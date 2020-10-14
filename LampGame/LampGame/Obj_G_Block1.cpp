@@ -10,19 +10,19 @@
 using namespace GameL;
 
 //イニシャライズ
-void CObj::Init()
+void CObj_G_Block::Init()
 {
 
 }
 
 //アクション
-void CObj::Action()
+void CObj_G_Block::Action()
 {
 
 }
 
 //ドロー
-void CObj::Draw()
+void CObj_G_Block::Draw()
 {
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
