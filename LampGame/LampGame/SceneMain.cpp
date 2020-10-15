@@ -52,7 +52,7 @@ void CSceneMain::InitScene()
 	CObjHero* obj = new CObjHero();
 	Objs::InsertObj(obj, OBJ_HERO, 10);
 
-	CObjBlock* objb = new CObjBlock(map);
+	CObjBlock* objb = new CObjBlock(map);//Ç»ÇÒÇ©ÉGÉâÅ[ìfÇ©ÇÍÇƒÇÈ
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
 
 	CObj_G_Block* objg = new CObj_G_Block(map);
