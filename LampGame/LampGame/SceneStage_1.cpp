@@ -11,24 +11,24 @@
 using namespace GameL;
 
 //使用ヘッダー
-#include "SceneMain.h"
+#include "SceneStage_1.h"
 #include "GameHead.h"
 #include "GameL/UserData.h"
 
 //コンストラクタ
-CSceneMain::CSceneMain()
+CSceneStage_1::CSceneStage_1()
 {
 
 }
 
 //デストラクタ
-CSceneMain::CSceneMain()
+CSceneStage_1::CSceneStage_1()
 {
 
 }
 
 //初期化メソッド
-void CSceneMain::InitScene()
+void CSceneStage_1::InitScene()
 {
 	unique_ptr<wchar_t>p;
 	int size;
@@ -67,7 +67,7 @@ void CSceneMain::InitScene()
 }
 
 //実行中メソッド実行中メソッド
-void CSceneMain::Scene()
+void CSceneStage_1::Scene()
 {
 
 }
