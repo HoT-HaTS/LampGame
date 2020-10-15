@@ -6,7 +6,7 @@
 using namespace GameL;
 
 //オブジェクト：
-class CObj_G_Block : public CObj_G_Block
+class CObj_G_Block : public CObj
 {
 public:
 	CObj_G_Block() {};
