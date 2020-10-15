@@ -12,7 +12,7 @@ using namespace GameL;
 //イニシャライズ
 void CObjAttack::Init()
 {
-
+	
 }
 
 //アクション

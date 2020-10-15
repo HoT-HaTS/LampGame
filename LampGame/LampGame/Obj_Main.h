@@ -14,6 +14,7 @@ public:
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
+	int x;	//位置
 private:
 };
 
