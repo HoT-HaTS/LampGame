@@ -34,14 +34,23 @@ void CObjHero::Draw()
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_bottom = 128.0f;
 
 	//表示位置の設定
 	dst.m_top = 0.0f;
 	dst.m_left = 0.0f;
 	dst.m_right = 64.0f;
-	dst.m_bottom = 64.0f;
+	dst.m_bottom = 128.0f;
 
-	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+	//光フラグがONなら
+	//if～～
+	//0番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
 	Draw::Draw(0, &src, &dst, c, 0.0f);
+
+
+	//影フラグがONなら
+	//if～～
+	//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
+	Draw::Draw(1, &src, &dst, c, 0.0f);
+
 }

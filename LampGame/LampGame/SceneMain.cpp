@@ -46,13 +46,13 @@ void CSceneMain::InitScene()
 		}
 	}
 
-
-	Draw::LoadImageW(L"image.png", 0, TEX_SIZE_512);
+	Draw::LoadImageW(L"lamp walk.png", 0, TEX_SIZE_512);
+	Draw::LoadImageW(L"lamp shadow walk.png", 1, TEX_SIZE_512);
 
 	CObjHero* obj = new CObjHero();
 	Objs::InsertObj(obj, OBJ_HERO, 10);
 
-	CObjBlock* objb = new CObjBlock(map);//Ç»ÇÒÇ©ÉGÉâÅ[ìfÇ©ÇÍÇƒÇÈ
+	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
 
 	CObj_G_Block* objg = new CObj_G_Block(map);
