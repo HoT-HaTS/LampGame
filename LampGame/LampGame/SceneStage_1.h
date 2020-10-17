@@ -1,4 +1,3 @@
-
 #pragma once
 //使用するヘッダーファイル
 #include "GameL/SceneManager.h"

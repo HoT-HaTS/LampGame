@@ -9,7 +9,7 @@ using namespace GameL;
 class CObj_G_Block : public CObj
 {
 	public:
-		CObj_G_Block(int map[10][100]);
+		CObj_G_Block(int map[10][100]);	//マップサイズは仮値
 		~CObj_G_Block() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
