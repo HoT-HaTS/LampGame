@@ -14,15 +14,15 @@ using namespace GameL;
 void CObjHero::Init()
 {
 	m_px = 64.0f;		//位置
-	m_py = 100.0f;
+	m_py = 350.0f;
 	m_vx = 0.0f;		//移動ベクトル
 	m_vy = 0.0f;
 	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
 
 	int m_ani_time = 0;
-	int m_ani_frame = 1;	//静止フレームを初期にする
+	int m_ani_frame = 0;	//静止フレームを初期にする
 
-	m_speed_power = 0.5f;	//通常速度
+	m_speed_power = 0.4f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
 	//blockとの衝突状態確認用
@@ -40,12 +40,61 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//キーの入力方向
+	if (Input::GetVKey(VK_RIGHT) == true)
+	{
+		m_vx += m_speed_power;
+		m_posture = 1.0f;
+		m_ani_time += 1.0;
+	}
 
+	else if (Input::GetVKey(VK_LEFT) == true)
+	{
+		m_vx -= m_speed_power;
+		m_posture = 0.0f;
+		m_ani_time += 1.0;
+	}
+
+	else
+	{
+		m_ani_frame = 1;	//キー入力がない場合は静止フレームにする
+		m_ani_time = 0;
+	}
+
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
+
+	//摩擦
+	m_vx += -(m_vx * 0.098);
+
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+
+	//位置の更新
+	m_px += m_vx;
+	m_py += m_vy;
+
+	//HitBoxの位置の変更
+	hit->SetPos(m_px, m_py);
 }
 
 //ドロー
 void CObjHero::Draw()
 {
+	//アニメーション番号
+	int AniData[4] =
+	{
+		0,1,2,3,
+	};
+
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
@@ -54,14 +103,14 @@ void CObjHero::Draw()
 
 	//切り取り位置の設定
 	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
+	src.m_left = 0.0f + AniData[m_ani_frame] * 64;
+	src.m_right = 64.0f + AniData[m_ani_frame] * 64;
 	src.m_bottom = 128.0f;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
-	dst.m_left = 0.0f + m_px;
-	dst.m_right = 64.0f + m_px;
+	dst.m_left = (64.0 - 64.0f * m_posture) + m_px;
+	dst.m_right = (64.0f * m_posture) + m_px;
 	dst.m_bottom = 128.0f + m_py;
 
 	//光フラグがONなら
