@@ -18,6 +18,9 @@ void CObjHero::Init()
 	m_py = INIT_H_PY;
 	m_vx = INIT_H_VX;		//移動ベクトル
 	m_vy = INIT_H_VY;
+	m_sx = INIT_H_PX;		//世界切り替え時の位置
+	m_sy = INIT_H_PY;
+
 	m_posture = INIT_H_POSTURE;	//右向き0.0f 左向き1.0f
 
 	int m_ani_time = INIT_ANI_TIME;
@@ -44,6 +47,10 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//主人公移動ベクトル初期化
+	m_vx = INIT_H_VX;		
+	m_vy = INIT_H_VY;
+
 	//移動(光の世界)
 	if (L_flag == true)
 	{
@@ -65,8 +72,6 @@ void CObjHero::Action()
 			m_ani_frame = 1;	//キー入力がない場合は静止フレームにする
 			m_ani_time = 0;
 		}
-		////摩擦
-		//m_vx += -(m_vx * INIT_FRICTION);
 	}
 
 	//移動(影の世界)
@@ -85,16 +90,14 @@ void CObjHero::Action()
 			m_posture = 0.0f;
 			m_ani_time += 1.0;
 		}
-		else if (Input::GetVKey(VK_UP) == true)
+		if (Input::GetVKey(VK_UP) == true)
 		{
 			m_vy -= m_speed_power;
-			m_posture = 0.0f;
 			m_ani_time += 1.0;
 		}
 		else if (Input::GetVKey(VK_DOWN) == true)
 		{
 			m_vy += m_speed_power;
-			m_posture = 0.0f;
 			m_ani_time += 1.0;
 		}
 
@@ -116,6 +119,9 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 
+	//移動ベクトルの正規化
+	UnitVec(&m_vy, &m_vx);
+
 	//摩擦
 	m_vx += -(m_vx * INIT_FRICTION);
 	m_vy += -(m_vy * INIT_FRICTION);
@@ -123,11 +129,8 @@ void CObjHero::Action()
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//移動ベクトルの正規化
-	//UnitVec(&m_vy, &m_vx);
-
 	//位置の更新
-	m_px += m_vx*m_speed_power;
+	m_px += m_vx * m_speed_power;
 	m_py += m_vy * m_speed_power;
 
 	//HitBoxの位置の変更
@@ -143,6 +146,8 @@ void CObjHero::Action()
 			{
 				L_flag = false;
 				m_flag = false;
+				m_sx = m_px;
+				m_sy = m_py;
 			}
 		}
 		else
@@ -160,6 +165,8 @@ void CObjHero::Action()
 			{
 				L_flag = true;
 				m_flag = false;
+				m_px = m_sx;
+				m_py = m_sy;
 			}
 		}
 		else
