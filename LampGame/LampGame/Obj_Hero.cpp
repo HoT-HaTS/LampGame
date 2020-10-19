@@ -1,4 +1,5 @@
 //使用するヘッダーファイル
+#include <math.h>
 #include "GameL/DrawTexture.h"
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
@@ -43,33 +44,73 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	//キーの入力方向
-	if (Input::GetVKey(VK_RIGHT) == true)
+	//移動(光の世界)
+	if (L_flag == true)
 	{
-		m_vx += m_speed_power;
-		m_posture = 1.0f;
-		m_ani_time += 1.0;
+		//キーの入力方向
+		if (Input::GetVKey(VK_RIGHT) == true)
+		{
+			m_vx += m_speed_power;
+			m_posture = 1.0f;
+			m_ani_time += 1.0;
+		}
+		else if (Input::GetVKey(VK_LEFT) == true)
+		{
+			m_vx -= m_speed_power;
+			m_posture = 0.0f;
+			m_ani_time += 1.0;
+		}
+		else
+		{
+			m_ani_frame = 1;	//キー入力がない場合は静止フレームにする
+			m_ani_time = 0;
+		}
+		////摩擦
+		//m_vx += -(m_vx * INIT_FRICTION);
 	}
 
-	else if (Input::GetVKey(VK_LEFT) == true)
+	//移動(影の世界)
+	if (L_flag == false)
 	{
-		m_vx -= m_speed_power;
-		m_posture = 0.0f;
-		m_ani_time += 1.0;
+		//キーの入力方向
+		if (Input::GetVKey(VK_RIGHT) == true)
+		{
+			m_vx += m_speed_power;
+			m_posture = 1.0f;
+			m_ani_time += 1.0;
+		}
+		else if (Input::GetVKey(VK_LEFT) == true)
+		{
+			m_vx -= m_speed_power;
+			m_posture = 0.0f;
+			m_ani_time += 1.0;
+		}
+		else if (Input::GetVKey(VK_UP) == true)
+		{
+			m_vy -= m_speed_power;
+			m_posture = 0.0f;
+			m_ani_time += 1.0;
+		}
+		else if (Input::GetVKey(VK_DOWN) == true)
+		{
+			m_vy += m_speed_power;
+			m_posture = 0.0f;
+			m_ani_time += 1.0;
+		}
+
+		else
+		{
+			m_ani_frame = 1;	//キー入力がない場合は静止フレームにする
+			m_ani_time = 0;
+		}
 	}
 
-	else
-	{
-		m_ani_frame = 1;	//キー入力がない場合は静止フレームにする
-		m_ani_time = 0;
-	}
-
+	//アニメーション関連
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
 		m_ani_time = 0;
 	}
-
 	if (m_ani_frame == m_ani_max_time)
 	{
 		m_ani_frame = 0;
@@ -77,13 +118,17 @@ void CObjHero::Action()
 
 	//摩擦
 	m_vx += -(m_vx * INIT_FRICTION);
+	m_vy += -(m_vy * INIT_FRICTION);
 
 	//自身のHitBoxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
+	//移動ベクトルの正規化
+	//UnitVec(&m_vy, &m_vx);
+
 	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
+	m_px += m_vx*m_speed_power;
+	m_py += m_vy * m_speed_power;
 
 	//HitBoxの位置の変更
 	hit->SetPos(m_px, m_py);
@@ -163,4 +208,36 @@ void CObjHero::Draw()
 		//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
 		Draw::Draw(1, &src, &dst, c, 0.0f);
 	}
+}
+
+
+
+//---UnitVec関数
+//引数1　float*vx	:ベクトルのx成分のポインタ
+//引数2　float*vy	:ベクトルのy成分のポインタ
+//戻り値 bool		:true=計算成功	false=計算失敗
+//内容
+//引数のベクトルを正規化しその値をvx,vyに変更します。
+bool UnitVec(float* vx, float* vy)
+{
+	//ベクトルの長さを求める（三平方の定理）
+	float r = 0.0f;
+	r = (*vx) * (*vx) + (*vy) * (*vy);
+	r = sqrt(r);
+
+	//長さが0かどうか調べる
+	if (r == 0.0f)
+	{
+		//0なら計算失敗
+		return false;
+	}
+	else
+	{
+		//正規化を行いvxとvyの参照先の値を変更
+		(*vx) = 1.0f / r * (*vx);
+		(*vy) = 1.0f / r * (*vy);
+	}
+
+	//計算成功
+	return true;
 }

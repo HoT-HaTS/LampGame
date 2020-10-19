@@ -15,7 +15,7 @@ using namespace GameL;
 #define INIT_ANI_TIME (0.0)		//アニメーションタイム	
 #define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
 
-#define INIT_SPEED_POWER (0.4)	//加算速度
+#define INIT_SPEED_POWER (0.5)	//加算速度
 #define INIT_ANI_MAX_TIME (4.0)	//アニメーション4種変更用
 
 #define INIT_FRICTION (0.098)	//摩擦係数
@@ -24,6 +24,10 @@ using namespace GameL;
 
 #define HBLOCK_INT_X_SIZE (64.0f)	//主人公横サイズ
 #define HBLOCK_INT_Y_SIZE (128.0f)//主人公縦サイズ
+
+
+//ベクトルの正規化を行う関数
+bool UnitVec(float* vx, float* vy);
 
 //オブジェクト：
 class CObjHero : public CObj
@@ -54,7 +58,7 @@ class CObjHero : public CObj
 		void SetDown(bool b) { m_hit_down = b; }
 		void SetLeft(bool b) { m_hit_left = b; }
 		void SetRight(bool b) { m_hit_right = b; }
-	
+
 	private:
 		float m_px;			//位置
 		float m_py;
