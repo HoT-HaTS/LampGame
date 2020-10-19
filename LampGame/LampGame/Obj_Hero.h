@@ -5,6 +5,26 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define INIT_H_VX (0.0f)		//主人公速度
+#define INIT_H_VY (0.0f)
+#define INIT_H_PX (64.0f)		//主人公位置
+#define INIT_H_PY (350.0f)
+
+#define INIT_H_POSTURE (1.0)	//主人公向き
+
+#define INIT_ANI_TIME (0.0)		//アニメーションタイム	
+#define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
+
+#define INIT_SPEED_POWER (0.4)	//加算速度
+#define INIT_ANI_MAX_TIME (4.0)	//アニメーション4種変更用
+
+#define INIT_FRICTION (0.098)	//摩擦係数
+
+#define BLOCK_TYPE (0.0)	//ブロックの種類識別用
+
+#define HBLOCK_INT_X_SIZE (64.0f)	//主人公横サイズ
+#define HBLOCK_INT_Y_SIZE (128.0f)//主人公縦サイズ
+
 //オブジェクト：
 class CObjHero : public CObj
 {
