@@ -35,11 +35,14 @@ class CObjHero : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 
+		//関数
 		float GetX() { return m_px; }
 		float GetY() { return m_py; }
 		float GetVY() { return m_vy; }
 		float GetVX() { return m_vx; }
 		int GetBT() { return m_block_type; }
+
+		bool Get_L_flag(){ return L_flag; }
 
 		void SetX(float x) { m_px = x; }
 		void SetY(float y) { m_py = y; }
@@ -70,6 +73,11 @@ class CObjHero : public CObj
 		bool m_hit_down;
 		bool m_hit_left;
 		bool m_hit_right;
+
+		//光の世界フラグ
+		bool L_flag;
+		//光の世界制御用フラグ
+		bool m_flag;
 
 		//踏んでいるblockの種類確認用
 		int m_block_type;

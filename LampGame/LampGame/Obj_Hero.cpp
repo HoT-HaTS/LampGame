@@ -25,6 +25,9 @@ void CObjHero::Init()
 	m_speed_power = INIT_SPEED_POWER;	//通常速度
 	m_ani_max_time = INIT_ANI_MAX_TIME;	//アニメーション間隔幅
 
+	L_flag = true;	//開始時は光フラグON
+	m_flag = true;	//光の世界制御用
+
 	//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
@@ -84,6 +87,41 @@ void CObjHero::Action()
 
 	//HitBoxの位置の変更
 	hit->SetPos(m_px, m_py);
+
+
+	//世界切り替えテスト用:光→影(X押すと切り替え)
+	if (L_flag == true)
+	{
+		if (Input::GetVKey('X') == true )
+		{
+			if (m_flag == true)
+			{
+				L_flag = false;
+				m_flag = false;
+			}
+		}
+		else
+		{
+			m_flag = true;
+		}
+	}
+
+	//世界切り替えテスト用:影→光(X押すと切り替え)
+	if (L_flag == false)
+	{
+		if (Input::GetVKey('X') == true )
+		{
+			if (m_flag == true)
+			{
+				L_flag = true;
+				m_flag = false;
+			}
+		}
+		else
+		{
+			m_flag = true;
+		}
+	}
 }
 
 //ドロー
@@ -114,14 +152,15 @@ void CObjHero::Draw()
 	dst.m_bottom = HBLOCK_INT_Y_SIZE + m_py;
 
 	//光フラグがONなら
-	//if～～
-	//0番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
-	Draw::Draw(0, &src, &dst, c, 0.0f);
-
-
-	//影フラグがONなら
-	//if～～
-	//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
-	//Draw::Draw(1, &src, &dst, c, 0.0f);
-
+	if (L_flag == true)
+	{
+		//0番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
+		Draw::Draw(0, &src, &dst, c, 0.0f);
+	}
+	//光フラグがOFFなら
+	else 
+	{
+		//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
+		Draw::Draw(1, &src, &dst, c, 0.0f);
+	}
 }
