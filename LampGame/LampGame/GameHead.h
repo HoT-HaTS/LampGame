@@ -32,6 +32,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLUE,
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
+	ELEMENT_SWITCH,
 };
 //------------------------------------------------
 
@@ -66,10 +67,10 @@ struct UserData
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
-#include "SceneMain.h"
+#include "SceneStage_1.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneMain
+#define SET_GAME_START CSceneStage_1
 //-----------------------------------------------

@@ -2,6 +2,7 @@
 #include "GameL/DrawTexture.h"
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
+#include "GameL/SceneObjManager.h"
 
 #include "GameHead.h"
 #include "Obj_Block.h"
@@ -9,20 +10,45 @@
 //使用するネームスペース
 using namespace GameL;
 
-//イニシャライズ
-void CObj::Init()
+CObjBlock::CObjBlock(int map[10][100])
 {
+	//マップデータをコピー
+	memcpy(m_map, map, sizeof(int) * (10 * 100));
+}
 
+//イニシャライズ
+void CObjBlock::Init()
+{
+	m_scroll = 0.0f;
 }
 
 //アクション
-void CObj::Action()
+void CObjBlock::Action()
 {
+	//主人公の位置を取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	float hx = hero->GetX();
+	float hy = hero->GetY();
+
+	//後方スクロールライン
+	if (hx < 80)
+	{
+		hero->SetX(80);
+		m_scroll -= hero->GetVX();
+	}
+
+	//前方スクロールライン
+	if (hx > 300)
+	{
+		hero->SetX(300);
+		m_scroll -= hero->GetVX();
+	}
+
 
 }
 
 //ドロー
-void CObj::Draw()
+void CObjBlock::Draw()
 {
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };

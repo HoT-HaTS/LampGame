@@ -118,7 +118,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -159,7 +159,7 @@
     <ClCompile Include="Obj_Hero.cpp" />
     <ClCompile Include="Obj_Main.cpp" />
     <ClCompile Include="Obj_Switch.cpp" />
-    <ClCompile Include="SceneMain.cpp" />
+    <ClCompile Include="SceneStage_1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h" />
@@ -182,7 +182,7 @@
     <ClInclude Include="Obj_Hero.h" />
     <ClInclude Include="Obj_Main.h" />
     <ClInclude Include="Obj_Switch.h" />
-    <ClInclude Include="SceneMain.h" />
+    <ClInclude Include="SceneStage_1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
