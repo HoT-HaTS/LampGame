@@ -29,8 +29,13 @@ void CObjHero::Init()
 	m_speed_power = INIT_SPEED_POWER;	//通常速度
 	m_ani_max_time = INIT_ANI_MAX_TIME;	//アニメーション間隔幅
 
+	attack_flag = true;	//攻撃制御用フラグ
+
 	L_flag = true;	//開始時は光フラグON
 	m_flag = true;	//光の世界制御用
+
+	//テスト
+	move_flag = true;
 
 	//blockとの衝突状態確認用
 	m_hit_up = false;
@@ -47,6 +52,31 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//落下によるゲームオーバー
+	if (m_py > STAGE_Y_OUT)
+	{
+		//場外に出たらリセット
+		Scene::SetScene(new CSceneStage_1());
+	}
+
+
+	//主人公の攻撃
+	if (Input::GetVKey('Z') == true)
+	{
+		if (attack_flag == true)
+		{
+			//攻撃オブジェクトの作成
+			CObjAttack* obj_attack = new CObjAttack(m_px, m_py); //弾丸オブジェクト作成
+			Objs::InsertObj(obj_attack, OBJ_ATTACK, 100);		//作った弾丸オブジェクトをマネージャーに登録
+
+			attack_flag = false;
+		}
+	}
+	else
+	{
+		attack_flag = true;
+	}
+
 	//移動(光の世界)
 	if (L_flag == true)
 	{
@@ -170,6 +200,7 @@ void CObjHero::Action()
 				m_flag = false;
 				m_px = m_sx;
 				m_py = m_sy;
+
 			}
 		}
 		else
