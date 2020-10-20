@@ -15,8 +15,8 @@ using namespace GameL;
 #define INIT_ANI_TIME (0.0)		//アニメーションタイム	
 #define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
 
-#define INIT_SPEED_POWER (0.5)	//加算速度
-#define INIT_ANI_MAX_TIME (4.0)	//アニメーション4種変更用
+#define INIT_SPEED_POWER (0.6)	//加算速度
+#define INIT_ANI_MAX_TIME (4.0)	
 
 #define INIT_FRICTION (0.098)	//摩擦係数
 
@@ -24,6 +24,7 @@ using namespace GameL;
 
 #define HBLOCK_INT_X_SIZE (64.0f)	//主人公横サイズ
 #define HBLOCK_INT_Y_SIZE (128.0f)//主人公縦サイズ
+#define STAGE_Y_OUT (800.0f)	//下方向ステージ外判定
 
 
 //ベクトルの正規化を行う関数
@@ -64,10 +65,15 @@ class CObjHero : public CObj
 		float m_py;
 		float m_vx;			//移動ベクトル
 		float m_vy;
+		float m_sx;			//世界切り替え時の位置
+		float m_sy;
+
 		float m_posture;	//姿勢
 
-		float m_ani_time;		//アニメーションフレーム動作間隔
+		float m_ani_time;	//アニメーションフレーム動作間隔
+		float m_ani_s_time;	//ストップアニメーションフレーム動作間隔
 		int m_ani_frame;	//描画フレーム
+		int m_ani_s_frame;	//ストップアニメーション描画フレーム
 
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値
@@ -77,6 +83,8 @@ class CObjHero : public CObj
 		bool m_hit_down;
 		bool m_hit_left;
 		bool m_hit_right;
+
+		bool attack_flag;	//攻撃制御用フラグ
 
 		//光の世界フラグ
 		bool L_flag;
@@ -88,5 +96,6 @@ class CObjHero : public CObj
 
 		//テスト用
 		float px, py;	//交点
+		bool move_flag;
 };
 
