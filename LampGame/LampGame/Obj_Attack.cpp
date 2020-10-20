@@ -18,7 +18,7 @@ CObjAttack::CObjAttack(float x, float y)
 //イニシャライズ
 void CObjAttack::Init()
 {
-	Hits::SetHitBox(this, m_x, m_y, 32, 32, ELEMENT_PLAYER, OBJ_ATTACK);
+	//Hits::SetHitBox(this, m_x, m_y, 32, 32, ELEMENT_PLAYER, OBJ_ATTACK);
 }
 
 //アクション
