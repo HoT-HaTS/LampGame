@@ -23,8 +23,11 @@ void CObjHero::Init()
 
 	m_posture = INIT_H_POSTURE;	//右向き0.0f 左向き1.0f
 
-	int m_ani_time = INIT_ANI_TIME;
-	int m_ani_frame = INIT_ANI_FLAME;	//静止フレームを初期にする
+	m_ani_time = INIT_ANI_TIME;
+	m_ani_frame = INIT_ANI_FLAME;	//静止フレームを初期にする
+	m_ani_s_time = INIT_ANI_TIME;
+	m_ani_s_frame = INIT_ANI_FLAME;	//静止フレームを初期にする
+
 
 	m_speed_power = INIT_SPEED_POWER;	//通常速度
 	m_ani_max_time = INIT_ANI_MAX_TIME;	//アニメーション間隔幅
@@ -152,7 +155,24 @@ void CObjHero::Action()
 		m_py += m_vy ;
 	}
 
-	//アニメーション関連
+	if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
+	{
+		m_ani_s_time += 1.0;
+	}
+	//アニメーション関連(静止用)
+	if (m_ani_s_time > m_ani_max_time)
+	{
+		m_ani_s_frame += 1;
+		m_ani_s_time = 0;
+	}
+	if (m_ani_s_frame == m_ani_max_time)
+	{
+		m_ani_s_frame = 0;
+	}
+
+
+
+	//アニメーション関連(移動用)
 	if (m_ani_time > m_ani_max_time)
 	{
 		m_ani_frame += 1;
@@ -169,11 +189,11 @@ void CObjHero::Action()
 	//HitBoxの位置の変更
 	hit->SetPos(m_px, m_py);
 
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, true,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type);
+	////ブロックとの当たり判定実行
+	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//pb->BlockHit(&m_px, &m_py, true,
+	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+	//	&m_block_type);
 
 
 	//世界切り替えテスト用:光→影(X押すと切り替え)
@@ -264,9 +284,9 @@ void CObjHero::Action()
 void CObjHero::Draw()
 {
 	//アニメーション番号
-	int AniData[4] =
+	int AniData[8] =
 	{
-		0,1,2,3,
+		0, 0, 1, 1, 2, 2, 3, 3,
 	};
 
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
@@ -276,10 +296,20 @@ void CObjHero::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
-	src.m_right = HBLOCK_INT_X_SIZE + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
-	src.m_bottom = HBLOCK_INT_Y_SIZE;
+	if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
+	{
+		src.m_top = 0.0f;
+		src.m_left = 0.0f + AniData[m_ani_s_frame] * HBLOCK_INT_X_SIZE;
+		src.m_right = HBLOCK_INT_X_SIZE + AniData[m_ani_s_frame] * HBLOCK_INT_X_SIZE;
+		src.m_bottom = HBLOCK_INT_Y_SIZE;
+	}
+	else
+	{
+		src.m_top = HBLOCK_INT_Y_SIZE;
+		src.m_left = 0.0f + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
+		src.m_right = HBLOCK_INT_X_SIZE + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
+		src.m_bottom = src.m_top + HBLOCK_INT_Y_SIZE;
+	}
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
@@ -291,7 +321,7 @@ void CObjHero::Draw()
 	if (L_flag == true)
 	{
 		//0番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
-		Draw::Draw(0, &src, &dst, c, 0.0f);
+		Draw::Draw(2, &src, &dst, c, 0.0f);
 	}
 	//光フラグがOFFなら
 	else 
