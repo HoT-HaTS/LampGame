@@ -50,18 +50,19 @@ void CSceneStage_1::InitScene()
 
 	Draw::LoadImageW(L"lamp_walk.png", 0, TEX_SIZE_512);
 	Draw::LoadImageW(L"lamp_shadow_walk.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
 
 	CObjHero* obj = new CObjHero();
 	Objs::InsertObj(obj, OBJ_HERO, 10);
+
+	CObjSwitch* objs = new CObjSwitch;
+	Objs::InsertObj(objs, OBJ_SWITCH, 7);
 
 	/*CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
 
 	CObj_G_Block* objg = new CObj_G_Block(map);
-	Objs::InsertObj(objb, OBJ_G_BLOCK, 8);
-
-	CObjSwitch* objs = new CObjSwitch;
-	Objs::InsertObj(objb, OBJ_SWITCH, 7);*/
+	Objs::InsertObj(objb, OBJ_G_BLOCK, 8);*/
 
 
 	/*CObjEnemy* obje = new CObjEnemy(map);
