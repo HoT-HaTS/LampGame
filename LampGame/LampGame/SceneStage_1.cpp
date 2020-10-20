@@ -51,8 +51,11 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"lamp_walk.png", 0, TEX_SIZE_512);
 	Draw::LoadImageW(L"lamp_shadow_walk.png", 1, TEX_SIZE_512);
 
-	CObjHero* obj = new CObjHero();
-	Objs::InsertObj(obj, OBJ_HERO, 10);
+	CObjHero* obj_h = new CObjHero();
+	Objs::InsertObj(obj_h, OBJ_HERO, 10);
+
+	CObjMain* obj_main = new CObjMain();
+	Objs::InsertObj(obj_main, OBJ_MAIN, 11);
 
 	/*CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);

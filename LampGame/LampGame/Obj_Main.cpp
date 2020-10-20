@@ -19,11 +19,21 @@ void CObjMain::Init()
 //アクション
 void CObjMain::Action()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//リトライ
-	if (Input::GetVKey('R') == true)
+	hero->GetVY();
+
+
+	if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
 	{
+		if (Input::GetVKey('R') == true)
+		{
 			Scene::SetScene(new CSceneStage_1());
+		}	
+	
 	}
+	
 	
 }
 
