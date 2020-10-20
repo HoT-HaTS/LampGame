@@ -2,23 +2,33 @@
 #include "GameL/DrawTexture.h"
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
-
+#include "GameL/HitBoxManager.h"
 #include "GameHead.h"
 #include "Obj_Attack.h"
 
 //使用するネームスペース
 using namespace GameL;
 
+CObjAttack::CObjAttack(float x, float y)
+{
+	m_x = x;
+	m_y = y;
+}
+
 //イニシャライズ
 void CObjAttack::Init()
 {
-	
+	//Hits::SetHitBox(this, m_x, m_y, 32, 32, ELEMENT_PLAYER, OBJ_ATTACK);
 }
 
 //アクション
 void CObjAttack::Action()
 {
+	CHitBox* hit = Hits::GetHitBox(this);
+	hit->SetPos(m_x, m_y);
 
+
+	//Todo:アニメーション終了後にオブジェクトを破棄する
 }
 
 //ドロー

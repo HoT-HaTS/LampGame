@@ -16,7 +16,7 @@ using namespace GameL;
 #define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
 
 #define INIT_SPEED_POWER (0.6)	//加算速度
-#define INIT_ANI_MAX_TIME (4.0)	//アニメーション4種変更用
+#define INIT_ANI_MAX_TIME (4.0)	
 
 #define INIT_FRICTION (0.098)	//摩擦係数
 
@@ -71,7 +71,9 @@ class CObjHero : public CObj
 		float m_posture;	//姿勢
 
 		float m_ani_time;	//アニメーションフレーム動作間隔
+		float m_ani_s_time;	//ストップアニメーションフレーム動作間隔
 		int m_ani_frame;	//描画フレーム
+		int m_ani_s_frame;	//ストップアニメーション描画フレーム
 
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値
