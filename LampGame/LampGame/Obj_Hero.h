@@ -16,7 +16,7 @@ using namespace GameL;
 #define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
 
 #define INIT_SPEED_POWER (0.6)	//加算速度
-#define INIT_ANI_MAX_TIME (4.0)	
+#define INIT_ANI_MAX_TIME (5.0)	
 
 #define INIT_FRICTION (0.098)	//摩擦係数
 
