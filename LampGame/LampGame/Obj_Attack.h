@@ -9,7 +9,7 @@ using namespace GameL;
 class CObjAttack : public CObj
 {
 public:
-	CObjAttack(float x,float y);
+	CObjAttack(float x, float y);
 	~CObjAttack() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション

@@ -24,6 +24,7 @@ using namespace GameL;
 
 #define HBLOCK_INT_X_SIZE (64.0f)	//主人公横サイズ
 #define HBLOCK_INT_Y_SIZE (128.0f)//主人公縦サイズ
+#define STAGE_Y_OUT (800.0f)	//下方向ステージ外判定
 
 
 //ベクトルの正規化を行う関数
@@ -81,6 +82,8 @@ class CObjHero : public CObj
 		bool m_hit_left;
 		bool m_hit_right;
 
+		bool attack_flag;	//攻撃制御用フラグ
+
 		//光の世界フラグ
 		bool L_flag;
 		//光の世界制御用フラグ
@@ -91,5 +94,6 @@ class CObjHero : public CObj
 
 		//テスト用
 		float px, py;	//交点
+		bool move_flag;
 };
 

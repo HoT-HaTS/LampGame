@@ -29,8 +29,13 @@ void CObjHero::Init()
 	m_speed_power = INIT_SPEED_POWER;	//通常速度
 	m_ani_max_time = INIT_ANI_MAX_TIME;	//アニメーション間隔幅
 
+	attack_flag = true;	//攻撃制御用フラグ
+
 	L_flag = true;	//開始時は光フラグON
 	m_flag = true;	//光の世界制御用
+
+	//テスト
+	move_flag = true;
 
 	//blockとの衝突状態確認用
 	m_hit_up = false;
@@ -47,6 +52,31 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//落下によるゲームオーバー
+	if (m_py > STAGE_Y_OUT)
+	{
+		//場外に出たらリセット
+		Scene::SetScene(new CSceneStage_1());
+	}
+
+
+	//主人公の攻撃
+	//if (Input::GetVKey('Z') == true)
+	//{
+	//	if (attack_flag == true)
+	//	{
+	//		//攻撃オブジェクトの作成
+	//		CObjAttack* obj_attack = new CObjAttack(m_px, m_py); //弾丸オブジェクト作成
+	//		Objs::InsertObj(obj_attack, OBJ_ATTACK, 100);		//作った弾丸オブジェクトをマネージャーに登録
+
+	//		attack_flag = false;
+	//	}
+	//}
+	//else
+	//{
+	//	attack_flag = true;
+	//}
+
 	//移動(光の世界)
 	if (L_flag == true)
 	{
@@ -139,6 +169,12 @@ void CObjHero::Action()
 	//HitBoxの位置の変更
 	hit->SetPos(m_px, m_py);
 
+	//ブロックとの当たり判定実行
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&m_px, &m_py, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+		&m_block_type);
+
 
 	//世界切り替えテスト用:光→影(X押すと切り替え)
 	if (L_flag == true)
@@ -170,6 +206,7 @@ void CObjHero::Action()
 				m_flag = false;
 				m_px = m_sx;
 				m_py = m_sy;
+
 			}
 		}
 		else
@@ -177,6 +214,50 @@ void CObjHero::Action()
 			m_flag = true;
 		}
 	}
+
+	//敵関係
+	////敵と当たっているか確認
+	//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
+	//{
+	//	//主人公がどの敵とどの角度で当たっているかを確認
+	//	HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
+	//	hit_data = hit->SearchObjNameHit(OBJ_ENEMY);	//hit_dataに主人公と当たっているほかすべてのHitBoxとの情報を入れる
+
+	//	for (int i = 0; i < hit->GetCount(); i++)
+	//	{
+	//		//敵の左右に当たったら
+	//		float r = hit_data[i]->r;
+	//		if ((r < 45 && r >= 0 || r>315))
+	//		{
+	//			m_vx = -5.0f;	//左に移動させる
+	//		}
+	//		if (r > 135 && r < 225)
+	//		{
+	//			m_vx = +5.0f;	//右に移動させる
+	//		}
+	//		if (r >= 225 && r < 315)
+	//		{
+	//			//敵の移動方向を主人公の位置に加算(oはオブジェクトアドレス)
+	//			m_px += ((CObjEnemy*)hit_data[i]->o)->GetVx();
+
+	//			CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//			//後方スクロールライン
+	//			if (m_px < 80)
+	//			{
+	//				m_px = 80;				//主人公はラインを超えないようにする
+	//				b->SetScroll(b->GetScroll() + 5.0f);	//主人公が本来動くべき分の値をm_scrollに加える
+	//			}
+
+	//			//前方スクロールライン
+	//			if (m_px > 300)
+	//			{
+	//				m_px = 300;				//主人公はラインを超えないようにする
+	//				b->SetScroll(b->GetScroll() - 5.0f);	//主人公が本来動くべき分の値をm_scrollに加える
+	//			}
+	//		}
+	//	}
+	//}
+
 }
 
 //ドロー
