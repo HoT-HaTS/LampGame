@@ -8,7 +8,7 @@ using namespace GameL;
 #define INIT_H_VX (0.0f)		//主人公速度
 #define INIT_H_VY (0.0f)
 #define INIT_H_PX (64.0f)		//主人公位置
-#define INIT_H_PY (350.0f)
+#define INIT_H_PY (450.0f)
 
 #define INIT_H_POSTURE (1.0)	//主人公向き
 
@@ -94,8 +94,7 @@ class CObjHero : public CObj
 		//踏んでいるblockの種類確認用
 		int m_block_type;
 
-		//テスト用
-		float px, py;	//交点
-		bool move_flag;
+		float CheckWindow(float pos_x, float pos_y,
+			float window_x, float window_y, float window_w, float window_h);
 };
 

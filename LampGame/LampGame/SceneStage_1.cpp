@@ -52,11 +52,10 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"lamp_shadow_walk.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"lamp_v2.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"GBlock_Wood.png", 3, TEX_SIZE_512);
+	Draw::LoadImageW(L"stage_background.png", 4, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"lampattack.png", 30, TEX_SIZE_512);
-	Draw::LoadImageW(L"stage_background.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"stage_ground.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"stage_plate.png", 22, TEX_SIZE_512);
 	Draw::LoadImageW(L"Enemy.png", 23, TEX_SIZE_512);
 	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
 

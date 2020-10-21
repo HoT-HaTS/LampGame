@@ -128,6 +128,9 @@ void BlockHit(
 	*left = false;
 	*right = false;
 
+	int x1 = *x + 32.0f;
+	int y1 = *y + 64.0f;
+
 	//踏んでいるblockの種類の初期化
 	*bt = 0;
 
@@ -139,20 +142,20 @@ void BlockHit(
 			if (Map[i][j] > 0 && Map[i][j] != 4)
 			{
 				//要素番号を座標に変更
-				float bx = j * 64.0f;
-				float by = i * 64.0f;
+				float bx = j * 64.0f + 32.0f;
+				float by = i * 64.0f + 32.0f;
 
 				//スクロールの影響
 				float scroll = scroll_on ? Scroll : 0;
 
 				//オブジェクトとブロックの当たり判定
-				if ((*x + (-scroll) + 64.0f > bx) && (*x + (-scroll) < bx + 64.0f) && (*y + 64.0f > by) && (*y < by + 64.0f))
+				if (( *x + (-scroll) + 64.0f > bx) && (*x + (-scroll) < bx + 64.0f) && (*y + 128.0f > by) && (*y < by + 128.0f))
 				{
 					//上下左右判定
 
-					//vectorの作成
-					float rvx = (*x + (-scroll)) - bx;
-					float rvy = *y - by;
+					//vectorの作成(座標)
+					float rvx = (x1 + (-scroll)) - bx;
+					float rvy = y1 - by;
 
 					//長さを求める
 					float len = sqrt(rvx * rvx + rvy * rvy);
