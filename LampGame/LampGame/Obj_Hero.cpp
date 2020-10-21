@@ -147,9 +147,6 @@ void CObjHero::Action()
 		m_vx += -(m_vx * INIT_FRICTION);
 		m_vy += -(m_vy * INIT_FRICTION);
 
-		//移動ベクトルの正規化
-		//UnitVec(&m_vy, &m_vx);
-
 		//位置の更新
 		m_px += m_vx ;
 		m_py += m_vy ;
@@ -242,7 +239,6 @@ void CObjHero::Action()
 	//	//主人公がどの敵とどの角度で当たっているかを確認
 	//	HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
 	//	hit_data = hit->SearchObjNameHit(OBJ_ENEMY);	//hit_dataに主人公と当たっているほかすべてのHitBoxとの情報を入れる
-
 	//	for (int i = 0; i < hit->GetCount(); i++)
 	//	{
 	//		//敵の左右に当たったら
@@ -284,9 +280,9 @@ void CObjHero::Action()
 void CObjHero::Draw()
 {
 	//アニメーション番号
-	int AniData[8] =
+	int AniData[5] =
 	{
-		0, 0, 1, 1, 2, 2, 3, 3,
+		0, 1, 2, 3, 1,
 	};
 
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
@@ -332,33 +328,3 @@ void CObjHero::Draw()
 }
 
 
-
-//---UnitVec関数
-//引数1　float*vx	:ベクトルのx成分のポインタ
-//引数2　float*vy	:ベクトルのy成分のポインタ
-//戻り値 bool		:true=計算成功	false=計算失敗
-//内容
-//引数のベクトルを正規化しその値をvx,vyに変更します。
-bool UnitVec(float* vx, float* vy)
-{
-	//ベクトルの長さを求める（三平方の定理）
-	float r = 0.0f;
-	r = (*vx) * (*vx) + (*vy) * (*vy);
-	r = sqrt(r);
-
-	//長さが0かどうか調べる
-	if (r == 0.0f)
-	{
-		//0なら計算失敗
-		return false;
-	}
-	else
-	{
-		//正規化を行いvxとvyの参照先の値を変更
-		(*vx) = 1.0f / r * (*vx);
-		(*vy) = 1.0f / r * (*vy);
-	}
-
-	//計算成功
-	return true;
-}

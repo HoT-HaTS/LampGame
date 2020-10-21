@@ -79,7 +79,9 @@ void CObjBlock::Draw()
 	RECT_F dst;	//ï`âÊêÊï\é¶à íu
 
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	bool L_flag_background = hero->Get_L_flag();
+
 	if (L_flag_background == true)
 		background_flag = 0;
 	else
@@ -88,10 +90,10 @@ void CObjBlock::Draw()
 	if (background_flag == 0)
 	{
 		//îwåiï\é¶
-		src.m_top = 256.0f;
+		src.m_top = 0.0f;
 		src.m_left = 0.0f;
-		src.m_right = 512.0f;
-		src.m_bottom = 512.0f;
+		src.m_right = 896.0f;
+		src.m_bottom = 640.0f;
 		dst.m_top = 0.0f;
 		dst.m_left = 0.0f;
 		dst.m_right = 800.0f;
