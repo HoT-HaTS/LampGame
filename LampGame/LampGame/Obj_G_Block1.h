@@ -9,14 +9,12 @@ using namespace GameL;
 class CObj_G_Block : public CObj
 {
 	public:
-		CObj_G_Block(int map[10][100]);	//マップサイズは仮値
+		CObj_G_Block(float x, float y);
 		~CObj_G_Block() {};
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
 
-		void SetScroll(float s) { m_scroll = s; }
-		float GetScroll() { return m_scroll; }
 	
 		//ブロックとの当たり判定
 		void BlockHit
@@ -32,16 +30,8 @@ class CObj_G_Block : public CObj
 			float* out_px, float* out_py, float* out_len
 		);
 	private:
-		void BlockDraw(float x, float y, RECT_F* dst, float c[]);
-		int m_map[10][100];	//マップ情報
-
-		float m_scroll;		//左右スクロール用
-
-		/*/テスト用変数
-		float m_px, m_py;	//テスト交点表示用*/
-
-		float Dot(float ax, float ay, float bx, float by);		//内積
-		float Cross(float ax, float ay, float bx, float by);	//外積
+		float m_px;			//位置
+		float m_py;
 
 		//線と線と交差判定
 		bool LineCrossPoint(

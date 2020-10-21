@@ -3,6 +3,9 @@
 #include "GameL/DrawTexture.h"
 #include "UtilityModule.h"
 
+#include "GameHead.h"
+#include "Obj_Block.h"
+
 //使用するネームスペース
 using namespace GameL;
 
@@ -105,11 +108,19 @@ void BlockDraw(float x, float y, RECT_F* dst, float c[])
 void BlockHit(
 	float* x, float* y, bool scroll_on,
 	bool* up, bool* down, bool* left, bool* right,
-	float* vx, float* vy, int* bt, int map[10][100]
+	float* vx, float* vy, int* bt
 )
 {
+	int map[10][100];
+	int Map[10][100];
+
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	int Scroll = block->GetScroll();
+	Map[10][100] = block->GetMap();
+
 	//マップデータをコピー
-	memcpy(m_map, map, sizeof(int) * (10 * 100));
+	//memcpy(&Map, map, sizeof(int) * (10 * 100));
 
 	//衝突状態確認用フラグの初期化
 	*up = false;
@@ -125,14 +136,14 @@ void BlockHit(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] > 0 && m_map[i][j] != 4)
+			if (Map[i][j] > 0 && Map[i][j] != 4)
 			{
 				//要素番号を座標に変更
 				float bx = j * 64.0f;
 				float by = i * 64.0f;
 
 				//スクロールの影響
-				float scroll = scroll_on ? m_scroll : 0;
+				float scroll = scroll_on ? Scroll : 0;
 
 				//オブジェクトとブロックの当たり判定
 				if ((*x + (-scroll) + 64.0f > bx) && (*x + (-scroll) < bx + 64.0f) && (*y + 64.0f > by) && (*y < by + 64.0f))
@@ -172,8 +183,8 @@ void BlockHit(
 							*down = true;	//オブジェクトの下の部分が衝突している
 							*y = by - 64.0f;	//ブロックの位置+オブジェクトの幅
 							//種類を渡すのスタートとゴールのみ変更する
-							if (m_map[i][j] >= 2)
-								*bt = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
+							if (Map[i][j] >= 2)
+								*bt = Map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
 							*vy = 0.0f;
 						}
 						if (r > 135 && r < 225)

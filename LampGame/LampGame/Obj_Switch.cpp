@@ -140,11 +140,11 @@ void CObjSwitch::Draw()
 	src.m_bottom = 64.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f;
-	dst.m_left = 0.0f;
-	dst.m_right = 64.0f;
-	dst.m_bottom = 64.0f;
+	dst.m_top = m_px;
+	dst.m_left = m_py;
+	dst.m_right = m_px + 64.0f;
+	dst.m_bottom = m_py + 64.0f;
 
 	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-	Draw::Draw(10, &src, &dst, c, 0.0f);
+	Draw::Draw(22, &src, &dst, c, 0.0f);
 }

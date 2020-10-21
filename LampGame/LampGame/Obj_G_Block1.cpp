@@ -9,6 +9,12 @@
 //使用するネームスペース
 using namespace GameL;
 
+CObj_G_Block::CObj_G_Block(float x, float y)
+{
+	m_px = x;	//位置
+	m_py = y;
+}
+
 //イニシャライズ
 void CObj_G_Block::Init()
 {
@@ -18,7 +24,8 @@ void CObj_G_Block::Init()
 //アクション
 void CObj_G_Block::Action()
 {
-
+	m_px += 0;	//位置
+	m_py += 0;
 }
 
 //ドロー
@@ -33,15 +40,15 @@ void CObj_G_Block::Draw()
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 32.0f;
+	src.m_bottom = 320.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f;
-	dst.m_left = 0.0f;
-	dst.m_right = 64.0f;
-	dst.m_bottom = 64.0f;
+	dst.m_top = 0.0f; +m_px;
+	dst.m_left = 0.0f; +m_py;
+	dst.m_right = 32.0f; +m_px;
+	dst.m_bottom = 320.0f; +m_py;
 
 	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-	Draw::Draw(0, &src, &dst, c, 0.0f);
+	Draw::Draw(3, &src, &dst, c, 0.0f);
 }
