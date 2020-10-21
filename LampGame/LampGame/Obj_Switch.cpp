@@ -16,8 +16,8 @@ using namespace GameL;
 //イニシャライズ
 void CObjSwitch::Init()
 {
-	m_px = 0.0f;			//位置
-	m_py = 0.0f;
+	m_px = 100.0f;			//位置
+	m_py = 100.0f;
 
 	S_flag = false;			//スイッチがオフのときはfalse、オンのときはtrue
 
@@ -39,36 +39,16 @@ void CObjSwitch::Action()
 	hero->SetRight(false);
 
 	//主人公とスイッチのあたり判定チェック
-	if ((m_px + 64 > hx) && (hx + 64 > m_px) && (m_py + 64 > hy) && (hy + 64 > m_py))
+	if ((m_px + 64 > hx) && (m_px < hx+64) && (m_py + 64 > hy) && (hy + 128 > m_py))
 	{
 		//当たっている場合
 
-		//ベクトルの作成
-		float vx = hx - m_px;
-		float vy = hx - m_py;
-
-		//長さを求める
-		float len = sqrt(vx * vx + vy * vy);
-		
-		//角度を求める
-		float r = atan2(vy, vx);
-		r = r * 180.0f / 3.14f;
-
-		if (r <= 0.0f)
-			r = abs(r);
-		else
-			r = 360.0f - abs(r);
-
-		//lenがある一定の長さより短い場合に判定に入る
-		if (len < 88.0f)
-		{
-
 			//求めた角度で上下左右を判定
-			//スイッチが主人公の左部分に接触
-			if ((r < 45 && r>0) || r > 315)
+			//スイッチの右部分に接触
+			/*if ((hx <  && r>0) || r > 315)
 			{
 				hero->SetLeft(true);
-				hero->SetX(hx + 64);
+				hero->SetX(m_px + 65);
 				hero->SetVX(0.0f);
 			}
 
@@ -76,7 +56,7 @@ void CObjSwitch::Action()
 			if (r > 225 || r < 315)
 			{
 				hero->SetUp(true);
-				hero->SetY(hy);
+				hero->SetY(m_py);
 				hero->SetVY(0.0f);
 			}
 
@@ -84,7 +64,7 @@ void CObjSwitch::Action()
 			if (r > 45 || r < 135)
 			{
 				hero->SetDown(true);
-				hero->SetY(hy + 64);
+				hero->SetY(m_py + 64);
 				hero->SetVY(0.0f);
 			}
 
@@ -92,10 +72,9 @@ void CObjSwitch::Action()
 			if (r > 135 || r < 225)
 			{
 				hero->SetRight(true);
-				hero->SetX(hx);
+				hero->SetX(m_px);
 				hero->SetVX(0.0f);
-			}
-		}
+			}*/
 
 	}
 
@@ -134,16 +113,16 @@ void CObjSwitch::Draw()
 	
 
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
+	src.m_top = 10.0f;
+	src.m_left = 10.0f +(switch_graphic * 64.0f);
+	src.m_right = 64.0f; +(switch_graphic * 64.0f);
 	src.m_bottom = 64.0f;
 
 	//表示位置の設定
-	dst.m_top = m_px;
-	dst.m_left = m_py;
-	dst.m_right = m_px + 64.0f;
-	dst.m_bottom = m_py + 64.0f;
+	dst.m_top = 0.0f;
+	dst.m_left = 0.0f;
+	dst.m_right = 64.0f;
+	dst.m_bottom = 64.0f;
 
 	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(22, &src, &dst, c, 0.0f);
