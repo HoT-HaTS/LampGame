@@ -51,26 +51,29 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"lamp_walk.png", 0, TEX_SIZE_512);
 	Draw::LoadImageW(L"lamp_shadow_walk.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"lamp_v2.png", 2, TEX_SIZE_512);
-	Draw::LoadImageW(L"lampattack.png", 30, TEX_SIZE_512);
 
-	CObjHero* obj_h = new CObjHero();
-	Objs::InsertObj(obj_h, OBJ_HERO, 10);
-	Draw::LoadImageW(L"stage_background", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"lampattack.png", 30, TEX_SIZE_512);
+	Draw::LoadImageW(L"stage_background.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"stage_ground.png", 21, TEX_SIZE_512);
 	Draw::LoadImageW(L"stage_button.png", 22, TEX_SIZE_512);
 	Draw::LoadImageW(L"stage_plate.png", 23, TEX_SIZE_512);
+	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
+
+	CObjHero* obj_h = new CObjHero();
+	Objs::InsertObj(obj_h, OBJ_HERO, 10);
+	
 
 	CObjMain* obj_main = new CObjMain();
 	Objs::InsertObj(obj_main, OBJ_MAIN, 11);
+
+	CObjSwitch* objs = new CObjSwitch;
+	Objs::InsertObj(objs, OBJ_SWITCH, 7);
 
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
 
 	/*CObj_G_Block* objg = new CObj_G_Block(map);
-	Objs::InsertObj(objb, OBJ_G_BLOCK, 8);
-
-	CObjSwitch* objs = new CObjSwitch;
-	Objs::InsertObj(objb, OBJ_SWITCH, 7);*/
+	Objs::InsertObj(objb, OBJ_G_BLOCK, 8);*/
 
 
 	/*CObjEnemy* obje = new CObjEnemy(map);
