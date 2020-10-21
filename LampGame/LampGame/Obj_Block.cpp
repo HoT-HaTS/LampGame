@@ -98,7 +98,7 @@ void CObjBlock::Draw()
 		dst.m_left = 0.0f;
 		dst.m_right = 800.0f;
 		dst.m_bottom = 600.0f;
-		Draw::Draw(4, &src, &dst, c, 0.0f);
+		Draw::Draw(20, &src, &dst, c, 0.0f);
 	}
 	else
 	{
@@ -113,4 +113,90 @@ void CObjBlock::Draw()
 		dst.m_bottom = 600.0f;
 		Draw::Draw(20, &src, &dst, c, 0.0f);
 	}
+
+	//マップチップによるBlock設置
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			if (m_map[i][j] > 0)
+			{
+				//表示位置の設定
+				dst.m_top    = i * 64.0f;
+				dst.m_left   = j * 64.0f + m_scroll;
+				dst.m_right  = dst.m_left + 64.0f;
+				dst.m_bottom = dst.m_top  + 64.0f;
+
+				if (m_map[i][j] == 2)
+				{
+					; //ギミックブロック配置用の番号のため何もしない
+				}
+				else if (m_map[i][j] == 3)
+				{
+					//看板
+					BlockDraw1(320.0f + 64.0f, 0.0f, &dst, c);
+				}
+				else if (m_map[i][j] == 3)
+				{
+					//ゴールブロック
+					BlockDraw(320.0f + 64.0f, 0.0f, &dst, c);
+				}
+				else if (m_map[i][j] == 5)
+				{
+					; //敵配置用の番号のため何もしない
+				}
+				else if (m_map[i][j] == 6)
+				{
+					//スイッチ
+					BlockDraw2(320.0f + 64.0f, 64.0f, &dst, c);
+				}
+				else
+				{
+					BlockDraw(320.0f, 0.0f, &dst, c);
+				}
+			}
+		}
+	}
+}
+
+//BlockDrawMethod関数
+//引数1 float    x   :リソース切り取り位置X
+//引数2 float    y   :リソース切り取り位置Y
+//引数3 RECT_F * dst :描画位置
+//引数4 float    c[] :カラー情報
+//ブロックを64×64限定描画用。リソース切り取り位置のみx・yで設定できる
+void CObjBlock::BlockDraw(float x, float y, RECT_F* dst, float c[])
+{
+	RECT_F src;
+	src.m_top = y;
+	src.m_left = x + 128.0f;
+	src.m_right = src.m_left + 64.0f;
+	src.m_bottom = src.m_top + 64.0f;
+
+	//描画
+	Draw::Draw(21, &src, dst, c, 0.0f);
+}
+//BlockDrawMethod1：看板
+void CObjBlock::BlockDraw1(float x, float y, RECT_F* dst, float c[])
+{
+	RECT_F src;
+	src.m_top = y;
+	src.m_left = x;
+	src.m_right = src.m_left + 64.0f;
+	src.m_bottom = src.m_top + 64.0f;
+
+	//描画
+	Draw::Draw(23, &src, dst, c, 0.0f);
+}
+//BlockDrawMethod2：スイッチを一旦表示（後で消すかも）
+void CObjBlock::BlockDraw2(float x, float y, RECT_F* dst, float c[])
+{
+	RECT_F src;
+	src.m_top = y;
+	src.m_left = x;
+	src.m_right = src.m_left + 64.0f;
+	src.m_bottom = src.m_top + 64.0f;
+
+	//描画
+	Draw::Draw(10, &src, dst, c, 0.0f);
 }

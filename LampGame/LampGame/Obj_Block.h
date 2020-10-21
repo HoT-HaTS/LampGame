@@ -35,6 +35,8 @@ public:
 
 private:
 	void BlockDraw(float x, float y, RECT_F* dst, float c[]);
+	void BlockDraw1(float x, float y, RECT_F* dst, float c[]);
+	void BlockDraw2(float x, float y, RECT_F* dst, float c[]);
 	int m_map[10][100]; //マップ情報
 
 	float m_scroll;     //左右スクロール用

@@ -54,10 +54,10 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"GBlock_Wood.png", 3, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"lampattack.png", 30, TEX_SIZE_512);
-	Draw::LoadImageW(L"stage_background.png", 4, TEX_SIZE_512);
+	Draw::LoadImageW(L"stage_background.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"stage_ground.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"stage_plate.png", 22, TEX_SIZE_512);
-	Draw::LoadImageW(L"Enemy.png", 23, TEX_SIZE_512);
+	Draw::LoadImageW(L"Enemy.png", 22, TEX_SIZE_512);
+	Draw::LoadImageW(L"Board.png", 23, TEX_SIZE_512);
 	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
 
 	CObjHero* obj_h = new CObjHero();
@@ -71,7 +71,7 @@ void CSceneStage_1::InitScene()
 	Objs::InsertObj(objs, OBJ_SWITCH, 7);
 
 	CObjBlock* objb = new CObjBlock(map);
-	Objs::InsertObj(objb, OBJ_BLOCK, 9);
+	Objs::InsertObj(objb, OBJ_BLOCK, 6);
 
 	CObj_G_Block* objg = new CObj_G_Block(100, 150);
 	Objs::InsertObj(objg, OBJ_BLOCK, 8);
