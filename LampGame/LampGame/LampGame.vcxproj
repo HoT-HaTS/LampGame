@@ -160,7 +160,9 @@
     <ClCompile Include="Obj_Main.cpp" />
     <ClCompile Include="Obj_Switch.cpp" />
     <ClCompile Include="SceneStage_1.cpp" />
-    <ClCompile Include="UtilityModule.cpp" />
+    <ClCompile Include="UtilityModule.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h" />

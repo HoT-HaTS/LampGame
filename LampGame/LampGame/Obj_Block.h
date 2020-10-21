@@ -18,6 +18,8 @@ public:
 	void  SetScroll(float s) { m_scroll = s; }
 	float GetScroll() { return m_scroll; }
 
+	int GetMap() { return m_map[10][100]; }
+
 	// ƒuƒƒbƒN‚Æ‚Ì“–‚½‚è”»’è
 	void BlockHit(
 		float* x, float* y, bool scroll_on,
