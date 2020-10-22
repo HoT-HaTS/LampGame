@@ -102,8 +102,12 @@ void CObjHero::Action()
 		//摩擦
 		m_vx += -(m_vx * INIT_FRICTION);
 
+		//自由落下運動
+		m_vy += 9.8 / (64.0f);
+
 		//位置の更新
 		m_px += m_vx;
+		m_py += m_vy;
 	}
 
 	//移動(影の世界)
@@ -164,11 +168,11 @@ void CObjHero::Action()
 		{
 			m_py = 0.0f;
 		}
-		//下方向
-		if (m_py + 128.0f > 600 )
-		{
-			m_py = 600.0f - 128.0f;
-		}
+		////下方向
+		//if (m_py + 128.0f > 600 )
+		//{
+		//	m_py = 600.0f - 128.0f;
+		//}
 
 		//画面外に行かない処理
 		//CheckWindow(m_px, m_py, -32.0f, -32.0f, 800.0f, 600.0f);
@@ -209,10 +213,10 @@ void CObjHero::Action()
 	hit->SetPos(m_px, m_py);
 
 	//ブロックとの当たり判定実行
-	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	//pb->BlockHit(&m_px, &m_py, true,
-	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-	//	&m_block_type);
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&m_px, &m_py, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+		&m_block_type);
 
 
 	//世界切り替えテスト用:光→影(X押すと切り替え)
@@ -224,6 +228,7 @@ void CObjHero::Action()
 			{
 				L_flag = false;
 				m_flag = false;
+				m_vy = 0;
 				m_sx = m_px;
 				m_sy = m_py;
 			}
@@ -245,6 +250,7 @@ void CObjHero::Action()
 				m_flag = false;
 				m_px = m_sx;
 				m_py = m_sy;
+				m_vy = 0;
 
 			}
 		}

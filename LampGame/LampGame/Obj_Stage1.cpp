@@ -20,37 +20,61 @@ CObjStage1::CObjStage1(int map[10][100])
 //イニシャライズ
 void CObjStage1::Init()
 {
-	m_scroll = 0.0f;
+	s1_scroll = 0.0f;
 }
 
 //アクション
 void CObjStage1::Action()
 {
-	/*CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	m_scroll = block->GetScroll();*/
+	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	s1_scroll = block->GetScroll();
 
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	float hx = hero->GetX();
-	float hy = hero->GetY();
-	bool L_flag = hero->Get_L_flag();
+	////主人公の位置を取得
+	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//float hx = hero->GetX();
+	//float hy = hero->GetY();
+	//bool L_flag = hero->Get_L_flag();
 
-	if (L_flag == true)
-	{
-		//後方スクロールライン
-		if (hx < 80)
-		{
-			hero->SetX(80);
-			m_scroll -= hero->GetVX();
-		}
+	//if (L_flag == true)
+	//{
+	//	//後方スクロールライン
+	//	if (hx < 80)
+	//	{
+	//		hero->SetX(80);
+	//		m_scroll -= hero->GetVX();
+	//	}
 
-		//前方スクロールライン
-		if (hx > 300)
-		{
-			hero->SetX(300);
-			m_scroll -= hero->GetVX();
-		}
-	}
+	//	//前方スクロールライン
+	//	if (hx > 300)
+	//	{
+	//		hero->SetX(300);
+	//		m_scroll -= hero->GetVX();
+	//	}
+	//}
+
+
+	////敵出現ライン
+	////主人公の位置+500を敵出現ラインにする
+	//float line = hx + (-m_scroll) + 500;
+
+	////敵出現ラインを要素番号化
+	//int ex = ((int)line) / 64;
+
+	////敵出現ラインの列を検索
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	//列の中から1を探す
+	//	if (m_map[i][ex] == 1)
+	//	{
+	//		//1があればブロック出現
+	//		CObjBlock* objb = new CObjBlock();
+	//		Objs::InsertObj(objb, OBJ_BLOCK, 9);
+
+	//		m_map[i][ex] = 99;
+	//	}
+	//}
+
+
 }
 
 //ドロー
@@ -71,7 +95,7 @@ void CObjStage1::Draw()
 			{
 				//表示位置の設定
 				dst.m_top = i * 64.0f;
-				dst.m_left = j * 64.0f + m_scroll;
+				dst.m_left = j * 64.0f + s1_scroll;
 				dst.m_right = dst.m_left + 64.0f;
 				dst.m_bottom = dst.m_top + 64.0f;
 				if (m_map[i][j] == 2)

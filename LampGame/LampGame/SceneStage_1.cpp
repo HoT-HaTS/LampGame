@@ -70,14 +70,14 @@ void CSceneStage_1::InitScene()
 	CObjMain* obj_main = new CObjMain();
 	Objs::InsertObj(obj_main, OBJ_MAIN, 11);
 
-	CObjSwitch* objs = new CObjSwitch();
-	Objs::InsertObj(objs, OBJ_SWITCH, 7);
+	/*CObjSwitch* objs = new CObjSwitch();
+	Objs::InsertObj(objs, OBJ_SWITCH, 7);*/
 
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 9);
 
-	CObj_G_Block* objg = new CObj_G_Block(100, 150);
-	Objs::InsertObj(objg, OBJ_BLOCK, 8);
+	/*CObj_G_Block* objg = new CObj_G_Block(0, 0);
+	Objs::InsertObj(objg, OBJ_BLOCK, 8);*/
 
 
 	/*CObjEnemy* obje = new CObjEnemy(map);
