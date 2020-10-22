@@ -86,13 +86,13 @@ void CObjHero::Action()
 		//ƒL[‚Ì“ü—Í•ûŒü
 		if (Input::GetVKey(VK_RIGHT) == true)
 		{
-			m_vx += m_speed_power;
+			m_vx += 3*m_speed_power;
 			m_posture = 1.0f;
 			m_ani_time += 1.0;
 		}
 		else if (Input::GetVKey(VK_LEFT) == true)
 		{
-			m_vx -= m_speed_power;
+			m_vx -= 3*m_speed_power;
 			m_posture = 0.0f;
 			m_ani_time += 1.0;
 		}
