@@ -34,8 +34,8 @@ void CSceneStage_1::InitScene()
 	//マップデータ完成したら追加
 	unique_ptr<wchar_t>p;
 	int size;
-	p = Save::ExternalDataOpen(L"Stages.csv", &size);
 	int map[10][100];
+	p = Save::ExternalDataOpen(L"Stages.csv", &size);
 	int count = 1;
 	for (int i = 0; i < 10; i++)
 	{
@@ -58,6 +58,10 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"stage_ground.png", 21, TEX_SIZE_512);
 	Draw::LoadImageW(L"Enemy.png", 23, TEX_SIZE_512);
 	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
+
+	
+	CObjStage1* obj_stage1 = new CObjStage1(map);
+	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 13);
 
 	CObjHero* obj_h = new CObjHero();
 	Objs::InsertObj(obj_h, OBJ_HERO, 10);
@@ -85,3 +89,7 @@ void CSceneStage_1::Scene()
 {
 
 }
+
+
+
+
