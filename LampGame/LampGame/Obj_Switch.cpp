@@ -21,7 +21,7 @@ using namespace GameL;
 //イニシャライズ
 void CObjSwitch::Init()
 {
-
+	m_scroll = 0.0f;
 
 	S_flag = false;			//スイッチがオフのときはfalse、オンのときはtrue
 
@@ -31,6 +31,11 @@ void CObjSwitch::Init()
 //アクション
 void CObjSwitch::Action()
 {
+	if (Input::GetVKey('A') == true)
+	{
+		S_flag == true;
+	}
+
 	//主人公の位置の取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
@@ -48,6 +53,11 @@ void CObjSwitch::Action()
 	//主人公から光フラグを取ってくる
 	bool L_flag_switch = hero->Get_L_flag();
 	
+	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	m_scroll = scroll->GetScroll();
+
+	m_px -= m_scroll;
+
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px, m_py);
@@ -103,6 +113,9 @@ void CObjSwitch::Action()
 		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
 	}
 
+
+
+
 }
 
 //ドロー
@@ -133,8 +146,8 @@ void CObjSwitch::Draw()
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
-	dst.m_left = 0.0f + m_px;
-	dst.m_right = 64.0f + m_px;
+	dst.m_left = 0.0f + m_px-m_scroll;
+	dst.m_right = 64.0f + m_px - m_scroll;
 	dst.m_bottom = 64.0f + m_py;
 
 	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画

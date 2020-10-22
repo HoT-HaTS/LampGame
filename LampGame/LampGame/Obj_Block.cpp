@@ -91,11 +91,6 @@ void CObjBlock::Draw()
 	bool L_flag_background = hero->Get_L_flag();
 
 	if (L_flag_background == true)
-		background_flag = 0;
-	else
-		background_flag = 1;
-
-	if (background_flag == 0)
 	{
 		//背景表示
 		src.m_top = 0.0f;
@@ -157,7 +152,7 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] > 0 && m_map[i][j] != 2 && m_map[i][j] != 3 && m_map[i][j] != 5 && m_map[i][j] != 6)
+			if (m_map[i][j] > 0  && m_map[i][j] != 3 && m_map[i][j] != 5 && m_map[i][j] != 6)
 			{
 				//要素番号を座標に変更
 				float bx = j * 64.0f;
@@ -208,14 +203,14 @@ void CObjBlock::BlockHit(
 								*bt = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
 							*vy = 0.0f;
 						}
-						if (r > 124 && r <192 )
+						if (r > 124 && r <236 )
 						{
 							//左
 							*left = true;	//オブジェクトの右の部分が衝突している
 							*x = bx - 64.0f + (scroll);	//ブロックの位置+オブジェクトの幅
 							*vx = -(*vx) * 0.1f;	//-VX*反発係数
 						}
-						if (192 < r && r < 304)
+						if (236 < r && r < 304)
 						{
 							//下
 							*up = true;	//オブジェクトの上の部分が衝突している

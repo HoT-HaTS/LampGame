@@ -20,5 +20,7 @@ public:
 private:
 	float s1_scroll;
 	int m_map[10][100];
+	bool g_f;
+
 	void BlockDraw(float x, float y, RECT_F* dst, float c[], int block_id);
 };

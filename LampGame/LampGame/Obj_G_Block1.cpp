@@ -2,6 +2,7 @@
 #include "GameL/DrawTexture.h"
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
+#include "GameL/HitBoxManager.h"
 
 #include "GameHead.h"
 #include "Obj_G_Block1.h"
@@ -18,36 +19,34 @@ CObj_G_Block::CObj_G_Block(float x, float y)
 //イニシャライズ
 void CObj_G_Block::Init()
 {
+	G_flag = false;			//false→ある。true→消滅
 
+	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 }
 
 //アクション
 void CObj_G_Block::Action()
 {
-		
+	//スイッチが押されたらフラグ切り替え、ギミックブロックを消滅
+	CObjSwitch* sflag = (CObjSwitch*)Objs::GetObj(OBJ_SWITCH);
+	 G_flag = sflag->Get_S_flag();
+
+
+	if (Input::GetVKey('A') == true)
+	{
+		G_flag == true;
+	}
+
+	//if (G_flag == true)
+	//{
+	//	this->SetStatus(false);		//スイッチが押されたら消滅
+	//	Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+	//}
+
 }
 
 //ドロー
 void CObj_G_Block::Draw()
 {
-	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
-	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-	RECT_F src;	//描画元切り取り位置
-	RECT_F dst;	//描画先表示位置
-
-	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 32.0f;
-	src.m_bottom = 320.0f;
-
-	//表示位置の設定
-	dst.m_top = 0.0f; +m_px;
-	dst.m_left = 0.0f; +m_py;
-	dst.m_right = 32.0f; +m_px;
-	dst.m_bottom = 320.0f; +m_py;
-
-	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-	Draw::Draw(3, &src, &dst, c, 0.0f);
 }

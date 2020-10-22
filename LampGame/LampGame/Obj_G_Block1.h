@@ -15,16 +15,12 @@ class CObj_G_Block : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 
-	
-		//ブロックとの当たり判定
-		void BlockHit
-		(
-			float* x, float* y, bool scroll_on,
-			bool* up, bool* down, bool* left, bool* right,
-			float* vx, float* vy, int* bt
-		);
+		bool Get_G_flag() { return G_flag; }
+
 
 	private:
+		bool G_flag;
+
 		float m_px;			//位置
 		float m_py;
 

@@ -24,6 +24,8 @@ private:
 	float m_px; 		//位置
 	float m_py;
 
+	float m_scroll;		//スクロール用の変数
+
 	bool  S_flag;		//スイッチのフラグ管理用関数
 };
 
