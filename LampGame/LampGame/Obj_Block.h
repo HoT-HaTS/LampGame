@@ -18,6 +18,8 @@ public:
 	void  SetScroll(float s) { m_scroll = s; }
 	float GetScroll() { return m_scroll; }
 
+	int GetMap() { return m_map[10][100]; }
+
 	// ブロックとの当たり判定
 	void BlockHit(
 		float* x, float* y, bool scroll_on,
@@ -33,6 +35,8 @@ public:
 
 private:
 	void BlockDraw(float x, float y, RECT_F* dst, float c[]);
+	void BlockDraw1(float x, float y, RECT_F* dst, float c[]);
+	void BlockDraw2(float x, float y, RECT_F* dst, float c[]);
 	int m_map[10][100]; //マップ情報
 
 	float m_scroll;     //左右スクロール用

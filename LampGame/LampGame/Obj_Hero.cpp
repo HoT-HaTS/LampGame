@@ -1,5 +1,4 @@
 //使用するヘッダーファイル
-#include <math.h>
 #include "GameL/DrawTexture.h"
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
@@ -7,6 +6,7 @@
 
 #include "GameHead.h"
 #include "Obj_Hero.h"
+#include "UtilityModule.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -186,11 +186,11 @@ void CObjHero::Action()
 	//HitBoxの位置の変更
 	hit->SetPos(m_px, m_py);
 
-	////ブロックとの当たり判定実行
+	//ブロックとの当たり判定実行
 	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	//pb->BlockHit(&m_px, &m_py, true,
-	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-	//	&m_block_type);
+	/*BlockHit(&m_px, &m_py, true,
+		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+		&m_block_type);*/
 
 
 	//世界切り替えテスト用:光→影(X押すと切り替え)
