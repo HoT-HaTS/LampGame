@@ -94,8 +94,7 @@ class CObjHero : public CObj
 		//踏んでいるblockの種類確認用
 		int m_block_type;
 
-		//テスト用
-		float px, py;	//交点
-		bool move_flag;
+		float CheckWindow(float pos_x, float pos_y,
+			float window_x, float window_y, float window_w, float window_h);
 };
 

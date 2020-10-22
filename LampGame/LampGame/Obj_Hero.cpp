@@ -37,9 +37,6 @@ void CObjHero::Init()
 	L_flag = true;	//開始時は光フラグON
 	m_flag = true;	//光の世界制御用
 
-	//テスト
-	move_flag = true;
-
 	//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
@@ -105,8 +102,12 @@ void CObjHero::Action()
 		//摩擦
 		m_vx += -(m_vx * INIT_FRICTION);
 
+		//自由落下運動
+		m_vy += 9.8 / (64.0f);
+
 		//位置の更新
 		m_px += m_vx;
+		m_py += m_vy;
 	}
 
 	//移動(影の世界)
@@ -150,6 +151,31 @@ void CObjHero::Action()
 		//位置の更新
 		m_px += m_vx ;
 		m_py += m_vy ;
+
+
+		//右方向
+		if (m_px + 64.0 > 800)
+		{
+			m_px = 800.0f - 64.0f; //はみ出ない位置に移動させる。
+		}
+		//左方向
+		if (m_px < 0.0f)
+		{
+			m_px = 0.0f;
+		}
+		//上方向
+		if (m_py < 0.0f)
+		{
+			m_py = 0.0f;
+		}
+		////下方向
+		//if (m_py + 128.0f > 600 )
+		//{
+		//	m_py = 600.0f - 128.0f;
+		//}
+
+		//画面外に行かない処理
+		//CheckWindow(m_px, m_py, -32.0f, -32.0f, 800.0f, 600.0f);
 	}
 
 	if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
@@ -187,10 +213,10 @@ void CObjHero::Action()
 	hit->SetPos(m_px, m_py);
 
 	//ブロックとの当たり判定実行
-	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	/*BlockHit(&m_px, &m_py, true,
+	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	pb->BlockHit(&m_px, &m_py, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type);*/
+		&m_block_type);
 
 
 	//世界切り替えテスト用:光→影(X押すと切り替え)
@@ -202,6 +228,7 @@ void CObjHero::Action()
 			{
 				L_flag = false;
 				m_flag = false;
+				m_vy = 0;
 				m_sx = m_px;
 				m_sy = m_py;
 			}
@@ -223,6 +250,7 @@ void CObjHero::Action()
 				m_flag = false;
 				m_px = m_sx;
 				m_py = m_sy;
+				m_vy = 0;
 
 			}
 		}
@@ -327,4 +355,43 @@ void CObjHero::Draw()
 	}
 }
 
+//---CheckWindow関数
+//引数1	float pos_x		:領域外かどうか調べるx位置
+//引数2	float pos_y		:領域外かどうか調べるy位置
+//引数3	float window_x	:領域のtop位置
+//引数4	float window_y	:領域のleft位置
+//引数5	float window_w	:領域のright位置
+//引数6	float window_h	:領域のbottom位置
+//戻り値 float x, y		:主人公の位置を領域内にする
+//内容
+//領域内かどうか調べる位置pos_(x,y)がwindow_(xywh)の内か外かを調べる。
+float CObjHero::CheckWindow(float pos_x, float pos_y,
+	float window_x, float window_y, float window_w, float window_h)
+{
+	int x, y;
 
+	//右方向
+	if (pos_x + 32.0 > window_w)
+	{
+		x = 800.0f - 32.0f; //はみ出ない位置に移動させる。
+		return x;
+	}
+	//左方向
+	if (pos_x < window_x)
+	{
+		x = 0.0f;
+		return x;	//領域外
+	}
+	//上方向
+	if (pos_y < window_y)
+	{
+		y = 0.0f;
+		return y;	//領域外
+	}
+	//下方向
+	if (pos_y + 64.0f > window_h)
+	{
+		y = 600.0f - 32.0f;
+		return y;	//領域外
+	}
+}

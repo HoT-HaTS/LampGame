@@ -13,7 +13,7 @@ using namespace GameL;
 class CObjSwitch : public CObj
 {
 public:
-	CObjSwitch() {};
+	CObjSwitch(float x, float y);
 	~CObjSwitch() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション

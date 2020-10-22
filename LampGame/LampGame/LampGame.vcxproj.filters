@@ -87,6 +87,9 @@
     <ClCompile Include="UtilityModule.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
+    <ClCompile Include="Obj_Stage1.cpp">
+      <Filter>ソース ファイル\Stage1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -154,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="UtilityModule.h">
       <Filter>ソース ファイル\共通</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Stage1.h">
+      <Filter>ソース ファイル\Stage1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

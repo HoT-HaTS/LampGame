@@ -19,11 +19,6 @@ void CObjMain::Init()
 //アクション
 void CObjMain::Action()
 {
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-	//リトライ
-	hero->GetVY();
-
 
 	if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
 	{

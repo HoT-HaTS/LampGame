@@ -24,20 +24,9 @@ class CObj_G_Block : public CObj
 			float* vx, float* vy, int* bt
 		);
 
-		//ålŒö‚Æ•Ç‚ÌŒğ·”»’è
-		bool HeroBlockCrossPoint(
-			float x, float y, float vx, float vy,
-			float* out_px, float* out_py, float* out_len
-		);
 	private:
 		float m_px;			//ˆÊ’u
 		float m_py;
 
-		//ü‚Æü‚ÆŒğ·”»’è
-		bool LineCrossPoint(
-			float a1x, float a1y, float a2x, float a2y,
-			float b1x, float b1y, float b2x, float b2y,
-			float* out_px, float* out_py
-		);
 };
 

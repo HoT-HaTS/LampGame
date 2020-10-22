@@ -11,13 +11,17 @@
 //使用するネームスペース
 using namespace GameL;
 
+ CObjSwitch::CObjSwitch(float x, float y)
+{
+	 m_px = x;			//位置
+	 m_py = y;
+}
 
 
 //イニシャライズ
 void CObjSwitch::Init()
 {
-	m_px = 200.0f;			//位置
-	m_py = 150.0f;
+
 
 	S_flag = false;			//スイッチがオフのときはfalse、オンのときはtrue
 

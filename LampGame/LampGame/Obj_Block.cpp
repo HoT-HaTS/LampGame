@@ -2,10 +2,12 @@
 #include "GameL/DrawTexture.h"
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
+#include "GameL/HitBoxManager.h"
 #include "GameL/SceneObjManager.h"
 
 #include "GameHead.h"
 #include "Obj_Block.h"
+#include "Obj_Stage1.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -29,20 +31,92 @@ void CObjBlock::Action()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
 	float hy = hero->GetY();
+	bool L_flag = hero->Get_L_flag();
 
-	//後方スクロールライン
-	if (hx < 80)
+	if (L_flag == true)
 	{
-		hero->SetX(80);
-		m_scroll -= hero->GetVX();
+		//後方スクロールライン
+		if (hx < 80)
+		{
+			hero->SetX(80);
+			m_scroll -= hero->GetVX();
+		}
+
+		//前方スクロールライン
+		if (hx > 300)
+		{
+			hero->SetX(300);
+			m_scroll -= hero->GetVX();
+		}
 	}
 
-	//前方スクロールライン
-	if (hx > 300)
-	{
-		hero->SetX(300);
-		m_scroll -= hero->GetVX();
-	}
+
+	//ブロック情報を持ってくる
+	CObjStage1* block = (CObjStage1*)Objs::GetObj(OBJ_ENEMY);
+	//m_scroll = block->GetScroll();
+
+	////主人公の位置の取得
+	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//float hx = hero->GetX();
+	//float hy = hero->GetY();
+
+	////主人公の衝突確認用のフラグの初期化
+	//hero->SetUp(false);
+	//hero->SetDown(false);
+	//hero->SetLeft(false);
+	//hero->SetRight(false);
+
+
+	////方針 HitBoxに当たった場合、上下左右判定を行う
+
+	////ブロック情報を持ってくる
+	//CObjStage1* block = (CObjStage1*)Objs::GetObj(OBJ_ENEMY);
+
+	////HitBoxの位置の変更
+	//CHitBox* hit = Hits::GetHitBox(this);
+	//hit->SetPos(m_px , m_py);
+
+	////主人公とブロックのあたり判定チェック
+	////当たっている場合
+	//if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	//{
+	//	//ブロックの左部分に接触
+
+	//	if ((m_px + 10 > hx + 64) && (m_px > hx))
+	//	{
+	//		hero->SetRight(true);
+	//		hero->SetX(m_px - 65);
+	//		hero->SetVX(0.0f);
+	//	}
+
+	//	//ブロックの右部分に接触
+	//	if ((m_px + 54 < hx) && (m_px + 64 < hx + 64))
+	//	{
+	//		hero->SetLeft(true);
+	//		hero->SetX(m_px + 64);
+	//		hero->SetVX(0.0f);
+	//	}
+
+	//	//ブロックの上部分に接触
+	//	if ((m_py + 10 > hy + 128) && (m_py > hy))
+	//	{
+	//		hero->SetDown(true);
+	//		hero->SetY(m_py - 128);
+	//		hero->SetVY(0.0f);
+	//	}
+
+	//	//ブロックの下部分に接触
+	//	if ((m_py + 54 < hy) && (m_py < hy + 128))
+	//	{
+	//		hero->SetUp(true);
+	//		hero->SetY(m_py + 64);
+	//		hero->SetVY(0.0f);
+	//	}
+	//}
+
+
+
+
 
 	/*//敵出現ライン
 	//主人公の位置+500を敵出現ラインにする
@@ -113,6 +187,116 @@ void CObjBlock::Draw()
 		dst.m_bottom = 600.0f;
 		Draw::Draw(20, &src, &dst, c, 0.0f);
 	}
+}
+
+
+//BlockHit関数(当たり判定)
+//引数1	float* x			:判定を行うobject(主人公など)のX位置
+//引数2 float* y			:判定を行うobject(主人公など)のY位置
+//引数3 bool	scroll_on	:判定を行うobjectはスクロールの影響を与えるかどうか(true=与える false=与えない)
+//引数4 bool* up			:上下判定の上部分にあたっているかどうかを返す
+//引数5 bool* down			:上下判定の下部分にあたっているかどうかを返す
+//引数6 bool* left			:上下判定の左部分にあたっているかどうかを返す
+//引数7 bool* right			:上下判定の右部分にあたっているかどうかを返す
+//引数8 float* px			:左右判定時、反対方向に座標を変更して位置を返す
+//引数9 float* py			:上下判定時、反対方向に座標を変更して位置を返す
+//引数10 int* bt			:下部分判定時、特殊なブロックのタイプを返す
+//判定を行うobjectとブロック64×64限定で、当たり判定と上下左右判定を行う
+//その結果は引数4～10に返す
+void CObjBlock::BlockHit(
+	float* x, float* y, bool scroll_on,
+	bool* up, bool* down, bool* left, bool* right,
+	float* vx, float* vy, int* bt
+)
+{
+	//衝突状態確認用フラグの初期化
+	*up = false;
+	*down = false;
+	*left = false;
+	*right = false;
+
+	//踏んでいるblockの種類の初期化
+	*bt = 0;
+
+	//m_mapの全要素にアクセス
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			if (m_map[i][j] > 0 && m_map[i][j] != 3 && m_map[i][j] != 5 && m_map[i][j] != 6)
+			{
+				//要素番号を座標に変更
+				float bx = j * 64.0f;
+				float by = i * 64.0f;
+
+				//スクロールの影響
+				float scroll = scroll_on ? m_scroll : 0;
+
+				//オブジェクトとブロックの当たり判定(ブロックの左:右:上:下の順)
+				if ((*x + (-scroll) + 64.0f > bx) && (*x + (-scroll) < bx + 64.0f) && (*y + 128.0f > by) && (*y < by + 64.0f))
+				{
+					//上下左右判定
+
+					//主人公とブロックの中心でvector作成
+					float rvx = (*x + (-scroll) + 32.0f) - (bx + 32.0f);
+					float rvy = (*y + 64.0f) - (by + 32.0f);
+
+					//長さlenを求める
+					float len = sqrt(rvx * rvx + rvy * rvy);
+
+					//角度rを求める
+					float r = atan2(rvy, rvx);	//(ラジアン)
+					r = r * 180.0f / 3.14f;		//度
+
+					if (r <= 0.0f)
+						r = abs(r);
+					else
+						r = 360.0f - abs(r);
+
+					//lenがある一定の長さより短い場合に判定に入る。
+					if (len < 111.0f)
+					{
+						//角度で上下左右を判定
+						if ((r < 56 && r>=0) || r > 304)
+						{
+							//右
+							*right = true;	//オブジェクトの左の部分が衝突している
+							*x = bx + 64.0f + (scroll);	//ブロックの位置+オブジェクトの幅
+							*vx = -(*vx) * 0.1f;	//-VX*反発係数
+						}
+						if (r > 56 && r < 124)
+						{
+							//上
+							*down = true;	//オブジェクトの下の部分が衝突している
+								*y = by - 128.0f;	//ブロックの位置+オブジェクトの幅
+							//種類を渡すのスタートとゴールのみ変更する
+							if (m_map[i][j] >= 2)
+								*bt = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
+							*vy = 0.0f;
+						}
+						if (r > 124 && r <192 )
+						{
+							//左
+							*left = true;	//オブジェクトの右の部分が衝突している
+							*x = bx - 64.0f + (scroll);	//ブロックの位置+オブジェクトの幅
+							*vx = -(*vx) * 0.1f;	//-VX*反発係数
+						}
+						if (192 < r && r < 304)
+						{
+							//下
+							*up = true;	//オブジェクトの上の部分が衝突している
+								*y = by + 64.0f;	//ブロックの位置+オブジェクトの幅
+							if (*vy < 0)
+							{
+								*vy = 0.0f;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
 
 	//マップチップによるBlock設置
 	for (int i = 0; i < 10; i++)
