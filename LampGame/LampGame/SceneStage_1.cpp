@@ -56,12 +56,15 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"lampattack.png", 30, TEX_SIZE_512);
 	Draw::LoadImageW(L"stage_background.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"stage_ground.png", 21, TEX_SIZE_512);
+
+	Draw::LoadImageW(L"stage_button.png", 22, TEX_SIZE_512);
+	Draw::LoadImageW(L"stage_plate.png", 23, TEX_SIZE_512);
+	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
+
 	Draw::LoadImageW(L"Enemy.png", 22, TEX_SIZE_512);
 	Draw::LoadImageW(L"Board.png", 23, TEX_SIZE_512);
 	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
-	Draw::LoadImageW(L"stage_button.png", 22, TEX_SIZE_512);
-	Draw::LoadImageW(L"stage_plate.png", 23, TEX_SIZE_512);
-	Draw::LoadImageW(L"switch.png", 11, TEX_SIZE_512);
+
 
 	CObjHero* obj_h = new CObjHero();
 	Objs::InsertObj(obj_h, OBJ_HERO, 10);

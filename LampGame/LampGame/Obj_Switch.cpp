@@ -115,11 +115,11 @@ void CObjSwitch::Draw()
 		switch_graphic = 0;
 	else
 		switch_graphic = 1;
-	
+
 
 	//切り取り位置の設定
 	src.m_top = 0.0f;
-	src.m_left = 0.0f +(switch_graphic * 64.0f);
+	src.m_left = 0.0f + (switch_graphic * 64.0f);
 	src.m_right = 64.0f; +(switch_graphic * 64.0f);
 	src.m_bottom = 64.0f;
 
@@ -130,6 +130,6 @@ void CObjSwitch::Draw()
 	dst.m_bottom = 64.0f + m_py;
 
 	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-	Draw::Draw(11, &src, &dst, c, 0.0f);
+	Draw::Draw(10, &src, &dst, c, 0.0f);
 }
 
