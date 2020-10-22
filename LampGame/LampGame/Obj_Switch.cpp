@@ -36,6 +36,9 @@ void CObjSwitch::Action()
 		S_flag == true;
 	}
 
+	//スクロールの値を取得
+	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
 	//主人公の位置の取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
@@ -47,20 +50,12 @@ void CObjSwitch::Action()
 	hero->SetLeft(false);
 	hero->SetRight(false);
 
-
-	//方針 HitBoxに当たった場合、上下左右判定を行う
-
 	//主人公から光フラグを取ってくる
 	bool L_flag_switch = hero->Get_L_flag();
-	
-	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	m_scroll = scroll->GetScroll();
-
-	m_px -= m_scroll;
 
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px, m_py);
+	hit->SetPos(m_px+scroll->GetScroll(), m_py);
 
 	//主人公とスイッチのあたり判定チェック
 	//当たっている場合
@@ -72,7 +67,7 @@ void CObjSwitch::Action()
 		{
 			hero->SetRight(true);
 
-			hero->SetX(m_px - 64);
+			hero->SetX(m_px - 64 + scroll->GetScroll());
 			hero->SetVX(0.0f);
 		}
 
@@ -80,7 +75,7 @@ void CObjSwitch::Action()
 		if ((m_px + 54 < hx) && (m_px+64 < hx+64))
 		{
 			hero->SetLeft(true);
-			hero->SetX(m_px + 64);
+			hero->SetX(m_px + 64 + scroll->GetScroll());
 			hero->SetVX(0.0f);
 		}
 
@@ -88,7 +83,7 @@ void CObjSwitch::Action()
 		if ((m_py +10 > hy + 128) && (m_py  > hy))
 		{
 			hero->SetDown(true);
-			hero->SetY(m_py - 128);
+			hero->SetY(m_py - 128 + scroll->GetScroll());
 			hero->SetVY(0.0f);
 		}
 
@@ -96,7 +91,7 @@ void CObjSwitch::Action()
 		if ((m_py + 54 < hy) && (m_py < hy+128))
 		{
 			hero->SetUp(true);
-			hero->SetY(m_py+64);
+			hero->SetY(m_py+64 + scroll->GetScroll());
 			hero->SetVY(0.0f);
 		}
 	}
@@ -113,16 +108,16 @@ void CObjSwitch::Action()
 		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
 	}
 
-
-
-
 }
 
 //ドロー
 void CObjSwitch::Draw()
 {
 	int switch_graphic;		//影と光でスイッチの描画を変えるための数字、ここだけでしか使わないため、ここで宣言している
-
+	
+    //スクロールの値を取得
+	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
@@ -146,9 +141,9 @@ void CObjSwitch::Draw()
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
-	dst.m_left = 0.0f + m_px-m_scroll;
-	dst.m_right = 64.0f + m_px - m_scroll;
-	dst.m_bottom = 64.0f + m_py;
+	dst.m_left = 0.0f + m_px + scroll->GetScroll();
+	dst.m_right = dst.m_left + 64.0f;
+	dst.m_bottom = dst.m_top + 64.0f;
 
 	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(10, &src, &dst, c, 0.0f);
