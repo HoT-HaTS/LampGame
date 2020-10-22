@@ -40,6 +40,9 @@ void CObjSwitch::Action()
 
 
 	//方針 HitBoxに当たった場合、上下左右判定を行う
+
+	//主人公から光フラグを取ってくる
+	bool L_flag_switch = hero->Get_L_flag();
 	
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -47,14 +50,15 @@ void CObjSwitch::Action()
 
 	//主人公とスイッチのあたり判定チェック
 	//当たっている場合
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	if ((hit->CheckObjNameHit(OBJ_HERO) != nullptr)&&(L_flag_switch==false))
 	{
 		//スイッチの左部分に接触
 
 		if ((m_px+10 > hx + 64) && (m_px  > hx ))
 		{
 			hero->SetRight(true);
-			hero->SetX(m_px - 65);
+
+			hero->SetX(m_px - 64);
 			hero->SetVX(0.0f);
 		}
 
@@ -120,7 +124,7 @@ void CObjSwitch::Draw()
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f + (switch_graphic * 64.0f);
-	src.m_right = 64.0f; +(switch_graphic * 64.0f);
+	src.m_right = 64.0f +(switch_graphic * 64.0f);
 	src.m_bottom = 64.0f;
 
 	//表示位置の設定
