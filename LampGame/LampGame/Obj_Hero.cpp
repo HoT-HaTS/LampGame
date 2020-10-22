@@ -83,13 +83,13 @@ void CObjHero::Action()
 		//キーの入力方向
 		if (Input::GetVKey(VK_RIGHT) == true)
 		{
-			m_vx += 3*m_speed_power;
+			m_vx += 2*m_speed_power;
 			m_posture = 1.0f;
 			m_ani_time += 1.0;
 		}
 		else if (Input::GetVKey(VK_LEFT) == true)
 		{
-			m_vx -= 3*m_speed_power;
+			m_vx -= 2*m_speed_power;
 			m_posture = 0.0f;
 			m_ani_time += 1.0;
 		}
@@ -352,46 +352,5 @@ void CObjHero::Draw()
 	{
 		//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
 		Draw::Draw(1, &src, &dst, c, 0.0f);
-	}
-}
-
-//---CheckWindow関数
-//引数1	float pos_x		:領域外かどうか調べるx位置
-//引数2	float pos_y		:領域外かどうか調べるy位置
-//引数3	float window_x	:領域のtop位置
-//引数4	float window_y	:領域のleft位置
-//引数5	float window_w	:領域のright位置
-//引数6	float window_h	:領域のbottom位置
-//戻り値 float x, y		:主人公の位置を領域内にする
-//内容
-//領域内かどうか調べる位置pos_(x,y)がwindow_(xywh)の内か外かを調べる。
-float CObjHero::CheckWindow(float pos_x, float pos_y,
-	float window_x, float window_y, float window_w, float window_h)
-{
-	int x, y;
-
-	//右方向
-	if (pos_x + 32.0 > window_w)
-	{
-		x = 800.0f - 32.0f; //はみ出ない位置に移動させる。
-		return x;
-	}
-	//左方向
-	if (pos_x < window_x)
-	{
-		x = 0.0f;
-		return x;	//領域外
-	}
-	//上方向
-	if (pos_y < window_y)
-	{
-		y = 0.0f;
-		return y;	//領域外
-	}
-	//下方向
-	if (pos_y + 64.0f > window_h)
-	{
-		y = 600.0f - 32.0f;
-		return y;	//領域外
 	}
 }
