@@ -20,6 +20,7 @@ CObjStage1::CObjStage1(int map[10][100])
 //イニシャライズ
 void CObjStage1::Init()
 {
+	g_f = false;
 	s1_scroll = 0.0f;
 }
 
@@ -29,11 +30,17 @@ void CObjStage1::Action()
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	s1_scroll = block->GetScroll();
 
-	////主人公の位置を取得
-	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//float hx = hero->GetX();
-	//float hy = hero->GetY();
-	//bool L_flag = hero->Get_L_flag();
+	//主人公の位置を取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	float hx = hero->GetX();
+	float hy = hero->GetY();
+	bool L_flag = hero->Get_L_flag();
+
+
+	CObj_G_Block* gflag = (CObj_G_Block*)Objs::GetObj(OBJ_BLOCK);
+	g_f = gflag->Get_G_flag();
+
+
 
 	//if (L_flag == true)
 	//{
@@ -52,27 +59,36 @@ void CObjStage1::Action()
 	//	}
 	//}
 
+	//敵出現ライン
+	//主人公の位置+500を敵出現ラインにする
+	float line = hx + (-s1_scroll) + 500;
 
-	////敵出現ライン
-	////主人公の位置+500を敵出現ラインにする
-	//float line = hx + (-m_scroll) + 500;
+	//敵出現ラインを要素番号化
+	int ex = ((int)line) / 64;
 
-	////敵出現ラインを要素番号化
-	//int ex = ((int)line) / 64;
+	//敵出現ラインの列を検索
+	for (int i = 0; i < 10; i++)
+	{
+		//列の中から2を探す
+		if (m_map[i][ex] == 2)
+		{
+			////2があればブロック出現
+			//CObj_G_Block* objg = new CObj_G_Block(ex * 64.0f, i * 64.0f);
+			//Objs::InsertObj(objg, OBJ_BLOCK, 8);
 
-	////敵出現ラインの列を検索
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	//列の中から1を探す
-	//	if (m_map[i][ex] == 1)
-	//	{
-	//		//1があればブロック出現
-	//		CObjBlock* objb = new CObjBlock();
-	//		Objs::InsertObj(objb, OBJ_BLOCK, 9);
 
-	//		m_map[i][ex] = 99;
-	//	}
-	//}
+			////敵出現場所の値を0にする
+			//m_map[i][ex] = 0;
+
+		}
+		//列の中から6を探す
+		if (m_map[i][ex] == 6)
+		{
+			//6があればスイッチ出現
+			CObjSwitch* objs = new CObjSwitch(ex * 64.0f, i * 64.0f);
+			Objs::InsertObj(objs, OBJ_SWITCH, 7);
+		}
+	}
 
 
 }
@@ -148,7 +164,7 @@ void CObjStage1::BlockDraw(float x, float y, RECT_F* dst, float c[], int block_i
 		RECT_F src;
 		src.m_top = y;
 		src.m_left = x;
-		src.m_right = src.m_left + 32.0f;
+		src.m_right = src.m_left + 64.0f;
 		src.m_bottom = src.m_top + 64.0f;
 		//描画
 		Draw::Draw(3, &src, dst, c, 0.0f);
