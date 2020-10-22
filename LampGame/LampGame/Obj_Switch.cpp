@@ -16,8 +16,8 @@ using namespace GameL;
 //イニシャライズ
 void CObjSwitch::Init()
 {
-	m_px = 100.0f;			//位置
-	m_py = 100.0f;
+	m_px = 200.0f;			//位置
+	m_py = 150.0f;
 
 	S_flag = false;			//スイッチがオフのときはfalse、オンのときはtrue
 
@@ -38,50 +38,55 @@ void CObjSwitch::Action()
 	hero->SetLeft(false);
 	hero->SetRight(false);
 
-	//主人公とスイッチのあたり判定チェック
-	if ((m_px + 64 > hx) && (m_px < hx+64) && (m_py + 64 > hy) && (hy + 128 > m_py))
-	{
-		//当たっている場合
 
-			//求めた角度で上下左右を判定
-			//スイッチの右部分に接触
-			/*if ((hx <  && r>0) || r > 315)
-			{
-				hero->SetLeft(true);
-				hero->SetX(m_px + 65);
-				hero->SetVX(0.0f);
-			}
-
-			//スイッチが主人公の上部分に接触
-			if (r > 225 || r < 315)
-			{
-				hero->SetUp(true);
-				hero->SetY(m_py);
-				hero->SetVY(0.0f);
-			}
-
-			//スイッチが主人公の下部分に接触
-			if (r > 45 || r < 135)
-			{
-				hero->SetDown(true);
-				hero->SetY(m_py + 64);
-				hero->SetVY(0.0f);
-			}
-
-			//スイッチが主人公の右部分に接触
-			if (r > 135 || r < 225)
-			{
-				hero->SetRight(true);
-				hero->SetX(m_px);
-				hero->SetVX(0.0f);
-			}*/
-
-	}
-
-	//スイッチが押されたらフラグ切り替え、スイッチを消滅
+	//方針 HitBoxに当たった場合、上下左右判定を行う
+	
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px, m_py);
+
+	//主人公とスイッチのあたり判定チェック
+	//当たっている場合
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		//スイッチの左部分に接触
+
+		if ((m_px+10 > hx + 64) && (m_px  > hx ))
+		{
+			hero->SetRight(true);
+			hero->SetX(m_px - 65);
+			hero->SetVX(0.0f);
+		}
+
+		//スイッチの右部分に接触
+		if ((m_px + 54 < hx) && (m_px+64 < hx+64))
+		{
+			hero->SetLeft(true);
+			hero->SetX(m_px + 64);
+			hero->SetVX(0.0f);
+		}
+
+		//スイッチの上部分に接触
+		if ((m_py +10 > hy + 128) && (m_py  > hy))
+		{
+			hero->SetDown(true);
+			hero->SetY(m_py - 128);
+			hero->SetVY(0.0f);
+		}
+
+		//スイッチの下部分に接触
+		if ((m_py + 54 < hy) && (m_py < hy+128))
+		{
+			hero->SetUp(true);
+			hero->SetY(m_py+64);
+			hero->SetVY(0.0f);
+		}
+	}
+	
+	//スイッチが押されたらフラグ切り替え、スイッチを消滅
+	//HitBoxの内容を更新
+	//CHitBox* hit = Hits::GetHitBox(this);
+	//hit->SetPos(m_px, m_py);
 
 	if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
 	{
@@ -95,7 +100,7 @@ void CObjSwitch::Action()
 //ドロー
 void CObjSwitch::Draw()
 {
-	int switch_graphic;		//影と光でスイッチの描画を変えるための数字
+	int switch_graphic;		//影と光でスイッチの描画を変えるための数字、ここだけでしか使わないため、ここで宣言している
 
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -113,17 +118,18 @@ void CObjSwitch::Draw()
 	
 
 	//切り取り位置の設定
-	src.m_top = 10.0f;
-	src.m_left = 10.0f +(switch_graphic * 64.0f);
+	src.m_top = 0.0f;
+	src.m_left = 0.0f +(switch_graphic * 64.0f);
 	src.m_right = 64.0f; +(switch_graphic * 64.0f);
 	src.m_bottom = 64.0f;
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_px;
-	dst.m_left = 0.0f + m_py;
-	dst.m_right = 64.0f + m_py;
-	dst.m_bottom = 64.0f + m_px;
+	dst.m_top = 0.0f + m_py;
+	dst.m_left = 0.0f + m_px;
+	dst.m_right = 64.0f + m_px;
+	dst.m_bottom = 64.0f + m_py;
 
 	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-	Draw::Draw(10, &src, &dst, c, 0.0f);
+	Draw::Draw(11, &src, &dst, c, 0.0f);
 }
+
