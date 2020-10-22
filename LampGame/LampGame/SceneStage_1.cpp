@@ -53,7 +53,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"GBlock_Wood.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"stage_background.png", 4, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"lampattack.png", 30, TEX_SIZE_512);
+	Draw::LoadImageW(L"lamp_attack.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"stage_background.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"block.png", 21, TEX_SIZE_512);
 
