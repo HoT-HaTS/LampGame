@@ -59,6 +59,71 @@ void CObjSwitch::Action()
 
 	//主人公とスイッチのあたり判定チェック
 	//当たっている場合
+
+	/*
+	//スクロールの影響
+	float scroll = scroll_on ? m_scroll : 0;
+
+	//オブジェクトとブロックの当たり判定(ブロックの左:右:上:下の順)
+	if ((hx + (-scroll) + 64.0f > m_px) && (hx + (-scroll) < m_px + 64.0f) && (hy + 128.0f > m_py) && (hy < m_py + 64.0f))
+	{
+		//上下左右判定
+
+		//主人公とブロックの中心でvector作成
+		float rvx = (hx + (-scroll) + 32.0f) - (m_px + 32.0f);
+		float rvy = (hy + 64.0f) - (m_py + 32.0f);
+
+		//長さlenを求める
+		float len = sqrt(rvx * rvx + rvy * rvy);
+
+		//角度rを求める
+		float r = atan2(rvy, rvx);	//(ラジアン)
+		r = r * 180.0f / 3.14f;		//度
+
+		if (r <= 0.0f)
+			r = abs(r);
+		else
+			r = 360.0f - abs(r);
+
+		//lenがある一定の長さより短い場合に判定に入る。
+		if (len < 111.0f)
+		{
+			//角度で上下左右を判定
+			if ((r < 56 && r >= 0) || r > 304)
+			{
+				//右
+				hero->SetRight(true);	//オブジェクトの左の部分が衝突している
+				hx = m_px + 64.0f + (scroll);	//ブロックの位置+オブジェクトの幅
+				*vx = -(*vx) * 0.1f;	//-VX*反発係数
+			}
+			if (r > 56 && r < 124)
+			{
+				//上
+				hero->SetDown(true);	//オブジェクトの下の部分が衝突している
+				hy = m_py - 128.0f;	//ブロックの位置+オブジェクトの幅
+				*vy = 0.0f;
+			}
+			if (r > 124 && r < 236)
+			{
+				//左
+				hero->SetLeft(true);	//オブジェクトの右の部分が衝突している
+				hx = m_px - 64.0f + (scroll);	//ブロックの位置+オブジェクトの幅
+				*vx = -(*vx) * 0.1f;	//-VX*反発係数
+			}
+			if (236 < r && r < 304)
+			{
+				//下
+				hero->SetUp(true);	//オブジェクトの上の部分が衝突している
+				hy = m_py + 64.0f;	//ブロックの位置+オブジェクトの幅
+				if (hy < 0)
+				{
+					*vy = 0.0f;
+				}
+			}
+		}
+	}*/
+	
+	/*
 	if ((hit->CheckObjNameHit(OBJ_HERO) != nullptr)&&(L_flag_switch==false))
 	{
 		//スイッチの左部分に接触
@@ -95,6 +160,7 @@ void CObjSwitch::Action()
 			hero->SetVY(0.0f);
 		}
 	}
+	*/
 	
 	//スイッチが押されたらフラグ切り替え、スイッチを消滅
 	//HitBoxの内容を更新
