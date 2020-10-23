@@ -72,13 +72,13 @@ void CObjStage1::Action()
 		//列の中から2を探す
 		if (m_map[i][ex] == 2)
 		{
-			////2があればブロック出現
-			//CObj_G_Block* objg = new CObj_G_Block(ex * 64.0f, i * 64.0f);
-			//Objs::InsertObj(objg, OBJ_BLOCK, 8);
+			//2があればブロック出現
+			CObj_G_Block* objg = new CObj_G_Block(ex * 64.0f, i * 64.0f);
+			Objs::InsertObj(objg, OBJ_BLOCK, 8);
 
 
-			////敵出現場所の値を0にする
-			//m_map[i][ex] = 0;
+			//敵出現場所の値を0にする
+			m_map[i][ex] = 0;
 
 		}
 		//列の中から6を探す
@@ -87,6 +87,9 @@ void CObjStage1::Action()
 			//6があればスイッチ出現
 			CObjSwitch* objs = new CObjSwitch(ex * 64.0f, i * 64.0f);
 			Objs::InsertObj(objs, OBJ_SWITCH, 7);
+
+			//敵出現場所の値を0にする
+			m_map[i][ex] = 0;
 		}
 	}
 
@@ -117,7 +120,7 @@ void CObjStage1::Draw()
 				if (m_map[i][j] == 2)
 				{
 					//ギミックブロック
-					BlockDraw(0.0f, 0.0f, &dst, c, 2);
+					//BlockDraw(0.0f, 0.0f, &dst, c, 2);
 				}
 				else if (m_map[i][j] == 3)
 				{

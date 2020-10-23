@@ -152,7 +152,7 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] > 0  && m_map[i][j] != 3 && m_map[i][j] != 5 && m_map[i][j] != 6)
+			if (m_map[i][j] > 0 && m_map[i][j] != 2 && m_map[i][j] != 3 && m_map[i][j] != 5 && m_map[i][j] != 6)
 			{
 				//要素番号を座標に変更
 				float bx = j * 64.0f;
@@ -190,7 +190,7 @@ void CObjBlock::BlockHit(
 						{
 							//右
 							*right = true;	//オブジェクトの左の部分が衝突している
-							*x = bx + 64.0f + (scroll);	//ブロックの位置+オブジェクトの幅
+							*x = bx + 63.5f + (scroll);	//ブロックの位置+オブジェクトの幅
 							*vx = -(*vx) * 0.1f;	//-VX*反発係数
 						}
 						if (r > 56 && r < 124)
@@ -207,14 +207,14 @@ void CObjBlock::BlockHit(
 						{
 							//左
 							*left = true;	//オブジェクトの右の部分が衝突している
-							*x = bx - 64.0f + (scroll);	//ブロックの位置+オブジェクトの幅
+							*x = bx - 63.5f + (scroll);	//ブロックの位置+オブジェクトの幅
 							*vx = -(*vx) * 0.1f;	//-VX*反発係数
 						}
 						if (236 < r && r < 304)
 						{
 							//下
 							*up = true;	//オブジェクトの上の部分が衝突している
-								*y = by + 64.0f;	//ブロックの位置+オブジェクトの幅
+								*y = by + 63.5f;	//ブロックの位置+オブジェクトの幅
 							if (*vy < 0)
 							{
 								*vy = 0.0f;
