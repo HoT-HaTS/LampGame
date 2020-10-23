@@ -219,7 +219,7 @@ void CObjHero::Action()
 		&m_block_type);
 
 
-	//¢ŠEØ‚è‘Ö‚¦ƒeƒXƒg—p:Œõ¨‰e(X‰Ÿ‚·‚ÆØ‚è‘Ö‚¦)
+	//¢ŠEØ‚è‘Ö‚¦:Œõ¨‰e(X‰Ÿ‚·‚ÆØ‚è‘Ö‚¦)
 	if (L_flag == true)
 	{
 		if (Input::GetVKey('X') == true )
@@ -239,19 +239,19 @@ void CObjHero::Action()
 		}
 	}
 
-	//¢ŠEØ‚è‘Ö‚¦ƒeƒXƒg—p:‰e¨Œõ(X‰Ÿ‚·‚ÆØ‚è‘Ö‚¦)
+	//¢ŠEØ‚è‘Ö‚¦:‰e¨Œõ(X‰Ÿ‚·‚ÆØ‚è‘Ö‚¦)
 	if (L_flag == false)
 	{
 		if (Input::GetVKey('X') == true )
 		{
 			if (m_flag == true)
 			{
-				L_flag = true;
-				m_flag = false;
+				m_vx = 0;
 				m_px = m_sx;
 				m_py = m_sy;
+				L_flag = true;
+				m_flag = false;
 				m_vy = 0;
-
 			}
 		}
 		else
