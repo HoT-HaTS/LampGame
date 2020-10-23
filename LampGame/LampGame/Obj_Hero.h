@@ -15,10 +15,10 @@ using namespace GameL;
 #define INIT_ANI_TIME (0.0)		//アニメーションタイム	
 #define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
 
-#define INIT_SPEED_POWER (0.7)	//加算速度
+#define INIT_SPEED_POWER (1.4)	//加算速度
 #define INIT_ANI_MAX_TIME (5.0)	
 
-#define INIT_FRICTION (0.098)	//摩擦係数
+#define INIT_FRICTION (0.2)	//摩擦係数
 
 #define BLOCK_TYPE (0.0)	//ブロックの種類識別用
 
@@ -77,6 +77,8 @@ class CObjHero : public CObj
 
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値
+
+		int time;				//世界切り替え制御用時間
 
 		//blockとの衝突状態確認用
 		bool m_hit_up;

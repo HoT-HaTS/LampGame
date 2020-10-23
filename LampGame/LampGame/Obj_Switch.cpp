@@ -65,14 +65,14 @@ void CObjSwitch::Action()
 			if (m_px + scroll->GetScroll() > hx)
 			{
 				hero->SetRight(true);
-				hero->SetX(m_px - 64 + scroll->GetScroll());
+				hero->SetX(m_px - 64.5 + scroll->GetScroll());
 				hero->SetVX(0.0f);
 			}
 			//スイッチの右部分に接触
 			else if (hx > m_px + scroll->GetScroll())
 			{
 				hero->SetLeft(true);
-				hero->SetX(m_px + 64 + scroll->GetScroll());
+				hero->SetX(m_px + 63.5 + scroll->GetScroll());
 				hero->SetVX(0.0f);
 			}
 		}
@@ -80,14 +80,14 @@ void CObjSwitch::Action()
 		if ( hy + 127 <= m_py )
 		{
 			hero->SetDown(true);
-			hero->SetY(m_py - 128);
+			hero->SetY(m_py - 128.5);
 			hero->SetVY(0.0f);
 		}
 		//スイッチの下部分に接触
 		else if ( m_py + 65 <= hy )
 		{
 			hero->SetUp(true);
-			hero->SetY(m_py + 64);
+			hero->SetY(m_py + 63.5);
 			hero->SetVY(0.0f);
 		}
 	}
@@ -138,8 +138,8 @@ void CObjSwitch::Draw()
 
 	//切り取り位置の設定
 	src.m_top = 0.0f;
-	src.m_left = 0.0f + (switch_graphic * 64.0f);
-	src.m_right = 64.0f +(switch_graphic * 64.0f);
+	src.m_left = 64.0f;//0.0f + (switch_graphic * 64.0f);
+	src.m_right = 128.0f;// 64.0f + (switch_graphic * 64.0f);
 	src.m_bottom = 64.0f;
 
 	//表示位置の設定
@@ -149,6 +149,6 @@ void CObjSwitch::Draw()
 	dst.m_bottom = dst.m_top + 64.0f;
 
 	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-	Draw::Draw(10, &src, &dst, c, 0.0f);
+	Draw::Draw(12, &src, &dst, c, 0.0f);
 }
 

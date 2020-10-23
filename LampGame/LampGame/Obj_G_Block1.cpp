@@ -51,37 +51,40 @@ void CObj_G_Block::Action()
 		float hx = hero->GetX();
 		float hy = hero->GetY();
 
-		//スイッチの上じゃない条件
+		//G_Blockの上じゃない条件
 		if (hy + 120 > m_py)
 		{
-			//スイッチの左部分に接触
-			if (m_px + scroll->GetScroll() > hx)
+			//G_Blockの左部分に接触
+			if (m_px + scroll->GetScroll() > hx )
 			{
 				hero->SetRight(true);
-				hero->SetX(m_px - 64 + scroll->GetScroll());
-				hero->SetVX(0.0f);
+				hero->SetX(m_px - 64.5 + scroll->GetScroll());
+				hero->SetVX(-0.5);
 			}
-			//スイッチの右部分に接触
+			//G_Blockの右部分に接触
 			else if (hx > m_px + scroll->GetScroll())
 			{
 				hero->SetLeft(true);
-				hero->SetX(m_px + 64 + scroll->GetScroll());
-				hero->SetVX(0.0f);
+				hero->SetX(m_px + 63.5 + scroll->GetScroll());
+				hero->SetVX(0.0);
 			}
 		}
-		//スイッチの上部分に接触
-		if (hy + 127 <= m_py)
+		else
 		{
-			hero->SetDown(true);
-			hero->SetY(m_py - 128);
-			hero->SetVY(0.0f);
-		}
-		//スイッチの下部分に接触
-		else if (m_py + 65 <= hy)
-		{
-			hero->SetUp(true);
-			hero->SetY(m_py + 64);
-			hero->SetVY(0.0f);
+			//G_Blockの上部分に接触
+			if (hy + 127 <= m_py)
+			{
+				hero->SetDown(true);
+				hero->SetY(m_py - 128.5);
+				hero->SetVY(0.0);
+			}
+			//G_Blockの下部分に接触
+			else if (m_py + 65 <= hy)
+			{
+				hero->SetUp(true);
+				hero->SetY(m_py + 63.5);
+				hero->SetVY(0.0);
+			}
 		}
 	}
 
