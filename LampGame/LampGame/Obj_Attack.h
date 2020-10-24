@@ -26,7 +26,7 @@ private:
 	int m_ani_frame;		//アニメーションタイム
 	int m_ani_time;		//アニメーションフレーム
 
-	int m_posture;		//攻撃の向き(1で右、0で左)
+	float m_posture;	//向き：0で右、1で左
 
 	float m_px;			//位置
 	float m_py;

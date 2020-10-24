@@ -47,6 +47,8 @@ class CObjHero : public CObj
 		float GetVX() { return m_vx; }
 		int GetBT() { return m_block_type; }
 
+		float GetPosture() { return m_posture; }
+
 		bool Get_L_flag(){ return L_flag; }
 
 		void SetX(float x) { m_px = x; }
@@ -59,7 +61,7 @@ class CObjHero : public CObj
 		void SetDown(bool b) { m_hit_down = b; }
 		void SetLeft(bool b) { m_hit_left = b; }
 		void SetRight(bool b) { m_hit_right = b; }
-
+		
 	private:
 		float m_px;			//ˆÊ’u
 		float m_py;

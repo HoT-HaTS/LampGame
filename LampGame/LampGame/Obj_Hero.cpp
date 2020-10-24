@@ -61,21 +61,21 @@ void CObjHero::Action()
 
 
 	//主人公の攻撃
-	//if (Input::GetVKey('Z') == true)
-	//{
-	//	if (attack_flag == true)
-	//	{
-	//		//攻撃オブジェクトの作成
-	//		CObjAttack* obj_attack = new CObjAttack(m_px, m_py); //弾丸オブジェクト作成
-	//		Objs::InsertObj(obj_attack, OBJ_ATTACK, 100);		//作った弾丸オブジェクトをマネージャーに登録
+	if (Input::GetVKey('Z') == true)
+	{
+		if (attack_flag == true)
+		{
+			//攻撃オブジェクトの作成
+			CObjAttack* obj_attack = new CObjAttack(m_px, m_py); //弾丸オブジェクト作成
+			Objs::InsertObj(obj_attack, OBJ_ATTACK, 100);		//作った弾丸オブジェクトをマネージャーに登録
 
-	//		attack_flag = false;
-	//	}
-	//}
-	//else
-	//{
-	//	attack_flag = true;
-	//}
+			attack_flag = false;
+		}
+	}
+	else
+	{
+		attack_flag = true;
+	}
 
 	//移動(光の世界)
 	if (L_flag == true)

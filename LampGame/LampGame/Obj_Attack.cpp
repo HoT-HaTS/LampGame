@@ -23,6 +23,8 @@ void CObjAttack::Init()
 	m_ani_time = INIT_ANI_TIME;		//アニメーションタイムの初期化
 	m_ani_frame = INIT_ANI_FLAME;	//アニメーションフレームの初期化
 
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	m_posture = hero->GetPosture();
 
 	Hits::SetHitBox(this, m_px, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE+64, ELEMENT_ATTACK, OBJ_ATTACK,1);
 }
@@ -30,14 +32,23 @@ void CObjAttack::Init()
 //アクション
 void CObjAttack::Action()
 {
-	
 	m_ani_time += 1;
-	if(m_ani_time)
+	if (m_ani_time % 3 == 0)
+	{
+		m_ani_frame += 1;
+	}
+
 
 	CHitBox* hit = Hits::GetHitBox(this);
-	//hit->SetPos(m_px, m_py);
+	hit->SetPos(m_px,m_py);
 
-	//Todo:アニメーション終了後にオブジェクトを破棄する
+	//アニメーション終了後にオブジェクトを破棄する
+	if (m_ani_frame >= 8)
+	{
+		this->SetStatus(false);		//スイッチが押されたら消滅
+		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+		return;
+	}
 }
 
 //ドロー
@@ -57,17 +68,17 @@ void CObjAttack::Draw()
 
 	//切り取り位置の設定
 	{
-		src.m_top = HBLOCK_INT_Y_SIZE;
-		src.m_left = 0.0f + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
-		src.m_right = HBLOCK_INT_X_SIZE + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
-		src.m_bottom = src.m_top + HBLOCK_INT_Y_SIZE;
+		src.m_top = ABLOCK_INT_Y_SIZE;
+		src.m_left = 0.0f + AniData[m_ani_frame] * ABLOCK_INT_X_SIZE;
+		src.m_right = ABLOCK_INT_X_SIZE + AniData[m_ani_frame] * ABLOCK_INT_X_SIZE;
+		src.m_bottom = src.m_top + ABLOCK_INT_Y_SIZE;
 	}
 
 	//表示位置の設定
-	dst.m_top = 0.0f;
-	dst.m_left = 0.0f;
-	dst.m_right = 64.0f;
-	dst.m_bottom = 64.0f;
+	dst.m_top = 0.0f + m_py;
+	dst.m_left = (ABLOCK_INT_X_SIZE - ABLOCK_INT_X_SIZE * m_posture) + m_px;
+	dst.m_right = (ABLOCK_INT_X_SIZE * m_posture) + m_px;
+	dst.m_bottom = ABLOCK_INT_Y_SIZE + m_py;
 
 	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(11, &src, &dst, c, 0.0f);
