@@ -97,11 +97,6 @@ void CObjSwitch::Action()
 	{
 		S_flag = true;				//スイッチのフラグをtrueに
 	}
-	//テスト用：攻撃ではなく主人子が当たるとflagがtrueになる
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		S_flag = true;				//スイッチのフラグをtrueに
-	}
 
 	//flagがtrueのとき自身を消滅させる
 	if (S_flag == true)

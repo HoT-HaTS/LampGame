@@ -23,24 +23,39 @@ void CObjAttack::Init()
 	m_ani_time = INIT_ANI_TIME;		//アニメーションタイムの初期化
 	m_ani_frame = INIT_ANI_FLAME;	//アニメーションフレームの初期化
 
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);		//Obj_Heroから主人公の向きを取ってくる
 	m_posture = hero->GetPosture();
 
-	Hits::SetHitBox(this, m_px, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE+64, ELEMENT_ATTACK, OBJ_ATTACK,1);
+	//向きでHitBoxの位置を変える
+	if (m_posture)
+		Hits::SetHitBox(this, m_px-128, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE + 64, ELEMENT_ATTACK, OBJ_ATTACK, 1);
+	else
+		Hits::SetHitBox(this, m_px-128, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE + 64, ELEMENT_ATTACK, OBJ_ATTACK, 1);
+
 }
 
 //アクション
 void CObjAttack::Action()
 {
+	//アニメーションの調整
 	m_ani_time += 1;
 	if (m_ani_time % 3 == 0)
 	{
 		m_ani_frame += 1;
 	}
 
-
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px,m_py);
+	//向きでHitBoxの位置を変える
+	if (m_posture)
+	{
+		CHitBox* hit = Hits::GetHitBox(this);
+		hit->SetPos(m_px, m_py);
+	}
+	else
+	{
+		CHitBox* hit = Hits::GetHitBox(this);
+		hit->SetPos(m_px - 128, m_py);
+	}
 
 	//アニメーション終了後にオブジェクトを破棄する
 	if (m_ani_frame >= 8)
@@ -74,11 +89,21 @@ void CObjAttack::Draw()
 		src.m_bottom = src.m_top + ABLOCK_INT_Y_SIZE;
 	}
 
-	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = (ABLOCK_INT_X_SIZE - ABLOCK_INT_X_SIZE * m_posture) + m_px;
-	dst.m_right = (ABLOCK_INT_X_SIZE * m_posture) + m_px;
-	dst.m_bottom = ABLOCK_INT_Y_SIZE + m_py;
+	//表示位置の設定　向きで表示位置を変える
+	if (m_posture)
+	{
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = (ABLOCK_INT_X_SIZE - ABLOCK_INT_X_SIZE * m_posture) + m_px;
+		dst.m_right = (ABLOCK_INT_X_SIZE * m_posture) + m_px;
+		dst.m_bottom = ABLOCK_INT_Y_SIZE + m_py;
+	}
+	else
+	{
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = (ABLOCK_INT_X_SIZE - ABLOCK_INT_X_SIZE * m_posture) + m_px-128;
+		dst.m_right = (ABLOCK_INT_X_SIZE * m_posture) + m_px-128;
+		dst.m_bottom = ABLOCK_INT_Y_SIZE + m_py;
+	}
 
 	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(11, &src, &dst, c, 0.0f);
