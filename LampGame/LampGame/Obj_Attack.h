@@ -30,5 +30,7 @@ private:
 
 	float m_px;			//位置
 	float m_py;
+	float m_vx;			//移動ベクトル
+	float m_vy;
 };
 

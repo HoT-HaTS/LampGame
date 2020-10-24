@@ -23,9 +23,14 @@ void CObjAttack::Init()
 	m_ani_time = INIT_ANI_TIME;		//アニメーションタイムの初期化
 	m_ani_frame = INIT_ANI_FLAME;	//アニメーションフレームの初期化
 
+	m_vx = 0;
+	m_vy = 0;
+
+	m_posture = 0.0f;
 
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);		//Obj_Heroから主人公の向きを取ってくる
 	m_posture = hero->GetPosture();
+
 
 	//向きでHitBoxの位置を変える
 	if (m_posture)
@@ -38,6 +43,21 @@ void CObjAttack::Init()
 //アクション
 void CObjAttack::Action()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	m_posture = hero->GetPosture();
+
+	m_px = hero->GetX() + (m_posture * 64.0);
+	m_py = hero->GetY();
+
+	//位置の更新
+	m_px += m_vx;
+	m_py += m_vy;
+
+	//自身のHitBoxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+	//HitBoxの位置の変更
+	hit->SetPos(m_px, m_py);
+
 	//アニメーションの調整
 	m_ani_time += 1;
 	if (m_ani_time % 3 == 0)
@@ -54,7 +74,7 @@ void CObjAttack::Action()
 	else
 	{
 		CHitBox* hit = Hits::GetHitBox(this);
-		hit->SetPos(m_px - 128, m_py);
+		hit->SetPos(m_px - 64, m_py);
 	}
 
 	//アニメーション終了後にオブジェクトを破棄する
@@ -100,8 +120,8 @@ void CObjAttack::Draw()
 	else
 	{
 		dst.m_top = 0.0f + m_py;
-		dst.m_left = (ABLOCK_INT_X_SIZE - ABLOCK_INT_X_SIZE * m_posture) + m_px-128;
-		dst.m_right = (ABLOCK_INT_X_SIZE * m_posture) + m_px-128;
+		dst.m_left = (ABLOCK_INT_X_SIZE - ABLOCK_INT_X_SIZE * m_posture) + m_px-64;
+		dst.m_right = (ABLOCK_INT_X_SIZE * m_posture) + m_px-64;
 		dst.m_bottom = ABLOCK_INT_Y_SIZE + m_py;
 	}
 
