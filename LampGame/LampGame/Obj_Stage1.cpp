@@ -72,10 +72,20 @@ void CObjStage1::Action()
 		//列の中から2を探す
 		if (m_map[i][ex] == 2)
 		{
-			//2があればブロック出現
+			//2があればGブロック出現
 			CObj_G_Block* objg = new CObj_G_Block(ex * 64.0f, i * 64.0f);
 			Objs::InsertObj(objg, OBJ_BLOCK, 8);
 
+			//Gブロック出現場所の値を0にする
+			m_map[i][ex] = 0;
+
+		}
+		//列の中から5を探す
+		if (m_map[i][ex] == 5)
+		{
+			//5があれば敵出現
+			CObjEnemy* obje = new CObjEnemy(ex * 64.0f, i * 64.0f);
+			Objs::InsertObj(obje, OBJ_ENEMY, 12);
 
 			//敵出現場所の値を0にする
 			m_map[i][ex] = 0;
@@ -88,7 +98,7 @@ void CObjStage1::Action()
 			CObjSwitch* objs = new CObjSwitch(ex * 64.0f, i * 64.0f);
 			Objs::InsertObj(objs, OBJ_SWITCH, 7);
 
-			//敵出現場所の値を0にする
+			//スイッチ出現場所の値を0にする
 			m_map[i][ex] = 0;
 		}
 	}
