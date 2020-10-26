@@ -101,8 +101,8 @@ void CObjSwitch::Action()
 	//flagがtrueのとき自身を消滅させる
 	if (S_flag == true)
 	{
-		this->SetStatus(false);		//スイッチが押されたら消滅
-		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+		//this->SetStatus(false);		//スイッチが押されたら消滅
+		//Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
 		return;
 	}
 
@@ -132,10 +132,10 @@ void CObjSwitch::Draw()
 
 
 	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 64.0f;//0.0f + (switch_graphic * 64.0f);
-	src.m_right = 128.0f;// 64.0f + (switch_graphic * 64.0f);
-	src.m_bottom = 64.0f;
+	src.m_top = 0.0f + (switch_graphic * 64.0f);
+	src.m_left =0.0f + (S_flag * 64.0f);
+	src.m_right =  64.0f + (S_flag * 64.0f);
+	src.m_bottom = 64.0f+(switch_graphic * 64.0f);
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
