@@ -13,5 +13,6 @@ public:
 	~CSceneStage_1();
 	void InitScene(); //初期化メソッド
 	void Scene();		//実行中メソッド
+	void Draw();
 private:
 };

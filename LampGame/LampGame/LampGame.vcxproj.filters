@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\Object">
-      <UniqueIdentifier>{382e5944-6390-47d0-bbe7-06275528bc10}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Stage1">
       <UniqueIdentifier>{9f5d6e1a-8c09-4970-965e-10ff54f74759}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\共通">
+      <UniqueIdentifier>{382e5944-6390-47d0-bbe7-06275528bc10}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -61,28 +61,34 @@
       <Filter>リソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Attack.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Enemy.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
     <ClCompile Include="Obj_G_Block1.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Hero.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Switch.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Block.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
     <ClCompile Include="SceneStage_1.cpp">
       <Filter>ソース ファイル\Stage1</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Main.cpp">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
+    </ClCompile>
+    <ClCompile Include="UtilityModule.cpp">
+      <Filter>ソース ファイル\共通</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Stage1.cpp">
+      <Filter>ソース ファイル\Stage1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,28 +132,34 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Switch.h">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Attack.h">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Block.h">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Enemy.h">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
     <ClInclude Include="Obj_G_Block1.h">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Hero.h">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
     <ClInclude Include="SceneStage_1.h">
       <Filter>ソース ファイル\Stage1</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Main.h">
-      <Filter>ソース ファイル\Object</Filter>
+      <Filter>ソース ファイル\共通</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilityModule.h">
+      <Filter>ソース ファイル\共通</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Stage1.h">
+      <Filter>ソース ファイル\Stage1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
