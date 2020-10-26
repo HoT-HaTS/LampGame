@@ -137,10 +137,15 @@ void CObjStage1::Draw()
 					//看板ブロック
 					;//BlockDraw(320.0f + 64.0f, 64.0f, &dst, c, 3);
 				}
-				//else if (m_map[i][j] == 4)
-				//{
-				//	;//ゴールブロック
-				//}
+				else if (m_map[i][j] == 4)
+				{
+					dst.m_top = i * 64.0f - 128.0f;
+					dst.m_left = j * 64.0f + s1_scroll - 128.0f;
+					dst.m_right = dst.m_left + 320.0f;
+					dst.m_bottom = dst.m_top + 256.0f;
+					//ゴールブロック
+					BlockDraw(64.0f, 0.0f, &dst, c, 4);
+				}
 				else if (m_map[i][j] == 5)
 				{
 					;//敵出現用 BlockDraw(320.0f, 0.0f, &dst, c);
@@ -192,5 +197,16 @@ void CObjStage1::BlockDraw(float x, float y, RECT_F* dst, float c[], int block_i
 		src.m_bottom = src.m_top + 64.0f;
 		//描画
 		Draw::Draw(21, &src, dst, c, 0.0f);
+	}
+	else if (block_id == 4)
+	{
+		//ゴールブロック描画
+		RECT_F src;
+		src.m_top = y;
+		src.m_left = x - 64.0f;
+		src.m_right = src.m_left + 192.0f;
+		src.m_bottom = src.m_top + 128.0f;
+		//描画
+		Draw::Draw(24, &src, dst, c, 0.0f);
 	}
 }

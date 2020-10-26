@@ -129,13 +129,14 @@ void CObjBlock::Draw()
 //引数7 bool* right			:上下判定の右部分にあたっているかどうかを返す
 //引数8 float* px			:左右判定時、反対方向に座標を変更して位置を返す
 //引数9 float* py			:上下判定時、反対方向に座標を変更して位置を返す
-//引数10 int* bt			:下部分判定時、特殊なブロックのタイプを返す
+//引数10 int* btu			:下部分判定時、特殊なブロックのタイプを返す
+//引数11 int* btr			:右部分判定時、特殊なブロックのタイプを返す
 //判定を行うobjectとブロック64×64限定で、当たり判定と上下左右判定を行う
 //その結果は引数4～10に返す
 void CObjBlock::BlockHit(
 	float* x, float* y, bool scroll_on,
 	bool* up, bool* down, bool* left, bool* right,
-	float* vx, float* vy, int* bt
+	float* vx, float* vy, int* btu, int* btr
 )
 {
 	//衝突状態確認用フラグの初期化
@@ -145,7 +146,8 @@ void CObjBlock::BlockHit(
 	*right = false;
 
 	//踏んでいるblockの種類の初期化
-	*bt = 0;
+	*btu = 0;
+	*btr = 0;
 
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < 10; i++)
@@ -200,7 +202,7 @@ void CObjBlock::BlockHit(
 								*y = by - 128.0f;	//ブロックの位置+オブジェクトの幅
 							//種類を渡すのスタートとゴールのみ変更する
 							if (m_map[i][j] >= 2)
-								*bt = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
+								*btu = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
 							*vy = 0.0f;
 						}
 						if (r > 124 && r <236 )
@@ -209,6 +211,7 @@ void CObjBlock::BlockHit(
 							//*left = true;	//オブジェクトの右の部分が衝突している
 							*x = bx - 64.5f + (scroll);	//ブロックの位置+オブジェクトの幅
 							*vx = -(*vx) * 0.1f;	//-VX*反発係数
+							*btr = m_map[i][j];
 						}
 						if (236 < r && r < 304)
 						{

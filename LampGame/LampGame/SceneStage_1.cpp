@@ -60,7 +60,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"Board.png", 23, TEX_SIZE_512);
 	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"switch2.png", 12, TEX_SIZE_512);
-
+	Draw::LoadImageW(L"Shattersub.png", 24, TEX_SIZE_512);
 	
 	CObjStage1* obj_stage1 = new CObjStage1(map);
 	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 13);

@@ -23,7 +23,7 @@ public:
 	(
 		float* x, float* y, bool scroll_on,
 		bool* up, bool* down, bool* left, bool* right,
-		float* vx, float* vy, int* bt
+		float* vx, float* vy, int* btu,int* btr
 	);
 
 

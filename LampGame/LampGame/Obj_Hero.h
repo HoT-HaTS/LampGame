@@ -20,7 +20,8 @@ using namespace GameL;
 
 #define INIT_FRICTION (0.2)	//摩擦係数
 
-#define BLOCK_TYPE (0.0)	//ブロックの種類識別用
+#define BLOCK_TYPE_U (0.0)	//ブロックの種類識別用(下)
+#define BLOCK_TYPE_R (0.0)	//ブロックの種類識別用(右)
 
 #define HBLOCK_INT_X_SIZE (64.0f)	//主人公横サイズ
 #define HBLOCK_INT_Y_SIZE (128.0f)//主人公縦サイズ
@@ -45,7 +46,8 @@ class CObjHero : public CObj
 		float GetY() { return m_py; }
 		float GetVY() { return m_vy; }
 		float GetVX() { return m_vx; }
-		int GetBT() { return m_block_type; }
+		int GetBT_U() { return m_block_type_under; }
+		int GetBT_R() { return m_block_type_right; }
 
 		float GetPosture() { return m_posture; }
 
@@ -55,7 +57,8 @@ class CObjHero : public CObj
 		void SetY(float y) { m_py = y; }
 		void SetVY(float vy) { m_vy = vy; }
 		void SetVX(float vx) { m_vx = vx; }
-		void SetBT(int t) { m_block_type = t; }
+		void SetBT_U(int t1) { m_block_type_under = t1; }
+		void SetBT_R(int t2) { m_block_type_right = t2; }
 
 		void SetUp(bool b) { m_hit_up = b; }
 		void SetDown(bool b) { m_hit_down = b; }
@@ -96,7 +99,8 @@ class CObjHero : public CObj
 		bool m_flag;
 
 		//踏んでいるblockの種類確認用
-		int m_block_type;
+		int m_block_type_under;
+		int m_block_type_right;
 
 		float CheckWindow(float pos_x, float pos_y,
 			float window_x, float window_y, float window_w, float window_h);

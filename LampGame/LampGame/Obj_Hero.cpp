@@ -4,6 +4,7 @@
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
 
+
 #include "GameHead.h"
 #include "Obj_Hero.h"
 #include "UtilityModule.h"
@@ -43,7 +44,8 @@ void CObjHero::Init()
 	m_hit_left = false;
 	m_hit_right = false;
 
-	m_block_type = BLOCK_TYPE;	//踏んでいるblockの種類確認用
+	m_block_type_under = BLOCK_TYPE_U;	//踏んでいるblockの種類確認用(下)
+	m_block_type_right = BLOCK_TYPE_R;	//blockの種類確認用(右)
 
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
@@ -217,7 +219,7 @@ void CObjHero::Action()
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_px, &m_py, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&m_block_type);
+		&m_block_type_under, &m_block_type_right);
 
 
 	//世界切り替え:光→影(X押すと切り替え)
@@ -259,6 +261,11 @@ void CObjHero::Action()
 		{
 			m_flag = true;
 		}
+	}
+
+	if (m_block_type_right == 4)
+	{
+		Scene::SetScene(new CSceneStage_1());
 	}
 
 	//敵関係
