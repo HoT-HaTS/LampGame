@@ -13,6 +13,7 @@ enum OBJ_NAME
 	OBJ_G_BLOCK,
 	OBJ_HERO,
 	OBJ_SWITCH,
+	OBJ_STAGE1,
 };
 //------------------------------------------------
 
@@ -25,12 +26,12 @@ enum HIT_ELEMENTS
 	ELEMENT_PLAYER,
 	ELEMENT_ENEMY,
 	ELEMENT_ITEM,
-	ELEMENT_MAGIC,
+	ELEMENT_ATTACK,
 	ELEMENT_FIELD,
 	ELEMENT_RED,
 	ELEMENT_GREEN,
 	ELEMENT_BLUE,
-	ELEMENT_BLACK,
+	ELEMENT_BLOCK,
 	ELEMENT_WHITE,
 	ELEMENT_SWITCH,
 };
@@ -64,6 +65,7 @@ struct UserData
 #include "Obj_G_Block1.h"
 #include "Obj_Hero.h"
 #include "Obj_Switch.h"
+#include "Obj_Stage1.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

@@ -32,36 +32,54 @@ CSceneStage_1::~CSceneStage_1()
 void CSceneStage_1::InitScene()
 {
 	//マップデータ完成したら追加
-	//unique_ptr<wchar_t>p;
-	//int size;
-	//p = Save::ExternalDataOpen(L"Stages.csv", &size);
-	//int map[10][100];
-	//int count = 1;
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	for (int j = 0; j < 100; j++)
-	//	{
-	//		int w = 0;
-	//		swscanf_s(&p.get()[count], L"%d", &w);
-	//		map[i][j] = w;
-	//		count += 2;
-	//	}
-	//}
+	unique_ptr<wchar_t>p;
+	int size;
+	int map[10][100];
+	p = Save::ExternalDataOpen(L"Stages.csv", &size);
+	int count = 1;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			int w = 0;
+			swscanf_s(&p.get()[count], L"%d", &w);
+			map[i][j] = w;
+			count += 2;
+		}
+	}
 
-	Draw::LoadImageW(L"lamp_walk.png", 0, TEX_SIZE_512);
 	Draw::LoadImageW(L"lamp_shadow_walk.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"lamp_v2.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"stage_blockG.png", 3, TEX_SIZE_512);
 
-	CObjHero* obj = new CObjHero();
-	Objs::InsertObj(obj, OBJ_HERO, 10);
+	Draw::LoadImageW(L"lamp_attack.png", 11, TEX_SIZE_512);
+	Draw::LoadImageW(L"stage_background.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"block.png", 21, TEX_SIZE_512);
 
-	/*CObjBlock* objb = new CObjBlock(map);
-	Objs::InsertObj(objb, OBJ_BLOCK, 9);
+	Draw::LoadImageW(L"Enemy.png", 22, TEX_SIZE_512);
+	Draw::LoadImageW(L"Board.png", 23, TEX_SIZE_512);
+	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
+	Draw::LoadImageW(L"switch2.png", 12, TEX_SIZE_512);
+	Draw::LoadImageW(L"Shattersub.png", 24, TEX_SIZE_512);
+	
+	CObjStage1* obj_stage1 = new CObjStage1(map);
+	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 13);
 
-	CObj_G_Block* objg = new CObj_G_Block(map);
-	Objs::InsertObj(objb, OBJ_G_BLOCK, 8);
+	CObjHero* obj_h = new CObjHero();
+	Objs::InsertObj(obj_h, OBJ_HERO, 10);
+	
 
-	CObjSwitch* objs = new CObjSwitch;
-	Objs::InsertObj(objb, OBJ_SWITCH, 7);*/
+	CObjMain* obj_main = new CObjMain();
+	Objs::InsertObj(obj_main, OBJ_MAIN, 11);
+
+	/*CObjSwitch* objs = new CObjSwitch(100, 200);
+	Objs::InsertObj(objs, OBJ_SWITCH, 7);*/
+
+	CObjBlock* objb = new CObjBlock(map);
+	Objs::InsertObj(objb, OBJ_BLOCK, 6);
+
+	/*CObj_G_Block* objg = new CObj_G_Block(0, 0);
+	Objs::InsertObj(objg, OBJ_BLOCK, 8);*/
 
 
 	/*CObjEnemy* obje = new CObjEnemy(map);
@@ -73,3 +91,7 @@ void CSceneStage_1::Scene()
 {
 
 }
+
+
+
+
