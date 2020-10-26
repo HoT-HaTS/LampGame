@@ -35,7 +35,7 @@ void CSceneStage_1::InitScene()
 	unique_ptr<wchar_t>p;
 	int size;
 	int map[10][100];
-	p = Save::ExternalDataOpen(L"Stages.csv", &size);
+	p = Save::ExternalDataOpen(L"stagedata/Stages.csv", &size);
 	int count = 1;
 	for (int i = 0; i < 10; i++)
 	{
@@ -48,17 +48,19 @@ void CSceneStage_1::InitScene()
 		}
 	}
 
-	Draw::LoadImageW(L"lamp_shadow_walk.png", 1, TEX_SIZE_512);
-	Draw::LoadImageW(L"lamp_v2.png", 2, TEX_SIZE_512);
-	Draw::LoadImageW(L"stage_blockG.png", 3, TEX_SIZE_512);
-	Draw::LoadImageW(L"switch.png", 10, TEX_SIZE_512);
-	Draw::LoadImageW(L"lamp_attack.png", 11, TEX_SIZE_512);
-	Draw::LoadImageW(L"switch2.png", 12, TEX_SIZE_512);
-	Draw::LoadImageW(L"stage_background.png", 20, TEX_SIZE_512);
-	Draw::LoadImageW(L"block.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"Enemy.png", 22, TEX_SIZE_512);
-	Draw::LoadImageW(L"Board.png", 23, TEX_SIZE_512);
-	Draw::LoadImageW(L"Shattersub.png", 24, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/lamp_shadow_walk.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/lamp_v2.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG.png", 3, TEX_SIZE_512);
+
+	Draw::LoadImageW(L"graphic/lamp_attack.png", 11, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_background.png", 20, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/block.png", 21, TEX_SIZE_512);
+
+	Draw::LoadImageW(L"graphic/Enemy.png", 22, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Board.png", 23, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/switch.png", 10, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/switch2.png", 12, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Shattersub.png", 24, TEX_SIZE_512);
 	
 	CObjStage1* obj_stage1 = new CObjStage1(map);
 	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 13);
