@@ -14,6 +14,7 @@ enum OBJ_NAME
 	OBJ_HERO,
 	OBJ_SWITCH,
 	OBJ_STAGE1,
+	OBJ_SELECT,
 };
 //------------------------------------------------
 
@@ -66,13 +67,15 @@ struct UserData
 #include "Obj_Hero.h"
 #include "Obj_Switch.h"
 #include "Obj_Stage1.h"
+#include "ObjSelect.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneStage_1.h"
+#include "SceneSelect.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneStage_1
+#define SET_GAME_START CSceneSelect
 //-----------------------------------------------
