@@ -13,6 +13,7 @@ using namespace GameL;
 void CObjSelect::Init()
 {
 	m_key_flag = false;
+	select_flag = true;
 
 	count = 0;
 }
@@ -20,13 +21,26 @@ void CObjSelect::Init()
 //アクション
 void CObjSelect::Action()
 {
+	
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
-		count++;
+		if (select_flag == true)
+		{
+			count++;
+			select_flag = false;
+		}
 	}
 	else if (Input::GetVKey(VK_UP) == true)
 	{
-		count--;
+		if (select_flag == true)
+		{
+			count--;
+			select_flag = false;
+		}
+	}
+	else
+	{
+		select_flag = true;
 	}
 	
 	//エンターキーを押してシーン：ゲームメインに移行する

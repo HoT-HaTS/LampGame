@@ -14,7 +14,8 @@ public:
 	void Action();   //アクション
 	void Draw();     //ドロー
 private:
-	bool m_key_flag; //キーフラグ
-	
+	bool m_key_flag;  //キーフラグ
+	bool select_flag; //ステージセレクト用フラグ
+
 	int count;
 };

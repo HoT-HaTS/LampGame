@@ -31,7 +31,7 @@ CSceneSelect::~CSceneSelect()
 void CSceneSelect::InitScene()
 {
 	//出力させる文字のグラフィックを作成
-	Font::SetStrTex(L"シューティングゲーム");
+	Font::SetStrTex(L"LampGame");
 
 	//タイトルオブジェクト作成
 	CObjSelect* obj = new CObjSelect();   //タイトルオブジェクト作成
