@@ -155,6 +155,7 @@
     <ClCompile Include="ObjSelect.cpp" />
     <ClCompile Include="Obj_Attack.cpp" />
     <ClCompile Include="Obj_Block.cpp" />
+    <ClCompile Include="Obj_Board.cpp" />
     <ClCompile Include="Obj_Enemy.cpp" />
     <ClCompile Include="Obj_G_Block1.cpp" />
     <ClCompile Include="Obj_Hero.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="GameL\UserData.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="Obj_Board.h" />
     <ClInclude Include="ObjSelect.h" />
     <ClInclude Include="Obj_Stage1.h" />
     <ClInclude Include="Obj_Attack.h" />
