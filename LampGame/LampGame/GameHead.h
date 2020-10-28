@@ -14,6 +14,8 @@ enum OBJ_NAME
 	OBJ_HERO,
 	OBJ_SWITCH,
 	OBJ_STAGE1,
+	OBJ_BOARD,
+	OBJ_SELECT,
 };
 //------------------------------------------------
 
@@ -34,6 +36,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLOCK,
 	ELEMENT_WHITE,
 	ELEMENT_SWITCH,
+	ELEMENT_BOARD,
 };
 //------------------------------------------------
 
@@ -66,14 +69,16 @@ struct UserData
 #include "Obj_Hero.h"
 #include "Obj_Switch.h"
 #include "Obj_Stage1.h"
+#include "ObjSelect.h"
 #include "Obj_Board.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneStage_1.h"
+#include "SceneSelect.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneStage_1
+#define SET_GAME_START CSceneSelect
 //-----------------------------------------------

@@ -80,6 +80,15 @@ void CObjStage1::Action()
 			m_map[i][ex] = 0;
 
 		}
+		if (m_map[i][ex] == 3)
+		{
+			//3‚ª‚ ‚ê‚ÎŠÅ”ÂoŒ»
+			CObjBoard* objt = new CObjBoard(ex * 64.0f, i * 64.0f);
+			Objs::InsertObj(objt, OBJ_BOARD, 9);
+
+			//ŠÅ”ÂoŒ»êŠ‚Ì’l‚ğ0‚É‚·‚é
+			m_map[i][ex] = 0;
+		}
 		//—ñ‚Ì’†‚©‚ç5‚ğ’T‚·
 		if (m_map[i][ex] == 5)
 		{

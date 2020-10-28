@@ -44,6 +44,8 @@ void CObjSwitch::Action()
 	hero->SetLeft(false);
 	hero->SetRight(false);
 
+
+
 	//主人公から光フラグを取ってくる
 	bool L_flag_switch = hero->Get_L_flag();
 
@@ -51,47 +53,47 @@ void CObjSwitch::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px+scroll->GetScroll(), m_py);
 
-	//主人公とスイッチのあたり判定チェック
-	//当たっている場合
-	if ((hit->CheckObjNameHit(OBJ_HERO) != nullptr)&&(L_flag_switch==false))
-	{
-		float hx = hero->GetX();
-		float hy = hero->GetY();
+		//主人公とスイッチのあたり判定チェック
+		//当たっている場合
+		if ((hit->CheckObjNameHit(OBJ_HERO) != nullptr) && (L_flag_switch == false))
+		{
+			float hx = hero->GetX();
+			float hy = hero->GetY();
 
-		//スイッチの上じゃない条件
-		if (hy + 120 > m_py)
-		{
-			//スイッチの左部分に接触
-			if (m_px + scroll->GetScroll() > hx)
+			//スイッチの上じゃない条件
+			if (hy + 120 > m_py)
 			{
-				hero->SetRight(true);
-				hero->SetX(m_px - 64.5 + scroll->GetScroll());
-				hero->SetVX(0.0f);
+				//スイッチの左部分に接触
+				if (m_px + scroll->GetScroll() > hx)
+				{
+					hero->SetRight(true);
+					hero->SetX(m_px - 64.5 + scroll->GetScroll());
+					hero->SetVX(0.0f);
+				}
+				//スイッチの右部分に接触
+				else if (hx > m_px + scroll->GetScroll())
+				{
+					hero->SetLeft(true);
+					hero->SetX(m_px + 63.5 + scroll->GetScroll());
+					hero->SetVX(0.0f);
+				}
 			}
-			//スイッチの右部分に接触
-			else if (hx > m_px + scroll->GetScroll())
+			//スイッチの上部分に接触
+			if (hy + 127 <= m_py)
 			{
-				hero->SetLeft(true);
-				hero->SetX(m_px + 63.5 + scroll->GetScroll());
-				hero->SetVX(0.0f);
+				hero->SetDown(true);
+				hero->SetY(m_py - 128.5);
+				hero->SetVY(0.0f);
+			}
+			//スイッチの下部分に接触
+			else if (m_py + 65 <= hy)
+			{
+				hero->SetUp(true);
+				hero->SetY(m_py + 63.5);
+				hero->SetVY(0.0f);
 			}
 		}
-		//スイッチの上部分に接触
-		if ( hy + 127 <= m_py )
-		{
-			hero->SetDown(true);
-			hero->SetY(m_py - 128.5);
-			hero->SetVY(0.0f);
-		}
-		//スイッチの下部分に接触
-		else if ( m_py + 65 <= hy )
-		{
-			hero->SetUp(true);
-			hero->SetY(m_py + 63.5);
-			hero->SetVY(0.0f);
-		}
-	}
-
+	
 	//主人公の攻撃がHitBoxに当たるとflagをtrueにする
 	if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
 	{
@@ -117,7 +119,7 @@ void CObjSwitch::Draw()
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
-	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	float  c[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
