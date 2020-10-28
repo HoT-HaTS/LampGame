@@ -204,7 +204,6 @@ void CObjBlock::BlockHit(
 							//種類を渡すのスタートとゴールのみ変更する
 							if (m_map[i][j] >= 2)
 								*btu = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
-							*btg = m_map[i][j];
 							*vy = 0.0f;
 						}
 						if (r > 124 && r <236 )
