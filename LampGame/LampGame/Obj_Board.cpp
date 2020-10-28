@@ -5,6 +5,7 @@
 #include "GameL/HitBoxManager.h"
 #include "GameL/SceneObjManager.h"
 
+#include "Obj_Board.h"
 #include "GameHead.h"
 #include "Obj_Block.h"
 #include "Obj_Stage1.h"

@@ -66,6 +66,7 @@ struct UserData
 #include "Obj_Hero.h"
 #include "Obj_Switch.h"
 #include "Obj_Stage1.h"
+#include "Obj_Board.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
