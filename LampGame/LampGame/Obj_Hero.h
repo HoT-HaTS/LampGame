@@ -102,7 +102,14 @@ class CObjHero : public CObj
 		int m_block_type_under;
 		int m_block_type_right;
 
-		float CheckWindow(float pos_x, float pos_y,
-			float window_x, float window_y, float window_w, float window_h);
-};
+		void HeroMove(float mx, float my, float sx, float sy, float vx, float vy);
+		float GetAtan2Angle(float w, float h);
+		bool UnitVec(float* vx, float* vy);
 
+		//影→光移動用
+		bool move_flag;		//主人公の操作を受け付けるフラグ
+		float x;			//xベクトル
+		float y;			//yベクトル
+		float ar;			//移動元と移動先の角度
+
+};
