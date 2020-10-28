@@ -91,23 +91,23 @@ void BlockDraw(float x, float y, RECT_F* dst, float c[])
 	Draw::Draw(0, &src, dst, c, 0.0f);
 }
 
-//BlockHit関数(当たり判定)
-//引数1	float* x			:判定を行うobjectのX位置
-//引数2 float* y			:判定を行うobjectのY位置
-//引数3 bool	scroll_on	:判定を行うobjectはスクロールの影響を与えるかどうか(true=与える false=与えない)
-//引数4 bool* up			:上下判定の上部分にあたっているかどうかを返す
-//引数5 bool* down			:上下判定の下部分にあたっているかどうかを返す
-//引数6 bool* left			:上下判定の左部分にあたっているかどうかを返す
-//引数7 bool* right			:上下判定の右部分にあたっているかどうかを返す
-//引数8 float* vx			:左右判定時の反発による移動方向・力の値を変えて返す
-//引数9 float* vy			:上下判定時による自由落下運動の移動方向・力の値を変えて返す
-//引数10 int* bt			:下部分判定時、特殊なブロックのタイプを返す
-//引数11 int map[10][100]	:マップデータ
-//判定を行うobjectとブロック64×64限定で、当たり判定と上下左右判定を行う
-//その結果は引数4～10に返す
-void BlockHit(
-	float* x, float* y, bool scroll_on,
-	bool* up, bool* down, bool* left, bool* right,
-	float* vx, float* vy, int* bt
-)
+////BlockHit関数(当たり判定)
+////引数1	float* x			:判定を行うobjectのX位置
+////引数2 float* y			:判定を行うobjectのY位置
+////引数3 bool	scroll_on	:判定を行うobjectはスクロールの影響を与えるかどうか(true=与える false=与えない)
+////引数4 bool* up			:上下判定の上部分にあたっているかどうかを返す
+////引数5 bool* down			:上下判定の下部分にあたっているかどうかを返す
+////引数6 bool* left			:上下判定の左部分にあたっているかどうかを返す
+////引数7 bool* right			:上下判定の右部分にあたっているかどうかを返す
+////引数8 float* vx			:左右判定時の反発による移動方向・力の値を変えて返す
+////引数9 float* vy			:上下判定時による自由落下運動の移動方向・力の値を変えて返す
+////引数10 int* bt			:下部分判定時、特殊なブロックのタイプを返す
+////引数11 int map[10][100]	:マップデータ
+////判定を行うobjectとブロック64×64限定で、当たり判定と上下左右判定を行う
+////その結果は引数4～10に返す
+//void BlockHit(
+//	float* x, float* y, bool scroll_on,
+//	bool* up, bool* down, bool* left, bool* right,
+//	float* vx, float* vy, int* bt
+//)
 
