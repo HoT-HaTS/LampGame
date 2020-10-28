@@ -61,11 +61,11 @@ void CObjSelect::Action()
 		}
 		if (count == 2)
 		{
-			if (m_key_flag == true)
+			/*if (m_key_flag == true)
 			{
-				Scene::SetScene(new CSceneStage_1());
+				Scene::SetScene(new CSceneStage_2());
 				m_key_flag = false;
-			}
+			}*/
 		}
 		if (count == 3)
 		{
