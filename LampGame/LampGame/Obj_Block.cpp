@@ -136,7 +136,7 @@ void CObjBlock::Draw()
 void CObjBlock::BlockHit(
 	float* x, float* y, bool scroll_on,
 	bool* up, bool* down, bool* left, bool* right,
-	float* vx, float* vy, int* btu, int* btr
+	float* vx, float* vy, int* btu, int* btg
 )
 {
 	//衝突状態確認用フラグの初期化
@@ -147,7 +147,7 @@ void CObjBlock::BlockHit(
 
 	//踏んでいるblockの種類の初期化
 	*btu = 0;
-	*btr = 0;
+	*btg = 0;
 
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < 10; i++)
@@ -194,6 +194,7 @@ void CObjBlock::BlockHit(
 							//*right = true;	//オブジェクトの左の部分が衝突している
 							*x = bx + 63.5f + (scroll);	//ブロックの位置+オブジェクトの幅
 							*vx = -(*vx) * 0.1f;	//-VX*反発係数
+							*btg = m_map[i][j];
 						}
 						if (r > 56 && r < 124)
 						{
@@ -211,13 +212,14 @@ void CObjBlock::BlockHit(
 							//*left = true;	//オブジェクトの右の部分が衝突している
 							*x = bx - 64.5f + (scroll);	//ブロックの位置+オブジェクトの幅
 							*vx = -(*vx) * 0.1f;	//-VX*反発係数
-							*btr = m_map[i][j];
+							*btg = m_map[i][j];
 						}
 						if (236 < r && r < 304)
 						{
 							//下
 							//*up = true;	//オブジェクトの上の部分が衝突している
-								*y = by + 63.5f;	//ブロックの位置+オブジェクトの幅
+							*y = by + 63.5f;	//ブロックの位置+オブジェクトの幅
+							*btg = m_map[i][j];
 							if (*vy < 0)
 							{
 								*vy = 0.0f;

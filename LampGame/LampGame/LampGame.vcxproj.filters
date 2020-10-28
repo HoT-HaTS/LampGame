@@ -19,6 +19,9 @@
     <Filter Include="ソース ファイル\共通">
       <UniqueIdentifier>{382e5944-6390-47d0-bbe7-06275528bc10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Title">
+      <UniqueIdentifier>{f586dce4-8a1a-4904-80f6-922ebcad73ca}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ソース ファイル\Select">
       <UniqueIdentifier>{8bb42aa3-cee9-4fe5-9571-5d07b4ab4290}</UniqueIdentifier>
     </Filter>

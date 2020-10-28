@@ -21,7 +21,7 @@ using namespace GameL;
 #define INIT_FRICTION (0.2)	//摩擦係数
 
 #define BLOCK_TYPE_U (0.0)	//ブロックの種類識別用(下)
-#define BLOCK_TYPE_R (0.0)	//ブロックの種類識別用(右)
+#define BLOCK_TYPE_G (0.0)	//ブロックの種類識別用(右)
 
 #define HBLOCK_INT_X_SIZE (64.0f)	//主人公横サイズ
 #define HBLOCK_INT_Y_SIZE (128.0f)//主人公縦サイズ
@@ -47,7 +47,7 @@ class CObjHero : public CObj
 		float GetVY() { return m_vy; }
 		float GetVX() { return m_vx; }
 		int GetBT_U() { return m_block_type_under; }
-		int GetBT_R() { return m_block_type_right; }
+		int GetBT_G() { return m_block_type_goal; }
 
 		float GetPosture() { return m_posture; }
 
@@ -58,7 +58,7 @@ class CObjHero : public CObj
 		void SetVY(float vy) { m_vy = vy; }
 		void SetVX(float vx) { m_vx = vx; }
 		void SetBT_U(int t1) { m_block_type_under = t1; }
-		void SetBT_R(int t2) { m_block_type_right = t2; }
+		void SetBT_G(int t2) { m_block_type_goal = t2; }
 
 		void SetUp(bool b) { m_hit_up = b; }
 		void SetDown(bool b) { m_hit_down = b; }
@@ -100,7 +100,7 @@ class CObjHero : public CObj
 
 		//踏んでいるblockの種類確認用
 		int m_block_type_under;
-		int m_block_type_right;
+		int m_block_type_goal;
 
 		void HeroMove(float mx, float my, float sx, float sy, float vx, float vy);
 		float GetAtan2Angle(float w, float h);
