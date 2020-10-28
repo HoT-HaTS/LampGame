@@ -10,10 +10,12 @@
 //使用するネームスペース
 using namespace GameL;
 
+
+
 //イニシャライズ
 void CObjMain::Init()
 {
-	
+	 m_flag = true;
 }
 
 //アクション
@@ -28,8 +30,27 @@ void CObjMain::Action()
 		}	
 	
 	}
-	
-	
+
+
+	//ポーズ用
+	if (Input::GetVKey('P') == true)
+	{
+
+		if (m_flag == true && pause_flag == false)
+		{
+			pause_flag = true;
+			m_flag = false;
+		}
+		else if (m_flag == true && pause_flag == true)
+		{
+			pause_flag = false;
+			m_flag = false;
+		}
+	}
+	else
+	{
+		m_flag = true;
+	}	
 }
 
 //ドロー
