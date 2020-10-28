@@ -50,7 +50,7 @@ void CObjHero::Init()
 	//当たり判定用のHitBoxを作成
 	Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
 
-	//テスト用
+	//光→影移動用変数
 	move_flag = true;
 	x = 0;
 	y = 0;
@@ -286,8 +286,8 @@ void CObjHero::Action()
 		m_vy = -sin(3.14 / 180 * ar);
 		UnitVec(&m_vx, &m_vy);
 
-		m_px += 5 * m_vx;
-		m_py += 5 * m_vy;
+		m_px += 8 * m_vx;
+		m_py += 8 * m_vy;
 
 		if (m_sx - 5 < m_px && m_px < m_sx + 5)
 		{
@@ -479,7 +479,7 @@ void CObjHero::HeroMove(float mx,float my, float sx, float sy, float vx, float v
 		vy = -sin(3.14 / 180 * ar);
 		UnitVec(&vx, &vy);
 
-		sx += 4 * vx;
-		sy += 4 * vy;
+		sx += 20 * vx;
+		sy += 20 * vy;
 
 }

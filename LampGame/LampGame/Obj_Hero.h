@@ -106,11 +106,10 @@ class CObjHero : public CObj
 		float GetAtan2Angle(float w, float h);
 		bool UnitVec(float* vx, float* vy);
 
-		//テスト用
-		bool move_flag;
-		float x;
-		float y;
-		float ar;
+		//影→光移動用
+		bool move_flag;		//主人公の操作を受け付けるフラグ
+		float x;			//xベクトル
+		float y;			//yベクトル
+		float ar;			//移動元と移動先の角度
 
 };
-
