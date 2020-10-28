@@ -265,7 +265,7 @@ void CObjHero::Action()
 
 	if (m_block_type_right == 4)
 	{
-		Scene::SetScene(new CSceneStage_1());
+		Scene::SetScene(new CSceneSelect());//Œã‚ÅCSceneClear‚É•ÏX
 	}
 
 	//“GŠÖŒW
