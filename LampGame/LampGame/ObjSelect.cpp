@@ -61,9 +61,33 @@ void CObjSelect::Action()
 		}
 		if (count == 2)
 		{
+			if (m_key_flag == true)
+			{
+				Scene::SetScene(new CSceneStage_1());
+				m_key_flag = false;
+			}
+		}
+		if (count == 3)
+		{
 			/*if (m_key_flag == true)
 			{
-				Scene::SetScene(new CSceneStage_2());
+				Scene::SetScene(new CSceneStage_3());
+				m_key_flag = false;
+			}*/
+		}
+		if (count == 4)
+		{
+			/*if (m_key_flag == true)
+			{
+				Scene::SetScene(new CSceneStage_4());
+				m_key_flag = false;
+			}*/
+		}
+		if (count == 5)
+		{
+			/*if (m_key_flag == true)
+			{
+				Scene::SetScene(new CSceneStage_5());
 				m_key_flag = false;
 			}*/
 		}
@@ -86,7 +110,8 @@ void CObjSelect::Draw()
 	Font::StrDraw(L"ステージ3", 120, 250, 32, c);
 	Font::StrDraw(L"ステージ4", 120, 300, 32, c);
 	Font::StrDraw(L"ステージ5", 120, 350, 32, c);
-	Font::StrDraw(L"START : PushEnterKey", 230, 500, 32, c);
+	Font::StrDraw(L"START : Push_EnterKey", 230, 500, 32, c);
+	Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c);
 
 	if (count == 1)
 	{
