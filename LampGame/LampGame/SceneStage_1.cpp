@@ -38,7 +38,7 @@ void CSceneStage_1::InitScene()
 	unique_ptr<wchar_t>p;
 	int size;
 	int map[10][100];
-	p = Save::ExternalDataOpen(L"stagedata/Stages.csv", &size);
+	p = Save::ExternalDataOpen(L"stagedata/Stage1.csv", &size);
 	int count = 1;
 	for (int i = 0; i < 10; i++)
 	{
