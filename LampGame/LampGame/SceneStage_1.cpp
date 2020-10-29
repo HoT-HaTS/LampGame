@@ -16,6 +16,9 @@ using namespace GameL;
 #include "GameHead.h"
 #include "GameL/UserData.h"
 
+
+extern bool pause_flag = false;
+
 //コンストラクタ
 CSceneStage_1::CSceneStage_1()
 {

@@ -16,6 +16,8 @@ enum OBJ_NAME
 	OBJ_STAGE1,
 	OBJ_BOARD,
 	OBJ_SELECT,
+
+	OBJ_TITLE,
 };
 //------------------------------------------------
 
@@ -51,7 +53,7 @@ struct UserData
 
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
-
+extern bool pause_flag;
 
 
 //------------------------------------------------
@@ -71,14 +73,18 @@ struct UserData
 #include "Obj_Stage1.h"
 #include "ObjSelect.h"
 #include "Obj_Board.h"
+
+#include "ObjTitle.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include "SceneStage_1.h"
 #include "SceneSelect.h"
+#include "SceneTitle.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneSelect
+//#define SET_GAME_START CSceneSelect
+#define SET_GAME_START CSceneTitle
 //-----------------------------------------------

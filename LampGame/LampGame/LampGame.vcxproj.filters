@@ -19,6 +19,9 @@
     <Filter Include="ソース ファイル\共通">
       <UniqueIdentifier>{382e5944-6390-47d0-bbe7-06275528bc10}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Title">
+      <UniqueIdentifier>{f586dce4-8a1a-4904-80f6-922ebcad73ca}</UniqueIdentifier>
+    </Filter>
     <Filter Include="ソース ファイル\Select">
       <UniqueIdentifier>{8bb42aa3-cee9-4fe5-9571-5d07b4ab4290}</UniqueIdentifier>
     </Filter>
@@ -102,6 +105,12 @@
     <ClCompile Include="Obj_Board.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -181,6 +190,12 @@
     </ClInclude>
     <ClInclude Include="Obj_Board.h">
       <Filter>ソース ファイル\共通</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
