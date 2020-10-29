@@ -6,18 +6,24 @@
 using namespace GameL;
 
 //オブジェクト：
-class CObjBoard : public CObj
+class CObj_G_Block2 : public CObj
 {
 public:
-	CObjBoard(float x, float y);
-	~CObjBoard() {};
+	CObj_G_Block2(float x, float y);
+	~CObj_G_Block2() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
-	bool Get_Tuto_Sensor() { return T_Sensor; };//チュートリアル表示センサー
+
+	bool Get_G_flag() { return G_flag; }
+
+
 private:
-	float m_scroll;     //左右スクロール用
-	float m_px;
+	bool G_flag;
+
+	float m_px;			//位置
 	float m_py;
-	bool T_Sensor;
+
 };
+
+

@@ -315,7 +315,7 @@ void CObjHero::Action()
 
 
 		//ステージ終了条件(ゴール到達)
-		if (m_block_type_goal == 4)
+		if (m_block_type_goal == 3)
 		{
 			Scene::SetScene(new CSceneSelect());
 		}
@@ -323,8 +323,6 @@ void CObjHero::Action()
 		//////HitBoxの内容を更新
 		//CHitBox* hit = Hits::GetHitBox(this);
 		//hit->SetPos(m_px, m_py);
-
-
 
 		//敵関係
 		//敵と当たっているか確認
@@ -410,7 +408,7 @@ void CObjHero::Draw()
 	//光フラグがONなら
 	if (L_flag == true)
 	{
-		//0番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
+		//2番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
 		Draw::Draw(2, &src, &dst, c, 0.0f);
 	}
 	//光フラグがOFFなら

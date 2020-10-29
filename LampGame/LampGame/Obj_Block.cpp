@@ -81,7 +81,7 @@ void CObjBlock::Draw()
 	int background_flag = 0;
 
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
-	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	float  c[4] = { 0.8f, 0.8f, 0.8f, 1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -154,7 +154,7 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] > 0 && m_map[i][j] != 2 && m_map[i][j] != 3 && m_map[i][j] != 5 && m_map[i][j] != 6)
+			if (m_map[i][j] == 1 || m_map[i][j] == 3)
 			{
 				//要素番号を座標に変更
 				float bx = j * 64.0f;

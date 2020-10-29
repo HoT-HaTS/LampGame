@@ -25,6 +25,9 @@
     <Filter Include="ソース ファイル\Select">
       <UniqueIdentifier>{8bb42aa3-cee9-4fe5-9571-5d07b4ab4290}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\共通\G_Block">
+      <UniqueIdentifier>{7a43ec88-0786-4dce-ab56-f12a7cdb2cb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -72,9 +75,6 @@
     <ClCompile Include="Obj_Enemy.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_G_Block1.cpp">
-      <Filter>ソース ファイル\共通</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_Hero.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
@@ -110,6 +110,18 @@
     </ClCompile>
     <ClCompile Include="ObjTitle.cpp">
       <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Pause.cpp">
+      <Filter>ソース ファイル\共通</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Tutorial.cpp">
+      <Filter>ソース ファイル\Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_G_Block1.cpp">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_G_Block2.cpp">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +176,6 @@
     <ClInclude Include="Obj_Enemy.h">
       <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_G_Block1.h">
-      <Filter>ソース ファイル\共通</Filter>
-    </ClInclude>
     <ClInclude Include="Obj_Hero.h">
       <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
@@ -196,6 +205,18 @@
     </ClInclude>
     <ClInclude Include="ObjTitle.h">
       <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Pause.h">
+      <Filter>ソース ファイル\共通</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Tutorial.h">
+      <Filter>ソース ファイル\Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_G_Block1.h">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_G_Block2.h">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

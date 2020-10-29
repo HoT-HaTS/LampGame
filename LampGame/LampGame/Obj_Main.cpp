@@ -27,6 +27,7 @@ void CObjMain::Action()
 		if (Input::GetVKey('R') == true)
 		{
 			Scene::SetScene(new CSceneStage_1());
+			pause_flag = false;
 		}	
 	
 	}
@@ -40,6 +41,8 @@ void CObjMain::Action()
 		{
 			pause_flag = true;
 			m_flag = false;
+			CObjPause* obj_pause = new CObjPause();
+			Objs::InsertObj(obj_pause, OBJ_PAUSE, 99);
 		}
 		else if (m_flag == true && pause_flag == true)
 		{

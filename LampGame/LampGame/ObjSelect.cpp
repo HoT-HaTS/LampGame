@@ -99,18 +99,18 @@ void CObjSelect::Action()
 	}
 }
 
-//ドロー
+//ドロー（文字）
 void CObjSelect::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
-	Font::StrDraw(L"STAGE SELECT", 300, 50, 32, c);
+	Font::StrDraw(L"STAGE SELECT", 304, 50, 32, c);
 	Font::StrDraw(L"ステージ1", 120, 150, 32, c);
 	Font::StrDraw(L"ステージ2", 120, 200, 32, c);
 	Font::StrDraw(L"ステージ3", 120, 250, 32, c);
 	Font::StrDraw(L"ステージ4", 120, 300, 32, c);
 	Font::StrDraw(L"ステージ5", 120, 350, 32, c);
-	Font::StrDraw(L"START : Push_EnterKey", 230, 500, 32, c);
+	Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c);
 	Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c);
 
 	if (count == 1)
