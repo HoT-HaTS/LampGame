@@ -13,9 +13,11 @@ public:
 	void Init();     //イニシャライズ
 	void Action();   //アクション
 	void Draw();     //ドロー
+
+	int GetStageID() { return stage_id; }
 private:
 	bool m_key_flag;  //キーフラグ
 	bool select_flag; //ステージセレクト用フラグ
 
-	int count;
+	int stage_id;
 };
