@@ -6,15 +6,18 @@
 using namespace GameL;
 
 //オブジェクト：
-class CObjMain : public CObj
+class CObjPause : public CObj
 {
 public:
-	CObjMain() {};
-	~CObjMain() {};
+	CObjPause() {};
+	~CObjPause() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
 private:
-	bool m_flag;
+	float mx;
+	float my;
+	bool P_flag;
 };
+
 

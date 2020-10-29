@@ -80,6 +80,15 @@ void CObjStage1::Action()
 			m_map[i][ex] = 0;
 
 		}
+		if (m_map[i][ex] == 3)
+		{
+			//3があれば看板出現
+			CObjBoard* objt = new CObjBoard(ex * 64.0f, i * 64.0f);
+			Objs::InsertObj(objt, OBJ_BOARD, 9);
+
+			//看板出現場所の値を0にする
+			m_map[i][ex] = 0;
+		}
 		//列の中から5を探す
 		if (m_map[i][ex] == 5)
 		{
@@ -111,6 +120,7 @@ void CObjStage1::Draw()
 {
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	float  c1[4] = { 0.8f, 0.8f, 0.8f, 1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -157,12 +167,11 @@ void CObjStage1::Draw()
 				else
 				{
 					//床ブロック
-					BlockDraw(64.0f, 0.0f, &dst, c, 1);
+					BlockDraw(64.0f, 0.0f, &dst, c1, 1);
 				}
 			}
 		}
 	}
-
 }
 
 

@@ -18,12 +18,12 @@ public:
 	float GetScroll() { return m_scroll; }
 
 	//int GetMap() { return m_map[10][100]; }
-			//ブロックとの当たり判定
+	//ブロックとの当たり判定
 	void BlockHit
 	(
 		float* x, float* y, bool scroll_on,
 		bool* up, bool* down, bool* left, bool* right,
-		float* vx, float* vy, int* btu,int* btr
+		float* vx, float* vy, int* btu,int* btg
 	);
 
 

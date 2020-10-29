@@ -10,10 +10,12 @@
 //使用するネームスペース
 using namespace GameL;
 
+
+
 //イニシャライズ
 void CObjMain::Init()
 {
-	
+	 m_flag = true;
 }
 
 //アクション
@@ -25,11 +27,33 @@ void CObjMain::Action()
 		if (Input::GetVKey('R') == true)
 		{
 			Scene::SetScene(new CSceneStage_1());
+			pause_flag = false;
 		}	
 	
 	}
-	
-	
+
+
+	//ポーズ用
+	if (Input::GetVKey('P') == true)
+	{
+
+		if (m_flag == true && pause_flag == false)
+		{
+			pause_flag = true;
+			m_flag = false;
+			CObjPause* obj_pause = new CObjPause();
+			Objs::InsertObj(obj_pause, OBJ_PAUSE, 99);
+		}
+		else if (m_flag == true && pause_flag == true)
+		{
+			pause_flag = false;
+			m_flag = false;
+		}
+	}
+	else
+	{
+		m_flag = true;
+	}	
 }
 
 //ドロー

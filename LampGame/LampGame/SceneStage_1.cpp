@@ -16,6 +16,9 @@ using namespace GameL;
 #include "GameHead.h"
 #include "GameL/UserData.h"
 
+
+extern bool pause_flag = false;
+
 //コンストラクタ
 CSceneStage_1::CSceneStage_1()
 {
@@ -59,7 +62,10 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Enemy.png", 22, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Board.png", 23, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Shattersub.png", 24, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/tutorial.png", 50, TEX_SIZE_512);
 	
+	Draw::LoadImageW(L"graphic/pausetest.png", 13, TEX_SIZE_512);
+
 	CObjStage1* obj_stage1 = new CObjStage1(map);
 	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 13);
 
@@ -75,13 +81,6 @@ void CSceneStage_1::InitScene()
 
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 6);
-
-	/*CObj_G_Block* objg = new CObj_G_Block(0, 0);
-	Objs::InsertObj(objg, OBJ_BLOCK, 8);*/
-
-
-	/*CObjEnemy* obje = new CObjEnemy(map);
-	Objs::InsertObj(obje, OBJ_ENEMY, 12);*/
 }
 
 //実行中メソッド実行中メソッド
