@@ -114,6 +114,9 @@
     <ClCompile Include="Obj_Tutorial.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
+    <ClCompile Include="Obj_Pause.cpp">
+      <Filter>ソース ファイル\共通</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -201,6 +204,9 @@
       <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Tutorial.h">
+      <Filter>ソース ファイル\共通</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Pause.h">
       <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
   </ItemGroup>

@@ -407,7 +407,7 @@ void CObjHero::Draw()
 	//光フラグがONなら
 	if (L_flag == true)
 	{
-		//0番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
+		//2番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
 		Draw::Draw(2, &src, &dst, c, 0.0f);
 	}
 	//光フラグがOFFなら
