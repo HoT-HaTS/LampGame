@@ -105,6 +105,15 @@
     <ClCompile Include="Obj_Board.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Tutorial.cpp">
+      <Filter>ソース ファイル\共通</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -183,6 +192,15 @@
       <Filter>ソース ファイル\Select</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Board.h">
+      <Filter>ソース ファイル\共通</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Tutorial.h">
       <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
   </ItemGroup>

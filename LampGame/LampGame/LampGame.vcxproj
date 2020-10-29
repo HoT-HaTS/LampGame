@@ -153,6 +153,7 @@
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="ObjSelect.cpp" />
+    <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="Obj_Attack.cpp" />
     <ClCompile Include="Obj_Block.cpp" />
     <ClCompile Include="Obj_Board.cpp" />
@@ -162,8 +163,10 @@
     <ClCompile Include="Obj_Main.cpp" />
     <ClCompile Include="Obj_Stage1.cpp" />
     <ClCompile Include="Obj_Switch.cpp" />
+    <ClCompile Include="Obj_Tutorial.cpp" />
     <ClCompile Include="SceneSelect.cpp" />
     <ClCompile Include="SceneStage_1.cpp" />
+    <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="UtilityModule.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -182,6 +185,7 @@
     <ClInclude Include="GameL\UserData.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="Obj_Board.h" />
     <ClInclude Include="ObjSelect.h" />
     <ClInclude Include="Obj_Stage1.h" />
@@ -192,8 +196,10 @@
     <ClInclude Include="Obj_Hero.h" />
     <ClInclude Include="Obj_Main.h" />
     <ClInclude Include="Obj_Switch.h" />
+    <ClInclude Include="Obj_Tutorial.h" />
     <ClInclude Include="SceneSelect.h" />
     <ClInclude Include="SceneStage_1.h" />
+    <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="UtilityModule.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

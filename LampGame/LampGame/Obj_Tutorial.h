@@ -6,15 +6,19 @@
 using namespace GameL;
 
 //オブジェクト：
-class CObjMain : public CObj
+class CObjTutorial : public CObj
 {
 public:
-	CObjMain() {};
-	~CObjMain() {};
+	CObjTutorial(float x, float y);
+	~CObjTutorial() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
-private:
-	bool m_flag;
-};
 
+	
+private:
+	float m_scroll;     //左右スクロール用
+	float m_px;
+	float m_py;
+	bool T_Sensor;
+};
