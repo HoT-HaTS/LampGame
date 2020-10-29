@@ -37,6 +37,8 @@ class CObjHero : public CObj
 	public:
 		CObjHero() {};
 		~CObjHero() {};
+		void SetX();
+		void SetY();
 		void Init();		//イニシャライズ
 		void Action();		//アクション
 		void Draw();		//ドロー
