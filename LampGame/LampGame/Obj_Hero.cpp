@@ -306,12 +306,10 @@ void CObjHero::Action()
 
 
 		//ステージ終了条件(ゴール到達)
-		if (m_block_type_goal == 4)
+		if (m_block_type_goal == 3)
 		{
 			Scene::SetScene(new CSceneSelect());
 		}
-
-
 
 
 
