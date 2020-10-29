@@ -70,6 +70,7 @@ extern bool pause_flag;
 #include "Obj_Block.h"
 #include "Obj_Enemy.h"
 #include "Obj_G_Block1.h"
+#include "Obj_G_Block2.h"
 #include "Obj_Hero.h"
 #include "Obj_Switch.h"
 #include "Obj_Stage1.h"
@@ -77,7 +78,6 @@ extern bool pause_flag;
 #include "Obj_Board.h"
 #include "Obj_Pause.h"
 #include "Obj_Tutorial.h"
-
 #include "ObjTitle.h"
 //------------------------------------------------
 

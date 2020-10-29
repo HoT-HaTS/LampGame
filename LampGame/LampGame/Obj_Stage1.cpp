@@ -72,7 +72,7 @@ void CObjStage1::Action()
 		//列の中から2を探す
 		if (m_map[i][ex] == 2)
 		{
-			//2があればGブロック出現
+			//2があればG1ブロック出現
 			CObj_G_Block* objg = new CObj_G_Block(ex * 64.0f, i * 64.0f);
 			Objs::InsertObj(objg, OBJ_BLOCK, 8);
 
