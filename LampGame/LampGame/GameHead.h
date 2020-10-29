@@ -17,6 +17,8 @@ enum OBJ_NAME
 	OBJ_BOARD,
 	OBJ_SELECT,
 	OBJ_PAUSE,
+	OBJ_TUTORIAL,
+
 	OBJ_TITLE,
 };
 //------------------------------------------------
@@ -74,6 +76,8 @@ extern bool pause_flag;
 #include "ObjSelect.h"
 #include "Obj_Board.h"
 #include "Obj_Pause.h"
+#include "Obj_Tutorial.h"
+
 #include "ObjTitle.h"
 //------------------------------------------------
 

@@ -35,6 +35,21 @@ void CObjBoard::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + scroll->GetScroll(), m_py);
 
+	//主人公がHitBoxに当たるとflagをtrueにする
+	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	{
+		T_Sensor = true;				//センサーのフラグをtrueに
+	}
+	else
+	{
+		T_Sensor = false;
+	}
+
+	if (T_Sensor == true)
+	{
+		CObjTutorial* obj_tutorial = new CObjTutorial(m_px+64.0f, m_py - 194.0f); //弾丸オブジェクト作成
+		Objs::InsertObj(obj_tutorial, OBJ_TUTORIAL, 100);
+	}
 
 }
 

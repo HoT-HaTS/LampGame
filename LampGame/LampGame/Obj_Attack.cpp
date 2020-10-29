@@ -82,7 +82,6 @@ void CObjAttack::Action()
 	{
 		this->SetStatus(false);		//スイッチが押されたら消滅
 		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
-		return;
 	}
 }
 
