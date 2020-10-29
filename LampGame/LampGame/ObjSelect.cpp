@@ -99,7 +99,7 @@ void CObjSelect::Action()
 	}
 }
 
-//ドロー
+//ドロー（文字）
 void CObjSelect::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
