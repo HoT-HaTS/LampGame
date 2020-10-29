@@ -161,6 +161,7 @@
     <ClCompile Include="Obj_G_Block1.cpp" />
     <ClCompile Include="Obj_Hero.cpp" />
     <ClCompile Include="Obj_Main.cpp" />
+    <ClCompile Include="Obj_Pause.cpp" />
     <ClCompile Include="Obj_Stage1.cpp" />
     <ClCompile Include="Obj_Switch.cpp" />
     <ClCompile Include="Obj_Tutorial.cpp" />
@@ -188,6 +189,7 @@
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="Obj_Board.h" />
     <ClInclude Include="ObjSelect.h" />
+    <ClInclude Include="Obj_Pause.h" />
     <ClInclude Include="Obj_Stage1.h" />
     <ClInclude Include="Obj_Attack.h" />
     <ClInclude Include="Obj_Block.h" />
