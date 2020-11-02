@@ -205,7 +205,7 @@ void CObjHero::Action()
 				this->SetStatus(false);
 				Hits::DeleteHitBox(this);
 
-				Scene::SetScene(new CSceneSelect());
+				Scene::SetScene(new CSceneStage_1());
 			}
 
 			//ブロックとの当たり判定実行

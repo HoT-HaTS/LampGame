@@ -101,7 +101,7 @@ void CObj_G_Block2::Action()
 }
 
 //ドロー
-void CObj_G_Block::Draw()
+void CObj_G_Block2::Draw()
 {
 	//スクロールの値を取得
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);

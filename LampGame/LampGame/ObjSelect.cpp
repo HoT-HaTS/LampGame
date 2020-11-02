@@ -3,6 +3,7 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 
+#include "GameL/UserData.h"
 #include "GameHead.h"
 #include "ObjSelect.h"
 
@@ -15,18 +16,20 @@ void CObjSelect::Init()
 	m_key_flag = false;
 	select_flag = true;
 
-	stage_id = 1;
+	((UserData*)Save::GetData())->stage_id = 1;
 }
 
 //アクション
 void CObjSelect::Action()
 {
+
+
 	
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
 		if (select_flag == true)
 		{
-			stage_id++;
+			((UserData*)Save::GetData())->stage_id++;
 			select_flag = false;
 		}
 	}
@@ -34,7 +37,7 @@ void CObjSelect::Action()
 	{
 		if (select_flag == true)
 		{
-			stage_id--;
+			((UserData*)Save::GetData())->stage_id--;
 			select_flag = false;
 		}
 	}
@@ -43,10 +46,10 @@ void CObjSelect::Action()
 		select_flag = true;
 	}
 
-	if (stage_id <= 0)
-		stage_id = 1;
-	if (stage_id >= 6)
-		stage_id = 5;
+	if (((UserData*)Save::GetData())->stage_id <= 0)
+		((UserData*)Save::GetData())->stage_id = 1;
+	if (((UserData*)Save::GetData())->stage_id >= 6)
+		((UserData*)Save::GetData())->stage_id = 5;
 	
 	//エンターキーを押してシーン：ゲームメインに移行する
 	if (Input::GetVKey(VK_RETURN) == true)
@@ -77,23 +80,23 @@ void CObjSelect::Draw()
 	Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c);
 	Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c);
 
-	if (stage_id == 1)
+	if (((UserData*)Save::GetData())->stage_id == 1)
 	{
 		Font::StrDraw(L"→", 80, 150, 32, c);
 	}
-	else if (stage_id == 2)
+	else if (((UserData*)Save::GetData())->stage_id == 2)
 	{
 		Font::StrDraw(L"→", 80, 200, 32, c);
 	}
-	else if (stage_id == 3)
+	else if (((UserData*)Save::GetData())->stage_id == 3)
 	{
 		Font::StrDraw(L"→", 80, 250, 32, c);
 	}
-	else if (stage_id == 4)
+	else if (((UserData*)Save::GetData())->stage_id == 4)
 	{
 		Font::StrDraw(L"→", 80, 300, 32, c);
 	}
-	else if (stage_id == 5)
+	else if (((UserData*)Save::GetData())->stage_id == 5)
 	{
 		Font::StrDraw(L"→", 80, 350, 32, c);
 	}

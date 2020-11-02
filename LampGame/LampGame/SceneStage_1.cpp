@@ -34,6 +34,8 @@ CSceneStage_1::~CSceneStage_1()
 //初期化メソッド
 void CSceneStage_1::InitScene()
 {
+	
+
 	CObjSelect* stage = (CObjSelect*)Objs::GetObj(OBJ_SELECT);
 
 	//マップデータ完成したら追加
@@ -42,7 +44,7 @@ void CSceneStage_1::InitScene()
 	int map[10][100];
 	wchar_t str[128];
 
-	swprintf_s(str, L"stagedata/Stage%d.csv", stage_id);
+	swprintf_s(str, L"stagedata/Stage%d.csv", ((UserData*)Save::GetData())->stage_id);
 	p = Save::ExternalDataOpen(str, &size);
 	int count = 1;
 	for (int i = 0; i < 10; i++)
