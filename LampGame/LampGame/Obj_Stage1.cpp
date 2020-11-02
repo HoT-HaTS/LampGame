@@ -21,6 +21,7 @@ CObjStage1::CObjStage1(int map[10][100])
 void CObjStage1::Init()
 {
 	g_f = false;
+	g_f2 = false;
 	s1_scroll = 0.0f;
 }
 
@@ -39,6 +40,9 @@ void CObjStage1::Action()
 
 	CObj_G_Block* gflag = (CObj_G_Block*)Objs::GetObj(OBJ_BLOCK);
 	g_f = gflag->Get_G_flag();
+
+	CObj_G_Block2* gflag2 = (CObj_G_Block2*)Objs::GetObj(OBJ_BLOCK);
+	g_f2 = gflag2->Get_G_flag();
 
 
 
@@ -78,7 +82,6 @@ void CObjStage1::Action()
 
 			//Gブロック出現場所の値を0にする
 			m_map[i][ex] = 0;
-
 		}
 		if (m_map[i][ex] == 2)
 		{
@@ -110,9 +113,16 @@ void CObjStage1::Action()
 			//スイッチ出現場所の値を0にする
 			m_map[i][ex] = 0;
 		}
+		if (m_map[i][ex] == 10)
+		{
+			//10があればG2ブロック出現
+			CObj_G_Block2* objg2 = new CObj_G_Block2(ex * 64.0f, i * 64.0f);
+			Objs::InsertObj(objg2, OBJ_BLOCK, 8);
+
+			//G2ブロック出現場所の値を0にする
+			m_map[i][ex] = 0;
+		}
 	}
-
-
 }
 
 //ドロー
