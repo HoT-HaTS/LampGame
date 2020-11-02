@@ -33,71 +33,73 @@ void CObj_G_Block2::Action()
 	//主人公の位置の取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	//主人公の衝突確認用のフラグの初期化
-	hero->SetUp(false);
-	hero->SetDown(false);
-	hero->SetLeft(false);
-	hero->SetRight(false);
-
-
-	//HitBoxの内容を更新
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + scroll->GetScroll(), m_py);
-
-
-
-	//主人公とG_Blockのあたり判定チェック
-	//当たっている場合
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		float hx = hero->GetX();
-		float hy = hero->GetY();
-
-		//G_Blockの上じゃない条件
-		if (hy + 120 > m_py)
-		{
-			//G_Blockの左部分に接触
-			if (m_px + scroll->GetScroll() > hx)
-			{
-				hero->SetRight(true);
-				hero->SetX(m_px - 64.5 + scroll->GetScroll());
-				hero->SetVX(-0.8);
-			}
-			//G_Blockの右部分に接触
-			else if (hx > m_px + scroll->GetScroll())
-			{
-				hero->SetLeft(true);
-				hero->SetX(m_px + 63.5 + scroll->GetScroll());
-				hero->SetVX(0.0);
-			}
-		}
-		//G_Blockの上部分に接触
-		if (hy + 127 <= m_py)
-		{
-			hero->SetDown(true);
-			hero->SetY(m_py - 128.5);
-			hero->SetVY(0.0);
-		}
-		//G_Blockの下部分に接触
-		else if (m_py + 65 <= hy)
-		{
-			hero->SetUp(true);
-			hero->SetY(m_py + 63.5);
-			hero->SetVY(0.0);
-		}
-	}
-
-
-	//スイッチが押されたらフラグ切り替え、ギミックブロックを消滅
-	CObjSwitch* sflag = (CObjSwitch*)Objs::GetObj(OBJ_SWITCH);
-	G2_flag = sflag->Get_S_flag();
-
 	if (G2_flag == true)
+	{
+		//主人公の衝突確認用のフラグの初期化
+		hero->SetUp(false);
+		hero->SetDown(false);
+		hero->SetLeft(false);
+		hero->SetRight(false);
+
+
+		//HitBoxの内容を更新
+		CHitBox* hit = Hits::GetHitBox(this);
+		hit->SetPos(m_px + scroll->GetScroll(), m_py);
+
+
+
+		//主人公とG_Blockのあたり判定チェック
+		//当たっている場合
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+		{
+			float hx = hero->GetX();
+			float hy = hero->GetY();
+
+			//G_Blockの上じゃない条件
+			if (hy + 120 > m_py)
+			{
+				//G_Blockの左部分に接触
+				if (m_px + scroll->GetScroll() > hx)
+				{
+					hero->SetRight(true);
+					hero->SetX(m_px - 64.5 + scroll->GetScroll());
+					hero->SetVX(-0.8);
+				}
+				//G_Blockの右部分に接触
+				else if (hx > m_px + scroll->GetScroll())
+				{
+					hero->SetLeft(true);
+					hero->SetX(m_px + 63.5 + scroll->GetScroll());
+					hero->SetVX(0.0);
+				}
+			}
+			//G_Blockの上部分に接触
+			if (hy + 127 <= m_py)
+			{
+				hero->SetDown(true);
+				hero->SetY(m_py - 128.5);
+				hero->SetVY(0.0);
+			}
+			//G_Blockの下部分に接触
+			else if (m_py + 65 <= hy)
+			{
+				hero->SetUp(true);
+				hero->SetY(m_py + 63.5);
+				hero->SetVY(0.0);
+			}
+		}
+
+
+		//スイッチが押されたらフラグ切り替え、ギミックブロックを消滅
+		CObjSwitch* sflag = (CObjSwitch*)Objs::GetObj(OBJ_SWITCH);
+		G2_flag = sflag->Get_S_flag();
+		
+	}
+	else if (G2_flag == false)
 	{
 		this->SetStatus(false);		//スイッチが押されたら消滅
 		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
 	}
-
 }
 
 //ドロー

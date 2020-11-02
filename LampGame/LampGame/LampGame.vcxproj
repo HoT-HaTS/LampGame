@@ -168,6 +168,7 @@
     <ClCompile Include="Obj_Pause.cpp" />
     <ClCompile Include="Obj_Stage1.cpp" />
     <ClCompile Include="Obj_Switch.cpp" />
+    <ClCompile Include="Obj_Switch2.cpp" />
     <ClCompile Include="Obj_Tutorial.cpp" />
     <ClCompile Include="SceneSelect.cpp" />
     <ClCompile Include="SceneStage_1.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Obj_Hero.h" />
     <ClInclude Include="Obj_Main.h" />
     <ClInclude Include="Obj_Switch.h" />
+    <ClInclude Include="Obj_Switch2.h" />
     <ClInclude Include="Obj_Tutorial.h" />
     <ClInclude Include="SceneSelect.h" />
     <ClInclude Include="SceneStage_1.h" />

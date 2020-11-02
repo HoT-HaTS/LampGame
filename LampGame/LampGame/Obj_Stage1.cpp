@@ -118,9 +118,6 @@ void CObjStage1::Action()
 			//10があればG2ブロック出現
 			CObj_G_Block2* objg2 = new CObj_G_Block2(ex * 64.0f, i * 64.0f);
 			Objs::InsertObj(objg2, OBJ_BLOCK, 8);
-
-			//G2ブロック出現場所の値を0にする
-			m_map[i][ex] = 0;
 		}
 	}
 }
