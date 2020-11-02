@@ -41,8 +41,8 @@ void CObjStage1::Action()
 	CObj_G_Block* gflag = (CObj_G_Block*)Objs::GetObj(OBJ_BLOCK);
 	g_f = gflag->Get_G_flag();
 
-	CObj_G_Block2* gflag2 = (CObj_G_Block2*)Objs::GetObj(OBJ_BLOCK);
-	g_f2 = gflag2->Get_G_flag();
+	/*CObj_G_Block2* gflag2 = (CObj_G_Block2*)Objs::GetObj(OBJ_BLOCK);
+	g_f2 = gflag2->Get_G_flag();*/
 
 
 
@@ -86,11 +86,11 @@ void CObjStage1::Action()
 		if (m_map[i][ex] == 2)
 		{
 			//2があれば看板出現
-			CObjBoard* objt = new CObjBoard(ex * 64.0f, i * 64.0f);
-			Objs::InsertObj(objt, OBJ_BOARD, 9);
+			//CObjBoard* objt = new CObjBoard(ex * 64.0f, i * 64.0f);
+			//Objs::InsertObj(objt, OBJ_BOARD, 9);
 
-			//看板出現場所の値を0にする
-			m_map[i][ex] = 0;
+			////看板出現場所の値を0にする
+			//m_map[i][ex] = 0;
 		}
 		//列の中から4を探す
 		if (m_map[i][ex] == 4)
@@ -115,9 +115,9 @@ void CObjStage1::Action()
 		}
 		if (m_map[i][ex] == 10)
 		{
-			//10があればG2ブロック出現
-			CObj_G_Block2* objg2 = new CObj_G_Block2(ex * 64.0f, i * 64.0f);
-			Objs::InsertObj(objg2, OBJ_BLOCK, 8);
+			////10があればG2ブロック出現
+			//CObj_G_Block2* objg2 = new CObj_G_Block2(ex * 64.0f, i * 64.0f);
+			//Objs::InsertObj(objg2, OBJ_BLOCK, 8);
 
 			//G2ブロック出現場所の値を0にする
 			m_map[i][ex] = 0;

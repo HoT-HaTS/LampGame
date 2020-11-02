@@ -167,7 +167,9 @@
     <ClCompile Include="Obj_Pause.cpp" />
     <ClCompile Include="Obj_Stage1.cpp" />
     <ClCompile Include="Obj_Switch.cpp" />
-    <ClCompile Include="Obj_Tutorial.cpp" />
+    <ClCompile Include="Obj_Tutorial.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="SceneSelect.cpp" />
     <ClCompile Include="SceneStage_1.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
@@ -204,7 +206,9 @@
     <ClInclude Include="Obj_Hero.h" />
     <ClInclude Include="Obj_Main.h" />
     <ClInclude Include="Obj_Switch.h" />
-    <ClInclude Include="Obj_Tutorial.h" />
+    <ClInclude Include="Obj_Tutorial.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="SceneSelect.h" />
     <ClInclude Include="SceneStage_1.h" />
     <ClInclude Include="SceneTitle.h" />

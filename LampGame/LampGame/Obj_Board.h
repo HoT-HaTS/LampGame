@@ -19,5 +19,10 @@ private:
 	float m_scroll;     //左右スクロール用
 	float m_px;
 	float m_py;
+	int count;	//看板の数
 	bool T_Sensor;
+	bool m_flag;
+
+	bool CheckWindow(float pos_x, float pos_y,
+		float window_x, float window_y, float window_w, float window_h);
 };
