@@ -61,6 +61,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/lamp_shadow_walk.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_v2.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG.png", 3, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG_shadow.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/switch.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_attack.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/switch2.png", 12, TEX_SIZE_512);
@@ -78,16 +79,16 @@ void CSceneStage_1::InitScene()
 
 	CObjHero* obj_h = new CObjHero();
 	Objs::InsertObj(obj_h, OBJ_HERO, 10);
-	
 
 	CObjMain* obj_main = new CObjMain();
 	Objs::InsertObj(obj_main, OBJ_MAIN, 11);
 
-	/*CObjSwitch* objs = new CObjSwitch(100, 200);
-	Objs::InsertObj(objs, OBJ_SWITCH, 7);*/
-
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 6);
+
+	//ギミックブロック3テスト用
+	/*CObj_G_Block3* objb3 = new CObj_G_Block3(300, 200);
+	Objs::InsertObj(objb3, OBJ_G_BLOCK3, 8);*/
 }
 
 //実行中メソッド実行中メソッド

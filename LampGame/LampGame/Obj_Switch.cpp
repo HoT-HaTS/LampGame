@@ -145,7 +145,7 @@ void CObjSwitch::Draw()
 	dst.m_right = dst.m_left + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 
-	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+	//12番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(12, &src, &dst, c, 0.0f);
 }
 

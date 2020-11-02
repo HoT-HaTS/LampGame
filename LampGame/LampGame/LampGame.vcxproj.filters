@@ -120,7 +120,7 @@
     <ClCompile Include="Obj_G_Block1.cpp">
       <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_G_Block2.cpp">
+    <ClCompile Include="Obj_G_Block3.cpp">
       <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClCompile>
   </ItemGroup>
@@ -215,7 +215,7 @@
     <ClInclude Include="Obj_G_Block1.h">
       <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_G_Block2.h">
+    <ClInclude Include="Obj_G_Block3.h">
       <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClInclude>
   </ItemGroup>
