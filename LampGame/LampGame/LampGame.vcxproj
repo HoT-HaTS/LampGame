@@ -152,6 +152,7 @@
     <ClCompile Include="GameL\SetWindow.cpp" />
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
+    <ClCompile Include="Obj_G_Block2.cpp" />
     <ClCompile Include="Obj_G_Block3.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
@@ -167,6 +168,8 @@
     <ClCompile Include="Obj_Pause.cpp" />
     <ClCompile Include="Obj_Stage1.cpp" />
     <ClCompile Include="Obj_Switch.cpp" />
+    <ClCompile Include="Obj_Switch2.cpp" />
+    <ClCompile Include="Obj_Tutorial.cpp" />
     <ClCompile Include="Obj_Tutorial.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -194,6 +197,7 @@
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="Obj_Board.h" />
     <ClInclude Include="ObjSelect.h" />
+    <ClInclude Include="Obj_G_Block2.h" />
     <ClInclude Include="Obj_G_Block3.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
@@ -206,6 +210,8 @@
     <ClInclude Include="Obj_Hero.h" />
     <ClInclude Include="Obj_Main.h" />
     <ClInclude Include="Obj_Switch.h" />
+    <ClInclude Include="Obj_Switch2.h" />
+    <ClInclude Include="Obj_Tutorial.h" />
     <ClInclude Include="Obj_Tutorial.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
