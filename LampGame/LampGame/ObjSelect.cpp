@@ -2,8 +2,8 @@
 #include "GameL/DrawFont.h"
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
-
 #include "GameL/UserData.h"
+
 #include "GameHead.h"
 #include "ObjSelect.h"
 
@@ -22,9 +22,6 @@ void CObjSelect::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjSelect::Action()
 {
-
-
-	
 	if (Input::GetVKey(VK_DOWN) == true)
 	{
 		if (select_flag == true)
