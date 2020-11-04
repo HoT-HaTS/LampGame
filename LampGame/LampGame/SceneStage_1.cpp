@@ -75,7 +75,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/pausetest.png", 13, TEX_SIZE_512);
 
 	CObjStage1* obj_stage1 = new CObjStage1(map);
-	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 13);
+	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 30);
 
 	CObjHero* obj_h = new CObjHero();
 	Objs::InsertObj(obj_h, OBJ_HERO, 10);
@@ -88,13 +88,13 @@ void CSceneStage_1::InitScene()
 
 
 	//看板出現用テスト
-	CObjBoard* objt1 = new CObjBoard(640,512);
+	CObjBoard* objt1 = new CObjBoard(640,512, 0);
 	Objs::InsertObj(objt1, OBJ_BOARD, 9);
-
-	CObjBoard* objt2 = new CObjBoard(1664, 512);
+	
+	CObjBoard* objt2 = new CObjBoard(1664, 512, 1);
 	Objs::InsertObj(objt2, OBJ_BOARD, 9);
 
-	CObjBoard* objt3 = new CObjBoard(3392, 512);
+	CObjBoard* objt3 = new CObjBoard(3456, 512, 2);
 	Objs::InsertObj(objt3, OBJ_BOARD, 9);
 
 	//ギミックブロック3テスト用

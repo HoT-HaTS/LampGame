@@ -9,12 +9,15 @@ using namespace GameL;
 class CObjBoard : public CObj
 {
 public:
-	CObjBoard(float x, float y);
+	CObjBoard(float x, float y, int i);
 	~CObjBoard() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
 	bool Get_Tuto_Sensor() { return T_Sensor; };//チュートリアル表示センサー
+
+	int GetNum() { return b_num; };
+
 private:
 	float m_scroll;     //左右スクロール用
 	float m_px;
@@ -25,4 +28,7 @@ private:
 
 	bool CheckWindow(float pos_x, float pos_y,
 		float window_x, float window_y, float window_w, float window_h);
+
+	//看板番号
+	int b_num;
 };

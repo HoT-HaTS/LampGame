@@ -15,10 +15,11 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjBoard::CObjBoard(float x, float y)
+CObjBoard::CObjBoard(float x, float y, int i)
 {
 	m_px = x;			//位置
 	m_py = y;
+	b_num = i;
 }
 
 //イニシャライズ
@@ -28,7 +29,7 @@ void CObjBoard::Init()
 	m_flag = true;
 	T_Sensor = false;
 
-	Hits::SetHitBox(this, m_px, m_py, 128.0f, 64.0f, ELEMENT_BOARD, OBJ_BOARD, 1);
+	Hits::SetHitBox(this, m_px, m_py, 192.0f, 128.0f, ELEMENT_BOARD, OBJ_BOARD, 1);
 
 }
 
@@ -40,7 +41,7 @@ void CObjBoard::Action()
 
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px+scroll->GetScroll() , m_py);
+	hit->SetPos(m_px+scroll->GetScroll()-64 , m_py-64);
 
 	//主人公がHitBoxに当たるとflagをtrueにする
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
@@ -53,12 +54,14 @@ void CObjBoard::Action()
 			m_flag = true;
 		}
 	}
+	else
+		T_Sensor = false;
 	//看板が左側の画面外に出たら削除
 	bool check = CheckWindow(m_px, m_py, -32.0f, -32.0f, 800.0f, 600.0f);
 	if (check == false)
 	{
 		this->SetStatus(false);	//自身に削除命令を出す
-		Hits::DeleteHitBox(this);//敵機弾丸が所有するHitBoxに削除する
+		Hits::DeleteHitBox(this);//看板が所有するHitBoxを削除する
 		T_Sensor = false;
 	}
 
@@ -102,19 +105,20 @@ void CObjBoard::Draw()
 		RECT_F dst2;	//描画先表示位置
 
 		src2.m_top = 0.0f;
-		src2.m_left = 0.0f;
+		src2.m_left = 0.0f + 288 * b_num;
 		src2.m_right = src2.m_left + 288.0f;
 		src2.m_bottom = src2.m_top + 288.0f;
 
-		dst2.m_top = 200;
-		dst2.m_left = m_px + scroll->GetScroll() - 144.0f;
-		dst2.m_right = dst2.m_left + 208.0f;
-		dst2.m_bottom = dst2.m_top + 208.0f;
-
+		dst2.m_top = 270;
+		dst2.m_left = m_px + scroll->GetScroll() - 65.0f;
+		dst2.m_right = dst2.m_left + 192.0f;
+		dst2.m_bottom = dst2.m_top + 180.0f;
 		if (T_Sensor == true)
 		{
 			Draw::Draw(50, &src2, &dst2, c, 0.0f);
 		}
+
+
 }
 
 
