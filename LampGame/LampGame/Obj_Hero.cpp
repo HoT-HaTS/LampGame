@@ -202,10 +202,13 @@ void CObjHero::Action()
 			//敵オブジェクトと接触したら主人公削除
 			if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
 			{
-				this->SetStatus(false);
-				Hits::DeleteHitBox(this);
+				if (L_flag == true)
+				{
+					this->SetStatus(false);
+					Hits::DeleteHitBox(this);
 
-				Scene::SetScene(new CSceneStage_1());
+					Scene::SetScene(new CSceneStage_1());
+				}
 			}
 
 			//ブロックとの当たり判定実行
