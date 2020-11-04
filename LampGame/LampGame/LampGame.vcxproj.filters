@@ -28,6 +28,9 @@
     <Filter Include="ソース ファイル\共通\G_Block">
       <UniqueIdentifier>{7a43ec88-0786-4dce-ab56-f12a7cdb2cb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\共通\Switch">
+      <UniqueIdentifier>{d84ca799-ed0e-40fc-a867-bf384728fc72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -78,9 +81,6 @@
     <ClCompile Include="Obj_Hero.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Switch.cpp">
-      <Filter>ソース ファイル\共通</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_Block.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
@@ -114,14 +114,23 @@
     <ClCompile Include="Obj_Pause.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Tutorial.cpp">
-      <Filter>ソース ファイル\Stage1</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_G_Block1.cpp">
       <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClCompile>
     <ClCompile Include="Obj_G_Block3.cpp">
       <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_G_Block2.cpp">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Switch.cpp">
+      <Filter>ソース ファイル\共通\Switch</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Switch2.cpp">
+      <Filter>ソース ファイル\共通\Switch</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Tutorial.cpp">
+      <Filter>ソース ファイル\Stage1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -163,9 +172,6 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Switch.h">
-      <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Attack.h">
       <Filter>ソース ファイル\共通</Filter>
@@ -209,14 +215,23 @@
     <ClInclude Include="Obj_Pause.h">
       <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_Tutorial.h">
-      <Filter>ソース ファイル\Stage1</Filter>
-    </ClInclude>
     <ClInclude Include="Obj_G_Block1.h">
       <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClInclude>
     <ClInclude Include="Obj_G_Block3.h">
       <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_G_Block2.h">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Switch.h">
+      <Filter>ソース ファイル\共通\Switch</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Switch2.h">
+      <Filter>ソース ファイル\共通\Switch</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Tutorial.h">
+      <Filter>ソース ファイル\Stage1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
