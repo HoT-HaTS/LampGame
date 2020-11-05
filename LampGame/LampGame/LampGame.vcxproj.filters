@@ -129,9 +129,6 @@
     <ClCompile Include="Obj_Switch2.cpp">
       <Filter>ソース ファイル\共通\Switch</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Tutorial.cpp">
-      <Filter>ソース ファイル\Stage1</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -229,9 +226,6 @@
     </ClInclude>
     <ClInclude Include="Obj_Switch2.h">
       <Filter>ソース ファイル\共通\Switch</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Tutorial.h">
-      <Filter>ソース ファイル\Stage1</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
