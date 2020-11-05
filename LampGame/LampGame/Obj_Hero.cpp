@@ -199,6 +199,18 @@ void CObjHero::Action()
 			//HitBoxの位置の変更
 			hit->SetPos(m_px, m_py);
 
+			//敵オブジェクトと接触したら主人公削除
+			if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+			{
+				if (L_flag == true)
+				{
+					this->SetStatus(false);
+					Hits::DeleteHitBox(this);
+
+					Scene::SetScene(new CSceneStage_1());
+				}
+			}
+
 			//ブロックとの当たり判定実行
 			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 			pb->BlockHit(&m_px, &m_py, true,
@@ -270,7 +282,7 @@ void CObjHero::Action()
 						m_vx = 0;
 						m_vy = 0;
 						move_flag = false;
-						Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+						Hits::DeleteHitBox(this);	//主人公が所有するHitBoxを削除
 					}
 				}
 				else
@@ -306,25 +318,17 @@ void CObjHero::Action()
 
 
 		//ステージ終了条件(ゴール到達)
-		if (m_block_type_goal == 4)
+		if (m_block_type_goal == 3)
 		{
 			Scene::SetScene(new CSceneSelect());
 		}
 
-
-
-
-
-
-
-
-
-
-
-
+		//////HitBoxの内容を更新
+		//CHitBox* hit = Hits::GetHitBox(this);
+		//hit->SetPos(m_px, m_py);
 
 		//敵関係
-		////敵と当たっているか確認
+		//敵と当たっているか確認
 		//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
 		//{
 		//	//主人公がどの敵とどの角度で当たっているかを確認

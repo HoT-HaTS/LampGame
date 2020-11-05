@@ -21,6 +21,7 @@ CObjStage1::CObjStage1(int map[10][100])
 void CObjStage1::Init()
 {
 	g_f = false;
+	g_f2 = false;
 	s1_scroll = 0.0f;
 }
 
@@ -39,6 +40,9 @@ void CObjStage1::Action()
 
 	CObj_G_Block* gflag = (CObj_G_Block*)Objs::GetObj(OBJ_BLOCK);
 	g_f = gflag->Get_G_flag();
+
+	/*CObj_G_Block2* gflag2 = (CObj_G_Block2*)Objs::GetObj(OBJ_BLOCK);
+	g_f2 = gflag2->Get_G_flag();*/
 
 
 
@@ -69,50 +73,53 @@ void CObjStage1::Action()
 	//敵出現ラインの列を検索
 	for (int i = 0; i < 10; i++)
 	{
-		//列の中から2を探す
-		if (m_map[i][ex] == 2)
+		//列の中から6を探す
+		if (m_map[i][ex] == 6)
 		{
-			//2があればGブロック出現
+			//6があればGブロック出現
 			CObj_G_Block* objg = new CObj_G_Block(ex * 64.0f, i * 64.0f);
 			Objs::InsertObj(objg, OBJ_BLOCK, 8);
 
 			//Gブロック出現場所の値を0にする
 			m_map[i][ex] = 0;
-
 		}
-		if (m_map[i][ex] == 3)
+		if (m_map[i][ex] == 2)
 		{
-			//3があれば看板出現
-			CObjBoard* objt = new CObjBoard(ex * 64.0f, i * 64.0f);
-			Objs::InsertObj(objt, OBJ_BOARD, 9);
+			//2があれば看板出現
+			//CObjBoard* objt = new CObjBoard(ex * 64.0f, i * 64.0f);
+			//Objs::InsertObj(objt, OBJ_BOARD, 9);
 
-			//看板出現場所の値を0にする
-			m_map[i][ex] = 0;
+			////看板出現場所の値を0にする
+			//m_map[i][ex] = 0;
 		}
-		//列の中から5を探す
-		if (m_map[i][ex] == 5)
+		//列の中から4を探す
+		if (m_map[i][ex] == 4)
 		{
-			//5があれば敵出現
+			//4があれば敵出現
 			CObjEnemy* obje = new CObjEnemy(ex * 64.0f, i * 64.0f);
-			Objs::InsertObj(obje, OBJ_ENEMY, 12);
+			Objs::InsertObj(obje, OBJ_ENEMY, 14);
 
 			//敵出現場所の値を0にする
 			m_map[i][ex] = 0;
 
 		}
-		//列の中から6を探す
-		if (m_map[i][ex] == 6)
+		//列の中から7を探す
+		if (m_map[i][ex] == 7)
 		{
-			//6があればスイッチ出現
+			//7があればスイッチ出現
 			CObjSwitch* objs = new CObjSwitch(ex * 64.0f, i * 64.0f);
 			Objs::InsertObj(objs, OBJ_SWITCH, 7);
 
 			//スイッチ出現場所の値を0にする
 			m_map[i][ex] = 0;
 		}
+		if (m_map[i][ex] == 10)
+		{
+			//10があればG2ブロック出現
+			CObj_G_Block2* objg2 = new CObj_G_Block2(ex * 64.0f, i * 64.0f);
+			Objs::InsertObj(objg2, OBJ_BLOCK, 8);
+		}
 	}
-
-
 }
 
 //ドロー
@@ -139,22 +146,22 @@ void CObjStage1::Draw()
 				dst.m_bottom = dst.m_top + 64.0f;
 				if (m_map[i][j] == 2)
 				{
-					//ギミックブロック
-					//BlockDraw(0.0f, 0.0f, &dst, c, 2);
+					;//看板ブロック
+					//BlockDraw(320.0f + 64.0f, 64.0f, &dst, c, 3);
 				}
 				else if (m_map[i][j] == 3)
-				{
-					//看板ブロック
-					;//BlockDraw(320.0f + 64.0f, 64.0f, &dst, c, 3);
-				}
-				else if (m_map[i][j] == 4)
 				{
 					dst.m_top = i * 64.0f - 128.0f;
 					dst.m_left = j * 64.0f + s1_scroll - 128.0f;
 					dst.m_right = dst.m_left + 320.0f;
 					dst.m_bottom = dst.m_top + 256.0f;
 					//ゴールブロック
-					BlockDraw(64.0f, 0.0f, &dst, c, 4);
+					BlockDraw(64.0f, 0.0f, &dst, c, 3);
+				}
+				else if (m_map[i][j] == 4)
+				{
+					;//ギミックブロック
+					//BlockDraw(0.0f, 0.0f, &dst, c, 2);
 				}
 				else if (m_map[i][j] == 5)
 				{
@@ -185,7 +192,7 @@ void CObjStage1::Draw()
 //ブロックを64×64限定描画用。リソース切り取り位置のみx,yで設定できる。
 void CObjStage1::BlockDraw(float x, float y, RECT_F* dst, float c[], int block_id)
 {
-	if (block_id == 2)
+	if (block_id == 6)
 	{
 		//ギミックブロック(木)描画
 		RECT_F src;
@@ -207,7 +214,7 @@ void CObjStage1::BlockDraw(float x, float y, RECT_F* dst, float c[], int block_i
 		//描画
 		Draw::Draw(21, &src, dst, c, 0.0f);
 	}
-	else if (block_id == 4)
+	else if (block_id == 3)
 	{
 		//ゴールブロック描画
 		RECT_F src;

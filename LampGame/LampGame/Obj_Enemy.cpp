@@ -27,7 +27,7 @@ void CObjEnemy::Init()
 	m_ani_time = 0;
 	m_ani_frame = 1;	//静止フレームを初期にする
 
-	m_speed_power = 0.5f;	//通常速度
+	m_speed_power = 0.3f;	//通常速度
 	m_ani_max_time = 4;		//アニメーション間隔幅
 
 	m_move = true;			//true=右　false=左
@@ -48,51 +48,53 @@ void CObjEnemy::Init()
 void CObjEnemy::Action()
 {
 
-	////通常速度
-	//m_speed_power = 0.5f;	//移動速度
-	//m_ani_max_time = 4;		//アニメーション間隔幅
+	//通常速度
+	m_speed_power=0.3f;   	//移動速度
+	m_ani_max_time = 4;		//アニメーション間隔幅
 
-	////ブロック衝突で向き変更
-	//if (m_hit_left == true)
-	//{
-	//	m_move = true;
-	//}
-	//if (m_hit_right == true)
-	//{
-	//	m_move = false;
-	//}
 
-	////方向
-	//if (m_move == false)
-	//{
-	//	m_vx += m_speed_power;
-	//	m_posture = 1.0f;
-	//	m_ani_time += 1;
-	//}
+	//ブロック衝突で向き変更
+	if (m_hit_left == true)
+	{
+		m_move = true;
+	}
+	if (m_hit_right == true)
+	{
+		m_move = false;
+	}
 
-	//else if (m_move == true)
-	//{
-	//	m_vx -= m_speed_power;
-	//	m_posture = 0.0f;
-	//	m_ani_time += 1;
-	//}
+	//方向
+	if (m_move == false)
+	{
+		m_vx += m_speed_power;
+		m_posture = 1.0f;
+		m_ani_time += 1;
+	}
 
-	//if (m_ani_time > m_ani_max_time)
-	//{
-	//	m_ani_frame += 1;
-	//	m_ani_time = 0;
-	//}
+	else if (m_move == true)
+	{
+		m_vx -= m_speed_power;
+		m_posture = 0.0f;
+		m_ani_time += 1;
+	}
 
-	//if (m_ani_frame == 4)
-	//{
-	//	m_ani_frame = 0;
-	//}
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
 
-	////摩擦
-	//m_vx += -(m_vx * 0.098);
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
 
-	////自由落下運動
-	//m_vy += 9.8 / (16.0f);
+
+	//摩擦
+	m_vx += -(m_vx * 0.098);
+
+	//自由落下運動
+	m_vy += 9.8 / (16.0f);
 
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d1;
@@ -110,6 +112,8 @@ void CObjEnemy::Action()
 
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	
 
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -161,6 +165,14 @@ void CObjEnemy::Action()
 			hero->SetVY(0.0);
 		}
 	}
+	
+
+	//敵オブジェクトと接触したら主人公削除
+	//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
+	{
+		//this->SetStatus(false);    //自身に削除命令を出す
+		//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxを削除する
+	}
 
 
 	//主人公から光フラグを取ってくる
@@ -181,6 +193,7 @@ void CObjEnemy::Action()
 			return;
 		}
 	}
+	
 }
 
 //ドロー

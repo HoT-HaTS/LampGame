@@ -34,11 +34,18 @@ CSceneStage_1::~CSceneStage_1()
 //初期化メソッド
 void CSceneStage_1::InitScene()
 {
+	
+
+	CObjSelect* stage = (CObjSelect*)Objs::GetObj(OBJ_SELECT);
+
 	//マップデータ完成したら追加
 	unique_ptr<wchar_t>p;
 	int size;
 	int map[10][100];
-	p = Save::ExternalDataOpen(L"stagedata/Stages.csv", &size);
+	wchar_t str[128];
+
+	swprintf_s(str, L"stagedata/Stage%d.csv", ((UserData*)Save::GetData())->stage_id);
+	p = Save::ExternalDataOpen(str, &size);
 	int count = 1;
 	for (int i = 0; i < 10; i++)
 	{
@@ -54,6 +61,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/lamp_shadow_walk.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_v2.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG.png", 3, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG_shadow.png", 4, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/switch.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_attack.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/switch2.png", 12, TEX_SIZE_512);
@@ -67,20 +75,31 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/pausetest.png", 13, TEX_SIZE_512);
 
 	CObjStage1* obj_stage1 = new CObjStage1(map);
-	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 13);
+	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 30);
 
 	CObjHero* obj_h = new CObjHero();
 	Objs::InsertObj(obj_h, OBJ_HERO, 10);
-	
 
 	CObjMain* obj_main = new CObjMain();
 	Objs::InsertObj(obj_main, OBJ_MAIN, 11);
 
-	/*CObjSwitch* objs = new CObjSwitch(100, 200);
-	Objs::InsertObj(objs, OBJ_SWITCH, 7);*/
-
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 6);
+
+
+	//看板出現用テスト
+	CObjBoard* objt1 = new CObjBoard(640,512, 0);
+	Objs::InsertObj(objt1, OBJ_BOARD, 9);
+	
+	CObjBoard* objt2 = new CObjBoard(1664, 512, 1);
+	Objs::InsertObj(objt2, OBJ_BOARD, 9);
+
+	CObjBoard* objt3 = new CObjBoard(3456, 512, 2);
+	Objs::InsertObj(objt3, OBJ_BOARD, 9);
+
+	//ギミックブロック3テスト用
+	/*CObj_G_Block3* objb3 = new CObj_G_Block3(300, 200);
+	Objs::InsertObj(objb3, OBJ_G_BLOCK3, 8);*/
 }
 
 //実行中メソッド実行中メソッド

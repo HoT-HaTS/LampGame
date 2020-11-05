@@ -49,30 +49,6 @@ void CObjBlock::Action()
 			m_scroll -= hero->GetVX();
 		}
 	}
-
-
-	
-	/*//敵出現ライン
-	//主人公の位置+500を敵出現ラインにする
-	float line = hx + (-m_scroll) + 500;
-
-	//敵出現ラインを要素番号化
-	int ex = ((int)line) / 64;
-
-	//敵出現ラインの列を検索
-	for (int i = 0; i < 10; i++)
-	{
-		//列の中から5を探す
-		if (m_map[i][ex] == 5)
-		{
-			//5があれば、敵を出現
-			CObjEnemy* obje = new CObjEnemy(ex * 64.0f, i * 64.0f);
-			Objs::InsertObj(obje, OBJ_ENEMY, 10);
-
-			//敵出現場所の値を0にする
-			m_map[i][ex] = 0;
-		}
-	}*/
 }
 
 //ドロー
@@ -154,7 +130,7 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] > 0 && m_map[i][j] != 2 && m_map[i][j] != 3 && m_map[i][j] != 5 && m_map[i][j] != 6)
+			if (m_map[i][j] == 1 || m_map[i][j] == 3)
 			{
 				//要素番号を座標に変更
 				float bx = j * 64.0f;
