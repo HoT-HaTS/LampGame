@@ -113,7 +113,6 @@ void CObjEnemy::Action()
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	
 
 	//HitBoxの位置の変更
 	CHitBox* hit = Hits::GetHitBox(this);

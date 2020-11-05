@@ -11,10 +11,10 @@
 using namespace GameL;
 
 
-CObjStage1::CObjStage1(int map[10][100])
+CObjStage1::CObjStage1(int map[INIT_MAP_X][INIT_MAP_Y])
 {
 	//マップデータをコピー
-	memcpy(m_map, map, sizeof(int) * (10 * 100));
+	memcpy(m_map, map, sizeof(int) * (INIT_MAP_X * INIT_MAP_Y));
 }
 
 //イニシャライズ
@@ -22,7 +22,7 @@ void CObjStage1::Init()
 {
 	g_f = false;
 	g_f2 = false;
-	s1_scroll = 0.0f;
+	s1_scroll = INIT_SCROLL;
 }
 
 //アクション
@@ -41,83 +41,99 @@ void CObjStage1::Action()
 	CObj_G_Block* gflag = (CObj_G_Block*)Objs::GetObj(OBJ_BLOCK);
 	g_f = gflag->Get_G_flag();
 
-	/*CObj_G_Block2* gflag2 = (CObj_G_Block2*)Objs::GetObj(OBJ_BLOCK);
-	g_f2 = gflag2->Get_G_flag();*/
-
-
-
-	//if (L_flag == true)
-	//{
-	//	//後方スクロールライン
-	//	if (hx < 80)
-	//	{
-	//		hero->SetX(80);
-	//		m_scroll -= hero->GetVX();
-	//	}
-
-	//	//前方スクロールライン
-	//	if (hx > 300)
-	//	{
-	//		hero->SetX(300);
-	//		m_scroll -= hero->GetVX();
-	//	}
-	//}
-
 	//敵出現ライン
 	//主人公の位置+500を敵出現ラインにする
 	float line = hx + (-s1_scroll) + 500;
 
 	//敵出現ラインを要素番号化
-	int ex = ((int)line) / 64;
+	int ex = ((int)line) / BLOCK_SIZE;
 
-	//敵出現ラインの列を検索
-	for (int i = 0; i < 10; i++)
+	/*敵出現ラインの列を検索
+	0:なにもなし
+	1:ステージブロック
+	2:ゴールブロック
+	3:敵出現用ブロック
+	4:影の世界でしか見えないブロック(G3)
+	5:スイッチを押すと出現、消滅するブロック(G2)
+	6:5用のスイッチ
+	7:鍵と連動するブロック(G5)
+	8:7用の鍵
+	9:予備*/
+
+	for (int i = 0; i < INIT_MAP_X; i++)
 	{
-		//列の中から6を探す
-		if (m_map[i][ex] == 6)
+		//列の中からSTAGEBLOCKを探す
+		if (m_map[i][ex] == STAGE_BLOCK)
 		{
-			//6があればGブロック出現
-			CObj_G_Block* objg = new CObj_G_Block(ex * 64.0f, i * 64.0f);
-			Objs::InsertObj(objg, OBJ_BLOCK, 8);
 
-			//Gブロック出現場所の値を0にする
-			m_map[i][ex] = 0;
+			//出現場所の値を0にする
+			//m_map[i][ex] = NO_BLOCK;
 		}
-		if (m_map[i][ex] == 2)
+		//列の中からGOALBLOCKを探す
+		if (m_map[i][ex] == GOAL_BLOCK)
 		{
-			//2があれば看板出現
-			//CObjBoard* objt = new CObjBoard(ex * 64.0f, i * 64.0f);
-			//Objs::InsertObj(objt, OBJ_BOARD, 9);
 
-			////看板出現場所の値を0にする
-			//m_map[i][ex] = 0;
+			//出現場所の値を0にする
+			//m_map[i][ex] = NO_BLOCK;
 		}
-		//列の中から4を探す
-		if (m_map[i][ex] == 4)
+		//列の中からENEMYBLOCKを探す
+		if (m_map[i][ex] == ENEMY_BLOCK)
 		{
-			//4があれば敵出現
-			CObjEnemy* obje = new CObjEnemy(ex * 64.0f, i * 64.0f);
+			//敵出現
+			CObjEnemy* obje = new CObjEnemy(ex * BLOCK_SIZE, i * BLOCK_SIZE);
 			Objs::InsertObj(obje, OBJ_ENEMY, 14);
 
 			//敵出現場所の値を0にする
-			m_map[i][ex] = 0;
+			m_map[i][ex] = NO_BLOCK;
 
 		}
-		//列の中から7を探す
-		if (m_map[i][ex] == 7)
+		//列の中からG_BLOCK3を探す
+		if (m_map[i][ex] == G_BLOCK3)
 		{
-			//7があればスイッチ出現
-			CObjSwitch* objs = new CObjSwitch(ex * 64.0f, i * 64.0f);
+
+			//出現場所の値を0にする
+			//m_map[i][ex] = NO_BLOCK;
+		}
+		//列の中からG_BLOCK2を探す
+		if (m_map[i][ex] == G_BLOCK2)
+		{
+
+			//出現場所の値を0にする
+			//m_map[i][ex] = NO_BLOCK;
+		}
+		//列の中からG_BLOCK2のスイッチを探す
+		if (m_map[i][ex] == G_SWITCH2)
+		{
+			//スイッチ出現
+			CObjSwitch* objs = new CObjSwitch(ex * BLOCK_SIZE, i * BLOCK_SIZE);
 			Objs::InsertObj(objs, OBJ_SWITCH, 7);
 
 			//スイッチ出現場所の値を0にする
-			m_map[i][ex] = 0;
+			m_map[i][ex] = NO_BLOCK;
 		}
-		if (m_map[i][ex] == 10)
+		//列の中からG_BLOCK5を探す
+		if (m_map[i][ex] == G_BLOCK5)
 		{
-			//10があればG2ブロック出現
-			CObj_G_Block2* objg2 = new CObj_G_Block2(ex * 64.0f, i * 64.0f);
-			Objs::InsertObj(objg2, OBJ_BLOCK, 8);
+
+			//出現場所の値を0にする
+			//m_map[i][ex] = NO_BLOCK;
+		}
+		//列の中からG_BLOCK5のスイッチを探す
+		if (m_map[i][ex] == G_SWITCH5)
+		{
+
+			//出現場所の値を0にする
+			//m_map[i][ex] = NO_BLOCK;
+		}
+		//列の中からG_BLOCKを探す(テスト用)
+		if (m_map[i][ex] == G_BLOCK)
+		{
+			//Gブロック出現
+			CObj_G_Block* objg = new CObj_G_Block(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+			Objs::InsertObj(objg, OBJ_BLOCK, 8);
+
+			//Gブロック出現場所の値を0にする
+			m_map[i][ex] = NO_BLOCK;
 		}
 	}
 }
@@ -133,30 +149,30 @@ void CObjStage1::Draw()
 	RECT_F dst;	//描画先表示位置
 
 	//ブロック描画
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < INIT_MAP_X; i++)
 	{
-		for (int j = 0; j < 100; j++)
+		for (int j = 0; j < INIT_MAP_Y; j++)
 		{
-			if (m_map[i][j] > 0)
+			if (m_map[i][j] > NO_BLOCK)
 			{
 				//表示位置の設定
-				dst.m_top = i * 64.0f;
-				dst.m_left = j * 64.0f + s1_scroll;
-				dst.m_right = dst.m_left + 64.0f;
-				dst.m_bottom = dst.m_top + 64.0f;
-				if (m_map[i][j] == 2)
+				dst.m_top = i * BLOCK_SIZE;
+				dst.m_left = j * BLOCK_SIZE + s1_scroll;
+				dst.m_right = dst.m_left + BLOCK_SIZE;
+				dst.m_bottom = dst.m_top + BLOCK_SIZE;
+				if (m_map[i][j] == 8)
 				{
-					;//看板ブロック
+					;//ブロック
 					//BlockDraw(320.0f + 64.0f, 64.0f, &dst, c, 3);
 				}
-				else if (m_map[i][j] == 3)
+				else if (m_map[i][j] == GOAL_BLOCK)
 				{
-					dst.m_top = i * 64.0f - 128.0f;
-					dst.m_left = j * 64.0f + s1_scroll - 128.0f;
+					dst.m_top = i * BLOCK_SIZE - 128.0f;
+					dst.m_left = j * BLOCK_SIZE + s1_scroll - 128.0f;
 					dst.m_right = dst.m_left + 320.0f;
 					dst.m_bottom = dst.m_top + 256.0f;
 					//ゴールブロック
-					BlockDraw(64.0f, 0.0f, &dst, c, 3);
+					BlockDraw(BLOCK_SIZE, 0.0f, &dst, c, GOAL_BLOCK);
 				}
 				else if (m_map[i][j] == 4)
 				{
@@ -171,10 +187,10 @@ void CObjStage1::Draw()
 				{
 					;//スイッチ出現用 BlockDraw(64.0f, 0.0f, &dst, c, 21);
 				}
-				else
+				else if (m_map[i][j]==STAGE_BLOCK)
 				{
-					//床ブロック
-					BlockDraw(64.0f, 0.0f, &dst, c1, 1);
+					//ステージブロック
+					BlockDraw(BLOCK_SIZE, 0.0f, &dst, c1, STAGE_BLOCK);
 				}
 			}
 		}
@@ -198,28 +214,28 @@ void CObjStage1::BlockDraw(float x, float y, RECT_F* dst, float c[], int block_i
 		RECT_F src;
 		src.m_top = y;
 		src.m_left = x;
-		src.m_right = src.m_left + 64.0f;
-		src.m_bottom = src.m_top + 64.0f;
+		src.m_right = src.m_left + BLOCK_SIZE;
+		src.m_bottom = src.m_top + BLOCK_SIZE;
 		//描画
 		Draw::Draw(3, &src, dst, c, 0.0f);
 	}
-	else if (block_id == 1)
+	else if (block_id == STAGE_BLOCK)
 	{
 		//床ブロック描画
 		RECT_F src;
 		src.m_top = y;
 		src.m_left = x;
-		src.m_right = src.m_left + 64.0f;
-		src.m_bottom = src.m_top + 64.0f;
+		src.m_right = src.m_left + BLOCK_SIZE;
+		src.m_bottom = src.m_top + BLOCK_SIZE;
 		//描画
 		Draw::Draw(21, &src, dst, c, 0.0f);
 	}
-	else if (block_id == 3)
+	else if (block_id == GOAL_BLOCK)
 	{
 		//ゴールブロック描画
 		RECT_F src;
 		src.m_top = y;
-		src.m_left = x - 64.0f;
+		src.m_left = x - BLOCK_SIZE;
 		src.m_right = src.m_left + 192.0f;
 		src.m_bottom = src.m_top + 128.0f;
 		//描画

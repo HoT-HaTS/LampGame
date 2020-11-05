@@ -130,7 +130,7 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] == 1 || m_map[i][j] == 3)
+			if (m_map[i][j] == 1 || m_map[i][j] == 2)
 			{
 				//—v‘f”Ô†‚ðÀ•W‚É•ÏX
 				float bx = j * 64.0f;

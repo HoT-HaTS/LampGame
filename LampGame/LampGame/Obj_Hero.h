@@ -27,6 +27,7 @@ using namespace GameL;
 #define HBLOCK_INT_Y_SIZE (128.0f)//主人公縦サイズ
 #define STAGE_Y_OUT (800.0f)	//下方向ステージ外判定
 
+#define H_GOAL_BLOCK (2)
 
 //ベクトルの正規化を行う関数
 bool UnitVec(float* vx, float* vy);
