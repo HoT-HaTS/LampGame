@@ -165,6 +165,11 @@ void CObjStage1::Draw()
 					;//ブロック
 					//BlockDraw(320.0f + 64.0f, 64.0f, &dst, c, 3);
 				}
+				if (m_map[i][j] == 9)
+				{
+					;//ブロック
+					//BlockDraw(320.0f + 64.0f, 64.0f, &dst, c, 3);
+				}
 				else if (m_map[i][j] == GOAL_BLOCK)
 				{
 					dst.m_top = i * BLOCK_SIZE - 128.0f;
