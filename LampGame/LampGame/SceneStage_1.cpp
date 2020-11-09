@@ -75,6 +75,8 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/pausetest.png", 13, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
+
 
 	CObjStage1* obj_stage1 = new CObjStage1(map);
 	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 30);
@@ -113,7 +115,7 @@ void CSceneStage_1::InitScene()
 	CObjKeycoin* objcoin1 = new CObjKeycoin(300, 500);
 	Objs::InsertObj(objcoin1, OBJ_COIN, 7);
 
-	CObjKeycoin* objcoin2 = new CObjKeycoin(500, 500);
+	CObjKeycoin* objcoin2 = new CObjKeycoin(500, 200);
 	Objs::InsertObj(objcoin2, OBJ_COIN, 7);
 
 	CObjKeycoin* objcoin3 = new CObjKeycoin(700, 500);

@@ -123,9 +123,11 @@ void CObjStage1::Action()
 		//列の中からG_BLOCK5を探す
 		if (m_map[i][ex] == G_BLOCK5)
 		{
-
+			//G2ブロック出現
+			CObj_G_Block5* objg5 = new CObj_G_Block5(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+			Objs::InsertObj(objg5, OBJ_BLOCK, 8);
 			//出現場所の値を0にする
-			//m_map[i][ex] = NO_BLOCK;
+			m_map[i][ex] = NO_BLOCK;
 		}
 		//列の中からG_BLOCK5のスイッチを探す
 		if (m_map[i][ex] == G_SWITCH5)

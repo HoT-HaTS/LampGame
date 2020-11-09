@@ -36,11 +36,11 @@ void CObjKeycoin::Action()
 
 	m_ani_time++;
 
-	if (m_ani_time % 9 == 0)
+	if (m_ani_time % 10 == 0)
 	{
 		m_ani_frame++;
 	}
-	if (m_ani_time == 36)
+	if (m_ani_time == 40)
 	{
 		m_ani_time, m_ani_frame = 0;
 	}
