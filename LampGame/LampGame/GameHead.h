@@ -15,6 +15,7 @@ enum OBJ_NAME
 	OBJ_G_BLOCK3,
 	OBJ_HERO,
 	OBJ_SWITCH,
+	OBJ_SWITCH2,
 	OBJ_BOARD,
 	OBJ_SELECT,
 	OBJ_PAUSE,
@@ -75,6 +76,7 @@ extern bool pause_flag;
 #include "Obj_G_Block3.h"
 #include "Obj_Hero.h"
 #include "Obj_Switch.h"
+#include "Obj_Switch2.h"
 #include "Obj_Stage1.h"
 #include "ObjSelect.h"
 #include "Obj_Board.h"
