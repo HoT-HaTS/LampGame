@@ -19,7 +19,7 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 
-	bool Get_S_flag() { return S2_flag; };	//スイッチのオンorオフ
+	bool Get_S2_flag() { return S2_flag; };	//スイッチのオンorオフ
 private:
 	float m_px; 		//位置
 	float m_py;
