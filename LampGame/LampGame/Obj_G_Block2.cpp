@@ -33,20 +33,27 @@ void CObj_G_Block2::Action()
 	//主人公の位置の取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	if (G2_flag == true)
+	//スイッチが押されたらフラグ切り替え
+	CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH);
+	G2_flag = sflag2->Get_S2_flag();
+
+	if (G2_flag == false)
 	{
+		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+	}
+	else if (G2_flag == true)
+	{
+		Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
+
 		//主人公の衝突確認用のフラグの初期化
 		hero->SetUp(false);
 		hero->SetDown(false);
 		hero->SetLeft(false);
 		hero->SetRight(false);
 
-
 		//HitBoxの内容を更新
 		CHitBox* hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + scroll->GetScroll(), m_py);
-
-
 
 		//主人公とG_Blockのあたり判定チェック
 		//当たっている場合
@@ -89,16 +96,9 @@ void CObj_G_Block2::Action()
 			}
 		}
 
-
-		//スイッチが押されたらフラグ切り替え、ギミックブロックを消滅
-		CObjSwitch* sflag = (CObjSwitch*)Objs::GetObj(OBJ_SWITCH);
-		G2_flag = sflag->Get_S_flag();
-		
-	}
-	else if (G2_flag == false)
-	{
-		this->SetStatus(false);		//スイッチが押されたら消滅
-		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+		//スイッチが押されたらフラグ切り替え 
+		CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH);
+		G2_flag = sflag2->Get_S2_flag();
 	}
 }
 

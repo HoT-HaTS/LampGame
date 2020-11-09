@@ -72,7 +72,11 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Shattersub.png", 24, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/tutorial.png", 50, TEX_SIZE_512);
 	
-	Draw::LoadImageW(L"graphic/pausetest.png", 13, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/pausemenu.png", 13, TEX_SIZE_512);
+
+	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
+
 
 	CObjStage1* obj_stage1 = new CObjStage1(map);
 	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 30);
@@ -87,19 +91,35 @@ void CSceneStage_1::InitScene()
 	Objs::InsertObj(objb, OBJ_BLOCK, 6);
 
 
-	//看板出現用テスト
-	CObjBoard* objt1 = new CObjBoard(640,512, 0);
-	Objs::InsertObj(objt1, OBJ_BOARD, 9);
-	
-	CObjBoard* objt2 = new CObjBoard(1664, 512, 1);
-	Objs::InsertObj(objt2, OBJ_BOARD, 9);
+	//看板出現用
+	if (((UserData*)Save::GetData())->stage_id == 1)
+	{
+		CObjBoard* objt1 = new CObjBoard(640, 512, 0);
+		Objs::InsertObj(objt1, OBJ_BOARD, 9);
 
-	CObjBoard* objt3 = new CObjBoard(3456, 512, 2);
-	Objs::InsertObj(objt3, OBJ_BOARD, 9);
+		CObjBoard* objt2 = new CObjBoard(1664, 512, 1);
+		Objs::InsertObj(objt2, OBJ_BOARD, 9);
 
+		CObjBoard* objt3 = new CObjBoard(3456, 512, 2);
+		Objs::InsertObj(objt3, OBJ_BOARD, 9);
+	}
 	//ギミックブロック3テスト用
 	/*CObj_G_Block3* objb3 = new CObj_G_Block3(300, 200);
 	Objs::InsertObj(objb3, OBJ_G_BLOCK3, 8);*/
+
+
+	////G5ブロックテスト用
+	//CObj_G_Block5* objg5 = new CObj_G_Block5(800, 500);
+	//Objs::InsertObj(objg5, OBJ_G_BLOCK, 8);
+
+	//CObjKeycoin* objcoin1 = new CObjKeycoin(300, 500);
+	//Objs::InsertObj(objcoin1, OBJ_COIN, 7);
+
+	//CObjKeycoin* objcoin2 = new CObjKeycoin(500, 200);
+	//Objs::InsertObj(objcoin2, OBJ_COIN, 7);
+
+	//CObjKeycoin* objcoin3 = new CObjKeycoin(700, 500);
+	//Objs::InsertObj(objcoin3, OBJ_COIN, 7);
 }
 
 //実行中メソッド実行中メソッド

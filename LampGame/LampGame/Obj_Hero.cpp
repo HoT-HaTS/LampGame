@@ -57,6 +57,8 @@ void CObjHero::Init()
 	x = 0;
 	y = 0;
 	ar = 0;
+
+	m_coin_count = 0;
 }
 
 //アクション
@@ -74,7 +76,7 @@ void CObjHero::Action()
 
 		if (move_flag == true)
 		{
-			if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
+			//if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
 			{
 				//主人公の攻撃
 				if (Input::GetVKey('Z') == true)
@@ -99,13 +101,13 @@ void CObjHero::Action()
 				//キーの入力方向
 				if (Input::GetVKey(VK_RIGHT) == true)
 				{
-					m_vx += 2 * m_speed_power;
+					m_vx += 2* m_speed_power;
 					m_posture = 1.0f;
 					m_ani_time += 1.0;
 				}
 				else if (Input::GetVKey(VK_LEFT) == true)
 				{
-					m_vx -= 2 * m_speed_power;
+					m_vx -= 2* m_speed_power;
 					m_posture = 0.0f;
 					m_ani_time += 1.0;
 				}
@@ -318,56 +320,10 @@ void CObjHero::Action()
 
 
 		//ステージ終了条件(ゴール到達)
-		if (m_block_type_goal == 3)
+		if (m_block_type_goal == H_GOAL_BLOCK)
 		{
 			Scene::SetScene(new CSceneSelect());
 		}
-
-		//////HitBoxの内容を更新
-		//CHitBox* hit = Hits::GetHitBox(this);
-		//hit->SetPos(m_px, m_py);
-
-		//敵関係
-		//敵と当たっているか確認
-		//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
-		//{
-		//	//主人公がどの敵とどの角度で当たっているかを確認
-		//	HIT_DATA** hit_data;							//当たった時の細かな情報を入れるための構造体
-		//	hit_data = hit->SearchObjNameHit(OBJ_ENEMY);	//hit_dataに主人公と当たっているほかすべてのHitBoxとの情報を入れる
-		//	for (int i = 0; i < hit->GetCount(); i++)
-		//	{
-		//		//敵の左右に当たったら
-		//		float r = hit_data[i]->r;
-		//		if ((r < 45 && r >= 0 || r>315))
-		//		{
-		//			m_vx = -5.0f;	//左に移動させる
-		//		}
-		//		if (r > 135 && r < 225)
-		//		{
-		//			m_vx = +5.0f;	//右に移動させる
-		//		}
-		//		if (r >= 225 && r < 315)
-		//		{
-		//			//敵の移動方向を主人公の位置に加算(oはオブジェクトアドレス)
-		//			m_px += ((CObjEnemy*)hit_data[i]->o)->GetVx();
-
-		//			CObjBlock* b = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		//			//後方スクロールライン
-		//			if (m_px < 80)
-		//			{
-		//				m_px = 80;				//主人公はラインを超えないようにする
-		//				b->SetScroll(b->GetScroll() + 5.0f);	//主人公が本来動くべき分の値をm_scrollに加える
-		//			}
-
-		//			//前方スクロールライン
-		//			if (m_px > 300)
-		//			{
-		//				m_px = 300;				//主人公はラインを超えないようにする
-		//				b->SetScroll(b->GetScroll() - 5.0f);	//主人公が本来動くべき分の値をm_scrollに加える
-		//			}
-		//		}
-		//	}
-		//}
 	}
 }
 

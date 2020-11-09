@@ -5,6 +5,12 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define TITLE_SIZE (32.0f)
+#define TITLE1_X (224.0f) 
+#define TITLE1_Y (250.f)
+#define TITLE2_X (200.0f)
+#define TITLE2_Y (400.0f)
+
 //オブジェクト：タイトル
 class CObjTitle :public CObj
 {

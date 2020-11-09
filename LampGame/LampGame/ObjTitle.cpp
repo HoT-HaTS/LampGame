@@ -36,7 +36,7 @@ void CObjTitle::Action()
 	void CObjTitle::Draw()
 	{
 		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-		Font::StrDraw(L"ƒ‰ƒ“ƒv‚Ì—d¸‚Æ‰e‚Ì¢ŠE", 224, 250, 32, c);
+		Font::StrDraw(L"ƒ‰ƒ“ƒv‚Ì—d¸‚Æ‰e‚Ì¢ŠE", TITLE1_X, TITLE1_Y, TITLE_SIZE, c);
 
-		Font::StrDraw(L"GameStart : Push_EnterKey", 200, 400, 32, c);
+		Font::StrDraw(L"GameStart : Push_EnterKey", TITLE2_X, TITLE2_Y, TITLE_SIZE, c);
 	}

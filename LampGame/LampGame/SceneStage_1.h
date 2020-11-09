@@ -5,6 +5,7 @@
 //使用するネームスペース
 using namespace GameL;
 
+
 //シーン：メイン
 class CSceneStage_1 :public CScene
 {
