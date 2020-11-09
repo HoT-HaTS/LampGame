@@ -57,6 +57,8 @@ void CObjHero::Init()
 	x = 0;
 	y = 0;
 	ar = 0;
+
+	m_coin_count = 0;
 }
 
 //アクション
@@ -99,13 +101,13 @@ void CObjHero::Action()
 				//キーの入力方向
 				if (Input::GetVKey(VK_RIGHT) == true)
 				{
-					m_vx +=  m_speed_power;
+					m_vx += 2* m_speed_power;
 					m_posture = 1.0f;
 					m_ani_time += 1.0;
 				}
 				else if (Input::GetVKey(VK_LEFT) == true)
 				{
-					m_vx -=  m_speed_power;
+					m_vx -= 2* m_speed_power;
 					m_posture = 0.0f;
 					m_ani_time += 1.0;
 				}
@@ -116,7 +118,7 @@ void CObjHero::Action()
 				}
 
 				//摩擦
-				m_vx += -(m_vx * 0.01);
+				m_vx += -(m_vx * INIT_FRICTION);
 
 				//自由落下運動
 				m_vy += 9.8 / (64.0f);

@@ -15,7 +15,7 @@ class CObj_G_Block2 : public CObj
 		void Action();		//アクション
 		void Draw();		//ドロー
 	
-		bool Get_G_flag() { return G2_flag; }
+		bool Get_G2_flag() { return G2_flag; }
 	
 	
 	private:

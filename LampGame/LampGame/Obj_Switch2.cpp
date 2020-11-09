@@ -97,16 +97,23 @@ void CObjSwitch2::Action()
 	//主人公の攻撃がHitBoxに当たるとflagをtrueにする
 	if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
 	{
-		S2_flag = true;				//スイッチのフラグをtrueに
+		if (S2_flag == true)
+		{
+			S2_flag = false;				//スイッチのフラグをfalseに
+		}
+		else
+		{
+			S2_flag = true;				//スイッチのフラグをtrueに
+		}
 	}
 
-	//flagがtrueのとき自身を消滅させる
-	if (S2_flag == true)
-	{
-		//this->SetStatus(false);		//スイッチが押されたら消滅
-		//Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
-		return;
-	}
+	////flagがtrueのとき自身を消滅させる
+	//if (S2_flag == true)
+	//{
+	//	//this->SetStatus(false);		//スイッチが押されたら消滅
+	//	//Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+	//	return;
+	//}
 
 }
 

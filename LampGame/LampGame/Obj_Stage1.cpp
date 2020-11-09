@@ -20,7 +20,7 @@ CObjStage1::CObjStage1(int map[INIT_MAP_X][INIT_MAP_Y])
 //イニシャライズ
 void CObjStage1::Init()
 {
-	g_f = false;
+	//g_f = false;
 	g_f2 = false;
 	s1_scroll = INIT_SCROLL;
 }
@@ -38,8 +38,11 @@ void CObjStage1::Action()
 	bool L_flag = hero->Get_L_flag();
 
 
-	CObj_G_Block* gflag = (CObj_G_Block*)Objs::GetObj(OBJ_BLOCK);
-	g_f = gflag->Get_G_flag();
+	//CObj_G_Block* gflag = (CObj_G_Block*)Objs::GetObj(OBJ_BLOCK);
+	//g_f = gflag->Get_G_flag();
+
+	CObj_G_Block2* gflag2 = (CObj_G_Block2*)Objs::GetObj(OBJ_BLOCK);
+	g_f2 = gflag2->Get_G2_flag();
 
 	//敵出現ライン
 	//主人公の位置+500を敵出現ラインにする
@@ -98,8 +101,10 @@ void CObjStage1::Action()
 		//列の中からG_BLOCK2を探す
 		if (m_map[i][ex] == G_BLOCK2)
 		{
-			CObj_G_Block2* objs = new CObj_G_Block2(ex * BLOCK_SIZE, i * BLOCK_SIZE);
-			Objs::InsertObj(objs, G_BLOCK2, 7);
+			//G2ブロック出現
+			CObj_G_Block2* objg2 = new CObj_G_Block2(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+			Objs::InsertObj(objg2, OBJ_BLOCK, 8);
+
 			//出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;
 		}
@@ -107,8 +112,8 @@ void CObjStage1::Action()
 		if (m_map[i][ex] == G_SWITCH2)
 		{
 			//スイッチ出現
-			CObjSwitch* objs = new CObjSwitch(ex * BLOCK_SIZE, i * BLOCK_SIZE);
-			Objs::InsertObj(objs, OBJ_SWITCH, 7);
+			CObjSwitch2* objs2 = new CObjSwitch2(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+			Objs::InsertObj(objs2, OBJ_SWITCH2, 7);
 
 			//スイッチ出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;
@@ -116,9 +121,11 @@ void CObjStage1::Action()
 		//列の中からG_BLOCK5を探す
 		if (m_map[i][ex] == G_BLOCK5)
 		{
-
+			//G2ブロック出現
+			CObj_G_Block5* objg5 = new CObj_G_Block5(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+			Objs::InsertObj(objg5, OBJ_BLOCK, 8);
 			//出現場所の値を0にする
-			//m_map[i][ex] = NO_BLOCK;
+			m_map[i][ex] = NO_BLOCK;
 		}
 		//列の中からG_BLOCK5のスイッチを探す
 		if (m_map[i][ex] == G_SWITCH5)
@@ -127,16 +134,16 @@ void CObjStage1::Action()
 			//出現場所の値を0にする
 			//m_map[i][ex] = NO_BLOCK;
 		}
-		//列の中からG_BLOCKを探す(テスト用)
-		if (m_map[i][ex] == G_BLOCK)
-		{
-			//Gブロック出現
-			CObj_G_Block* objg = new CObj_G_Block(ex * BLOCK_SIZE, i * BLOCK_SIZE);
-			Objs::InsertObj(objg, OBJ_BLOCK, 8);
+		////列の中からG_BLOCKを探す(テスト用)
+		//if (m_map[i][ex] == G_BLOCK)
+		//{
+		//	//Gブロック出現
+		//	CObj_G_Block* objg = new CObj_G_Block(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+		//	Objs::InsertObj(objg, OBJ_BLOCK, 8);
 
-			//Gブロック出現場所の値を0にする
-			m_map[i][ex] = NO_BLOCK;
-		}
+		//	//Gブロック出現場所の値を0にする
+		//	m_map[i][ex] = NO_BLOCK;
+		//}
 	}
 }
 

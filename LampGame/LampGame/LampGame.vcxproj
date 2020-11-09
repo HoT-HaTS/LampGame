@@ -163,7 +163,9 @@
     <ClCompile Include="Obj_Board.cpp" />
     <ClCompile Include="Obj_Enemy.cpp" />
     <ClCompile Include="Obj_G_Block1.cpp" />
+    <ClCompile Include="Obj_G_Block5.cpp" />
     <ClCompile Include="Obj_Hero.cpp" />
+    <ClCompile Include="Obj_KeyCoin.cpp" />
     <ClCompile Include="Obj_Main.cpp" />
     <ClCompile Include="Obj_Pause.cpp" />
     <ClCompile Include="Obj_Stage1.cpp" />
@@ -197,6 +199,8 @@
     <ClInclude Include="Obj_G_Block3.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Obj_G_Block5.h" />
+    <ClInclude Include="Obj_KeyCoin.h" />
     <ClInclude Include="Obj_Pause.h" />
     <ClInclude Include="Obj_Stage1.h" />
     <ClInclude Include="Obj_Attack.h" />
