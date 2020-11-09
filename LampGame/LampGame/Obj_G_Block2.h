@@ -19,7 +19,8 @@ class CObj_G_Block2 : public CObj
 	
 	
 	private:
-		bool G2_flag;
+		bool G2_flag;		//ギミックブロック用
+		bool a_flag;		//HitBox作れるか調べるフラグ
 	
 		float m_px;			//位置
 		float m_py;
