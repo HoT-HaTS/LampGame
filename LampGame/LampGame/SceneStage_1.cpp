@@ -87,16 +87,18 @@ void CSceneStage_1::InitScene()
 	Objs::InsertObj(objb, OBJ_BLOCK, 6);
 
 
-	//看板出現用テスト
-	CObjBoard* objt1 = new CObjBoard(640,512, 0);
-	Objs::InsertObj(objt1, OBJ_BOARD, 9);
-	
-	CObjBoard* objt2 = new CObjBoard(1664, 512, 1);
-	Objs::InsertObj(objt2, OBJ_BOARD, 9);
+	//看板出現用
+	if (((UserData*)Save::GetData())->stage_id == 1)
+	{
+		CObjBoard* objt1 = new CObjBoard(640, 512, 0);
+		Objs::InsertObj(objt1, OBJ_BOARD, 9);
 
-	CObjBoard* objt3 = new CObjBoard(3456, 512, 2);
-	Objs::InsertObj(objt3, OBJ_BOARD, 9);
+		CObjBoard* objt2 = new CObjBoard(1664, 512, 1);
+		Objs::InsertObj(objt2, OBJ_BOARD, 9);
 
+		CObjBoard* objt3 = new CObjBoard(3456, 512, 2);
+		Objs::InsertObj(objt3, OBJ_BOARD, 9);
+	}
 	//ギミックブロック3テスト用
 	/*CObj_G_Block3* objb3 = new CObj_G_Block3(300, 200);
 	Objs::InsertObj(objb3, OBJ_G_BLOCK3, 8);*/

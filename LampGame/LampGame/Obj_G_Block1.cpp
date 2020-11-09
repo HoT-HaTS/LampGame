@@ -21,7 +21,7 @@ void CObj_G_Block::Init()
 {
 	G_flag = false;			//false→ある。true→消滅
 
-	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
+	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 }
 
 //アクション
@@ -115,15 +115,15 @@ void CObj_G_Block::Draw()
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0;
-	src.m_bottom = 64.0f;
+	src.m_right = BLOCK_SIZE;
+	src.m_bottom = BLOCK_SIZE;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
 	dst.m_left = 0.0f + m_px + scroll->GetScroll();
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_right = dst.m_left + BLOCK_SIZE;
+	dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
-	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+	//3番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(3, &src, &dst, c, 0.0f);
 }
