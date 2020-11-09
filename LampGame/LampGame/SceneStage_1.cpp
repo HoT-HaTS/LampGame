@@ -72,7 +72,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Shattersub.png", 24, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/tutorial.png", 50, TEX_SIZE_512);
 	
-	Draw::LoadImageW(L"graphic/pausetest.png", 13, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/pausemenu.png", 13, TEX_SIZE_512);
 
 	CObjStage1* obj_stage1 = new CObjStage1(map);
 	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 30);
