@@ -90,16 +90,18 @@ void CObjStage1::Action()
 		//列の中からG_BLOCK3を探す
 		if (m_map[i][ex] == G_BLOCK3)
 		{
-
+			CObj_G_Block3* objs = new CObj_G_Block3(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+			Objs::InsertObj(objs, G_BLOCK3, 7);
 			//出現場所の値を0にする
-			//m_map[i][ex] = NO_BLOCK;
+			m_map[i][ex] = NO_BLOCK;
 		}
 		//列の中からG_BLOCK2を探す
 		if (m_map[i][ex] == G_BLOCK2)
 		{
-
+			CObj_G_Block2* objs = new CObj_G_Block2(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+			Objs::InsertObj(objs, G_BLOCK2, 7);
 			//出現場所の値を0にする
-			//m_map[i][ex] = NO_BLOCK;
+			m_map[i][ex] = NO_BLOCK;
 		}
 		//列の中からG_BLOCK2のスイッチを探す
 		if (m_map[i][ex] == G_SWITCH2)
@@ -179,10 +181,10 @@ void CObjStage1::Draw()
 					//ゴールブロック
 					BlockDraw(BLOCK_SIZE, 0.0f, &dst, c, GOAL_BLOCK);
 				}
-				else if (m_map[i][j] == 4)
+				else if (m_map[i][j] == G_BLOCK3)
 				{
 					;//ギミックブロック
-					//BlockDraw(0.0f, 0.0f, &dst, c, 2);
+					//BlockDraw(0.0f, 0.0f, &dst, c, G_BLOCK3);
 				}
 				else if (m_map[i][j] == 5)
 				{
