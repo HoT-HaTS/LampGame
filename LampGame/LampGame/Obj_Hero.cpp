@@ -57,6 +57,8 @@ void CObjHero::Init()
 	x = 0;
 	y = 0;
 	ar = 0;
+
+	m_coin_count = 0;
 }
 
 //ƒAƒNƒVƒ‡ƒ“

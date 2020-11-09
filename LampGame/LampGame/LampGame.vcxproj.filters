@@ -129,6 +129,12 @@
     <ClCompile Include="Obj_Switch2.cpp">
       <Filter>ソース ファイル\共通\Switch</Filter>
     </ClCompile>
+    <ClCompile Include="Obj_G_Block5.cpp">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_KeyCoin.cpp">
+      <Filter>ソース ファイル\共通</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -226,6 +232,12 @@
     </ClInclude>
     <ClInclude Include="Obj_Switch2.h">
       <Filter>ソース ファイル\共通\Switch</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_G_Block5.h">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_KeyCoin.h">
+      <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
