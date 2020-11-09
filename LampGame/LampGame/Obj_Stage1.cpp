@@ -21,7 +21,7 @@ CObjStage1::CObjStage1(int map[INIT_MAP_X][INIT_MAP_Y])
 void CObjStage1::Init()
 {
 	//g_f = false;
-	g_f2 = true;
+	g_f2 = false;
 	s1_scroll = INIT_SCROLL;
 }
 
@@ -100,22 +100,19 @@ void CObjStage1::Action()
 		//列の中からG_BLOCK2を探す
 		if (m_map[i][ex] == G_BLOCK2)
 		{
-			if (g_f2 == false)
-			{
-				//G2ブロック出現
-				CObj_G_Block2* objg2 = new CObj_G_Block2(ex * BLOCK_SIZE, i * BLOCK_SIZE);
-				Objs::InsertObj(objg2, OBJ_BLOCK, 8);
-			}
+			//G2ブロック出現
+			CObj_G_Block2* objg2 = new CObj_G_Block2(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+			Objs::InsertObj(objg2, OBJ_BLOCK, 8);
 
 			//出現場所の値を0にする
-			//m_map[i][ex] = NO_BLOCK;
+			m_map[i][ex] = NO_BLOCK;
 		}
 		//列の中からG_BLOCK2のスイッチを探す
 		if (m_map[i][ex] == G_SWITCH2)
 		{
 			//スイッチ出現
-			CObjSwitch* objs = new CObjSwitch(ex * BLOCK_SIZE, i * BLOCK_SIZE);
-			Objs::InsertObj(objs, OBJ_SWITCH, 7);
+			CObjSwitch2* objs2 = new CObjSwitch2(ex * BLOCK_SIZE, i * BLOCK_SIZE);
+			Objs::InsertObj(objs2, OBJ_SWITCH2, 7);
 
 			//スイッチ出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;

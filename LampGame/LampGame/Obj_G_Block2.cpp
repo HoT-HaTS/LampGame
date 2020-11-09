@@ -19,7 +19,7 @@ CObj_G_Block2::CObj_G_Block2(float x, float y)
 //イニシャライズ
 void CObj_G_Block2::Init()
 {
-	G2_flag = true;			//false→ある。true→消滅
+	G2_flag = false;			//false→ある。true→消滅
 
 	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 }
@@ -39,11 +39,12 @@ void CObj_G_Block2::Action()
 
 	if (G2_flag == false)
 	{
-		this->SetStatus(false);		//スイッチが押されたら消滅
 		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
 	}
 	else if (G2_flag == true)
 	{
+		Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
+
 		//主人公の衝突確認用のフラグの初期化
 		hero->SetUp(false);
 		hero->SetDown(false);
