@@ -13,6 +13,7 @@ enum OBJ_NAME
 	OBJ_G_BLOCK,
 	OBJ_G_BLOCK2,
 	OBJ_G_BLOCK3,
+	OBJ_COIN,
 	OBJ_HERO,
 	OBJ_SWITCH,
 	OBJ_BOARD,
@@ -42,6 +43,7 @@ enum HIT_ELEMENTS
 	ELEMENT_WHITE,
 	ELEMENT_SWITCH,
 	ELEMENT_BOARD,
+	ELEMENT_COIN,
 };
 //------------------------------------------------
 
@@ -73,6 +75,8 @@ extern bool pause_flag;
 #include "Obj_G_Block1.h"
 #include "Obj_G_Block2.h"
 #include "Obj_G_Block3.h"
+#include "Obj_G_Block5.h"
+#include "Obj_KeyCoin.h"
 #include "Obj_Hero.h"
 #include "Obj_Switch.h"
 #include "Obj_Stage1.h"

@@ -67,6 +67,10 @@ class CObjHero : public CObj
 		void SetDown(bool b) { m_hit_down = b; }
 		void SetLeft(bool b) { m_hit_left = b; }
 		void SetRight(bool b) { m_hit_right = b; }
+
+		//コイン関係
+		int GetCoin() { return m_coin_count; }      //コイン枚数確認用
+		void SetCoin(int p) { m_coin_count = p; }
 		
 	private:
 		float m_px;			//位置
@@ -87,6 +91,8 @@ class CObjHero : public CObj
 		float m_ani_max_time;	//アニメーション動作間隔最大値
 
 		int time;				//世界切り替え制御用時間
+
+		int m_coin_count;		//コイン枚数確認用
 
 		//blockとの衝突状態確認用
 		bool m_hit_up;
