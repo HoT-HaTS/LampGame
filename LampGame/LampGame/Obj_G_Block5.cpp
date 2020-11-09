@@ -89,7 +89,7 @@ void CObj_G_Block5::Action()
 
 	coin_count = hero->GetCoin();
 
-	if (coin_count >= 2)
+	if (coin_count >= 3)
 	{
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
@@ -125,5 +125,5 @@ void CObj_G_Block5::Draw()
 	dst.m_bottom = dst.m_top + 64.0f;
 
 	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-	Draw::Draw(3, &src, &dst, c, 0.0f);
+	Draw::Draw(31, &src, &dst, c, 0.0f);
 }
