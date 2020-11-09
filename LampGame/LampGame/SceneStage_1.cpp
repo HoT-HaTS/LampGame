@@ -75,6 +75,8 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/pausemenu.png", 13, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
+
 
 	CObjStage1* obj_stage1 = new CObjStage1(map);
 	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 30);
