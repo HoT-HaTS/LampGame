@@ -168,10 +168,10 @@ void CObjEnemy::Action()
 
 	//敵オブジェクトと接触したら主人公削除
 	//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
-	{
-		//this->SetStatus(false);    //自身に削除命令を出す
-		//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxを削除する
-	}
+	//{
+	//	  this->SetStatus(false);    //自身に削除命令を出す
+	//	  Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxを削除する
+	//}
 
 
 	//主人公から光フラグを取ってくる
