@@ -3,11 +3,10 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
-
+#include "GameL/DrawFont.h"
 
 #include "GameHead.h"
 #include "Obj_Hero.h"
-#include "UtilityModule.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -46,6 +45,8 @@ void CObjHero::Init()
 	m_hit_left = false;
 	m_hit_right = false;
 
+	m_hit_down2=false;
+
 	m_block_type_under = BLOCK_TYPE_U;	//踏んでいるblockの種類確認用(下)
 	m_block_type_goal = BLOCK_TYPE_G;	//blockの種類確認用(右)
 
@@ -76,6 +77,12 @@ void CObjHero::Action()
 
 		if (move_flag == true)
 		{
+			//ブロックとの当たり判定実行
+			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			pb->BlockHit(&m_px, &m_py, true,
+				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+				&m_block_type_under, &m_block_type_goal);
+
 			//if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
 			{
 				//主人公の攻撃
@@ -101,13 +108,13 @@ void CObjHero::Action()
 				//キーの入力方向
 				if (Input::GetVKey(VK_RIGHT) == true)
 				{
-					m_vx += 2* m_speed_power;
+					m_vx +=  m_speed_power;
 					m_posture = 1.0f;
 					m_ani_time += 1.0;
 				}
 				else if (Input::GetVKey(VK_LEFT) == true)
 				{
-					m_vx -= 2* m_speed_power;
+					m_vx -=  m_speed_power;
 					m_posture = 0.0f;
 					m_ani_time += 1.0;
 				}
@@ -117,11 +124,25 @@ void CObjHero::Action()
 					m_ani_time = 0;
 				}
 
+				//Aキー入力でジャンプ
+				if (Input::GetVKey('A') == true)
+				{
+					if (m_hit_down == true|| m_hit_down2==true)
+					{
+						m_vy = -10;
+						m_hit_down = false;
+						m_hit_down2 = false;
+					}
+				}
+
+				/*if (m_hit_down == false && m_hit_down2 == false)
+					m_vx += -(m_vx*0.2);*/
+
 				//摩擦
 				m_vx += -(m_vx * INIT_FRICTION);
 
 				//自由落下運動
-				m_vy += 9.8 / (64.0f);
+				m_vy += 9.8 / (20.0f);
 
 				//位置の更新
 				m_px += m_vx;
@@ -214,10 +235,10 @@ void CObjHero::Action()
 			}
 
 			//ブロックとの当たり判定実行
-			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			/*CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 			pb->BlockHit(&m_px, &m_py, true,
 				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-				&m_block_type_under, &m_block_type_goal);
+				&m_block_type_under, &m_block_type_goal);*/
 		}
 
 
@@ -325,6 +346,7 @@ void CObjHero::Action()
 			Scene::SetScene(new CSceneSelect());
 		}
 	}
+
 }
 
 //ドロー
@@ -376,6 +398,7 @@ void CObjHero::Draw()
 		//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
 		Draw::Draw(1, &src, &dst, c, 0.0f);
 	}
+
 }
 
 
