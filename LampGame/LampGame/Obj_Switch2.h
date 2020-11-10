@@ -27,4 +27,5 @@ private:
 	float m_scroll;		//スクロール用の変数
 
 	bool  S2_flag;		//スイッチのフラグ管理用関数
+	bool  a_flag;       //攻撃の当たる回数調整用
 };

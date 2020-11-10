@@ -168,10 +168,10 @@ void CObjEnemy::Action()
 
 	//敵オブジェクトと接触したら主人公削除
 	//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
-	{
-		//this->SetStatus(false);    //自身に削除命令を出す
-		//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxを削除する
-	}
+	//{
+	//	  this->SetStatus(false);    //自身に削除命令を出す
+	//	  Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxを削除する
+	//}
 
 
 	//主人公から光フラグを取ってくる
@@ -215,8 +215,8 @@ void CObjEnemy::Draw()
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
-	dst.m_left = 0.0f + m_px + scroll->GetScroll();
-	dst.m_right = dst.m_left + 64.0f;
+	dst.m_right = 0.0f + m_px + scroll->GetScroll();
+	dst.m_left = dst.m_right + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 
 

@@ -20,6 +20,7 @@ CObj_G_Block2::CObj_G_Block2(float x, float y)
 void CObj_G_Block2::Init()
 {
 	G2_flag = false;			//false→ある。true→消滅
+	a_flag = false;				//true→HitBox作成可能。false→作成不可。
 
 	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 }
@@ -34,17 +35,21 @@ void CObj_G_Block2::Action()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//スイッチが押されたらフラグ切り替え
-	CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH);
+	CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH2);
 	G2_flag = sflag2->Get_S2_flag();
 
 	if (G2_flag == false)
 	{
 		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+		a_flag = true;
 	}
 	else if (G2_flag == true)
 	{
-		Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
-
+		if (a_flag == true)
+		{
+			Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
+			a_flag = false;
+		}
 		//主人公の衝突確認用のフラグの初期化
 		hero->SetUp(false);
 		hero->SetDown(false);
@@ -97,8 +102,8 @@ void CObj_G_Block2::Action()
 		}
 
 		//スイッチが押されたらフラグ切り替え 
-		CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH);
-		G2_flag = sflag2->Get_S2_flag();
+		/*CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH2);
+		G2_flag = sflag2->Get_S2_flag();*/
 	}
 }
 
@@ -107,6 +112,13 @@ void CObj_G_Block2::Draw()
 {
 	//スクロールの値を取得
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+
+	//主人公の位置の取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+	//スイッチが押されたらフラグ切り替え
+	CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH2);
+	G2_flag = sflag2->Get_S2_flag();
 
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -120,12 +132,15 @@ void CObj_G_Block2::Draw()
 	src.m_right = 64.0;
 	src.m_bottom = 64.0f;
 
-	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = 0.0f + m_px + scroll->GetScroll();
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	if (G2_flag == true)
+	{
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = 0.0f + m_px + scroll->GetScroll();
+		dst.m_right = dst.m_left + 64.0f;
+		dst.m_bottom = dst.m_top + 64.0f;
 
-	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-	Draw::Draw(3, &src, &dst, c, 0.0f);
+		//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+		Draw::Draw(3, &src, &dst, c, 0.0f);
+	}
 }
