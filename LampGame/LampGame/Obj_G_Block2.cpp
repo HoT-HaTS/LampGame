@@ -63,14 +63,14 @@ void CObj_G_Block2::Action()
 		hit->SetPos(m_px + scroll->GetScroll(), m_py);
 
 		//主人公とG_Blockのあたり判定チェック
-		//当たっている場合
-		float hx = hero->GetX();
-		float hy = hero->GetY();
-
-		//G_Blockの上じゃない条件
-		if (hy + 120 > m_py)
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
-			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+			//当たっている場合
+			float hx = hero->GetX();
+			float hy = hero->GetY();
+
+			//G_Blockの上or下じゃない条件
+			if (hy + 120 > m_py) //|| m_py + 50 < hy)
 			{
 				//G_Blockの左部分に接触
 				if (m_px + scroll->GetScroll() > hx)
@@ -80,36 +80,29 @@ void CObj_G_Block2::Action()
 					hero->SetVX(-0.8);
 				}
 				//G_Blockの右部分に接触
-				else if (hx > m_px + scroll->GetScroll())
+				if (hx > m_px + scroll->GetScroll())
 				{
 					hero->SetLeft(true);
 					hero->SetX(m_px + 63.5 + scroll->GetScroll());
 					hero->SetVX(0.0);
 				}
 			}
-		}
-		//G_Blockの上部分に接触
-		if (hy + 127 <= m_py)
-		{
-			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+			//G_Blockの上部分に接触
+			if (hy + 125 < m_py)
 			{
 				hero->SetDown2(true);
 				hero->SetY(m_py - 128.5);
 				hero->SetVY(0.0);
 			}
-		}
-		//G_Blockの下部分に接触
-		else if (m_py + 65 <= hy)
-		{
-			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+			//G_Blockの下部分に接触
+			if (m_py + 55 < hy)
 			{
 				hero->SetUp(true);
-				hero->SetY(m_py + 63.5);
+				hero->SetY(m_py + 64.5);
 				hero->SetVY(0.0);
 			}
 		}
 	}
-
 	//スイッチが押されたらフラグ切り替え 
 	/*CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH2);
 	G2_flag = sflag2->Get_S2_flag();*/
