@@ -67,8 +67,8 @@ void CObj_G_Block2::Action()
 			float hx = hero->GetX();
 			float hy = hero->GetY();
 
-			//G_Block‚Ìã‚¶‚á‚È‚¢ğŒ
-			if (hy + 120 > m_py)
+			//G_Block‚Ìãor‰º‚¶‚á‚È‚¢ğŒ
+			if (hy + 120 > m_py) //|| m_py + 50 < hy)
 			{
 				//G_Block‚Ì¶•”•ª‚ÉÚG
 				if (m_px + scroll->GetScroll() > hx)
@@ -78,7 +78,7 @@ void CObj_G_Block2::Action()
 					hero->SetVX(-0.8);
 				}
 				//G_Block‚Ì‰E•”•ª‚ÉÚG
-				else if (hx > m_px + scroll->GetScroll())
+				if (hx > m_px + scroll->GetScroll())
 				{
 					hero->SetLeft(true);
 					hero->SetX(m_px + 63.5 + scroll->GetScroll());
@@ -86,17 +86,17 @@ void CObj_G_Block2::Action()
 				}
 			}
 			//G_Block‚Ìã•”•ª‚ÉÚG
-			if (hy + 127 <= m_py)
+			if (hy + 125 < m_py)
 			{
 				hero->SetDown(true);
 				hero->SetY(m_py - 128.5);
 				hero->SetVY(0.0);
 			}
 			//G_Block‚Ì‰º•”•ª‚ÉÚG
-			else if (m_py + 65 <= hy)
+			if (m_py + 55 < hy)
 			{
 				hero->SetUp(true);
-				hero->SetY(m_py + 63.5);
+				hero->SetY(m_py + 64.5);
 				hero->SetVY(0.0);
 			}
 		}
