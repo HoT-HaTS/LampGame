@@ -68,6 +68,8 @@ class CObjHero : public CObj
 		void SetLeft(bool b) { m_hit_left = b; }
 		void SetRight(bool b) { m_hit_right = b; }
 
+		void SetDown2(bool b) { m_hit_down2 = b; }
+
 		//コイン関係
 		int GetCoin() { return m_coin_count; }      //コイン枚数確認用
 		void SetCoin(int p) { m_coin_count = p; }
@@ -100,6 +102,8 @@ class CObjHero : public CObj
 		bool m_hit_left;
 		bool m_hit_right;
 
+		bool m_hit_down2;
+
 		bool attack_flag;	//攻撃制御用フラグ
 
 		//光の世界フラグ
@@ -120,5 +124,4 @@ class CObjHero : public CObj
 		float x;			//xベクトル
 		float y;			//yベクトル
 		float ar;			//移動元と移動先の角度
-
 };

@@ -56,14 +56,16 @@ void CObj_G_Block2::Action()
 		hero->SetLeft(false);
 		hero->SetRight(false);
 
+		hero->SetDown2(false);
+
 		//HitBoxの内容を更新
 		CHitBox* hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + scroll->GetScroll(), m_py);
 
 		//主人公とG_Blockのあたり判定チェック
-		//当たっている場合
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
+			//当たっている場合
 			float hx = hero->GetX();
 			float hy = hero->GetY();
 
@@ -88,7 +90,7 @@ void CObj_G_Block2::Action()
 			//G_Blockの上部分に接触
 			if (hy + 125 < m_py)
 			{
-				hero->SetDown(true);
+				hero->SetDown2(true);
 				hero->SetY(m_py - 128.5);
 				hero->SetVY(0.0);
 			}
@@ -100,11 +102,10 @@ void CObj_G_Block2::Action()
 				hero->SetVY(0.0);
 			}
 		}
-
-		//スイッチが押されたらフラグ切り替え 
-		/*CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH2);
-		G2_flag = sflag2->Get_S2_flag();*/
 	}
+	//スイッチが押されたらフラグ切り替え 
+	/*CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH2);
+	G2_flag = sflag2->Get_S2_flag();*/
 }
 
 //ドロー
