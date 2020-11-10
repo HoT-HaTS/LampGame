@@ -19,7 +19,7 @@ CObj_G_Block2::CObj_G_Block2(float x, float y)
 //イニシャライズ
 void CObj_G_Block2::Init()
 {
-	G2_flag = false;			//false→ある。true→消滅
+	G2_flag = false;			//false→ある。true→消滅。
 	a_flag = false;				//true→HitBox作成可能。false→作成不可。
 
 	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
