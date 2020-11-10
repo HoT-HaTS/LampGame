@@ -215,8 +215,8 @@ void CObjEnemy::Draw()
 
 	//•\Ž¦ˆÊ’u‚ÌÝ’è
 	dst.m_top = 0.0f + m_py;
-	dst.m_left = 0.0f + m_px + scroll->GetScroll();
-	dst.m_right = dst.m_left + 64.0f;
+	dst.m_right = 0.0f + m_px + scroll->GetScroll();
+	dst.m_left = dst.m_right + 64.0f;
 	dst.m_bottom = dst.m_top + 64.0f;
 
 
