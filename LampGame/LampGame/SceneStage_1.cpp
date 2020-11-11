@@ -63,6 +63,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/lamp_v2.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG.png", 3, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG_shadow.png", 4, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Glass_Block.png", 5, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/switch.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_attack.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/switch2.png", 12, TEX_SIZE_512);

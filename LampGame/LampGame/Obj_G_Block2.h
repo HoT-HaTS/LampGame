@@ -22,6 +22,8 @@ private:
 	bool G2_flag;		//ギミックブロック用
 	bool a_flag;		//HitBox作れるか調べるフラグ
 
+	bool l_f;
+
 	float m_px;			//位置
 	float m_py;
 };

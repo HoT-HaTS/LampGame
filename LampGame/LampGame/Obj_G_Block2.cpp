@@ -22,6 +22,8 @@ void CObj_G_Block2::Init()
 	G2_flag = false;			//false→ある。true→消滅。
 	a_flag = false;				//true→HitBox作成可能。false→作成不可。
 
+	l_f = true;
+
 	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 }
 
@@ -113,11 +115,12 @@ void CObj_G_Block2::Action()
 //ドロー
 void CObj_G_Block2::Draw()
 {
+	//主人公から光フラグを取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	bool l_f = hero->Get_L_flag();
+
 	//スクロールの値を取得
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-	//主人公の位置の取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 	//スイッチが押されたらフラグ切り替え
 	CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH2);
@@ -137,13 +140,27 @@ void CObj_G_Block2::Draw()
 
 	if (G2_flag == true)
 	{
-		//表示位置の設定
-		dst.m_top = 0.0f + m_py;
-		dst.m_left = 0.0f + m_px + scroll->GetScroll();
-		dst.m_right = dst.m_left + 64.0f;
-		dst.m_bottom = dst.m_top + 64.0f;
+		if (l_f == true)
+		{
+			//表示位置の設定
+			dst.m_top = 0.0f + m_py;
+			dst.m_left = 0.0f + m_px + scroll->GetScroll();
+			dst.m_right = dst.m_left + 64.0f;
+			dst.m_bottom = dst.m_top + 64.0f;
 
-		//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-		Draw::Draw(3, &src, &dst, c, 0.0f);
+			//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+			Draw::Draw(3, &src, &dst, c, 0.0f);
+		}
+		else if (l_f == false)
+		{
+			//表示位置の設定
+			dst.m_top = 0.0f + m_py;
+			dst.m_left = 0.0f + m_px + scroll->GetScroll();
+			dst.m_right = dst.m_left + 64.0f;
+			dst.m_bottom = dst.m_top + 64.0f;
+
+			//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+			Draw::Draw(4, &src, &dst, c, 0.0f);
+		}
 	}
 }
