@@ -72,7 +72,8 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Shattersub.png", 24, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/G_Block.png", 25, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/tutorial.png", 50, TEX_SIZE_512);
-	
+	Draw::LoadImageW(L"graphic/block_shadow.png", 51, TEX_SIZE_512);
+
 	Draw::LoadImageW(L"graphic/pausemenu.png", 13, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
