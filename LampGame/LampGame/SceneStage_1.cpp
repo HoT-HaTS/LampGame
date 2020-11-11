@@ -115,13 +115,13 @@ void CSceneStage_1::InitScene()
 	//CObj_G_Block2* objg21 = new CObj_G_Block2(864, 436);
 	//Objs::InsertObj(objg21, OBJ_G_BLOCK, 8);
 
-	////スイッチ出現
+	//スイッチ出現
 	//CObjSwitch2* objs2 = new CObjSwitch2(600, 500);
 	//Objs::InsertObj(objs2, OBJ_SWITCH2, 7);
 
 	//G4ブロック出現
-	CObj_G_Block4* objg4 = new CObj_G_Block4(800, 500);
-	Objs::InsertObj(objg4, OBJ_BLOCK, 8);
+	//CObj_G_Block4* objg4 = new CObj_G_Block4(800, 500);
+	//Objs::InsertObj(objg4, OBJ_BLOCK, 8);
 
 	//G5ブロックテスト用
 	//CObj_G_Block5* objg5 = new CObj_G_Block5(800, 500);
