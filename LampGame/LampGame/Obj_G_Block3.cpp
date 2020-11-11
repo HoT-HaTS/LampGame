@@ -126,6 +126,6 @@ void CObj_G_Block3::Draw()
 	if (L_flag == false)
 	{	
 		//4番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-		Draw::Draw(4, &src, &dst, c, 0.0f);
+		Draw::Draw(5, &src, &dst, c, 0.0f);
 	}
 }
