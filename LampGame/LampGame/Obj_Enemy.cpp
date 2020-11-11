@@ -150,17 +150,17 @@ void CObjEnemy::Action()
 			}
 		}
 		//“G‚Ìã•”•ª‚ÉÚG
-		if (hy + 127 <= m_py)
+		if (hy + 125 <= m_py)
 		{
 			hero->SetDown(true);
 			hero->SetY(m_py - 128.5);
 			hero->SetVY(0.0);
 		}
 		//“G‚Ì‰º•”•ª‚ÉÚG
-		else if (m_py + 65 <= hy)
+		else if (m_py + 61 <= hy)
 		{
 			hero->SetUp(true);
-			hero->SetY(m_py + 63.5);
+			hero->SetY(m_py + 64.5);
 			hero->SetVY(0.0);
 		}
 	}

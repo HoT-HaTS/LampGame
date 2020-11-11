@@ -56,8 +56,6 @@ void CObj_G_Block2::Action()
 		hero->SetLeft(false);
 		hero->SetRight(false);
 
-		hero->SetDown2(false);
-
 		//HitBox‚Ì“à—e‚ğXV
 		CHitBox* hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + scroll->GetScroll(), m_py);
@@ -95,7 +93,7 @@ void CObj_G_Block2::Action()
 				hero->SetVY(0.0);
 			}
 			//G_Block‚Ì‰º•”•ª‚ÉÚG
-			if (m_py + 55 < hy)
+			if (m_py + 61 < hy)
 			{
 				hero->SetUp(true);
 				hero->SetY(m_py + 64.5);
