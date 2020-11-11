@@ -38,6 +38,7 @@ void CObjPause::Action()
 		{
 			Scene::SetScene(new CSceneSelect());
 			pause_flag = false;
+			switch_flag = true;
 		}
 
 	}

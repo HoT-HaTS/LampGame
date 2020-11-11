@@ -29,6 +29,7 @@ void CObjMain::Action()
 		{
 			Scene::SetScene(new CSceneStage_1());
 			pause_flag = false;
+			switch_flag = true;
 		}	
 	
 	}

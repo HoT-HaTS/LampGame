@@ -73,6 +73,7 @@ void CObjHero::Action()
 		{
 			//場外に出たらリセット
 			Scene::SetScene(new CSceneStage_1());
+			switch_flag = true;
 		}
 
 
@@ -240,6 +241,7 @@ void CObjHero::Action()
 					Hits::DeleteHitBox(this);
 
 					Scene::SetScene(new CSceneStage_1());
+					switch_flag = true;
 				}
 			}
 
