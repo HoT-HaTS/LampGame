@@ -23,6 +23,7 @@ void CObjStage1::Init()
 	//g_f = false;
 	g_f2 = false;
 	s1_scroll = INIT_SCROLL;
+	l_f = true;
 }
 
 //アクション
@@ -225,9 +226,13 @@ void CObjStage1::Draw()
 //ブロックを64×64限定描画用。リソース切り取り位置のみx,yで設定できる。
 void CObjStage1::BlockDraw(float x, float y, RECT_F* dst, float c[], int block_id)
 {
+	//主人公から光フラグを取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	bool l_f = hero->Get_L_flag();
+
 	if (block_id == 6)
 	{
-		//ギミックブロック(木)描画
+		//ギミックブロック2を描画
 		RECT_F src;
 		src.m_top = y;
 		src.m_left = x;
@@ -238,14 +243,29 @@ void CObjStage1::BlockDraw(float x, float y, RECT_F* dst, float c[], int block_i
 	}
 	else if (block_id == STAGE_BLOCK)
 	{
-		//床ブロック描画
-		RECT_F src;
-		src.m_top = y;
-		src.m_left = x;
-		src.m_right = src.m_left + BLOCK_SIZE;
-		src.m_bottom = src.m_top + BLOCK_SIZE;
-		//描画
-		Draw::Draw(21, &src, dst, c, 0.0f);
+		if (l_f == true)
+		{
+			//床ブロック(光)描画
+			RECT_F src;
+			src.m_top = y;
+			src.m_left = x;
+			src.m_right = src.m_left + BLOCK_SIZE;
+			src.m_bottom = src.m_top + BLOCK_SIZE;
+			//描画
+			Draw::Draw(21, &src, dst, c, 0.0f);
+		}
+
+		else if (l_f == false)
+		{
+			//床ブロック(影)描画
+			RECT_F src;
+			src.m_top = y;
+			src.m_left = x;
+			src.m_right = src.m_left + BLOCK_SIZE;
+			src.m_bottom = src.m_top + BLOCK_SIZE;
+			//描画
+			Draw::Draw(51, &src, dst, c, 0.0f);
+		}
 	}
 	else if (block_id == GOAL_BLOCK)
 	{
