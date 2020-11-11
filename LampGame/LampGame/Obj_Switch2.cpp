@@ -23,7 +23,7 @@ void CObjSwitch2::Init()
 {
 	m_scroll = 0.0f;
 
-	S2_flag = true;			//スイッチがオフのときはfalse、オンのときはtrue
+	//S2_flag = switch_flag;			//スイッチがオフのときはfalse、オンのときはtrue
 	a_flag = false;
 
 	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_SWITCH, OBJ_SWITCH, 1);
@@ -104,22 +104,22 @@ void CObjSwitch2::Action()
 
 	if (a_flag == false)
 	{
-		if (S2_flag == false)
+		if (switch_flag == false)
 		{
 			if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
 			{
-				S2_flag = true;				//スイッチのフラグをtrueに
+				switch_flag = true;				//スイッチのフラグをtrueに
 				a_flag = true;
 			}
 		}
 	}
 	if (a_flag == false)
 	{
-		if (S2_flag == true)
+		if (switch_flag == true)
 		{
 			if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
 			{
-				S2_flag = false;				//スイッチのフラグをtrueに
+				switch_flag = false;				//スイッチのフラグをtrueに
 				a_flag = true;
 			}
 		}
@@ -183,8 +183,8 @@ void CObjSwitch2::Draw()
 
 	//切り取り位置の設定
 	src.m_top = 0.0f + (switch_graphic * 64.0f);
-	src.m_left = 0.0f + (S2_flag * 64.0f);
-	src.m_right = 64.0f + (S2_flag * 64.0f);
+	src.m_left = 0.0f + (switch_flag * 64.0f);
+	src.m_right = 64.0f + (switch_flag * 64.0f);
 	src.m_bottom = 64.0f + (switch_graphic * 64.0f);
 
 	//表示位置の設定

@@ -59,7 +59,8 @@ struct UserData
 
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
-extern bool pause_flag;
+extern bool pause_flag;	//ポーズ画面用のフラグ
+extern bool switch_flag;	//スイッチ用フラグ
 
 
 //------------------------------------------------

@@ -110,6 +110,8 @@ class CObjHero : public CObj
 		bool L_flag;
 		//光の世界制御用フラグ
 		bool m_flag;
+		//ジャンプフラグ
+		bool m_flagj;
 
 		//踏んでいるblockの種類確認用
 		int m_block_type_under;

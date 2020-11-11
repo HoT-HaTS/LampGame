@@ -16,8 +16,9 @@ using namespace GameL;
 #include "GameHead.h"
 #include "GameL/UserData.h"
 
-
+//ステージ読み込むたびに初期化されるグローバル変数
 extern bool pause_flag = false;
+extern bool switch_flag = true;
 
 //コンストラクタ
 CSceneStage_1::CSceneStage_1()

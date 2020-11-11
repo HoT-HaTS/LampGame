@@ -97,7 +97,7 @@ void CObjSwitch::Action()
 	//主人公の攻撃がHitBoxに当たるとflagをtrueにする
 	if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
 	{
-		S_flag = true;				//スイッチのフラグをtrueに
+		switch_flag = true;				//スイッチのフラグをtrueに
 	}
 
 	//flagがtrueのとき自身を消滅させる
@@ -135,8 +135,8 @@ void CObjSwitch::Draw()
 
 	//切り取り位置の設定
 	src.m_top = 0.0f + (switch_graphic * 64.0f);
-	src.m_left =0.0f + (S_flag * 64.0f);
-	src.m_right =  64.0f + (S_flag * 64.0f);
+	src.m_left =0.0f + (switch_flag * 64.0f);
+	src.m_right =  64.0f + (switch_flag * 64.0f);
 	src.m_bottom = 64.0f+(switch_graphic * 64.0f);
 
 	//表示位置の設定
