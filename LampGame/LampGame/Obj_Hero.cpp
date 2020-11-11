@@ -38,6 +38,7 @@ void CObjHero::Init()
 
 	L_flag = true;	//開始時は光フラグON
 	m_flag = true;	//光の世界制御用
+	m_flagj = true; //ジャンプ制御用
 
 	//blockとの衝突状態確認用
 	m_hit_up = false;
@@ -127,13 +128,21 @@ void CObjHero::Action()
 				//Aキー入力でジャンプ
 				if (Input::GetVKey(' ') == true)
 				{
-					if (m_hit_down == true|| m_hit_down2==true)
+					//if (m_flagj == true)
 					{
-						m_vy = -10;
-						m_hit_down = false;
-						m_hit_down2 = false;
+						if (m_hit_down == true || m_hit_down2 == true)
+						{
+							m_vy = -10;
+							m_hit_down = false;
+							m_hit_down2 = false;
+							//m_flagj = false;
+						}
 					}
 				}
+				/*else
+				{
+					m_flagj = true;
+				}*/
 
 				/*if (m_hit_down == false && m_hit_down2 == false)
 					m_vx += -(m_vx*0.2);*/
