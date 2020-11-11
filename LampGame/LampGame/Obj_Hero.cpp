@@ -125,7 +125,7 @@ void CObjHero::Action()
 				}
 
 				//Aキー入力でジャンプ
-				if (Input::GetVKey('A') == true)
+				if (Input::GetVKey(' ') == true)
 				{
 					if (m_hit_down == true|| m_hit_down2==true)
 					{
