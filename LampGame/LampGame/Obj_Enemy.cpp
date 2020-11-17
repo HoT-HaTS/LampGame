@@ -20,15 +20,15 @@ CObjEnemy::CObjEnemy(float x, float y)
 void CObjEnemy::Init()
 {
 
-	m_vx = 0.0f;		//移動ベクトル
-	m_vy = 0.0f;
-	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
+	m_vx = INIT_E_VX;		//移動ベクトル
+	m_vy = INIT_E_VY;
+	m_posture = INIT_E_POSTURE;	//右向き0.0f 左向き1.0f
 
-	m_ani_time = 0;
-	m_ani_frame = 1;	//静止フレームを初期にする
+	m_ani_time = INIT_ANI_TIME;
+	m_ani_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
 
-	m_speed_power = 0.3f;	//通常速度
-	m_ani_max_time = 4;		//アニメーション間隔幅
+	m_speed_power = INIT_E_SPEED_POWER;	//通常速度
+	m_ani_max_time = INIT_E_ANI_MAX_TIME; //アニメーション間隔幅
 
 	m_move = true;			//true=右　false=左
 
@@ -86,7 +86,7 @@ void CObjEnemy::Action()
 
 	if (m_ani_frame == 4)
 	{
-		m_ani_frame = 0;
+		m_ani_frame = INIT_E_ANI_MAX_TIME;
 	}
 
 
@@ -210,14 +210,14 @@ void CObjEnemy::Draw()
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0;
-	src.m_bottom = 64.0f;
+	src.m_right = E_XSIZE;
+	src.m_bottom = E_YSIZE;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
 	dst.m_right = 0.0f + m_px + scroll->GetScroll();
-	dst.m_left = dst.m_right + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_left = dst.m_right + E_XSIZE;
+	dst.m_bottom = dst.m_top + E_YSIZE;
 
 
 	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画

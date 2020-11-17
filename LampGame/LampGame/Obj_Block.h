@@ -32,7 +32,8 @@ private:
 	int m_map[10][100]; //マップ情報
 
 	float m_scroll;     //左右スクロール用
-	float m_px;
-	float m_py;
+
+	//float m_px; //使われていないのでコメントアウト
+	//float m_py;
 
 };

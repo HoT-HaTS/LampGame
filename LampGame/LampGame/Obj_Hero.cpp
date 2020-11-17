@@ -26,13 +26,13 @@ void CObjHero::Init()
 	m_posture = INIT_H_POSTURE;	//右向き0.0f 左向き1.0f
 
 	m_ani_time = INIT_ANI_TIME;
-	m_ani_frame = INIT_ANI_FLAME;	//静止フレームを初期にする
+	m_ani_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
 	m_ani_s_time = INIT_ANI_TIME;
-	m_ani_s_frame = INIT_ANI_FLAME;	//静止フレームを初期にする
+	m_ani_s_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
 
 
 	m_speed_power = INIT_SPEED_POWER;	//通常速度
-	m_ani_max_time = INIT_ANI_MAX_TIME;	//アニメーション間隔幅
+	m_ani_max_time = INIT_H_ANI_MAX_TIME;	//アニメーション間隔幅
 
 	attack_flag = true;	//攻撃制御用フラグ
 
