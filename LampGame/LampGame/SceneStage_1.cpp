@@ -45,6 +45,11 @@ void CSceneStage_1::InitScene()
 	int map[10][100];
 	wchar_t str[128];
 
+	unique_ptr<wchar_t>p2;
+	int size2;
+	int map2[10][100];
+	wchar_t str2[128];
+
 	swprintf_s(str, L"stagedata/Stage%d.csv", ((UserData*)Save::GetData())->stage_id);
 	p = Save::ExternalDataOpen(str, &size);
 	int count = 1;
@@ -58,6 +63,20 @@ void CSceneStage_1::InitScene()
 			count += 2;
 		}
 	}
+
+	//swprintf_s(str2, L"stagedata/Stage%d.csv", ((UserData*)Save::GetData())->stage_id);
+	//p2 = Save::ExternalDataOpen(str2, &size2);
+	//int count2 = 1;
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	for (int j = 0; j < 100; j++)
+	//	{
+	//		int w2 = 0;
+	//		swscanf_s(&p2.get()[count2], L"%d", &w2);
+	//		map2[i][j] = w2;
+	//		count2 += 2;
+	//	}
+	//}
 
 	Draw::LoadImageW(L"graphic/lamp_shadow_walk.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_v2.png", 2, TEX_SIZE_512);
@@ -119,8 +138,8 @@ void CSceneStage_1::InitScene()
 	//Objs::InsertObj(objg21, OBJ_G_BLOCK, 8);
 
 	//スイッチ出現
-	//CObjSwitch2* objs2 = new CObjSwitch2(600, 500);
-	//Objs::InsertObj(objs2, OBJ_SWITCH2, 7);
+	CObjSwitch2* objs2 = new CObjSwitch2(5600, 5500);
+	Objs::InsertObj(objs2, OBJ_SWITCH2, 7);
 
 	//G4ブロック出現
 	//CObj_G_Block4* objg4 = new CObj_G_Block4(800, 500);

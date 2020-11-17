@@ -52,6 +52,11 @@ class CObjHero : public CObj
 		int GetBT_U() { return m_block_type_under; }
 		int GetBT_G() { return m_block_type_goal; }
 
+		bool GetUp() { return m_hit_up; }
+		bool GetDown() { return m_hit_down; }
+		bool GetRight() { return m_hit_right; }
+		bool GetLeft() { return m_hit_left; }
+
 		float GetPosture() { return m_posture; }
 
 		bool Get_L_flag(){ return L_flag; }
@@ -112,6 +117,9 @@ class CObjHero : public CObj
 		bool m_flag;
 		//ジャンプフラグ
 		bool m_flagj;
+
+		//Switch2のフラグ
+		bool s_flag2;
 
 		//踏んでいるblockの種類確認用
 		int m_block_type_under;

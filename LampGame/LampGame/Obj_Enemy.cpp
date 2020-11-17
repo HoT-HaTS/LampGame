@@ -99,12 +99,13 @@ void CObjEnemy::Action()
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d1;
 	int d2;
+	bool d3;
 
 	//ブロックとの当たり判定実行
 	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 	pb->BlockHit(&m_px, &m_py, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&d1, &d2);
+		&d1, &d2, &d3);
 
 	////位置の更新
 	//m_px += m_vx;
