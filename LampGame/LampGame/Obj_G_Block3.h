@@ -15,13 +15,6 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 
-		//ブロックとの当たり判定
-	void BlockHit3
-	(
-		float* x, float* y, bool scroll_on,
-		bool* up, bool* down, bool* left, bool* right,
-		float* vx, float* vy
-	);
 
 private:
 	bool L_flag;

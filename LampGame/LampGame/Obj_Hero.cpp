@@ -62,16 +62,11 @@ void CObjHero::Init()
 
 	m_coin_count = 0;
 
-	s_flag2 = true;
 }
 
 //アクション
 void CObjHero::Action()
 {
-	//スイッチが押されたらフラグ切り替え
-	CObjSwitch2* sflag2 = (CObjSwitch2*)Objs::GetObj(OBJ_SWITCH2);
-	s_flag2 = sflag2->Get_S2_flag();
-
 	if (pause_flag == false)
 	{
 		//落下によるゲームオーバー
@@ -89,7 +84,7 @@ void CObjHero::Action()
 			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 			pb->BlockHit(&m_px, &m_py, true,
 				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-				&m_block_type_under, &m_block_type_goal, &s_flag2);
+				&m_block_type_under, &m_block_type_goal);
 
 
 			//if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
@@ -251,12 +246,6 @@ void CObjHero::Action()
 					switch_flag = true;
 				}
 			}
-
-			//ブロックとの当たり判定実行
-			/*CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-			pb->BlockHit(&m_px, &m_py, true,
-				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-				&m_block_type_under, &m_block_type_goal);*/
 		}
 
 

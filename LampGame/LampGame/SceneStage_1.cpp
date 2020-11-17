@@ -138,8 +138,8 @@ void CSceneStage_1::InitScene()
 	//Objs::InsertObj(objg21, OBJ_G_BLOCK, 8);
 
 	//スイッチ出現
-	CObjSwitch2* objs2 = new CObjSwitch2(5600, 5500);
-	Objs::InsertObj(objs2, OBJ_SWITCH2, 7);
+	/*CObjSwitch2* objs2 = new CObjSwitch2(5600, 5500);
+	Objs::InsertObj(objs2, OBJ_SWITCH2, 7);*/
 
 	//G4ブロック出現
 	//CObj_G_Block4* objg4 = new CObj_G_Block4(800, 500);

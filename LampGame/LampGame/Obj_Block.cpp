@@ -112,7 +112,7 @@ void CObjBlock::Draw()
 void CObjBlock::BlockHit(
 	float* x, float* y, bool scroll_on,
 	bool* up, bool* down, bool* left, bool* right,
-	float* vx, float* vy, int* btu, int* btg, bool*s2_flag
+	float* vx, float* vy, int* btu, int* btg
 )
 {
 	//衝突状態確認用フラグの初期化
@@ -207,12 +207,9 @@ void CObjBlock::BlockHit(
 					}
 				}
 			}
-
-			//G_BLOCK2の当たり判定制御
-			if (m_map[i][j] == 5)
+			else if (m_map[i][j] == 5 )
 			{
-				//スイッチONの時だけ判定
-				if(*s2_flag == true)
+				if (switch_flag == true)
 				{
 					//要素番号を座標に変更
 					float bx = j * 64.0f;
@@ -245,7 +242,7 @@ void CObjBlock::BlockHit(
 						//lenがある一定の長さより短い場合に判定に入る。
 						if (len < 111.0f)
 						{
-						//角度で上下左右を判定
+							//角度で上下左右を判定
 							if ((r < 56 && r >= 0) || r > 304)
 							{
 								//右
@@ -255,7 +252,7 @@ void CObjBlock::BlockHit(
 								*btg = m_map[i][j];
 							}
 							if (r > 56 && r < 124)
-								{
+							{
 								//上
 								*down = true;			//オブジェクトの下の部分が衝突している
 								*y = by - 128.0f;		//ブロックの位置+オブジェクトの幅
@@ -293,5 +290,3 @@ void CObjBlock::BlockHit(
 		}
 	}
 }
-
-
