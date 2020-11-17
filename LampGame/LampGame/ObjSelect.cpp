@@ -55,6 +55,7 @@ void CObjSelect::Action()
 		{
 			Scene::SetScene(new CSceneStage_1());
 			m_key_flag = false;
+			switch_flag = true;
 		}
 	}
 	else
