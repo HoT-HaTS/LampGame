@@ -138,6 +138,9 @@
     <ClCompile Include="Obj_G_Block4.cpp">
       <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBackGround.cpp">
+      <Filter>ソース ファイル\Title</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="Obj_G_Block4.h">
       <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBackGround.h">
+      <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,21 +5,14 @@
 //使用するネームスペース
 using namespace GameL;
 
-#define TITLE_SIZE (32.0f)
-#define TITLE1_X (224.0f) 
-#define TITLE1_Y (250.f)
-#define TITLE2_X (200.0f)
-#define TITLE2_Y (500.0f)
-
 //オブジェクト：タイトル
-class CObjTitle :public CObj
+class CObjBackGround :public CObj
 {
 public:
-	CObjTitle() {};
-	~CObjTitle() {};
+	CObjBackGround() {};
+	~CObjBackGround() {};
 	void Init();   //イニシャライズ
 	void Action(); //アクション
 	void Draw();   //ドロー
 private:
-	bool m_key_flag;
 };

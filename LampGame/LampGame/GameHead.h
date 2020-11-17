@@ -89,6 +89,7 @@ extern bool switch_flag;	//スイッチ用フラグ
 #include "Obj_Board.h"
 #include "Obj_Pause.h"
 #include "ObjTitle.h"
+#include "ObjBackGround.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
