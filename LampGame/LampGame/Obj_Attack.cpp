@@ -34,9 +34,9 @@ void CObjAttack::Init()
 
 	//Œü‚«‚ÅHitBox‚ÌˆÊ’u‚ð•Ï‚¦‚é
 	if (m_posture)
-		Hits::SetHitBox(this, m_px- ABLOCK_INT_Y_SIZE, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE, ELEMENT_ATTACK, OBJ_ATTACK, 1);
+		Hits::SetHitBox(this, m_px- ABLOCK_INT_Y_SIZE, m_py, ABLOCK_INT_X_SIZE-4, ABLOCK_INT_Y_SIZE, ELEMENT_ATTACK, OBJ_ATTACK, 1);
 	else
-		Hits::SetHitBox(this, m_px- ABLOCK_INT_Y_SIZE, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE, ELEMENT_ATTACK, OBJ_ATTACK, 1);
+		Hits::SetHitBox(this, m_px- ABLOCK_INT_Y_SIZE, m_py, ABLOCK_INT_X_SIZE-4, ABLOCK_INT_Y_SIZE, ELEMENT_ATTACK, OBJ_ATTACK, 1);
 
 }
 

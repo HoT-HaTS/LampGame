@@ -205,9 +205,9 @@ void CObjHero::Action()
 
 
 				//右方向
-				if (m_px + 64.0 > 800)
+				if (m_px + BLOCK_SIZE > STAGE_X_OUT)
 				{
-					m_px = 800.0f - 64.0f; //はみ出ない位置に移動させる。
+					m_px = STAGE_X_OUT - BLOCK_SIZE; //はみ出ない位置に移動させる。
 				}
 				//左方向
 				if (m_px < 0.0f)
@@ -292,6 +292,7 @@ void CObjHero::Action()
 						L_flag = false;
 						m_flag = false;
 						m_vy = 0;
+						m_block_type_goal = 0;
 						m_sx = m_px;
 						m_sy = m_py;
 					}
@@ -312,6 +313,7 @@ void CObjHero::Action()
 						m_vx = 0;
 						m_vy = 0;
 						move_flag = false;
+						m_block_type_goal = 0;
 						Hits::DeleteHitBox(this);	//主人公が所有するHitBoxを削除
 					}
 				}
@@ -347,10 +349,13 @@ void CObjHero::Action()
 		}
 
 
-		//ステージ終了条件(ゴール到達)
-		if (m_block_type_goal == H_GOAL_BLOCK)
+		if (L_flag == true)
 		{
-			Scene::SetScene(new CSceneSelect());
+			//ステージ終了条件(ゴール到達)
+			if (m_block_type_goal == H_GOAL_BLOCK)
+			{
+				Scene::SetScene(new CSceneSelect());
+			}
 		}
 	}
 
@@ -434,7 +439,7 @@ float CObjHero:: GetAtan2Angle(float w, float h)
 //引数2　float*vy	:ベクトルのy成分のポインタ
 //戻り値 bool		:true=計算成功	false=計算失敗
 //内容
-//引数のベクトルを正規化しその値をvx,vyに変更します。
+//引数のベクトルを正規化しその値をvx,vyに変更する
 bool CObjHero:: UnitVec(float* vx, float* vy)
 {
 	//ベクトルの長さを求める（三平方の定理）
@@ -460,14 +465,11 @@ bool CObjHero:: UnitVec(float* vx, float* vy)
 }
 
 //HeroMove関数:Xボタンを押した瞬間の光と影の位置から角度を求めて一定速度で元の位置に戻る
-
-
 void CObjHero::HeroMove(float mx,float my, float sx, float sy, float vx, float vy)
 {
 		float x = sx - mx;
 		float y = sy - my;
 		float ar = GetAtan2Angle(x, -y);
-
 
 		//移動方向を主人公機の方向にする
 		vx = cos(3.14 / 180 * ar);
@@ -476,5 +478,4 @@ void CObjHero::HeroMove(float mx,float my, float sx, float sy, float vx, float v
 
 		sx += 20 * vx;
 		sy += 20 * vy;
-
 }
