@@ -3,6 +3,7 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "Obj_Enemy.h"
@@ -107,11 +108,11 @@ void CObjEnemy::Action()
 	int d1;
 	int d2;
 
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHit(&m_px, &m_py, false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&d1, &d2);
+	////ブロックとの当たり判定実行
+	//CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+	//pb->BlockHit(&m_px, &m_py, false,
+	//	&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+	//	&d1, &d2);
 
 	////位置の更新
 	//m_px += m_vx;
@@ -189,6 +190,9 @@ void CObjEnemy::Action()
 		//flagがtrueのとき自身を消滅させる
 		if (E_flag == true)
 		{
+			//敵消滅SE
+			Audio::Start(5);
+
 			this->SetStatus(false);		//スイッチが押されたら消滅
 			Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
 			return;
@@ -223,7 +227,7 @@ void CObjEnemy::Draw()
 	src.m_bottom = E_YSIZE;
 
 	//表示位置の設定
-	dst.m_top = 0.0f + m_py + E_YSIZE;
+	dst.m_top = 0.0f + m_py;
 	dst.m_right = 0.0f + m_px + scroll->GetScroll();
 	dst.m_left = dst.m_right + E_XSIZE;
 	dst.m_bottom = dst.m_top + E_YSIZE;
