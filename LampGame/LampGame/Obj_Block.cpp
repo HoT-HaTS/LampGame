@@ -58,6 +58,7 @@ void CObjBlock::Draw()
 
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 0.8f, 1.0f, 0.9f };
+	float  c2[4] = { 1.0f, 1.0f, 1.0f, 0.9f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -92,7 +93,7 @@ void CObjBlock::Draw()
 		dst.m_left = 0.0f;
 		dst.m_right = DRAW_SIZE_R;
 		dst.m_bottom = DRAW_SIZE_B;
-		Draw::Draw(20, &src, &dst, c, 0.0f);
+		Draw::Draw(20, &src, &dst, c2, 0.0f);
 	}
 }
 

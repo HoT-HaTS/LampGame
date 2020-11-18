@@ -347,10 +347,13 @@ void CObjHero::Action()
 		}
 
 
-		//ステージ終了条件(ゴール到達)
-		if (m_block_type_goal == H_GOAL_BLOCK)
+		if (L_flag == true)
 		{
-			Scene::SetScene(new CSceneSelect());
+			//ステージ終了条件(ゴール到達)
+			if (m_block_type_goal == H_GOAL_BLOCK)
+			{
+				Scene::SetScene(new CSceneSelect());
+			}
 		}
 	}
 
