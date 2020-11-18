@@ -5,6 +5,20 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define ASCROLL_LINE (300)
+#define BSCROLL_LINE (200)
+
+#define CUT_SIZE_T (640.0f)
+#define CUT_SIZE_R (896.0f)
+#define CUT_SIZE_B (640.0f)
+
+#define DRAW_SIZE_R (800.0f)
+#define DRAW_SIZE_B (600.0f)
+
+#define BLOCK_SIZE (64.0f)
+#define HIT_LENGTH (111.0f)
+
+
 //オブジェクト：
 class CObjBlock : public CObj
 {

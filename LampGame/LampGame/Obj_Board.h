@@ -5,6 +5,9 @@
 //使用するネームスペース
 using namespace GameL;
 
+
+
+
 //オブジェクト：
 class CObjBoard : public CObj
 {

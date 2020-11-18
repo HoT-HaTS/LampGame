@@ -25,6 +25,7 @@ using namespace GameL;
 
 #define HBLOCK_INT_X_SIZE (64.0f)	//主人公横サイズ
 #define HBLOCK_INT_Y_SIZE (128.0f)//主人公縦サイズ
+#define STAGE_X_OUT (600.0f)
 #define STAGE_Y_OUT (800.0f)	//下方向ステージ外判定
 
 #define H_GOAL_BLOCK (2)
