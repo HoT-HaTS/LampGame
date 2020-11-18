@@ -115,7 +115,7 @@ void CSceneStage_1::InitScene()
 
 
 	//ŠÅ”ÂoŒ»—p
-	if (((UserData*)Save::GetData())->stage_id == 1)
+	if (((UserData*)Save::GetData())->stage_id == 0)
 	{
 		CObjBoard* objt1 = new CObjBoard(640, 512, 0);
 		Objs::InsertObj(objt1, OBJ_BOARD, 9);
