@@ -22,12 +22,14 @@ void CObjMain::Init()
 void CObjMain::Action()
 {
 
+	//Rキー入力でリトライ
 	if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
 	{
 		if (Input::GetVKey('R') == true)
 		{
 			Scene::SetScene(new CSceneStage_1());
 			pause_flag = false;
+			switch_flag = true;
 		}	
 	
 	}

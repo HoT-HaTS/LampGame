@@ -6,7 +6,10 @@
 using namespace GameL;
 
 #define SBLOCK_INT_X_SIZE (64.0f) //スイッチの横サイズ
-#define SBLOCK_INT_Y_SIZE (64.0f) //スイッチの横サイズ
+#define SBLOCK_INT_Y_SIZE (64.0f) //スイッチの縦サイズ
+
+
+
 //主人公の縦サイズ
 
 //オブジェクト：
@@ -27,4 +30,5 @@ private:
 	float m_scroll;		//スクロール用の変数
 
 	bool  S2_flag;		//スイッチのフラグ管理用関数
+	bool  a_flag;       //攻撃の当たる回数調整用
 };

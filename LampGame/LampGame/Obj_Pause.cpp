@@ -31,6 +31,17 @@ void CObjPause::Action()
 		//Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
 		return;
 	}
+	//Eキー入力でステージセレクト画面へ
+	if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
+	{
+		if (Input::GetVKey('E') == true)
+		{
+			Scene::SetScene(new CSceneSelect());
+			pause_flag = false;
+			switch_flag = true;
+		}
+
+	}
 }
 
 //ドロー

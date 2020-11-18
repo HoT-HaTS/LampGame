@@ -12,16 +12,16 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjKeycoin::CObjKeycoin(float x, float y)
+CObjKeyCoin::CObjKeyCoin(float x, float y)
 {
 	m_px = x;			//位置
 	m_py = y;
 }
 
 //イニシャライズ
-void CObjKeycoin::Init()
+void CObjKeyCoin::Init()
 {
-	Hits::SetHitBox(this, m_px, m_py, 64.0f, 64.0f, ELEMENT_COIN, OBJ_COIN, 1);
+	Hits::SetHitBox(this, m_px, m_py, 64.0f, 64.0f, ELEMENT_COIN, OBJ_KEYCOIN, 1);
 	m_ani_time = 0;
 	m_ani_frame = 0;
 
@@ -29,7 +29,7 @@ void CObjKeycoin::Init()
 }
 
 //アクション
-void CObjKeycoin::Action()
+void CObjKeyCoin::Action()
 {
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -66,7 +66,7 @@ void CObjKeycoin::Action()
 }
 
 //ドロー
-void CObjKeycoin::Draw()
+void CObjKeyCoin::Draw()
 {
 	int background_flag = 0;
 
@@ -81,14 +81,14 @@ void CObjKeycoin::Draw()
 
 
 	src.m_top = 0.0f;
-	src.m_left = 0.0f + (64.0 * m_ani_frame);
-	src.m_right = src.m_left + 64.0f;
-	src.m_bottom = src.m_top + 64.0f;
+	src.m_left = 0.0f + (BLOCK_SIZE * m_ani_frame);
+	src.m_right = src.m_left + BLOCK_SIZE;
+	src.m_bottom = src.m_top + BLOCK_SIZE;
 
 	dst.m_top = m_py + 0.0f;
 	dst.m_left = m_px + scroll->GetScroll() + 0.0f;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_right = dst.m_left + BLOCK_SIZE;
+	dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
 	Draw::Draw(30, &src, &dst, c, 0.0f);
 }

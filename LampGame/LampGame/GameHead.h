@@ -13,7 +13,8 @@ enum OBJ_NAME
 	OBJ_G_BLOCK,
 	OBJ_G_BLOCK2,
 	OBJ_G_BLOCK3,
-	OBJ_COIN,
+	OBJ_G_BLOCK4,
+	OBJ_KEYCOIN,
 	OBJ_HERO,
 	OBJ_SWITCH,
 	OBJ_SWITCH2,
@@ -59,7 +60,8 @@ struct UserData
 
 
 //ゲーム内で使用されるグローバル変数・定数・列挙--
-extern bool pause_flag;
+extern bool pause_flag;	//ポーズ画面用のフラグ
+extern bool switch_flag;	//スイッチ用フラグ
 
 
 //------------------------------------------------
@@ -73,19 +75,21 @@ extern bool pause_flag;
 #include "Obj_Attack.h"
 #include "Obj_Block.h"
 #include "Obj_Enemy.h"
-#include "Obj_G_Block1.h"
+//#include "Obj_G_Block1.h"
 #include "Obj_G_Block2.h"
 #include "Obj_G_Block3.h"
+#include "Obj_G_Block4.h"
 #include "Obj_G_Block5.h"
 #include "Obj_KeyCoin.h"
 #include "Obj_Hero.h"
-#include "Obj_Switch.h"
+//#include "Obj_Switch.h"
 #include "Obj_Switch2.h"
 #include "Obj_Stage1.h"
 #include "ObjSelect.h"
 #include "Obj_Board.h"
 #include "Obj_Pause.h"
 #include "ObjTitle.h"
+#include "ObjBackGround.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

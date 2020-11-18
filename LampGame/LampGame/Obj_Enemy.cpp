@@ -20,15 +20,15 @@ CObjEnemy::CObjEnemy(float x, float y)
 void CObjEnemy::Init()
 {
 
-	m_vx = 0.0f;		//移動ベクトル
-	m_vy = 0.0f;
-	m_posture = 1.0f;	//右向き0.0f 左向き1.0f
+	m_vx = INIT_E_VX;		//移動ベクトル
+	m_vy = INIT_E_VY;
+	m_posture = INIT_E_POSTURE;	//右向き0.0f 左向き1.0f
 
-	m_ani_time = 0;
-	m_ani_frame = 1;	//静止フレームを初期にする
+	m_ani_time = INIT_ANI_TIME;
+	m_ani_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
 
-	m_speed_power = 0.3f;	//通常速度
-	m_ani_max_time = 4;		//アニメーション間隔幅
+	m_speed_power = INIT_E_SPEED_POWER;	//通常速度
+	m_ani_max_time = INIT_E_ANI_MAX_TIME; //アニメーション間隔幅
 
 	m_move = true;			//true=右　false=左
 
@@ -41,7 +41,7 @@ void CObjEnemy::Init()
 	E_flag = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 }
 
 //アクション
@@ -49,9 +49,8 @@ void CObjEnemy::Action()
 {
 
 	//通常速度
-	m_speed_power=0.3f;   	//移動速度
-	m_ani_max_time = 4;		//アニメーション間隔幅
-
+	m_speed_power = 0.3f;   	//移動速度
+	m_ani_max_time = 8;		//アニメーション間隔幅
 
 	//ブロック衝突で向き変更
 	if (m_hit_left == true)
@@ -86,15 +85,15 @@ void CObjEnemy::Action()
 
 	if (m_ani_frame == 4)
 	{
-		m_ani_frame = 0;
+		m_ani_frame = INIT_E_ANI_MAX_TIME;
 	}
 
 
 	//摩擦
-	m_vx += -(m_vx * 0.098);
+	m_vx += -(m_vx * INIT_FRICTION);
 
 	//自由落下運動
-	m_vy += 9.8 / (16.0f);
+	//m_vy += 9.8 / (16.0f);
 
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d1;
@@ -150,29 +149,20 @@ void CObjEnemy::Action()
 			}
 		}
 		//敵の上部分に接触
-		if (hy + 127 <= m_py)
+		if (hy + 125 <= m_py)
 		{
 			hero->SetDown(true);
 			hero->SetY(m_py - 128.5);
 			hero->SetVY(0.0);
 		}
 		//敵の下部分に接触
-		else if (m_py + 65 <= hy)
+		else if (m_py + 61 <= hy)
 		{
 			hero->SetUp(true);
-			hero->SetY(m_py + 63.5);
+			hero->SetY(m_py + 64.5);
 			hero->SetVY(0.0);
 		}
 	}
-	
-
-	//敵オブジェクトと接触したら主人公削除
-	//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
-	{
-		//this->SetStatus(false);    //自身に削除命令を出す
-		//Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxを削除する
-	}
-
 
 	//主人公から光フラグを取ってくる
 	bool L_flag_enemy = hero->Get_L_flag();
@@ -198,6 +188,12 @@ void CObjEnemy::Action()
 //ドロー
 void CObjEnemy::Draw()
 {
+	//アニメーション番号
+	int AniData[9] =
+	{
+		0, 1, 2, 3, 4, 5, 6, 7, 1,
+	};
+
 	//スクロールの値を取得
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -210,14 +206,14 @@ void CObjEnemy::Draw()
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0;
-	src.m_bottom = 64.0f;
+	src.m_right = E_XSIZE;
+	src.m_bottom = E_YSIZE;
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
-	dst.m_left = 0.0f + m_px + scroll->GetScroll();
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_right = 0.0f + m_px + scroll->GetScroll();
+	dst.m_left = dst.m_right + E_XSIZE;
+	dst.m_bottom = dst.m_top + E_YSIZE;
 
 
 	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画

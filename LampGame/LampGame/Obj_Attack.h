@@ -3,12 +3,12 @@
 #include "GameL/SceneObjManager.h"
 
 #define INIT_ANI_TIME (0.0)		//アニメーションタイム	
-#define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
+#define INIT_ANI_FRAME (0.0)	//アニメーションフレーム
 
 #define INIT_A_POSTURE (1.0)	//攻撃向き
 
 #define ABLOCK_INT_X_SIZE (64.0f)	//攻撃横サイズ
-#define ABLOCK_INT_Y_SIZE (64.0f)	//攻撃縦サイズ
+#define ABLOCK_INT_Y_SIZE (128.0f)	//攻撃縦サイズ
 
 //使用するネームスペース
 using namespace GameL;

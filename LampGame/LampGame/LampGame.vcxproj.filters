@@ -90,9 +90,6 @@
     <ClCompile Include="Obj_Main.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
-    <ClCompile Include="UtilityModule.cpp">
-      <Filter>ソース ファイル\共通</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_Stage1.cpp">
       <Filter>ソース ファイル\Stage1</Filter>
     </ClCompile>
@@ -134,6 +131,12 @@
     </ClCompile>
     <ClCompile Include="Obj_KeyCoin.cpp">
       <Filter>ソース ファイル\共通</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_G_Block4.cpp">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjBackGround.cpp">
+      <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,9 +197,6 @@
     <ClInclude Include="Obj_Main.h">
       <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
-    <ClInclude Include="UtilityModule.h">
-      <Filter>ソース ファイル\共通</Filter>
-    </ClInclude>
     <ClInclude Include="Obj_Stage1.h">
       <Filter>ソース ファイル\Stage1</Filter>
     </ClInclude>
@@ -238,6 +238,12 @@
     </ClInclude>
     <ClInclude Include="Obj_KeyCoin.h">
       <Filter>ソース ファイル\共通</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_G_Block4.h">
+      <Filter>ソース ファイル\共通\G_Block</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBackGround.h">
+      <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

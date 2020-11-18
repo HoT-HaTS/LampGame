@@ -5,6 +5,16 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define BOARD_SIXE_X (192.0)
+#define BOARD_SIXE_Y (128.0)
+
+#define BOARDCUT_SIZE (288.0)
+
+#define BOARDDRAW_SIZE_T (270.0)
+#define BOARDDRAW_SIZE_R (192.0)
+#define BOARDDRAW_SIZE_B (180.0)
+
+
 //オブジェクト：
 class CObjBoard : public CObj
 {

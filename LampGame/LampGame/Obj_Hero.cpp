@@ -3,11 +3,10 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
-
+#include "GameL/DrawFont.h"
 
 #include "GameHead.h"
 #include "Obj_Hero.h"
-#include "UtilityModule.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -27,24 +26,27 @@ void CObjHero::Init()
 	m_posture = INIT_H_POSTURE;	//右向き0.0f 左向き1.0f
 
 	m_ani_time = INIT_ANI_TIME;
-	m_ani_frame = INIT_ANI_FLAME;	//静止フレームを初期にする
+	m_ani_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
 	m_ani_s_time = INIT_ANI_TIME;
-	m_ani_s_frame = INIT_ANI_FLAME;	//静止フレームを初期にする
+	m_ani_s_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
 
 
 	m_speed_power = INIT_SPEED_POWER;	//通常速度
-	m_ani_max_time = INIT_ANI_MAX_TIME;	//アニメーション間隔幅
+	m_ani_max_time = INIT_H_ANI_MAX_TIME;	//アニメーション間隔幅
 
 	attack_flag = true;	//攻撃制御用フラグ
 
 	L_flag = true;	//開始時は光フラグON
 	m_flag = true;	//光の世界制御用
+	m_flagj = true; //ジャンプ制御用
 
 	//blockとの衝突状態確認用
 	m_hit_up = false;
 	m_hit_down = false;
 	m_hit_left = false;
 	m_hit_right = false;
+
+	m_hit_down2=false;
 
 	m_block_type_under = BLOCK_TYPE_U;	//踏んでいるblockの種類確認用(下)
 	m_block_type_goal = BLOCK_TYPE_G;	//blockの種類確認用(右)
@@ -59,6 +61,7 @@ void CObjHero::Init()
 	ar = 0;
 
 	m_coin_count = 0;
+
 }
 
 //アクション
@@ -71,11 +74,19 @@ void CObjHero::Action()
 		{
 			//場外に出たらリセット
 			Scene::SetScene(new CSceneStage_1());
+			switch_flag = true;
 		}
 
 
 		if (move_flag == true)
 		{
+			//ブロックとの当たり判定実行
+			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			pb->BlockHit(&m_px, &m_py, true,
+				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+				&m_block_type_under, &m_block_type_goal);
+
+
 			//if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
 			{
 				//主人公の攻撃
@@ -101,13 +112,13 @@ void CObjHero::Action()
 				//キーの入力方向
 				if (Input::GetVKey(VK_RIGHT) == true)
 				{
-					m_vx += 2* m_speed_power;
+					m_vx +=  m_speed_power;
 					m_posture = 1.0f;
 					m_ani_time += 1.0;
 				}
 				else if (Input::GetVKey(VK_LEFT) == true)
 				{
-					m_vx -= 2* m_speed_power;
+					m_vx -=  m_speed_power;
 					m_posture = 0.0f;
 					m_ani_time += 1.0;
 				}
@@ -117,11 +128,33 @@ void CObjHero::Action()
 					m_ani_time = 0;
 				}
 
+				//Aキー入力でジャンプ
+				if (Input::GetVKey(' ') == true)
+				{
+					//if (m_flagj == true)
+					{
+						if (m_hit_down == true || m_hit_down2 == true)
+						{
+							m_vy = -10;
+							m_hit_down = false;
+							m_hit_down2 = false;
+							//m_flagj = false;
+						}
+					}
+				}
+				/*else
+				{
+					m_flagj = true;
+				}*/
+
+				/*if (m_hit_down == false && m_hit_down2 == false)
+					m_vx += -(m_vx*0.2);*/
+
 				//摩擦
 				m_vx += -(m_vx * INIT_FRICTION);
 
 				//自由落下運動
-				m_vy += 9.8 / (64.0f);
+				m_vy += 9.8 / (20.0f);
 
 				//位置の更新
 				m_px += m_vx;
@@ -172,9 +205,9 @@ void CObjHero::Action()
 
 
 				//右方向
-				if (m_px + 64.0 > 800)
+				if (m_px + BLOCK_SIZE > STAGE_X_OUT)
 				{
-					m_px = 800.0f - 64.0f; //はみ出ない位置に移動させる。
+					m_px = STAGE_X_OUT - BLOCK_SIZE; //はみ出ない位置に移動させる。
 				}
 				//左方向
 				if (m_px < 0.0f)
@@ -210,14 +243,9 @@ void CObjHero::Action()
 					Hits::DeleteHitBox(this);
 
 					Scene::SetScene(new CSceneStage_1());
+					switch_flag = true;
 				}
 			}
-
-			//ブロックとの当たり判定実行
-			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-			pb->BlockHit(&m_px, &m_py, true,
-				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-				&m_block_type_under, &m_block_type_goal);
 		}
 
 
@@ -264,6 +292,7 @@ void CObjHero::Action()
 						L_flag = false;
 						m_flag = false;
 						m_vy = 0;
+						m_block_type_goal = 0;
 						m_sx = m_px;
 						m_sy = m_py;
 					}
@@ -284,6 +313,7 @@ void CObjHero::Action()
 						m_vx = 0;
 						m_vy = 0;
 						move_flag = false;
+						m_block_type_goal = 0;
 						Hits::DeleteHitBox(this);	//主人公が所有するHitBoxを削除
 					}
 				}
@@ -319,12 +349,16 @@ void CObjHero::Action()
 		}
 
 
-		//ステージ終了条件(ゴール到達)
-		if (m_block_type_goal == H_GOAL_BLOCK)
+		if (L_flag == true)
 		{
-			Scene::SetScene(new CSceneSelect());
+			//ステージ終了条件(ゴール到達)
+			if (m_block_type_goal == H_GOAL_BLOCK)
+			{
+				Scene::SetScene(new CSceneSelect());
+			}
 		}
 	}
+
 }
 
 //ドロー
@@ -376,6 +410,7 @@ void CObjHero::Draw()
 		//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
 		Draw::Draw(1, &src, &dst, c, 0.0f);
 	}
+
 }
 
 
@@ -404,7 +439,7 @@ float CObjHero:: GetAtan2Angle(float w, float h)
 //引数2　float*vy	:ベクトルのy成分のポインタ
 //戻り値 bool		:true=計算成功	false=計算失敗
 //内容
-//引数のベクトルを正規化しその値をvx,vyに変更します。
+//引数のベクトルを正規化しその値をvx,vyに変更する
 bool CObjHero:: UnitVec(float* vx, float* vy)
 {
 	//ベクトルの長さを求める（三平方の定理）
@@ -430,14 +465,11 @@ bool CObjHero:: UnitVec(float* vx, float* vy)
 }
 
 //HeroMove関数:Xボタンを押した瞬間の光と影の位置から角度を求めて一定速度で元の位置に戻る
-
-
 void CObjHero::HeroMove(float mx,float my, float sx, float sy, float vx, float vy)
 {
 		float x = sx - mx;
 		float y = sy - my;
 		float ar = GetAtan2Angle(x, -y);
-
 
 		//移動方向を主人公機の方向にする
 		vx = cos(3.14 / 180 * ar);
@@ -446,5 +478,4 @@ void CObjHero::HeroMove(float mx,float my, float sx, float sy, float vx, float v
 
 		sx += 20 * vx;
 		sy += 20 * vy;
-
 }

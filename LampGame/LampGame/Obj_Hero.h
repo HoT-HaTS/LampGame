@@ -13,10 +13,10 @@ using namespace GameL;
 #define INIT_H_POSTURE (1.0)	//主人公向き
 
 #define INIT_ANI_TIME (0.0)		//アニメーションタイム	
-#define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
+#define INIT_ANI_FRAME (0.0)	//アニメーションフレーム
 
-#define INIT_SPEED_POWER (1.4)	//加算速度
-#define INIT_ANI_MAX_TIME (5.0)	
+#define INIT_SPEED_POWER (1.2)	//加算速度
+#define INIT_H_ANI_MAX_TIME (5.0)	
 
 #define INIT_FRICTION (0.2)	//摩擦係数
 
@@ -25,6 +25,7 @@ using namespace GameL;
 
 #define HBLOCK_INT_X_SIZE (64.0f)	//主人公横サイズ
 #define HBLOCK_INT_Y_SIZE (128.0f)//主人公縦サイズ
+#define STAGE_X_OUT (800.0f)
 #define STAGE_Y_OUT (800.0f)	//下方向ステージ外判定
 
 #define H_GOAL_BLOCK (2)
@@ -52,6 +53,11 @@ class CObjHero : public CObj
 		int GetBT_U() { return m_block_type_under; }
 		int GetBT_G() { return m_block_type_goal; }
 
+		bool GetUp() { return m_hit_up; }
+		bool GetDown() { return m_hit_down; }
+		bool GetRight() { return m_hit_right; }
+		bool GetLeft() { return m_hit_left; }
+
 		float GetPosture() { return m_posture; }
 
 		bool Get_L_flag(){ return L_flag; }
@@ -67,6 +73,8 @@ class CObjHero : public CObj
 		void SetDown(bool b) { m_hit_down = b; }
 		void SetLeft(bool b) { m_hit_left = b; }
 		void SetRight(bool b) { m_hit_right = b; }
+
+		void SetDown2(bool b) { m_hit_down2 = b; }
 
 		//コイン関係
 		int GetCoin() { return m_coin_count; }      //コイン枚数確認用
@@ -100,12 +108,19 @@ class CObjHero : public CObj
 		bool m_hit_left;
 		bool m_hit_right;
 
+		bool m_hit_down2;
+
 		bool attack_flag;	//攻撃制御用フラグ
 
 		//光の世界フラグ
 		bool L_flag;
 		//光の世界制御用フラグ
 		bool m_flag;
+		//ジャンプフラグ
+		bool m_flagj;
+
+		//Switch2のフラグ
+		bool s_flag2;
 
 		//踏んでいるblockの種類確認用
 		int m_block_type_under;
@@ -120,5 +135,4 @@ class CObjHero : public CObj
 		float x;			//xベクトル
 		float y;			//yベクトル
 		float ar;			//移動元と移動先の角度
-
 };

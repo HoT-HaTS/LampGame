@@ -33,6 +33,7 @@ private:
 	int m_map[10][100];
 	bool g_f;
 	bool g_f2;
+	bool l_f;
 
 	void BlockDraw(float x, float y, RECT_F* dst, float c[], int block_id);
 

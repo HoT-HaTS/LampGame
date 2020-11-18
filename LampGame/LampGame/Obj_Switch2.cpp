@@ -23,7 +23,8 @@ void CObjSwitch2::Init()
 {
 	m_scroll = 0.0f;
 
-	S2_flag = false;			//スイッチがオフのときはfalse、オンのときはtrue
+	//S2_flag = switch_flag;		//スイッチがオフのときはfalse、オンのときはtrue
+	a_flag = false;
 
 	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_SWITCH, OBJ_SWITCH, 1);
 }
@@ -31,6 +32,7 @@ void CObjSwitch2::Init()
 //アクション
 void CObjSwitch2::Action()
 {
+
 	//スクロールの値を取得
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
@@ -61,60 +63,67 @@ void CObjSwitch2::Action()
 		float hy = hero->GetY();
 
 		//スイッチの上じゃない条件
-		if (hy + 120 > m_py)
+		if (hy + (2 * BLOCK_SIZE - 8) > m_py)
 		{
 			//スイッチの左部分に接触
 			if (m_px + scroll->GetScroll() > hx)
 			{
 				hero->SetRight(true);
-				hero->SetX(m_px - 64.5 + scroll->GetScroll());
+				hero->SetX(m_px - (BLOCK_SIZE + 0.5) + scroll->GetScroll());
 				hero->SetVX(0.0f);
 			}
 			//スイッチの右部分に接触
 			else if (hx > m_px + scroll->GetScroll())
 			{
 				hero->SetLeft(true);
-				hero->SetX(m_px + 63.5 + scroll->GetScroll());
+				hero->SetX(m_px + (BLOCK_SIZE - 0.5) + scroll->GetScroll());
 				hero->SetVX(0.0f);
 			}
 		}
 		//スイッチの上部分に接触
-		if (hy + 127 <= m_py)
+		if (hy + (2 * BLOCK_SIZE - 1) <= m_py)
 		{
 			hero->SetDown(true);
-			hero->SetY(m_py - 128.5);
+			hero->SetY(m_py - (2 * BLOCK_SIZE + 0.5));
 			hero->SetVY(0.0f);
 		}
 		//スイッチの下部分に接触
-		else if (m_py + 65 <= hy)
+		else if (m_py + (BLOCK_SIZE + 1) <= hy)
 		{
 			hero->SetUp(true);
-			hero->SetY(m_py + 63.5);
+			hero->SetY(m_py + (BLOCK_SIZE - 0.5));
 			hero->SetVY(0.0f);
 		}
 	}
 
 	//主人公の攻撃がHitBoxに当たるとflagをtrueにする
-	if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
+
+	//当たってないとfalse
+	if (hit->CheckObjNameHit(OBJ_ATTACK) == nullptr)
+		a_flag = false;				//スイッチのフラグをtrueに
+
+	if (a_flag == false)
 	{
-		if (S2_flag == true)
+		if (switch_flag == false)
 		{
-			S2_flag = false;				//スイッチのフラグをfalseに
-		}
-		else
-		{
-			S2_flag = true;				//スイッチのフラグをtrueに
+			if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
+			{
+				switch_flag = true;				//スイッチのフラグをtrueに
+				a_flag = true;
+			}
 		}
 	}
-
-	////flagがtrueのとき自身を消滅させる
-	//if (S2_flag == true)
-	//{
-	//	//this->SetStatus(false);		//スイッチが押されたら消滅
-	//	//Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
-	//	return;
-	//}
-
+	if (a_flag == false)
+	{
+		if (switch_flag == true)
+		{
+			if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
+			{
+				switch_flag = false;				//スイッチのフラグをtrueに
+				a_flag = true;
+			}
+		}
+	}
 }
 
 //ドロー
@@ -141,16 +150,16 @@ void CObjSwitch2::Draw()
 
 
 	//切り取り位置の設定
-	src.m_top = 0.0f + (switch_graphic * 64.0f);
-	src.m_left = 0.0f + (S2_flag * 64.0f);
-	src.m_right = 64.0f + (S2_flag * 64.0f);
-	src.m_bottom = 64.0f + (switch_graphic * 64.0f);
+	src.m_top = 0.0f + (switch_graphic * BLOCK_SIZE);
+	src.m_left = 0.0f + (switch_flag * BLOCK_SIZE);
+	src.m_right = BLOCK_SIZE + (switch_flag * BLOCK_SIZE);
+	src.m_bottom = BLOCK_SIZE + (switch_graphic * BLOCK_SIZE);
 
 	//表示位置の設定
 	dst.m_top = 0.0f + m_py;
 	dst.m_left = 0.0f + m_px + scroll->GetScroll();
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_right = dst.m_left + BLOCK_SIZE;
+	dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
 	//12番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(12, &src, &dst, c, 0.0f);
