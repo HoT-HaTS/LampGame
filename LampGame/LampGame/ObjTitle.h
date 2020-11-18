@@ -9,7 +9,7 @@ using namespace GameL;
 #define TITLE1_X (224.0f) 
 #define TITLE1_Y (250.f)
 #define TITLE2_X (200.0f)
-#define TITLE2_Y (400.0f)
+#define TITLE2_Y (500.0f)
 
 //オブジェクト：タイトル
 class CObjTitle :public CObj
