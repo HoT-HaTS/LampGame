@@ -49,9 +49,8 @@ void CObjEnemy::Action()
 {
 
 	//通常速度
-	m_speed_power=0.3f;   	//移動速度
-	m_ani_max_time = 4;		//アニメーション間隔幅
-
+	m_speed_power = 0.3f;   	//移動速度
+	m_ani_max_time = 8;		//アニメーション間隔幅
 
 	//ブロック衝突で向き変更
 	if (m_hit_left == true)
@@ -189,6 +188,12 @@ void CObjEnemy::Action()
 //ドロー
 void CObjEnemy::Draw()
 {
+	//アニメーション番号
+	int AniData[9] =
+	{
+		0, 1, 2, 3, 4, 5, 6, 7, 1,
+	};
+
 	//スクロールの値を取得
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
