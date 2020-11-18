@@ -107,6 +107,8 @@ void CSceneStage_1::InitScene()
 
 
 	//音楽データ読み込み用
+	Audio::LoadAudio(10, L"BGM/main_stage.wav", BACK_MUSIC);
+
 
 	//SE読み込み用
 	Audio::LoadAudio(0, L"SE/Shadow_from.wav", EFFECT);
@@ -145,6 +147,11 @@ void CSceneStage_1::InitScene()
 		CObjBoard* objt3 = new CObjBoard(3456, 512, 2);
 		Objs::InsertObj(objt3, OBJ_BOARD, 9);
 	}
+
+	//バックミュージックスタート
+	float Volume = Audio::VolumeMaster(-0.8f);
+	Audio::Start(10);
+
 }
 
 //実行中メソッド実行中メソッド
