@@ -13,7 +13,7 @@ using namespace GameL;
 //コンストラクタ
 CObjAttack::CObjAttack(float x, float y)
 {
-	m_px = x+64;
+	m_px = x + ABLOCK_INT_X_SIZE;
 	m_py = y;
 }
 
@@ -34,9 +34,9 @@ void CObjAttack::Init()
 
 	//向きでHitBoxの位置を変える
 	if (m_posture)
-		Hits::SetHitBox(this, m_px-128, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE + 64, ELEMENT_ATTACK, OBJ_ATTACK, 1);
+		Hits::SetHitBox(this, m_px- ABLOCK_INT_Y_SIZE, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE, ELEMENT_ATTACK, OBJ_ATTACK, 1);
 	else
-		Hits::SetHitBox(this, m_px-128, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE + 64, ELEMENT_ATTACK, OBJ_ATTACK, 1);
+		Hits::SetHitBox(this, m_px- ABLOCK_INT_Y_SIZE, m_py, ABLOCK_INT_X_SIZE, ABLOCK_INT_Y_SIZE, ELEMENT_ATTACK, OBJ_ATTACK, 1);
 
 }
 
@@ -46,7 +46,7 @@ void CObjAttack::Action()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	m_posture = hero->GetPosture();
 
-	m_px = hero->GetX() + (m_posture * 64.0);
+	m_px = hero->GetX() + (m_posture * ABLOCK_INT_X_SIZE);
 	m_py = hero->GetY();
 
 	//位置の更新
@@ -74,7 +74,7 @@ void CObjAttack::Action()
 	else
 	{
 		CHitBox* hit = Hits::GetHitBox(this);
-		hit->SetPos(m_px - 64, m_py);
+		hit->SetPos(m_px - ABLOCK_INT_X_SIZE, m_py);
 	}
 
 	//アニメーション終了後にオブジェクトを破棄する
@@ -102,10 +102,10 @@ void CObjAttack::Draw()
 
 	//切り取り位置の設定
 	{
-		src.m_top = ABLOCK_INT_Y_SIZE;
+		src.m_top = ABLOCK_INT_X_SIZE;
 		src.m_left = 0.0f + AniData[m_ani_frame] * ABLOCK_INT_X_SIZE;
 		src.m_right = ABLOCK_INT_X_SIZE + AniData[m_ani_frame] * ABLOCK_INT_X_SIZE;
-		src.m_bottom = src.m_top + ABLOCK_INT_Y_SIZE;
+		src.m_bottom = src.m_top + ABLOCK_INT_X_SIZE;
 	}
 
 	//表示位置の設定　向きで表示位置を変える
@@ -114,14 +114,14 @@ void CObjAttack::Draw()
 		dst.m_top = 0.0f + m_py;
 		dst.m_left = (ABLOCK_INT_X_SIZE - ABLOCK_INT_X_SIZE * m_posture) + m_px;
 		dst.m_right = (ABLOCK_INT_X_SIZE * m_posture) + m_px;
-		dst.m_bottom = ABLOCK_INT_Y_SIZE + m_py;
+		dst.m_bottom = ABLOCK_INT_X_SIZE + m_py;
 	}
 	else
 	{
 		dst.m_top = 0.0f + m_py;
-		dst.m_left = (ABLOCK_INT_X_SIZE - ABLOCK_INT_X_SIZE * m_posture) + m_px-64;
-		dst.m_right = (ABLOCK_INT_X_SIZE * m_posture) + m_px-64;
-		dst.m_bottom = ABLOCK_INT_Y_SIZE + m_py;
+		dst.m_left = (ABLOCK_INT_X_SIZE - ABLOCK_INT_X_SIZE * m_posture) + m_px - ABLOCK_INT_X_SIZE;
+		dst.m_right = (ABLOCK_INT_X_SIZE * m_posture) + m_px - ABLOCK_INT_X_SIZE;
+		dst.m_bottom = ABLOCK_INT_X_SIZE + m_py;
 	}
 
 	//0番目に登録したグラフィックをsrc・dst・c の情報をもとに描画

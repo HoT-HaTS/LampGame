@@ -64,14 +64,6 @@ void CObjBoard::Action()
 		Hits::DeleteHitBox(this);//ŠÅ”Â‚ªŠ—L‚·‚éHitBox‚ğíœ‚·‚é
 		T_Sensor = false;
 	}
-
-
-	//if (T_Sensor == true)
-	//{
-	//	CObjTutorial* obj_tutorial = new CObjTutorial(m_px + 64.0f, m_py - 194.0f);
-	//	Objs::InsertObj(obj_tutorial, OBJ_TUTORIAL, 100);
-	//}
-
 }
 
 //ƒhƒ[
