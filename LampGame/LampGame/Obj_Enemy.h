@@ -13,7 +13,7 @@
 
 //アニメーション関係の初期化
 #define INIT_ANI_TIME (0.0);
-#define INIT_E_ANI_MAX_TIME (4.0);
+#define INIT_E_ANI_MAX_TIME (9.0);
 #define INIT_ANI_FRAME (1.0);
 
 #define INIT_E_SPEED_POWER (0.3f)
