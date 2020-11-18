@@ -292,6 +292,7 @@ void CObjHero::Action()
 						L_flag = false;
 						m_flag = false;
 						m_vy = 0;
+						m_block_type_goal = 0;
 						m_sx = m_px;
 						m_sy = m_py;
 					}
@@ -312,6 +313,7 @@ void CObjHero::Action()
 						m_vx = 0;
 						m_vy = 0;
 						move_flag = false;
+						m_block_type_goal = 0;
 						Hits::DeleteHitBox(this);	//ålŒö‚ªŠ—L‚·‚éHitBox‚ğíœ
 					}
 				}
