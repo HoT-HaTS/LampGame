@@ -92,6 +92,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Board.png", 23, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Shattersub.png", 24, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/G_Block.png", 25, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Enemy_dead.png", 26, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/tutorial.png", 50, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/block_shadow.png", 51, TEX_SIZE_512);
 
