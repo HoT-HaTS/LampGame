@@ -7,6 +7,9 @@ using namespace GameL;
 
 #define SBLOCK_INT_X_SIZE (64.0f) //スイッチの横サイズ
 #define SBLOCK_INT_Y_SIZE (64.0f) //スイッチの縦サイズ
+
+
+
 //主人公の縦サイズ
 
 //オブジェクト：
