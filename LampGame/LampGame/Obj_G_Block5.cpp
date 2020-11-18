@@ -3,6 +3,7 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "Obj_G_Block5.h"
@@ -96,8 +97,11 @@ void CObj_G_Block5::Action()
 	{
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
-			this->SetStatus(false);		//スイッチが押されたら消滅
-			Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+			//ブロック削除効果音
+			Audio::Start(8);
+
+			this->SetStatus(false);		//コイン3舞取得状態で主人公が触れると削除
+			Hits::DeleteHitBox(this);	//所有するHitBoxを削除
 		}
 	}
 

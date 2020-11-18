@@ -4,6 +4,7 @@
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
 #include "GameL/SceneObjManager.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "Obj_KeyCoin.h"
@@ -57,6 +58,9 @@ void CObjKeyCoin::Action()
 	//主人公と接触したら消滅する。
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
+		//コイン取得効果音
+		Audio::Start(4);
+
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 		coin_count++;
