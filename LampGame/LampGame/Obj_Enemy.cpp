@@ -41,7 +41,7 @@ void CObjEnemy::Init()
 	E_flag = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 }
 
 //アクション
@@ -91,10 +91,10 @@ void CObjEnemy::Action()
 
 
 	//摩擦
-	m_vx += -(m_vx * 0.098);
+	m_vx += -(m_vx * INIT_FRICTION);
 
 	//自由落下運動
-	m_vy += 9.8 / (16.0f);
+	//m_vy += 9.8 / (16.0f);
 
 	//ブロックタイプ検知用の変数がないためのダミー
 	int d1;
@@ -164,15 +164,6 @@ void CObjEnemy::Action()
 			hero->SetVY(0.0);
 		}
 	}
-	
-
-	//敵オブジェクトと接触したら主人公削除
-	//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
-	//{
-	//	  this->SetStatus(false);    //自身に削除命令を出す
-	//	  Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxを削除する
-	//}
-
 
 	//主人公から光フラグを取ってくる
 	bool L_flag_enemy = hero->Get_L_flag();

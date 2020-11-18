@@ -81,8 +81,8 @@ void CObj_G_Block2::Draw()
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0;
-	src.m_bottom = 64.0f;
+	src.m_right = BLOCK_SIZE;
+	src.m_bottom = BLOCK_SIZE;
 
 	if (switch_flag == true)
 	{
@@ -91,8 +91,8 @@ void CObj_G_Block2::Draw()
 			//表示位置の設定
 			dst.m_top = 0.0f + m_py;
 			dst.m_left = 0.0f + m_px + scroll->GetScroll();
-			dst.m_right = dst.m_left + 64.0f;
-			dst.m_bottom = dst.m_top + 64.0f;
+			dst.m_right = dst.m_left + BLOCK_SIZE;
+			dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
 			//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 			Draw::Draw(3, &src, &dst, c, 0.0f);
@@ -102,8 +102,8 @@ void CObj_G_Block2::Draw()
 			//表示位置の設定
 			dst.m_top = 0.0f + m_py;
 			dst.m_left = 0.0f + m_px + scroll->GetScroll();
-			dst.m_right = dst.m_left + 64.0f;
-			dst.m_bottom = dst.m_top + 64.0f;
+			dst.m_right = dst.m_left + BLOCK_SIZE;
+			dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
 			//4番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 			Draw::Draw(4, &src, &dst, c, 0.0f);

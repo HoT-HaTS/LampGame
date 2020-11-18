@@ -90,9 +90,6 @@
     <ClCompile Include="Obj_Main.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
-    <ClCompile Include="UtilityModule.cpp">
-      <Filter>ソース ファイル\共通</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_Stage1.cpp">
       <Filter>ソース ファイル\Stage1</Filter>
     </ClCompile>
@@ -198,9 +195,6 @@
       <Filter>ソース ファイル\Stage1</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Main.h">
-      <Filter>ソース ファイル\共通</Filter>
-    </ClInclude>
-    <ClInclude Include="UtilityModule.h">
       <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Stage1.h">

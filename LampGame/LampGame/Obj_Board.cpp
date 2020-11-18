@@ -29,7 +29,7 @@ void CObjBoard::Init()
 	m_flag = true;
 	T_Sensor = false;
 
-	Hits::SetHitBox(this, m_px, m_py, 192.0f, 128.0f, ELEMENT_BOARD, OBJ_BOARD, 1);
+	Hits::SetHitBox(this, m_px, m_py, BOARD_SIXE_X, BOARD_SIXE_Y, ELEMENT_BOARD, OBJ_BOARD, 1);
 
 }
 
@@ -41,7 +41,7 @@ void CObjBoard::Action()
 
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px+scroll->GetScroll()-64 , m_py-64);
+	hit->SetPos(m_px + scroll->GetScroll() - BLOCK_SIZE, m_py - BLOCK_SIZE);
 
 	//主人公がHitBoxに当たるとflagをtrueにする
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
@@ -57,7 +57,7 @@ void CObjBoard::Action()
 	else
 		T_Sensor = false;
 	//看板が左側の画面外に出たら削除
-	bool check = CheckWindow(m_px, m_py, -32.0f, -32.0f, 800.0f, 600.0f);
+	bool check = CheckWindow(m_px, m_py, -(BLOCK_SIZE/2), -(BLOCK_SIZE / 2), STAGE_X_OUT, STAGE_Y_OUT);
 	if (check == false)
 	{
 		this->SetStatus(false);	//自身に削除命令を出す
@@ -80,13 +80,13 @@ void CObjBoard::Draw()
 
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
-		src.m_right = src.m_left + 64.0f;
-		src.m_bottom = src.m_top + 64.0f;
+		src.m_right = src.m_left + BLOCK_SIZE;
+		src.m_bottom = src.m_top + BLOCK_SIZE;
 
 		dst.m_top = m_py + 0.0f;
 		dst.m_left = m_px + scroll->GetScroll() +0.0f;
-		dst.m_right = dst.m_left + 64.0f;
-		dst.m_bottom = dst.m_top + 64.0f;
+		dst.m_right = dst.m_left + BLOCK_SIZE;
+		dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
 		Draw::Draw(23, &src, &dst, c, 0.0f);
 
@@ -97,14 +97,14 @@ void CObjBoard::Draw()
 		RECT_F dst2;	//描画先表示位置
 
 		src2.m_top = 0.0f;
-		src2.m_left = 0.0f + 288 * b_num;
-		src2.m_right = src2.m_left + 288.0f;
-		src2.m_bottom = src2.m_top + 288.0f;
+		src2.m_left = 0.0f + BOARDCUT_SIZE * b_num;
+		src2.m_right = src2.m_left + BOARDCUT_SIZE;
+		src2.m_bottom = src2.m_top + BOARDCUT_SIZE;
 
-		dst2.m_top = 270;
-		dst2.m_left = m_px + scroll->GetScroll() - 65.0f;
-		dst2.m_right = dst2.m_left + 192.0f;
-		dst2.m_bottom = dst2.m_top + 180.0f;
+		dst2.m_top = BOARDDRAW_SIZE_T;
+		dst2.m_left = m_px + scroll->GetScroll() - (BLOCK_SIZE + 1);
+		dst2.m_right = dst2.m_left + BOARDDRAW_SIZE_R;
+		dst2.m_bottom = dst2.m_top + BOARDDRAW_SIZE_B;
 		if (T_Sensor == true)
 		{
 			Draw::Draw(50, &src2, &dst2, c, 0.0f);

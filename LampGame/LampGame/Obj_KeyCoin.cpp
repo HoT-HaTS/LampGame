@@ -81,14 +81,14 @@ void CObjKeyCoin::Draw()
 
 
 	src.m_top = 0.0f;
-	src.m_left = 0.0f + (64.0 * m_ani_frame);
-	src.m_right = src.m_left + 64.0f;
-	src.m_bottom = src.m_top + 64.0f;
+	src.m_left = 0.0f + (BLOCK_SIZE * m_ani_frame);
+	src.m_right = src.m_left + BLOCK_SIZE;
+	src.m_bottom = src.m_top + BLOCK_SIZE;
 
 	dst.m_top = m_py + 0.0f;
 	dst.m_left = m_px + scroll->GetScroll() + 0.0f;
-	dst.m_right = dst.m_left + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_right = dst.m_left + BLOCK_SIZE;
+	dst.m_bottom = dst.m_top + BLOCK_SIZE;
 
 	Draw::Draw(30, &src, &dst, c, 0.0f);
 }

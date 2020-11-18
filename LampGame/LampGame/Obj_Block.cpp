@@ -57,7 +57,7 @@ void CObjBlock::Draw()
 	int background_flag = 0;
 
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
-	float  c[4] = { 0.8f, 0.8f, 0.8f, 1.0f };
+	float  c[4] = { 1.0f, 0.8f, 1.0f, 0.9f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
@@ -71,8 +71,8 @@ void CObjBlock::Draw()
 		//背景表示
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
-		src.m_right = CUT_SIZE_R;
-		src.m_bottom = CUT_SIZE_B;
+		src.m_right = BLOCKCUT_SIZE_R;
+		src.m_bottom = BLOCKCUT_SIZE_B;
 
 		dst.m_top = 0.0f;
 		dst.m_left = 0.0f;
@@ -83,10 +83,10 @@ void CObjBlock::Draw()
 	else
 	{
 		//背景表示
-		src.m_top = CUT_SIZE_T;
+		src.m_top = BLOCKCUT_SIZE_T;
 		src.m_left = 0.0f;
-		src.m_right = CUT_SIZE_R;
-		src.m_bottom = 2 * CUT_SIZE_B;
+		src.m_right = BLOCKCUT_SIZE_R;
+		src.m_bottom = 2 * BLOCKCUT_SIZE_B;
 
 		dst.m_top = 0.0f;
 		dst.m_left = 0.0f;
