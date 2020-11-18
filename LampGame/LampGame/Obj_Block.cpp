@@ -130,7 +130,7 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] == 1 || m_map[i][j] == 2)
+			if (m_map[i][j] == 1 || m_map[i][j] == 2|| m_map[i][j] == 4)
 			{
 				//要素番号を座標に変更
 				float bx = j * 64.0f;
@@ -167,16 +167,16 @@ void CObjBlock::BlockHit(
 						if ((r < 56 && r>=0) || r > 304)
 						{
 							//右
-							*right = true;	//オブジェクトの左の部分が衝突している
+							*right = true;				//オブジェクトの左の部分が衝突している
 							*x = bx + 63.5f + (scroll);	//ブロックの位置+オブジェクトの幅
-							*vx = -(*vx) *0.1f;	//-VX*反発係数
+							*vx = -(*vx) *0.1f;			//-VX*反発係数
 							*btg = m_map[i][j];
 						}
 						if (r > 56 && r < 124)
 						{
 							//上
-							*down = true;	//オブジェクトの下の部分が衝突している
-							*y = by - 128.0f;	//ブロックの位置+オブジェクトの幅
+							*down = true;			//オブジェクトの下の部分が衝突している
+							*y = by - 128.0f;		//ブロックの位置+オブジェクトの幅
 							//種類を渡すのスタートとゴールのみ変更する
 							if (m_map[i][j] >= 2)
 							{
@@ -188,15 +188,15 @@ void CObjBlock::BlockHit(
 						if (r > 124 && r <236 )
 						{
 							//左
-							*left = true;	//オブジェクトの右の部分が衝突している
+							*left = true;				//オブジェクトの右の部分が衝突している
 							*x = bx - 64.5f + (scroll);	//ブロックの位置+オブジェクトの幅
-							*vx = -(*vx) *0.1f;	//-VX*反発係数
+							*vx = -(*vx) *0.1f;			//-VX*反発係数
 							*btg = m_map[i][j];
 						}
 						if (236 < r && r < 304)
 						{
 							//下
-							*up = true;	//オブジェクトの上の部分が衝突している
+							*up = true;			//オブジェクトの上の部分が衝突している
 							*y = by + 63.5f;	//ブロックの位置+オブジェクトの幅
 							*btg = m_map[i][j];
 							if (*vy < 0)
@@ -207,8 +207,86 @@ void CObjBlock::BlockHit(
 					}
 				}
 			}
+			else if (m_map[i][j] == 5 )
+			{
+				if (switch_flag == true)
+				{
+					//要素番号を座標に変更
+					float bx = j * 64.0f;
+					float by = i * 64.0f;
+
+					//スクロールの影響
+					float scroll = scroll_on ? m_scroll : 0;
+
+					//オブジェクトとブロックの当たり判定(ブロックの左:右:上:下の順)
+					if ((*x + (-scroll) + 64.0f > bx) && (*x + (-scroll) < bx + 64.0f) && (*y + 128.0f > by) && (*y < by + 64.0f))
+					{
+						//上下左右判定
+
+						//主人公とブロックの中心でvector作成
+						float rvx = (*x + (-scroll) + 32.0f) - (bx + 32.0f);
+						float rvy = (*y + 64.0f) - (by + 32.0f);
+
+						//長さlenを求める
+						float len = sqrt(rvx * rvx + rvy * rvy);
+
+						//角度rを求める
+						float r = atan2(rvy, rvx);	//(ラジアン)
+						r = r * 180.0f / 3.14f;		//度
+
+						if (r <= 0.0f)
+							r = abs(r);
+						else
+							r = 360.0f - abs(r);
+
+						//lenがある一定の長さより短い場合に判定に入る。
+						if (len < 111.0f)
+						{
+							//角度で上下左右を判定
+							if ((r < 56 && r >= 0) || r > 304)
+							{
+								//右
+								*right = true;				//オブジェクトの左の部分が衝突している
+								*x = bx + 63.5f + (scroll);	//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;			//-VX*反発係数
+								*btg = m_map[i][j];
+							}
+							if (r > 56 && r < 124)
+							{
+								//上
+								*down = true;			//オブジェクトの下の部分が衝突している
+								*y = by - 128.0f;		//ブロックの位置+オブジェクトの幅
+								//種類を渡すのスタートとゴールのみ変更する
+								if (m_map[i][j] >= 2)
+								{
+									*btu = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
+									*btg = m_map[i][j];
+								}
+								*vy = 0.0f;
+							}
+							if (r > 124 && r < 236)
+							{
+								//左
+								*left = true;				//オブジェクトの右の部分が衝突している
+								*x = bx - 64.5f + (scroll);	//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;			//-VX*反発係数
+								*btg = m_map[i][j];
+							}
+							if (236 < r && r < 304)
+							{
+								//下
+								*up = true;			//オブジェクトの上の部分が衝突している
+								*y = by + 63.5f;	//ブロックの位置+オブジェクトの幅
+								*btg = m_map[i][j];
+								if (*vy < 0)
+								{
+									*vy = 0.0f;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
-
-

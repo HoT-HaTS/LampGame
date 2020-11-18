@@ -6,6 +6,8 @@
 #include "GameL/SceneManager.h"
 #include "GameL/SceneObjManager.h"
 #include "GameL/DrawFont.h"
+#include "GameL/DrawTexture.h"
+#include "GameL/WinInputs.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -14,6 +16,7 @@ using namespace GameL;
 #include "GameHead.h"
 #include "SceneTitle.h"
 #include "ObjTitle.h"
+#include "ObjBackGround.h"
 
 //コンストラクタ
 CSceneTitle::CSceneTitle()
@@ -30,12 +33,18 @@ CSceneTitle::~CSceneTitle()
 //ゲームメイン初期化メゾット
 void CSceneTitle::InitScene()
 {
-	//初期化させる文字のグラフィック作成
-	Font::SetStrTex(L"ランプの妖精と影の世界");
+	Draw::LoadImageW(L"graphic/Title.png", 14, TEX_SIZE_512);
 
-		//タイトルオブジェクト作成
+	////初期化させる文字のグラフィック作成
+	//Font::SetStrTex(L"ランプの妖精と影の世界");
+
+	//タイトルオブジェクト作成
 	CObjTitle* obj = new CObjTitle();    //タイトルオブジェクト作成
-	Objs::InsertObj(obj, OBJ_TITLE, 10);//主人公オブジェクト登録
+	Objs::InsertObj(obj, OBJ_TITLE, 6); //主人公オブジェクト登録
+
+	//背景オブジェクト作成
+	CObjBackGround* objbg = new CObjBackGround();    //背景オブジェクト作成
+	Objs::InsertObj(objbg, OBJ_TITLE, 6); //主人公オブジェクト登録
 }
 
 //ゲームメイン実行中メゾット

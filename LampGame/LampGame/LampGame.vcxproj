@@ -152,6 +152,7 @@
     <ClCompile Include="GameL\SetWindow.cpp" />
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
+    <ClCompile Include="ObjBackGround.cpp" />
     <ClCompile Include="Obj_G_Block2.cpp" />
     <ClCompile Include="Obj_G_Block3.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -193,6 +194,7 @@
     <ClInclude Include="GameL\UserData.h" />
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="ObjBackGround.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="Obj_Board.h" />
     <ClInclude Include="ObjSelect.h" />

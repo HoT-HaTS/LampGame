@@ -23,7 +23,7 @@ void CObjSwitch2::Init()
 {
 	m_scroll = 0.0f;
 
-	//S2_flag = switch_flag;			//スイッチがオフのときはfalse、オンのときはtrue
+	//S2_flag = switch_flag;		//スイッチがオフのときはfalse、オンのときはtrue
 	a_flag = false;
 
 	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_SWITCH, OBJ_SWITCH, 1);
