@@ -105,6 +105,8 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
 
+	Draw::LoadImageW(L"graphic/BG_Area1.png", 60, TEX_SIZE_512);
+
 
 	//音楽データ読み込み用
 	Audio::LoadAudio(10, L"BGM/main_stage.wav", BACK_MUSIC);
