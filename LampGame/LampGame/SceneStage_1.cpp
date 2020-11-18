@@ -7,6 +7,8 @@
 #include "GameL/SceneObjManager.h"
 #include "GameL/DrawTexture.h"
 #include "GameL/DrawFont.h"
+#include "GameL/UserData.h"
+#include "GameL/Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -14,7 +16,7 @@ using namespace GameL;
 //使用ヘッダー
 #include "SceneStage_1.h"
 #include "GameHead.h"
-#include "GameL/UserData.h"
+
 
 //ステージ読み込むたびに初期化されるグローバル変数
 extern bool pause_flag = false;
@@ -78,6 +80,8 @@ void CSceneStage_1::InitScene()
 	//	}
 	//}
 
+
+	//グラフィック読み込み
 	Draw::LoadImageW(L"graphic/lamp_shadow_walk.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_v2.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG.png", 3, TEX_SIZE_512);
@@ -102,6 +106,20 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
 
 
+	//音楽データ読み込み用
+
+	//SE読み込み用
+	Audio::LoadAudio(0, L"SE/Shadow_from.wav", EFFECT);
+	Audio::LoadAudio(1, L"SE/Shadow_to.wav", EFFECT);
+	Audio::LoadAudio(2, L"SE/Jump.wav", EFFECT);
+	Audio::LoadAudio(3, L"SE/Flame.wav", EFFECT);
+	Audio::LoadAudio(4, L"SE/Coin.wav", EFFECT);
+	Audio::LoadAudio(5, L"SE/En_defeat.wav", EFFECT);
+	Audio::LoadAudio(6, L"SE/Miss.wav", EFFECT);
+	Audio::LoadAudio(7, L"SE/Switch.wav", EFFECT);
+	Audio::LoadAudio(8, L"SE/Unlock.wav", EFFECT);
+
+	//オブジェクト出現
 	CObjStage1* obj_stage1 = new CObjStage1(map);
 	Objs::InsertObj(obj_stage1, OBJ_STAGE1, 30);
 
@@ -127,37 +145,6 @@ void CSceneStage_1::InitScene()
 		CObjBoard* objt3 = new CObjBoard(3456, 512, 2);
 		Objs::InsertObj(objt3, OBJ_BOARD, 9);
 	}
-	//ギミックブロック3テスト用
-	/*CObj_G_Block3* objb3 = new CObj_G_Block3(300, 200);
-	Objs::InsertObj(objb3, OBJ_G_BLOCK3, 8);*/
-
-	//G2ブロックテスト用
-	//CObj_G_Block2* objg2 = new CObj_G_Block2(800, 500);
-	//Objs::InsertObj(objg2, OBJ_G_BLOCK, 8);
-
-	//CObj_G_Block2* objg21 = new CObj_G_Block2(864, 436);
-	//Objs::InsertObj(objg21, OBJ_G_BLOCK, 8);
-
-	//スイッチ出現
-	/*CObjSwitch2* objs2 = new CObjSwitch2(5600, 5500);
-	Objs::InsertObj(objs2, OBJ_SWITCH2, 7);*/
-
-	//G4ブロック出現
-	//CObj_G_Block4* objg4 = new CObj_G_Block4(800, 500);
-	//Objs::InsertObj(objg4, OBJ_BLOCK, 8);
-
-	//G5ブロックテスト用
-	//CObj_G_Block5* objg5 = new CObj_G_Block5(800, 500);
-	//Objs::InsertObj(objg5, OBJ_G_BLOCK, 8);
-
-	//CObjKeycoin* objcoin1 = new CObjKeycoin(300, 500);
-	//Objs::InsertObj(objcoin1, OBJ_COIN, 7);
-
-	//CObjKeycoin* objcoin2 = new CObjKeycoin(500, 500);
-	//Objs::InsertObj(objcoin2, OBJ_COIN, 7);
-
-	//CObjKeycoin* objcoin3 = new CObjKeycoin(700, 500);
-	//Objs::InsertObj(objcoin3, OBJ_COIN, 7);
 }
 
 //実行中メソッド実行中メソッド

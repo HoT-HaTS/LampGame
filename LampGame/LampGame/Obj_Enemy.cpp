@@ -3,6 +3,7 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "Obj_Enemy.h"
@@ -177,6 +178,9 @@ void CObjEnemy::Action()
 		//flagがtrueのとき自身を消滅させる
 		if (E_flag == true)
 		{
+			//敵消滅SE
+			Audio::Start(5);
+
 			this->SetStatus(false);		//スイッチが押されたら消滅
 			Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
 			return;
