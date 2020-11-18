@@ -3,7 +3,7 @@
 #include "GameL/SceneObjManager.h"
 
 #define INIT_ANI_TIME (0.0)		//アニメーションタイム	
-#define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
+#define INIT_ANI_FRAME (0.0)	//アニメーションフレーム
 
 #define INIT_A_POSTURE (1.0)	//攻撃向き
 

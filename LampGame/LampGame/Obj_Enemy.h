@@ -2,6 +2,26 @@
 //使用するヘッダー
 #include "GameL/SceneObjManager.h"
 
+//関数化
+//敵のサイズ
+#define E_XSIZE (64.0f);
+#define E_YSIZE (64.0f);
+
+//移動ベクトルの初期化
+#define INIT_E_VX (0.0f);
+#define INIT_E_VY (0.0f);
+
+//アニメーション関係の初期化
+#define INIT_ANI_TIME (0.0);
+#define INIT_E_ANI_MAX_TIME (4.0);
+#define INIT_ANI_FRAME (1.0);
+
+#define INIT_E_SPEED_POWER (0.3f)
+
+//向きの初期化
+#define INIT_E_POSTURE (1.0f);
+
+
 //使用するネームスペース
 using namespace GameL;
 

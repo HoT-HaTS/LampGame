@@ -21,7 +21,7 @@ CObjAttack::CObjAttack(float x, float y)
 void CObjAttack::Init()
 {
 	m_ani_time = INIT_ANI_TIME;		//アニメーションタイムの初期化
-	m_ani_frame = INIT_ANI_FLAME;	//アニメーションフレームの初期化
+	m_ani_frame = INIT_ANI_FRAME;	//アニメーションフレームの初期化
 
 	m_vx = 0;
 	m_vy = 0;

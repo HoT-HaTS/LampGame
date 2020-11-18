@@ -13,10 +13,10 @@ using namespace GameL;
 #define INIT_H_POSTURE (1.0)	//主人公向き
 
 #define INIT_ANI_TIME (0.0)		//アニメーションタイム	
-#define INIT_ANI_FLAME (0.0)	//アニメーションフレーム
+#define INIT_ANI_FRAME (0.0)	//アニメーションフレーム
 
 #define INIT_SPEED_POWER (1.2)	//加算速度
-#define INIT_ANI_MAX_TIME (5.0)	
+#define INIT_H_ANI_MAX_TIME (5.0)	
 
 #define INIT_FRICTION (0.2)	//摩擦係数
 
