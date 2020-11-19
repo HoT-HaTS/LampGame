@@ -44,7 +44,7 @@ void CObjBackGround::Draw()
 		dst.m_right = dst.m_left + BG_X;
 		dst.m_bottom = dst.m_top + BG_Y;
 
-		//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+		//14番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 		Draw::Draw(14, &src, &dst, c, 0.0f);
 	}
 

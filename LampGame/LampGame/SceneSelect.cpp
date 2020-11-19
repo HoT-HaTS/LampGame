@@ -33,9 +33,19 @@ void CSceneSelect::InitScene()
 	//出力させる文字のグラフィックを作成
 	Font::SetStrTex(L"LampGame");
 
-	//タイトルオブジェクト作成
-	CObjSelect* obj = new CObjSelect();   //タイトルオブジェクト作成
-	Objs::InsertObj(obj, OBJ_SELECT, 10); //主人公オブジェクト登録
+	//音楽データ読み込み用
+	Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);
+
+
+	//ステージセレクトオブジェクト作成
+	CObjSelect* obj = new CObjSelect();   //ステージセレクトオブジェクト作成
+	Objs::InsertObj(obj, OBJ_SELECT, 10); 
+
+	//マスターボリュームを1に戻す
+	float v = Audio::VolumeMaster(0);
+	v = Audio::VolumeMaster((0.4 - v));
+
+	Audio::Start(11);
 }
 
 //ゲームメイン実行中メソッド

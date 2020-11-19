@@ -112,13 +112,10 @@ void CSceneStage_1::InitScene()
 	Objs::InsertObj(obj_h, OBJ_HERO, 10);
 
 	CObjMain* obj_main = new CObjMain();
-	Objs::InsertObj(obj_main, OBJ_MAIN, 11);
+	Objs::InsertObj(obj_main, OBJ_MAIN, 35);
 
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 6);
-
-	/*CObjKeyCoin* objcoin = new CObjKeyCoin(-1000, -1000);
-	Objs::InsertObj(objcoin, OBJ_KEYCOIN, 7);*/
 
 	//看板出現用
 	if (((UserData*)Save::GetData())->stage_id == 0)
@@ -133,8 +130,10 @@ void CSceneStage_1::InitScene()
 		Objs::InsertObj(objt3, OBJ_BOARD, 9);
 	}
 
-	//バックミュージックスタート
-	float Volume = Audio::VolumeMaster(-0.8f);
+	//マスターボリュームを1に戻す
+	float v = Audio::VolumeMaster(0);
+	v = Audio::VolumeMaster((0.9 - v));
+
 	Audio::Start(10);
 
 }
