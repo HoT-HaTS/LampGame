@@ -51,8 +51,8 @@ void CObjSelect::Action()
 	}
 
 	if (((UserData*)Save::GetData())->stage_id == -1)
-		((UserData*)Save::GetData())->stage_id = 6;
-	if (((UserData*)Save::GetData())->stage_id == 7)
+		((UserData*)Save::GetData())->stage_id = 5;
+	if (((UserData*)Save::GetData())->stage_id == 6)
 		((UserData*)Save::GetData())->stage_id = 0;
 	
 	//エンターキーを押してシーン：ゲームメインに移行する
@@ -90,7 +90,6 @@ void CObjSelect::Draw()
 	Font::StrDraw(L"ステージ3", 120, 300, 32, c);
 	Font::StrDraw(L"ステージ4", 120, 350, 32, c);
 	Font::StrDraw(L"ステージ5", 450, 150, 32, c);
-	Font::StrDraw(L"ステージ6", 450, 200, 32, c);
 	Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c);
 	Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c);
 
@@ -117,9 +116,5 @@ void CObjSelect::Draw()
 	else if (((UserData*)Save::GetData())->stage_id == 5)
 	{
 		Font::StrDraw(L"→", 410, 150, 32, c);
-	}
-	else if (((UserData*)Save::GetData())->stage_id == 6)
-	{
-		Font::StrDraw(L"→", 410, 200, 32, c);
 	}
 }
