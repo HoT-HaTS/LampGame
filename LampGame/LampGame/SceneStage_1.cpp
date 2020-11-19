@@ -117,6 +117,8 @@ void CSceneStage_1::InitScene()
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 6);
 
+	/*CObjKeyCoin* objcoin = new CObjKeyCoin(-1000, -1000);
+	Objs::InsertObj(objcoin, OBJ_KEYCOIN, 7);*/
 
 	//ŠÅ”ÂoŒ»—p
 	if (((UserData*)Save::GetData())->stage_id == 0)

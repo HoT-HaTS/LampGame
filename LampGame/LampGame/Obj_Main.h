@@ -16,5 +16,6 @@ public:
 	void Draw();		//ƒhƒ[
 private:
 	bool m_flag;
+	int coin_count;
 };
 

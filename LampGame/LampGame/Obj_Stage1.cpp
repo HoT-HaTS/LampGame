@@ -127,10 +127,10 @@ void CObjStage1::Action()
 			//出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;
 		}
-		//列の中からSWITCH5のスイッチを探す
+		//列の中からコインを探す
 		if (m_map[i][ex] == G_SWITCH5)
 		{
-			//スイッチ5出現
+			//コイン出現
 			CObjKeyCoin* objs5 = new CObjKeyCoin(ex * BLOCK_SIZE, i * BLOCK_SIZE);
 			Objs::InsertObj(objs5, OBJ_KEYCOIN, 7);
 

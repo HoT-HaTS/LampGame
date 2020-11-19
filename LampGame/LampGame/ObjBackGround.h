@@ -18,4 +18,5 @@ public:
 	void Action(); //アクション
 	void Draw();   //ドロー
 private:
+
 };

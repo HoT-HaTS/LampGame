@@ -16,6 +16,7 @@ using namespace GameL;
 void CObjMain::Init()
 {
 	 m_flag = true;
+	 coin_count = 0;
 }
 
 //アクション
@@ -61,5 +62,46 @@ void CObjMain::Action()
 //ドロー
 void CObjMain::Draw()
 {
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
+	//主人公情報の取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	coin_count = hero->GetCoin();
+
+
+	RECT_F src2;	//描画元切り取り位置
+	RECT_F dst2;	//描画先表示位置
+	RECT_F dst3;	//描画先表示位置
+	RECT_F dst4;	//描画先表示位置
+
+	//コイン枚数の描画
+	src2.m_top = 0.0f;
+	src2.m_left = 0.0f;
+	src2.m_right = src2.m_left + BLOCK_SIZE;
+	src2.m_bottom = src2.m_top + BLOCK_SIZE;
+
+	if (1 <= coin_count)
+	{
+		dst2.m_top = 0.0f;
+		dst2.m_left = 0.0f;
+		dst2.m_right = dst2.m_left + BLOCK_SIZE;
+		dst2.m_bottom = dst2.m_top + BLOCK_SIZE;
+		Draw::Draw(30, &src2, &dst2, c, 0.0f);
+	}
+	if (2 <= coin_count)
+	{
+		dst3.m_top = 0.0f;
+		dst3.m_left = 0.0f + BLOCK_SIZE;
+		dst3.m_right = dst3.m_left + BLOCK_SIZE;
+		dst3.m_bottom = dst3.m_top + BLOCK_SIZE;
+		Draw::Draw(30, &src2, &dst3, c, 0.0f);
+	}
+	if (3 <= coin_count)
+	{
+		dst4.m_top = 0.0f;
+		dst4.m_left = 0.0f + 2 * BLOCK_SIZE;
+		dst4.m_right = dst4.m_left + BLOCK_SIZE;
+		dst4.m_bottom = dst4.m_top + BLOCK_SIZE;
+		Draw::Draw(30, &src2, &dst4, c, 0.0f);
+	}
 }

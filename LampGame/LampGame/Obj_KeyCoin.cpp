@@ -51,7 +51,7 @@ void CObjKeyCoin::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + scroll->GetScroll(), m_py);
 
-	//ŽålŒö‚ÌˆÊ’u‚ÌŽæ“¾
+	//ŽålŒöî•ñ‚ÌŽæ“¾
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	coin_count = hero->GetCoin();
 
