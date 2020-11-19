@@ -3,6 +3,7 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/UserData.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "ObjSelect.h"
@@ -28,6 +29,9 @@ void CObjSelect::Action()
 		{
 			((UserData*)Save::GetData())->stage_id++;
 			select_flag = false;
+			
+			//カーソル音を鳴らす
+			Audio::Start(0);
 		}
 	}
 	else if (Input::GetVKey(VK_UP) == true)
@@ -36,6 +40,9 @@ void CObjSelect::Action()
 		{
 			((UserData*)Save::GetData())->stage_id--;
 			select_flag = false;
+
+			//カーソル音を鳴らす
+			Audio::Start(0);
 		}
 	}
 	else
@@ -43,10 +50,10 @@ void CObjSelect::Action()
 		select_flag = true;
 	}
 
-	if (((UserData*)Save::GetData())->stage_id < 0)
-		((UserData*)Save::GetData())->stage_id = 0;
-	if (((UserData*)Save::GetData())->stage_id > 6)
+	if (((UserData*)Save::GetData())->stage_id == -1)
 		((UserData*)Save::GetData())->stage_id = 6;
+	if (((UserData*)Save::GetData())->stage_id == 7)
+		((UserData*)Save::GetData())->stage_id = 0;
 	
 	//エンターキーを押してシーン：ゲームメインに移行する
 	if (Input::GetVKey(VK_RETURN) == true)

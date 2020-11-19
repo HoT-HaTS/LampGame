@@ -36,6 +36,8 @@ void CSceneSelect::InitScene()
 	//音楽データ読み込み用
 	Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);
 
+	//SE読み込み用
+	Audio::LoadAudio(0, L"SE/Cursor.wav", EFFECT);
 
 	//ステージセレクトオブジェクト作成
 	CObjSelect* obj = new CObjSelect();   //ステージセレクトオブジェクト作成
