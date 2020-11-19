@@ -47,11 +47,6 @@ void CSceneStage_1::InitScene()
 	int map[10][100];
 	wchar_t str[128];
 
-	unique_ptr<wchar_t>p2;
-	int size2;
-	int map2[10][100];
-	wchar_t str2[128];
-
 	swprintf_s(str, L"stagedata/Stage%d.csv", ((UserData*)Save::GetData())->stage_id);
 	p = Save::ExternalDataOpen(str, &size);
 	int count = 1;
@@ -65,20 +60,6 @@ void CSceneStage_1::InitScene()
 			count += 2;
 		}
 	}
-
-	//swprintf_s(str2, L"stagedata/Stage%d.csv", ((UserData*)Save::GetData())->stage_id);
-	//p2 = Save::ExternalDataOpen(str2, &size2);
-	//int count2 = 1;
-	//for (int i = 0; i < 10; i++)
-	//{
-	//	for (int j = 0; j < 100; j++)
-	//	{
-	//		int w2 = 0;
-	//		swscanf_s(&p2.get()[count2], L"%d", &w2);
-	//		map2[i][j] = w2;
-	//		count2 += 2;
-	//	}
-	//}stage_background_beta
 
 
 	//グラフィック読み込み
@@ -140,13 +121,13 @@ void CSceneStage_1::InitScene()
 	//看板出現用
 	if (((UserData*)Save::GetData())->stage_id == 0)
 	{
-		CObjBoard* objt1 = new CObjBoard(640, 512, 0);
+		CObjBoard* objt1 = new CObjBoard(BOARD1_X, BOARD_Y, 0);
 		Objs::InsertObj(objt1, OBJ_BOARD, 9);
 
-		CObjBoard* objt2 = new CObjBoard(1664, 512, 1);
+		CObjBoard* objt2 = new CObjBoard(BOARD2_X, BOARD_Y, 1);
 		Objs::InsertObj(objt2, OBJ_BOARD, 9);
 
-		CObjBoard* objt3 = new CObjBoard(3456, 512, 2);
+		CObjBoard* objt3 = new CObjBoard(BOARD3_X, BOARD_Y, 2);
 		Objs::InsertObj(objt3, OBJ_BOARD, 9);
 	}
 

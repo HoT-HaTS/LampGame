@@ -65,48 +65,48 @@ void CObj_G_Block4::Action()
 		CHitBox* hit = Hits::GetHitBox(this);
 		hit->SetPos(m_px + scroll->GetScroll(), m_py);
 
-		//主人公とG_Blockのあたり判定チェック
+		//主人公とG5_BLOCKのあたり判定チェック
+//当たっている場合
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
-			//当たっている場合
 			float hx = hero->GetX();
 			float hy = hero->GetY();
 
-			//G_Blockの上or下じゃない条件
-			if (hy + 120 > m_py) //|| m_py + 50 < hy)
+			//G5_BLOCKの上じゃない条件
+			if (hy + (2 * BLOCK_SIZE - 8) > m_py)
 			{
-				//G_Blockの左部分に接触
+				//G5_BLOCKの左部分に接触
 				if (m_px + scroll->GetScroll() > hx)
 				{
 					hero->SetRight(true);
-					hero->SetX(m_px - 64.5 + scroll->GetScroll());
-					hero->SetVX(-0.8);
+					hero->SetX(m_px - (BLOCK_SIZE + 0.5) + scroll->GetScroll());
+					hero->SetVX(0.0f);
 				}
-				//G_Blockの右部分に接触
-				if (hx > m_px + scroll->GetScroll())
+				//G5_BLOCKの右部分に接触
+				else if (hx > m_px + scroll->GetScroll())
 				{
 					hero->SetLeft(true);
-					hero->SetX(m_px + 63.5 + scroll->GetScroll());
-					hero->SetVX(0.0);
+					hero->SetX(m_px + (BLOCK_SIZE - 0.5) + scroll->GetScroll());
+					hero->SetVX(0.0f);
 				}
 			}
-			//G_Blockの上部分に接触
-			if (hy + 125 < m_py)
+			//G5_BLOCKの上部分に接触
+			if (hy + (2 * BLOCK_SIZE - 1) <= m_py)
 			{
-				hero->SetDown2(true);
-				hero->SetY(m_py - 128.5);
-				hero->SetVY(0.0);
+				hero->SetDown(true);
+				hero->SetY(m_py - (2 * BLOCK_SIZE + 0.5));
+				hero->SetVY(0.0f);
 			}
-			//G_Blockの下部分に接触
-			if (m_py + 55 < hy)
+			//G5_BLOCKの下部分に接触
+			else if (m_py + (BLOCK_SIZE + 1) <= hy)
 			{
 				hero->SetUp(true);
-				hero->SetY(m_py + 64.5);
-				hero->SetVY(0.0);
+				hero->SetY(m_py + (BLOCK_SIZE - 0.5));
+				hero->SetVY(0.0f);
 			}
 		}
 
-		if (m_time == 540)
+		if (m_time == G4_TIME)
 		{
 			m_time = 0;
 		}

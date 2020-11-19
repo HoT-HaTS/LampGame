@@ -16,6 +16,13 @@ using namespace GameL;
 
 #define BLOCK_SIZE (64.0f)
 
+#define OBJECT_LINE (500.0)
+
+#define GOAL_T (128.0)
+#define GOAL_L (128.0)
+#define GOAL_R (320.0)
+#define GOAL_B (256.0)
+
 //オブジェクト：
 class CObjStage1 : public CObj
 {
