@@ -4,6 +4,7 @@
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
 #include "GameL/DrawFont.h"
+#include "GameL/UserData.h"
 
 #include "GameHead.h"
 #include "Obj_Hero.h"
@@ -64,6 +65,8 @@ void CObjHero::Init()
 	fall_time = 0;
 
 	m_coin_count = 0;
+
+	count = 0;
 
 }
 
@@ -377,7 +380,24 @@ void CObjHero::Action()
 			//ステージ終了条件(ゴール到達)
 			if (m_block_type_goal == H_GOAL_BLOCK)
 			{
-				Scene::SetScene(new CSceneSelect());
+				((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
+
+				for (int i = 1; i <= 5; i++)
+				{
+					if (((UserData*)Save::GetData())->clear[i] == true)
+					{
+						count++;
+					}
+				}
+				if (count == 5)
+				{
+					Scene::SetScene(new CSceneClear());
+				}
+				else
+				{
+					Scene::SetScene(new CSceneSelect());
+				}
+
 			}
 		}
 	}

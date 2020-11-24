@@ -4,6 +4,7 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/SceneObjManager.h"
+#include "GameL/UserData.h"
 
 #include "GameHead.h"
 #include "ObjTitle.h"
@@ -15,6 +16,8 @@ using namespace GameL;
 void CObjTitle :: Init()
 {
 	m_key_flag = false;
+
+	((UserData*)Save::GetData())->clear[6] = { false };
 
 }
 
