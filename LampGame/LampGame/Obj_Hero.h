@@ -135,4 +135,8 @@ class CObjHero : public CObj
 		float x;			//xベクトル
 		float y;			//yベクトル
 		float ar;			//移動元と移動先の角度
+
+		int fall_time;	//主人公が落下した時用の時間
+
+		int count;		//ステージクリア時の条件
 };

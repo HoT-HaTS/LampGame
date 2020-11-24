@@ -40,11 +40,11 @@ public:
 		float* vx, float* vy, int* btu,int* btg
 	);
 
-	void BlockHit2
+	void BlockHitEnemy
 	(
 		float* x, float* y, bool scroll_on,
 		bool* up, bool* down, bool* left, bool* right,
-		float* vx, float* vy, int* btu, int* btg
+		float* vx, float* vy, int* bt
 	);
 
 

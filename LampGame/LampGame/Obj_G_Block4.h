@@ -6,6 +6,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define G4_TIME (540.0)
+
 //オブジェクト：
 class CObj_G_Block4 : public CObj
 {

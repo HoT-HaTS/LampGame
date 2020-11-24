@@ -4,6 +4,7 @@
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
 #include "GameL/SceneObjManager.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "Obj_Switch2.h"
@@ -110,6 +111,8 @@ void CObjSwitch2::Action()
 			{
 				switch_flag = true;				//スイッチのフラグをtrueに
 				a_flag = true;
+				//スイッチの音
+				Audio::Start(7);
 			}
 		}
 	}
@@ -121,6 +124,9 @@ void CObjSwitch2::Action()
 			{
 				switch_flag = false;				//スイッチのフラグをtrueに
 				a_flag = true;
+
+				//スイッチの音
+				Audio::Start(7);
 			}
 		}
 	}

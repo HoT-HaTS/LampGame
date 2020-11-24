@@ -74,7 +74,7 @@ void CObjAttack::Action()
 	else
 	{
 		CHitBox* hit = Hits::GetHitBox(this);
-		hit->SetPos(m_px - ABLOCK_INT_X_SIZE, m_py);
+		hit->SetPos(m_px - ABLOCK_INT_X_SIZE+4, m_py);
 	}
 
 	//アニメーション終了後にオブジェクトを破棄する

@@ -13,12 +13,12 @@ using namespace GameL;
 //イニシャライズ
 void CObjBackGround::Init()
 {
-
 }
 
 //アクション
 void CObjBackGround::Action()
 {
+	
 
 }
 
@@ -30,18 +30,22 @@ void CObjBackGround::Draw()
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 800.0f;
-	src.m_bottom = 600.0f;
+	//背景の描画
+	{
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = BG_X;
+		src.m_bottom = BG_Y;
 
-	//表示位置の設定
-	dst.m_top = 0.0f;
-	dst.m_left = 0.0f;
-	dst.m_right = dst.m_left + 800.0f;
-	dst.m_bottom = dst.m_top + 600.0f;
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = dst.m_left + BG_X;
+		dst.m_bottom = dst.m_top + BG_Y;
 
-	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
-	Draw::Draw(14, &src, &dst, c, 0.0f);
+		//14番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+		Draw::Draw(14, &src, &dst, c, 0.0f);
+	}
+
 }

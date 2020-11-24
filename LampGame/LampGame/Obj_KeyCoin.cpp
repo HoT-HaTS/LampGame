@@ -4,6 +4,7 @@
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
 #include "GameL/SceneObjManager.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "Obj_KeyCoin.h"
@@ -50,13 +51,16 @@ void CObjKeyCoin::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	hit->SetPos(m_px + scroll->GetScroll(), m_py);
 
-	//主人公の位置の取得
+	//主人公情報の取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	coin_count = hero->GetCoin();
 
 	//主人公と接触したら消滅する。
 	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 	{
+		//コイン取得効果音
+		Audio::Start(4);
+
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 		coin_count++;

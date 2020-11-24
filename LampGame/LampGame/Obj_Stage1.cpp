@@ -3,13 +3,13 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/SceneObjManager.h"
+#include "GameL/UserData.h"
 
 #include "GameHead.h"
 #include "Obj_Stage1.h"
 
 //使用するネームスペース
 using namespace GameL;
-
 
 CObjStage1::CObjStage1(int map[INIT_MAP_X][INIT_MAP_Y])
 {
@@ -38,21 +38,17 @@ void CObjStage1::Action()
 	float hy = hero->GetY();
 	bool L_flag = hero->Get_L_flag();
 
-
-	//CObj_G_Block* gflag = (CObj_G_Block*)Objs::GetObj(OBJ_BLOCK);
-	//g_f = gflag->Get_G_flag();
-
 	CObj_G_Block2* gflag2 = (CObj_G_Block2*)Objs::GetObj(OBJ_BLOCK);
 	g_f2 = gflag2->Get_G2_flag();
 
-	//敵出現ライン
-	//主人公の位置+500を敵出現ラインにする
-	float line = hx + (-s1_scroll) + 500;
+	//object出現ライン
+	//主人公の位置+500をobject出現ラインにする
+	float line = hx + (-s1_scroll) + OBJECT_LINE;
 
-	//敵出現ラインを要素番号化
+	//object出現ラインを要素番号化
 	int ex = ((int)line) / BLOCK_SIZE;
 
-	/*敵出現ラインの列を検索
+	/*object出現ラインの列を検索
 	0:なにもなし
 	1:ステージブロック
 	2:ゴールブロック
@@ -94,8 +90,10 @@ void CObjStage1::Action()
 		//列の中からG_BLOCK3を探す
 		if (m_map[i][ex] == G_BLOCK3)
 		{
+			//G3ブロック出現
 			CObj_G_Block3* objg3 = new CObj_G_Block3(ex * BLOCK_SIZE, i * BLOCK_SIZE);
 			Objs::InsertObj(objg3, G_BLOCK3, 7);
+			
 			//出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;
 		}
@@ -112,11 +110,11 @@ void CObjStage1::Action()
 		//列の中からSWITCH2のスイッチを探す
 		if (m_map[i][ex] == G_SWITCH2)
 		{
-			//スイッチ出現
+			//スイッチ2出現
 			CObjSwitch2* objs2 = new CObjSwitch2(ex * BLOCK_SIZE, i * BLOCK_SIZE);
 			Objs::InsertObj(objs2, OBJ_SWITCH2, 7);
 
-			//スイッチ出現場所の値を0にする
+			//スイッチ2出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;
 		}
 		//列の中からG_BLOCK5を探す
@@ -125,29 +123,20 @@ void CObjStage1::Action()
 			//G5ブロック出現
 			CObj_G_Block5* objg5 = new CObj_G_Block5(ex * BLOCK_SIZE, i * BLOCK_SIZE);
 			Objs::InsertObj(objg5, OBJ_BLOCK, 8);
+			
 			//出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;
 		}
-		//列の中からSWITCH5のスイッチを探す
+		//列の中からコインを探す
 		if (m_map[i][ex] == G_SWITCH5)
 		{
-			//スイッチ5出現
+			//コイン出現
 			CObjKeyCoin* objs5 = new CObjKeyCoin(ex * BLOCK_SIZE, i * BLOCK_SIZE);
 			Objs::InsertObj(objs5, OBJ_KEYCOIN, 7);
 
 			//出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;
 		}
-		////列の中からG_BLOCKを探す(テスト用)
-		//if (m_map[i][ex] == G_BLOCK)
-		//{
-		//	//Gブロック出現
-		//	CObj_G_Block* objg = new CObj_G_Block(ex * BLOCK_SIZE, i * BLOCK_SIZE);
-		//	Objs::InsertObj(objg, OBJ_BLOCK, 8);
-
-		//	//Gブロック出現場所の値を0にする
-		//	m_map[i][ex] = NO_BLOCK;
-		//}
 	}
 }
 
@@ -173,7 +162,7 @@ void CObjStage1::Draw()
 				dst.m_left = j * BLOCK_SIZE + s1_scroll;
 				dst.m_right = dst.m_left + BLOCK_SIZE;
 				dst.m_bottom = dst.m_top + BLOCK_SIZE;
-				if (m_map[i][j] == 8)
+				if (m_map[i][j] == G_SWITCH5)
 				{
 					;//ブロック
 					//BlockDraw(320.0f + 64.0f, 64.0f, &dst, c, 3);
@@ -185,11 +174,12 @@ void CObjStage1::Draw()
 				}
 				else if (m_map[i][j] == GOAL_BLOCK)
 				{
-					dst.m_top = i * BLOCK_SIZE - 128.0f;
-					dst.m_left = j * BLOCK_SIZE + s1_scroll - 128.0f;
-					dst.m_right = dst.m_left + 320.0f;
-					dst.m_bottom = dst.m_top + 256.0f;
-					//ゴールブロック
+					dst.m_top = i * BLOCK_SIZE - GOAL_T;
+					dst.m_left = j * BLOCK_SIZE + s1_scroll - GOAL_T;
+					dst.m_right = dst.m_left + GOAL_R;
+					dst.m_bottom = dst.m_top + GOAL_B;
+					
+					//ゴールブロック描画
 					BlockDraw(BLOCK_SIZE, 0.0f, &dst, c, GOAL_BLOCK);
 				}
 				else if (m_map[i][j] == G_BLOCK3)

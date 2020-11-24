@@ -4,9 +4,11 @@
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
 #include "GameL/DrawFont.h"
+#include "GameL/UserData.h"
 
 #include "GameHead.h"
 #include "Obj_Hero.h"
+#include "GameL/Audio.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -60,7 +62,11 @@ void CObjHero::Init()
 	y = 0;
 	ar = 0;
 
+	fall_time = 0;
+
 	m_coin_count = 0;
+
+	count = 0;
 
 }
 
@@ -72,9 +78,17 @@ void CObjHero::Action()
 		//落下によるゲームオーバー
 		if (m_py > STAGE_Y_OUT)
 		{
-			//場外に出たらリセット
-			Scene::SetScene(new CSceneStage_1());
-			switch_flag = true;
+			//ミス時効果音
+			//Audio::Start(6);
+
+			fall_time++;
+
+			if (fall_time > 40)
+			{
+				//場外に出たらリセット
+				Scene::SetScene(new CSceneStage_1());
+				switch_flag = true;
+			}
 		}
 
 
@@ -97,6 +111,9 @@ void CObjHero::Action()
 						//攻撃オブジェクトの作成
 						CObjAttack* obj_attack = new CObjAttack(m_px, m_py); //弾丸オブジェクト作成
 						Objs::InsertObj(obj_attack, OBJ_ATTACK, 100);		//作った弾丸オブジェクトをマネージャーに登録
+
+						//攻撃音を鳴らす
+						Audio::Start(3);
 
 						attack_flag = false;
 					}
@@ -131,21 +148,24 @@ void CObjHero::Action()
 				//Aキー入力でジャンプ
 				if (Input::GetVKey(' ') == true)
 				{
-					//if (m_flagj == true)
+					if (m_flagj == true)
 					{
 						if (m_hit_down == true || m_hit_down2 == true)
 						{
+							//jump音を鳴らす
+							Audio::Start(2);
+
 							m_vy = -10;
 							m_hit_down = false;
 							m_hit_down2 = false;
-							//m_flagj = false;
+							m_flagj = false;
 						}
 					}
 				}
-				/*else
+				else
 				{
 					m_flagj = true;
-				}*/
+				}
 
 				/*if (m_hit_down == false && m_hit_down2 == false)
 					m_vx += -(m_vx*0.2);*/
@@ -295,6 +315,9 @@ void CObjHero::Action()
 						m_block_type_goal = 0;
 						m_sx = m_px;
 						m_sy = m_py;
+
+						//移動音を鳴らす(光→影)
+						Audio::Start(1);
 					}
 				}
 				else
@@ -315,6 +338,9 @@ void CObjHero::Action()
 						move_flag = false;
 						m_block_type_goal = 0;
 						Hits::DeleteHitBox(this);	//主人公が所有するHitBoxを削除
+					
+						//移動音を鳴らす(影→光)
+						Audio::Start(0);
 					}
 				}
 				else
@@ -354,7 +380,24 @@ void CObjHero::Action()
 			//ステージ終了条件(ゴール到達)
 			if (m_block_type_goal == H_GOAL_BLOCK)
 			{
-				Scene::SetScene(new CSceneSelect());
+				((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
+
+				for (int i = 1; i <= 5; i++)
+				{
+					if (((UserData*)Save::GetData())->clear[i] == true)
+					{
+						count++;
+					}
+				}
+				if (count == 5)
+				{
+					Scene::SetScene(new CSceneClear());
+				}
+				else
+				{
+					Scene::SetScene(new CSceneSelect());
+				}
+
 			}
 		}
 	}
