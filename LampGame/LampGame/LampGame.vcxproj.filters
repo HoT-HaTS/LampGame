@@ -31,6 +31,9 @@
     <Filter Include="ソース ファイル\共通\Switch">
       <UniqueIdentifier>{d84ca799-ed0e-40fc-a867-bf384728fc72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Clear">
+      <UniqueIdentifier>{bff1ae20-7fb8-4c64-9590-887681b7bbaf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameL\Audio.cpp">
@@ -138,6 +141,12 @@
     <ClCompile Include="ObjBackGround.cpp">
       <Filter>ソース ファイル\Title</Filter>
     </ClCompile>
+    <ClCompile Include="ObjClear.cpp">
+      <Filter>ソース ファイル\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneClear.cpp">
+      <Filter>ソース ファイル\Clear</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -244,6 +253,12 @@
     </ClInclude>
     <ClInclude Include="ObjBackGround.h">
       <Filter>ソース ファイル\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjClear.h">
+      <Filter>ソース ファイル\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneClear.h">
+      <Filter>ソース ファイル\Clear</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,28 +7,25 @@
 #include "GameL/UserData.h"
 
 #include "GameHead.h"
-#include "ObjTitle.h"
+#include "ObjClear.h"
 
 //使用するネームスペース
 using namespace GameL;
 
 //イニシャライズ
-void CObjTitle :: Init()
+void CObjClear::Init()
 {
-	m_key_flag = false;
-
-	((UserData*)Save::GetData())->clear[6] = { false };
-
+	
 }
 
 //アクション
-void CObjTitle::Action()
+void CObjClear::Action()
 {
 	if (Input::GetVKey(VK_RETURN) == true)
 	{
 		if (m_key_flag == true)
 		{
-			Scene::SetScene(new CSceneSelect());
+			Scene::SetScene(new CSceneTitle());
 			m_key_flag = false;
 		}
 	}
@@ -39,11 +36,9 @@ void CObjTitle::Action()
 }
 
 //ドロー
-void CObjTitle::Draw()
+void CObjClear::Draw()
 {
-	float c[4] = { 0.0f,0.0f,0.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
-	//Font::StrDraw(L"ランプの妖精と影の世界", TITLE1_X, TITLE1_Y, TITLE_SIZE, c);
-
-	Font::StrDraw(L"GameStart : Push_EnterKey", TITLE2_X, TITLE2_Y, TITLE_SIZE, c);
+	Font::StrDraw(L"クリア", 370, 290, 20, c);
 }
