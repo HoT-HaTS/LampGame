@@ -3,13 +3,13 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/SceneObjManager.h"
+#include "GameL/UserData.h"
 
 #include "GameHead.h"
 #include "Obj_Stage1.h"
 
 //使用するネームスペース
 using namespace GameL;
-
 
 CObjStage1::CObjStage1(int map[INIT_MAP_X][INIT_MAP_Y])
 {

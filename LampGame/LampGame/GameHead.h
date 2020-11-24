@@ -24,6 +24,7 @@ enum OBJ_NAME
 
 	OBJ_STAGE1,
 	OBJ_TITLE,
+	OBJ_CLEAR,
 };
 //------------------------------------------------
 
@@ -55,6 +56,7 @@ struct UserData
 {
 	int mSeveData;	//サンプルセーブデータ
 	int stage_id;
+	bool clear_[6];
 };
 //------------------------------------------------
 
@@ -89,6 +91,7 @@ extern bool switch_flag;	//スイッチ用フラグ
 #include "Obj_Board.h"
 #include "Obj_Pause.h"
 #include "ObjTitle.h"
+#include "ObjClear.h"
 #include "ObjBackGround.h"
 //------------------------------------------------
 
@@ -96,6 +99,7 @@ extern bool switch_flag;	//スイッチ用フラグ
 #include "SceneStage_1.h"
 #include "SceneSelect.h"
 #include "SceneTitle.h"
+#include "SceneClear.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
