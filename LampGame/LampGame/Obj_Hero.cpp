@@ -76,7 +76,7 @@ void CObjHero::Action()
 		if (m_py > STAGE_Y_OUT)
 		{
 			//ƒ~ƒXŽžŒø‰Ê‰¹
-			Audio::Start(6);
+			//Audio::Start(6);
 
 			fall_time++;
 
