@@ -43,10 +43,6 @@ void CSceneSelect::InitScene()
 	CObjSelect* obj = new CObjSelect();   //ステージセレクトオブジェクト作成
 	Objs::InsertObj(obj, OBJ_SELECT, 10); 
 
-	//マスターボリュームを1に戻す
-	float v = Audio::VolumeMaster(0);
-	v = Audio::VolumeMaster((0.4 - v));
-
 	Audio::Start(11);
 }
 
