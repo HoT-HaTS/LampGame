@@ -75,6 +75,7 @@ void CObjSelect::Action()
 void CObjSelect::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c1[4] = { 1.0f,1.0f,0.0f,1.0f };
 
 	/*
 	ステージ構成変更案
@@ -93,28 +94,53 @@ void CObjSelect::Draw()
 	Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c);
 	Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c);
 
+	if (((UserData*)Save::GetData())->clear[0] == true)
+	{
+		Font::StrDraw(L"★", 88, 150, 32, c1);
+	}
+	if (((UserData*)Save::GetData())->clear[1] == true)
+	{
+		Font::StrDraw(L"★", 88, 200, 32, c1);
+	}
+	if (((UserData*)Save::GetData())->clear[2] == true)
+	{
+		Font::StrDraw(L"★", 88, 250, 32, c1);
+	}
+	if (((UserData*)Save::GetData())->clear[3] == true)
+	{
+		Font::StrDraw(L"★", 88, 300, 32, c1);
+	}
+	if (((UserData*)Save::GetData())->clear[4] == true)
+	{
+		Font::StrDraw(L"★", 88, 350, 32, c1);
+	}
+	if (((UserData*)Save::GetData())->clear[5] == true)
+	{
+		Font::StrDraw(L"★", 418, 150, 32, c1);
+	}
+
 	if (((UserData*)Save::GetData())->stage_id == 0)
 	{
-		Font::StrDraw(L"→", 80, 150, 32, c);
+		Font::StrDraw(L"→", 56, 150, 32, c);
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 1)
 	{
-		Font::StrDraw(L"→", 80, 200, 32, c);
+		Font::StrDraw(L"→", 56, 200, 32, c);
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 2)
 	{
-		Font::StrDraw(L"→", 80, 250, 32, c);
+		Font::StrDraw(L"→", 56, 250, 32, c);
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 3)
 	{
-		Font::StrDraw(L"→", 80, 300, 32, c);
+		Font::StrDraw(L"→", 56, 300, 32, c);
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 4)
 	{
-		Font::StrDraw(L"→", 80, 350, 32, c);
+		Font::StrDraw(L"→", 56, 350, 32, c);
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 5)
 	{
-		Font::StrDraw(L"→", 410, 150, 32, c);
+		Font::StrDraw(L"→", 386, 150, 32, c);
 	}
 }
