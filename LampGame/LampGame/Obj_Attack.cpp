@@ -78,7 +78,7 @@ void CObjAttack::Action()
 	}
 
 	//アニメーション終了後にオブジェクトを破棄する
-	if (m_ani_frame >= 8)
+	if (m_ani_frame >= 9)
 	{
 		this->SetStatus(false);		//スイッチが押されたら消滅
 		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
@@ -102,10 +102,13 @@ void CObjAttack::Draw()
 
 	//切り取り位置の設定
 	{
-		src.m_top = ABLOCK_INT_X_SIZE;
+		float x;
+		x = 0.5;
+
+		src.m_top = x;
 		src.m_left = 0.0f + AniData[m_ani_frame] * ABLOCK_INT_X_SIZE;
-		src.m_right = ABLOCK_INT_X_SIZE + AniData[m_ani_frame] * ABLOCK_INT_X_SIZE;
-		src.m_bottom = src.m_top + ABLOCK_INT_X_SIZE;
+		src.m_right = src.m_left + ABLOCK_INT_X_SIZE;
+		src.m_bottom = src.m_top + ABLOCK_INT_X_SIZE - (x);
 	}
 
 	//表示位置の設定　向きで表示位置を変える

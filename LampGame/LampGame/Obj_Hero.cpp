@@ -113,7 +113,7 @@ void CObjHero::Action()
 						Objs::InsertObj(obj_attack, OBJ_ATTACK, 100);		//作った弾丸オブジェクトをマネージャーに登録
 
 						//攻撃音を鳴らす
-						Audio::Start(3);
+						Audio::Start(9);
 
 						attack_flag = false;
 					}
@@ -350,6 +350,7 @@ void CObjHero::Action()
 			}
 		}
 
+		//影→光時に主人公の位置を元に戻す
 		if (move_flag == false)
 		{
 			x = m_sx - m_px;
@@ -361,8 +362,8 @@ void CObjHero::Action()
 			m_vy = -sin(3.14 / 180 * ar);
 			UnitVec(&m_vx, &m_vy);
 
-			m_px += 8 * m_vx;
-			m_py += 8 * m_vy;
+			m_px += 12 * m_vx;
+			m_py += 12 * m_vy;
 
 			if (m_sx - 5 < m_px && m_px < m_sx + 5 && m_sy - 5 < m_py && m_py < m_sy + 5)
 			{
