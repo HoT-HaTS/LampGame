@@ -328,7 +328,7 @@ void CObjBlock::BlockHitEnemy(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] > 0 && m_map[i][j] != 4)
+			if (m_map[i][j] == 1 || m_map[i][j] == 2 || m_map[i][j] == 4)
 			{
 				//要素番号を座標に変更
 				float bx = j * 64.0f;
@@ -374,9 +374,6 @@ void CObjBlock::BlockHitEnemy(
 							//上
 							*down = true;	//オブジェクトの下の部分が衝突している
 							*y = by - 64.0f;	//ブロックの位置+オブジェクトの幅
-							//種類を渡すのスタートとゴールのみ変更する
-							if (m_map[i][j] >= 2)
-								*bt = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
 							*vy = 0.0f;
 						}
 						if (r > 135 && r < 225)

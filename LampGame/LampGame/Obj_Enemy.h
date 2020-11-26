@@ -2,10 +2,12 @@
 //使用するヘッダー
 #include "GameL/SceneObjManager.h"
 
+using namespace GameL;
+
 //関数化
 //敵のサイズ
-#define E_XSIZE (64.0f);
-#define E_YSIZE (64.0f);
+#define E_XSIZE (64.0);
+#define E_YSIZE (64.0);
 
 //移動ベクトルの初期化
 #define INIT_E_VX (0.0f);
@@ -18,10 +20,6 @@
 
 //向きの初期化
 #define INIT_E_POSTURE (1.0f);
-
-
-//使用するネームスペース
-using namespace GameL;
 
 //オブジェクト：
 class CObjEnemy : public CObj
