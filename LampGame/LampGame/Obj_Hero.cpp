@@ -68,6 +68,8 @@ void CObjHero::Init()
 
 	count = 0;
 
+	hg_flag = false;
+	a=0;
 }
 
 //アクション
@@ -378,14 +380,31 @@ void CObjHero::Action()
 
 		if (L_flag == true)
 		{
+			if (hg_flag == true)
+				a += 1;
 			//ステージ終了条件(ゴール到達)
 			if (m_block_type_goal == H_GOAL_BLOCK)
 			{
+				
+				//CObjBlock* g_scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+				//g_scroll->GetScroll();
+				//float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+				//
+				//RECT_F src;	//描画元切り取り位置
+				//RECT_F dst;	//描画先表示位置
+				//dst.m_top = i * BLOCK_SIZE - GOAL_T;
+				//dst.m_left = j * BLOCK_SIZE + s1_scroll - GOAL_T;
+				//dst.m_right = dst.m_left + GOAL_R;
+				//dst.m_bottom = dst.m_top + GOAL_B;
+
+				////ゴールブロック描画
+				//BlockDraw(BLOCK_SIZE, 0.0f, &dst, c, GOAL_BLOCK)
+
 				((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
 
 				for (int i = 1; i <= 5; i++)
 				{
-					if (((UserData*)Save::GetData())->clear[i] == true)
+					if (((UserData*)Save::GetData())->clear[i] == true && hg_flag == false)
 					{
 						count++;
 					}
@@ -396,9 +415,15 @@ void CObjHero::Action()
 				}
 				else
 				{
-					Scene::SetScene(new CSceneSelect());
+					hg_flag = true;
 				}
 
+			}
+			if (a > 100)
+			{
+				hg_flag = false;
+				a = 0;
+				//Scene::SetScene(new CSceneSelect());
 			}
 		}
 	}

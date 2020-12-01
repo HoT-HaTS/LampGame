@@ -17,6 +17,8 @@ void CObjMain::Init()
 {
 	 m_flag = true;
 	 coin_count = 0;
+	 g_flag = false;
+	 alpha = 0.0f;
 }
 
 //アクション
@@ -35,6 +37,29 @@ void CObjMain::Action()
 	
 	}
 
+	//ゴールの演出用、主人公の情報取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	g_flag = hero->GetG_Flag();
+	if (g_flag == false)
+	{
+			float  c[4] = { 1.0f, 1.0f, 1.0f, alpha };
+
+			alpha += 0.1f;
+
+			RECT_F src;	//描画元切り取り位置
+			RECT_F dst;	//描画先表示位置
+
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
+			src.m_right = 800.0f;
+			src.m_bottom = 600.0f;
+			dst.m_top = 0.0f;
+			dst.m_left = 0.0f;
+			dst.m_right = 800.0f;
+			dst.m_bottom = 600.0f;
+
+			Draw::Draw(61, &src, &dst, c, 0.0f);
+	}
 
 	//ポーズ用
 	if (Input::GetVKey('P') == true)

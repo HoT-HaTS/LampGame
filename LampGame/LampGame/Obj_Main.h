@@ -17,5 +17,9 @@ public:
 private:
 	bool m_flag;
 	int coin_count;
+
+	//ƒS[ƒ‹‰‰o—p‚Ì•Ï”
+	float alpha;
+	bool g_flag;
 };
 

@@ -87,6 +87,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"graphic/BG_Area1.png", 60, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/White.png", 61, TEX_SIZE_512);
 
 
 	//音楽データ読み込み用
