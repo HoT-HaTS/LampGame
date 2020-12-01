@@ -32,5 +32,7 @@ private:
 	float m_py;
 	float m_vx;			//移動ベクトル
 	float m_vy;
+
+	bool m_flag;		//主人公動いているかフラグ
 };
 

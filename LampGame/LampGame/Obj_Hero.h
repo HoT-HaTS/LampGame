@@ -15,7 +15,7 @@ using namespace GameL;
 #define INIT_ANI_TIME (0.0)		//アニメーションタイム	
 #define INIT_ANI_FRAME (0.0)	//アニメーションフレーム
 
-#define INIT_SPEED_POWER (1.2)	//加算速度
+#define INIT_SPEED_POWER (1.4)	//加算速度
 #define INIT_H_ANI_MAX_TIME (5.0)	
 
 #define INIT_FRICTION (0.2)	//摩擦係数
@@ -61,6 +61,7 @@ class CObjHero : public CObj
 		float GetPosture() { return m_posture; }
 
 		bool Get_L_flag(){ return L_flag; }
+		bool Get_M_flag() { return move_flag; }
 
 		void SetX(float x) { m_px = x; }
 		void SetY(float y) { m_py = y; }
@@ -136,7 +137,10 @@ class CObjHero : public CObj
 		float y;			//yベクトル
 		float ar;			//移動元と移動先の角度
 
-		int fall_time;	//主人公が落下した時用の時間
+		int fall_time;		//主人公が落下した時用の時間
 
-		int count;		//ステージクリア時の条件
+		int count;			//ステージクリア時の条件
+
+		bool dead_flag;		//死んだか判定するフラグ
+		int respawn_time;	//死亡時から復活するまでの時間
 };
