@@ -31,6 +31,7 @@ void CObjAttack::Init()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);		//Obj_Heroから主人公の向きを取ってくる
 	m_posture = hero->GetPosture();
 
+	m_flag = true;
 
 	//向きでHitBoxの位置を変える
 	if (m_posture)
@@ -53,28 +54,37 @@ void CObjAttack::Action()
 	m_px += m_vx;
 	m_py += m_vy;
 
-	//自身のHitBoxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
-	//HitBoxの位置の変更
-	hit->SetPos(m_px, m_py);
+	m_flag = hero->Get_M_flag();
+	
+	if (m_flag == true)
+	{
+		//自身のHitBoxを持ってくる
+		CHitBox* hit = Hits::GetHitBox(this);
+		//HitBoxの位置の変更
+		hit->SetPos(m_px, m_py);
+
+		//向きでHitBoxの位置を変える
+		if (m_posture)
+		{
+			CHitBox* hit = Hits::GetHitBox(this);
+			hit->SetPos(m_px, m_py);
+		}
+		else
+		{
+			CHitBox* hit = Hits::GetHitBox(this);
+			hit->SetPos(m_px - ABLOCK_INT_X_SIZE + 4, m_py);
+		}
+	}
+	else if (m_flag == false)
+	{
+		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+	}
 
 	//アニメーションの調整
 	m_ani_time += 1;
 	if (m_ani_time % 3 == 0)
 	{
 		m_ani_frame += 1;
-	}
-
-	//向きでHitBoxの位置を変える
-	if (m_posture)
-	{
-		CHitBox* hit = Hits::GetHitBox(this);
-		hit->SetPos(m_px, m_py);
-	}
-	else
-	{
-		CHitBox* hit = Hits::GetHitBox(this);
-		hit->SetPos(m_px - ABLOCK_INT_X_SIZE+4, m_py);
 	}
 
 	//アニメーション終了後にオブジェクトを破棄する

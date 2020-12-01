@@ -61,6 +61,7 @@ class CObjHero : public CObj
 		float GetPosture() { return m_posture; }
 
 		bool Get_L_flag(){ return L_flag; }
+		bool Get_M_flag() { return move_flag; }
 
 		void SetX(float x) { m_px = x; }
 		void SetY(float y) { m_py = y; }

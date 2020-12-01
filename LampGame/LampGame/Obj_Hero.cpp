@@ -368,7 +368,7 @@ void CObjHero::Action()
 			m_px += 12 * m_vx;
 			m_py += 12 * m_vy;
 
-			if (m_sx - 5 < m_px && m_px < m_sx + 5 && m_sy - 5 < m_py && m_py < m_sy + 5)
+			if (m_sx - 10 < m_px && m_px < m_sx + 10 && m_sy - 10 < m_py && m_py < m_sy + 10)
 			{
 				//“–‚½‚è”»’è—p‚ÌHitBox‚ðì¬
 				Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);

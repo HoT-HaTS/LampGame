@@ -101,23 +101,23 @@ void CObjSelect::Draw()
 	{
 		Font::StrDraw(L"š", 88, 150, 32, c1);
 	}
-	else if (((UserData*)Save::GetData())->clear[1] == true)
+	if (((UserData*)Save::GetData())->clear[1] == true)
 	{
 		Font::StrDraw(L"š", 88, 200, 32, c1);
 	}
-	else if (((UserData*)Save::GetData())->clear[2] == true)
+	if (((UserData*)Save::GetData())->clear[2] == true)
 	{
 		Font::StrDraw(L"š", 88, 250, 32, c1);
 	}
-	else if (((UserData*)Save::GetData())->clear[3] == true)
+	if (((UserData*)Save::GetData())->clear[3] == true)
 	{
 		Font::StrDraw(L"š", 88, 300, 32, c1);
 	}
-	else if (((UserData*)Save::GetData())->clear[4] == true)
+	if (((UserData*)Save::GetData())->clear[4] == true)
 	{
 		Font::StrDraw(L"š", 88, 350, 32, c1);
 	}
-	else if (((UserData*)Save::GetData())->clear[5] == true)
+	if (((UserData*)Save::GetData())->clear[5] == true)
 	{
 		Font::StrDraw(L"š", 418, 150, 32, c1);
 	}
