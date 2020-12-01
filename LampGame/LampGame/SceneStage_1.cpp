@@ -86,7 +86,13 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"graphic/BG_Area1.png", 60, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area1.png", 14, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area2.png", 15, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area3.png", 16, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area4.png", 17, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area5.png", 18, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area6.png", 19, TEX_SIZE_512);
+
 
 
 	//音楽データ読み込み用
@@ -117,6 +123,7 @@ void CSceneStage_1::InitScene()
 
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 6);
+
 
 	//看板出現用
 	if (((UserData*)Save::GetData())->stage_id == 0)

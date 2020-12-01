@@ -14,7 +14,7 @@ using namespace GameL;
 CObjEnemy::CObjEnemy(float x, float y)
 {
 	m_px = x;		//位置
-	m_py = y;
+	m_py = y - 10;
 }
 
 //イニシャライズ
@@ -28,7 +28,7 @@ void CObjEnemy::Init()
 	m_ani_time = INIT_ANI_TIME;
 	m_ani_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
 
-	//m_speed_power = INIT_E_SPEED_POWER;	//通常速度
+	m_speed_power = INIT_E_SPEED_POWER;	//通常速度
 	m_ani_max_time = INIT_E_ANI_MAX_TIME; //アニメーション間隔幅
 
 	m_move = true;			//true=右　false=左
@@ -50,33 +50,8 @@ void CObjEnemy::Action()
 {
 
 	//通常速度
-	m_speed_power = -0.3;    //移動速度
-	m_ani_max_time = 8;		//アニメーション間隔幅
-
-	//ブロック衝突で向き変更
-	if (m_hit_left == true)
-	{
-		m_move = true;
-	}
-	if (m_hit_right == true)
-	{
-		m_move = false;
-	}
-
-	//移動方向
-	if (m_move == false)
-	{
-		m_vx += m_speed_power;
-		m_posture = 1.0f;
-		m_ani_time += 1;
-	}
-
-	else if (m_move == true)
-	{
-		m_vx -= m_speed_power;
-		m_posture = 0.0f;
-		m_ani_time += 1;
-	}
+	//m_speed_power = 0.3;    //移動速度
+	//m_ani_max_time = 8;		//アニメーション間隔幅
 
 	//Hero.cppから光フラグを取得する
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -84,46 +59,74 @@ void CObjEnemy::Action()
 
 	if (L_flag_enemy == true)
 	{
-		m_ani_time += 1;
+
+		//ブロック衝突で向き変更
+		if (m_hit_left == true)
+		{
+			m_move = true;
+		}
+		if (m_hit_right == true)
+		{
+			m_move = false;
+		}
+
+		//移動方向
+		if (m_move == false)
+		{
+			m_vx += m_speed_power;
+			m_posture = 1.0f;		//右向き
+		}
+		else if (m_move == true)
+		{
+			m_vx -= m_speed_power;
+			m_posture = 0.0f;		//左向き
+		}
+
+
+		if (L_flag_enemy == true)
+		{
+			m_ani_time += 1;
+		}
+
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame += 1;
+			m_ani_time = 0;
+		}
+
+		if (m_ani_frame >= 8)
+		{
+			m_ani_frame = 0;
+		}
+
+
+		//摩擦
+		m_vx += -(m_vx * 0.098);
+
+		//自由落下運動
+		m_vy += 9.8 / (16.0f);
+
+		//ブロックタイプ検知用の変数がないためのダミー
+		int d1;
+
+		//ブロックとの当たり判定実行
+		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+		pb->BlockHitEnemy(&m_px, &m_py, false,
+			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+			&d1);
+
+		//位置の更新
+		m_px += m_vx;
+		m_py += m_vy;
 	}
 
-	if (m_ani_time > m_ani_max_time)
-	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
-	}
+		//ブロック情報を持ってくる
+		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	if (m_ani_frame >= 8)
-	{
-		m_ani_frame = 0;
-	}
+		//HitBoxの位置の変更
+		CHitBox* hit = Hits::GetHitBox(this);
+		hit->SetPos(m_px + block->GetScroll(), m_py);
 
-
-	//摩擦
-	m_vx += -(m_vx * 0.098);
-
-	//自由落下運動
-	//m_vy += 9.8 / (16.0f);
-
-	//ブロックタイプ検知用の変数がないためのダミー
-	int d1;
-
-	//ブロックとの当たり判定実行
-	CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-	pb->BlockHitEnemy(&m_px, &m_py, false,
-		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&d1);
-
-	//位置の更新
-	/*m_px += m_vx;
-	m_py += m_vy;*/
-
-	//ブロック情報を持ってくる
-	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-
-	//HitBoxの位置の変更
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + block->GetScroll(), m_py);
 
 	//主人公の位置の取得
 	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -171,14 +174,7 @@ void CObjEnemy::Action()
 			hero->SetVY(0.0);
 		}
 	}
-	
 
-	//敵オブジェクトと接触したら主人公削除
-	//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
-	//{
-	//	  this->SetStatus(false);    //自身に削除命令を出す
-	//	  Hits::DeleteHitBox(this);  //主人公機が所有するHitBoxを削除する
-	//}
 
 	if (L_flag_enemy == true)
 	{
@@ -222,8 +218,8 @@ void CObjEnemy::Draw()
 
 	//切り取り位置の設定
 	src.m_top = 0.0f;
-	src.m_left = 0.0f + AniData[m_ani_frame] * E_XSIZE;
-	src.m_right = src.m_left + E_XSIZE;
+	src.m_right = AniData[m_ani_frame]*BLOCK_SIZE - BLOCK_SIZE * m_posture;
+	src.m_left = src.m_right - (1 - m_posture)*BLOCK_SIZE + m_posture * BLOCK_SIZE;
 	src.m_bottom = E_YSIZE;
 
 	//表示位置の設定

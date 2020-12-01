@@ -15,6 +15,7 @@ public:
 	void Action();		//アクション
 	void Draw();		//ドロー
 
+
 	bool Get_G5_flag() { return G5_flag; }
 
 
