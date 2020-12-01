@@ -68,6 +68,9 @@ void CObjHero::Init()
 
 	count = 0;
 
+	dead_flag = false;
+
+	respawn_time = 0;
 }
 
 //ƒAƒNƒVƒ‡ƒ“

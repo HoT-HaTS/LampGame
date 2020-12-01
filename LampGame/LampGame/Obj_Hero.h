@@ -136,7 +136,10 @@ class CObjHero : public CObj
 		float y;			//yベクトル
 		float ar;			//移動元と移動先の角度
 
-		int fall_time;	//主人公が落下した時用の時間
+		int fall_time;		//主人公が落下した時用の時間
 
-		int count;		//ステージクリア時の条件
+		int count;			//ステージクリア時の条件
+
+		bool dead_flag;		//死んだか判定するフラグ
+		int respawn_time;	//死亡時から復活するまでの時間
 };
