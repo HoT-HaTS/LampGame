@@ -24,42 +24,12 @@ void CObj_G_Block2::Init()
 
 	l_f = true;
 
-	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
 }
 
 //アクション
 void CObj_G_Block2::Action()
 {
-	//スクロールの値を取得
-	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//主人公の位置の取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-
-	G2_flag = switch_flag;
-
-	if (G2_flag == false)
-	{
-		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
-		a_flag = true;
-	}
-	else if (G2_flag == true)
-	{
-		if (a_flag == true)
-		{
-			Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_BLOCK, 1);
-			a_flag = false;
-		}
-		//主人公の衝突確認用のフラグの初期化
-		hero->SetUp(false);
-		hero->SetDown(false);
-		hero->SetLeft(false);
-		hero->SetRight(false);
-
-		//HitBoxの内容を更新
-		CHitBox* hit = Hits::GetHitBox(this);
-		hit->SetPos(m_px + scroll->GetScroll(), m_py);
-	}
 }
 
 //ドロー

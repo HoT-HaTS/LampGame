@@ -4,6 +4,7 @@
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
 #include "GameL/SceneObjManager.h"
+#include "GameL/UserData.h"
 
 #include "GameHead.h"
 #include "Obj_Block.h"
@@ -22,6 +23,9 @@ CObjBlock::CObjBlock(int map[10][100])
 void CObjBlock::Init()
 {
 	m_scroll = 0.0f;
+
+
+	coin_count = 0;
 }
 
 //アクション
@@ -54,10 +58,8 @@ void CObjBlock::Action()
 //ドロー
 void CObjBlock::Draw()
 {
-	int background_flag = 0;
-
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
-	float  c[4] = { 1.0f, 1.0f, 1.0f, 0.9f };
+	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	float  c2[4] = { 1.0f, 1.0f, 1.0f, 0.9f };
 
 	RECT_F src;	//描画元切り取り位置
@@ -79,7 +81,8 @@ void CObjBlock::Draw()
 		dst.m_left = 0.0f;
 		dst.m_right = DRAW_SIZE_R;
 		dst.m_bottom = DRAW_SIZE_B;
-		Draw::Draw(20, &src, &dst, c, 0.0f);
+
+		Draw::Draw(((UserData*)Save::GetData())->stage_id + 14, &src, &dst, c, 0.0f);
 	}
 	else
 	{
@@ -93,7 +96,8 @@ void CObjBlock::Draw()
 		dst.m_left = 0.0f;
 		dst.m_right = DRAW_SIZE_R;
 		dst.m_bottom = DRAW_SIZE_B;
-		Draw::Draw(20, &src, &dst, c2, 0.0f);
+
+		Draw::Draw(((UserData*)Save::GetData())->stage_id + 14, &src, &dst, c, 0.0f);
 	}
 }
 
@@ -127,6 +131,10 @@ void CObjBlock::BlockHit(
 	//踏んでいるblockの種類の初期化
 	*btu = 0;
 	*btg = 0;
+
+	//主人公情報取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	coin_count = hero->GetCoin();
 
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < 10; i++)
@@ -290,6 +298,86 @@ void CObjBlock::BlockHit(
 					}
 				}
 			}
+			else if (m_map[i][j] == 7)
+			{
+				if (coin_count < 3)
+				{
+					//要素番号を座標に変更
+					float bx = j * BLOCK_SIZE;
+					float by = i * BLOCK_SIZE;
+
+					//スクロールの影響
+					float scroll = scroll_on ? m_scroll : 0;
+
+					//オブジェクトとブロックの当たり判定(ブロックの左:右:上:下の順)
+					if ((*x + (-scroll) + BLOCK_SIZE > bx) && (*x + (-scroll) < bx + BLOCK_SIZE) && (*y + (2 * BLOCK_SIZE) > by) && (*y < by + BLOCK_SIZE))
+					{
+						//上下左右判定
+
+						//主人公とブロックの中心でvector作成
+						float rvx = (*x + (-scroll) + (BLOCK_SIZE / 2)) - (bx + (BLOCK_SIZE / 2));
+						float rvy = (*y + BLOCK_SIZE) - (by + (BLOCK_SIZE / 2));
+
+						//長さlenを求める
+						float len = sqrt(rvx * rvx + rvy * rvy);
+
+						//角度rを求める
+						float r = atan2(rvy, rvx);	//(ラジアン)
+						r = r * 180.0f / 3.14f;		//度
+
+						if (r <= 0.0f)
+							r = abs(r);
+						else
+							r = 360.0f - abs(r);
+
+						//lenがある一定の長さより短い場合に判定に入る。
+						if (len < HIT_LENGTH)
+						{
+							//角度で上下左右を判定
+							if ((r < 56 && r >= 0) || r > 304)
+							{
+								//右
+								*right = true;								//オブジェクトの左の部分が衝突している
+								*x = bx + (BLOCK_SIZE - 0.5) + (scroll);	//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;							//-VX*反発係数
+								*btg = m_map[i][j];
+							}
+							if (r > 56 && r < 124)
+							{
+								//上
+								*down = true;					//オブジェクトの下の部分が衝突している
+								*y = by - (2 * BLOCK_SIZE);		//ブロックの位置+オブジェクトの幅
+								//種類を渡すのスタートとゴールのみ変更する
+								if (m_map[i][j] >= 2)
+								{
+									*btu = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
+									*btg = m_map[i][j];
+								}
+								*vy = 0.0f;
+							}
+							if (r > 124 && r < 236)
+							{
+								//左
+								*left = true;								//オブジェクトの右の部分が衝突している
+								*x = bx - (BLOCK_SIZE + 0.5) + (scroll);	//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;							//-VX*反発係数
+								*btg = m_map[i][j];
+							}
+							if (236 < r && r < 304)
+							{
+								//下
+								*up = true;						//オブジェクトの上の部分が衝突している
+								*y = by + (BLOCK_SIZE - 0.5);	//ブロックの位置+オブジェクトの幅
+								*btg = m_map[i][j];
+								if (*vy < 0)
+								{
+									*vy = 0.0f;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -322,6 +410,10 @@ void CObjBlock::BlockHitEnemy(
 
 	//踏んでいるblockの種類の初期化
 	*bt = 0;
+
+	//主人公情報取得
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	coin_count = hero->GetCoin();
 
 	//m_mapの全要素にアクセス
 	for (int i = 0; i < 10; i++)
@@ -391,6 +483,156 @@ void CObjBlock::BlockHitEnemy(
 							if (*vy < 0)
 							{
 								*vy = 0.0f;
+							}
+						}
+					}
+				}
+			}
+			else if (m_map[i][j] == 5)
+			{
+				if (switch_flag == true)
+				{
+					//要素番号を座標に変更
+					float bx = j * BLOCK_SIZE;
+					float by = i * BLOCK_SIZE;
+
+					//スクロールの影響
+					float scroll = scroll_on ? m_scroll : 0;
+
+					//オブジェクトとブロックの当たり判定(ブロックの左:右:上:下の順)
+					if ((*x + (-scroll) + BLOCK_SIZE > bx) && (*x + (-scroll) < bx + BLOCK_SIZE) && (*y + (2 * BLOCK_SIZE) > by) && (*y < by + BLOCK_SIZE))
+					{
+						//上下左右判定
+
+						//主人公とブロックの中心でvector作成
+						float rvx = (*x + (-scroll) + (BLOCK_SIZE / 2)) - (bx + (BLOCK_SIZE / 2));
+						float rvy = (*y + BLOCK_SIZE) - (by + (BLOCK_SIZE / 2));
+
+						//長さlenを求める
+						float len = sqrt(rvx * rvx + rvy * rvy);
+
+						//角度rを求める
+						float r = atan2(rvy, rvx);	//(ラジアン)
+						r = r * 180.0f / 3.14f;		//度
+
+						if (r <= 0.0f)
+							r = abs(r);
+						else
+							r = 360.0f - abs(r);
+
+						//lenがある一定の長さより短い場合に判定に入る。
+						if (len < 88.0)
+						{
+							//角度で上下左右を判定
+							if ((r < 45 && r >= 0) || r > 315)
+							{
+								//右
+								*right = true;								//オブジェクトの左の部分が衝突している
+								*x = bx + 64.0f + (scroll);				//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;							//-VX*反発係数
+							}
+							if (r > 45 && r < 135)
+							{
+								//上
+								*down = true;					//オブジェクトの下の部分が衝突している
+								*y = by - (2 * BLOCK_SIZE);		//ブロックの位置+オブジェクトの幅
+								//種類を渡すのスタートとゴールのみ変更する
+								if (m_map[i][j] >= 2)
+								{
+								}
+								*vy = 0.0f;
+							}
+							if (r > 135 && r < 225)
+							{
+								//左
+								*left = true;								//オブジェクトの右の部分が衝突している
+								*x = bx - 64.0f + (scroll);					//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;							//-VX*反発係数
+							}
+							if (225 < r && r < 45)
+							{
+								//下
+								*up = true;						//オブジェクトの上の部分が衝突している
+								*y = by + (BLOCK_SIZE - 0.5);	//ブロックの位置+オブジェクトの幅
+								if (*vy < 0)
+								{
+									*vy = 0.0f;
+								}
+							}
+						}
+					}
+				}
+			}
+			else if (m_map[i][j] == 7)
+			{
+				if (coin_count < 3)
+				{
+					//要素番号を座標に変更
+					float bx = j * BLOCK_SIZE;
+					float by = i * BLOCK_SIZE;
+
+					//スクロールの影響
+					float scroll = scroll_on ? m_scroll : 0;
+
+					//オブジェクトとブロックの当たり判定(ブロックの左:右:上:下の順)
+					if ((*x + (-scroll) + BLOCK_SIZE > bx) && (*x + (-scroll) < bx + BLOCK_SIZE) && (*y + (2 * BLOCK_SIZE) > by) && (*y < by + BLOCK_SIZE))
+					{
+						//上下左右判定
+
+						//主人公とブロックの中心でvector作成
+						float rvx = (*x + (-scroll) + (BLOCK_SIZE / 2)) - (bx + (BLOCK_SIZE / 2));
+						float rvy = (*y + BLOCK_SIZE) - (by + (BLOCK_SIZE / 2));
+
+						//長さlenを求める
+						float len = sqrt(rvx * rvx + rvy * rvy);
+
+						//角度rを求める
+						float r = atan2(rvy, rvx);	//(ラジアン)
+						r = r * 180.0f / 3.14f;		//度
+
+						if (r <= 0.0f)
+							r = abs(r);
+						else
+							r = 360.0f - abs(r);
+
+						//lenがある一定の長さより短い場合に判定に入る。
+						if (len < 88.0)
+						{
+							//角度で上下左右を判定
+							if ((r < 45 && r >= 0) || r > 315)
+							{
+								//右
+								*right = true;								//オブジェクトの左の部分が衝突している
+								*x = bx + 64.0f + (scroll);				//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;							//-VX*反発係数
+							}
+							if (r > 45 && r < 135)
+							{
+								//上
+								*down = true;					//オブジェクトの下の部分が衝突している
+								*y = by - (2 * BLOCK_SIZE);		//ブロックの位置+オブジェクトの幅
+								//種類を渡すのスタートとゴールのみ変更する
+								if (m_map[i][j] >= 2)
+								{
+								}
+								*vy = 0.0f;
+							}
+							if (r > 135 && r < 225)
+							{
+								//左
+								*left = true;								//オブジェクトの右の部分が衝突している
+								*x = bx - 64.0f + (scroll);					//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;							//-VX*反発係数
+							}
+							if (225 < r && r < 45)
+							{
+								//下
+								*up = true;						//オブジェクトの上の部分が衝突している
+								*y = by + (BLOCK_SIZE - 0.5);	//ブロックの位置+オブジェクトの幅
+								if (*vy < 0)
+								{
+									*vy = 0.0f;
+								}
 							}
 						}
 					}

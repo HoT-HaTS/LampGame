@@ -23,9 +23,6 @@ void CObj_G_Block3::Init()
 	L_flag = true;
 
 	m_scroll = 0;
-
-	//HitBoxçÏê¨
-	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_BLOCK, OBJ_G_BLOCK3, 1);
 }
 
 //ÉAÉNÉVÉáÉì
