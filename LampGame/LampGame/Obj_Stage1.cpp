@@ -259,6 +259,13 @@ void CObjStage1::BlockDraw(float x, float y, RECT_F* dst, float c[], int block_i
 	}
 	else if (block_id == GOAL_BLOCK)
 	{
+		bool S_flag = hero->GetG_Flag();
+
+		float alpha = 1.0f;
+		if (S_flag == true)
+			alpha -= 0.0005f;
+		float gc[4] = { 1.0f,1.0f,1.0f,alpha };
+
 		//ゴールブロック描画
 		RECT_F src;
 		src.m_top = y;

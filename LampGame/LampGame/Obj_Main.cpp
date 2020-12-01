@@ -40,25 +40,12 @@ void CObjMain::Action()
 	//ゴールの演出用、主人公の情報取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	g_flag = hero->GetG_Flag();
-	if (g_flag == false)
+	//flagがtrueの時、演出開始
+	/*if (g_flag == true)*/
+	if (Input::GetVKey('K') == true)
 	{
-			float  c[4] = { 1.0f, 1.0f, 1.0f, alpha };
-
-			alpha += 0.1f;
-
-			RECT_F src;	//描画元切り取り位置
-			RECT_F dst;	//描画先表示位置
-
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 800.0f;
-			src.m_bottom = 600.0f;
-			dst.m_top = 0.0f;
-			dst.m_left = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(61, &src, &dst, c, 0.0f);
+		CObjGoalscene* obj_goalscene = new CObjGoalscene();
+		Objs::InsertObj(obj_goalscene, OBJ_GOALSCENE, 99);
 	}
 
 	//ポーズ用
