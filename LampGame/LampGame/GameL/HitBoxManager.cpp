@@ -383,7 +383,7 @@ void  CHitBoxManager::DrawHitBox()
 		else								{ col[0]=0.5f;col[1]=0.5f;col[2]=0.5f; }
 		
 		//当たり判定描画(描画しない時はコメントアウト)
-		/*CDrawTexture::DrawHitBox(
+	/*	CDrawTexture::DrawHitBox(
 			(*itr)->GetHitBox()->x,
 			(*itr)->GetHitBox()->y,
 			(*itr)->GetHitBox()->h,

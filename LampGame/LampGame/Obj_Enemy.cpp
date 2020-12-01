@@ -21,8 +21,8 @@ CObjEnemy::CObjEnemy(float x, float y)
 void CObjEnemy::Init()
 {
 
-	//m_vx = INIT_E_VX;		//移動ベクトル
-	//m_vy = INIT_E_VY;
+	m_vx = INIT_E_VX;		//移動ベクトル
+	m_vy = INIT_E_VY;
 	//m_posture = INIT_E_POSTURE;	//右向き0.0f 左向き1.0f
 
 	m_ani_time = INIT_ANI_TIME;
@@ -50,33 +50,33 @@ void CObjEnemy::Action()
 {
 
 	//通常速度
-	//m_speed_power = 0.3f;    //移動速度
+	m_speed_power = -0.3;    //移動速度
 	m_ani_max_time = 8;		//アニメーション間隔幅
 
-	////ブロック衝突で向き変更
-	//if (m_hit_left == true)
-	//{
-	//	m_move = true;
-	//}
-	//if (m_hit_right == true)
-	//{
-	//	m_move = false;
-	//}
+	//ブロック衝突で向き変更
+	if (m_hit_left == true)
+	{
+		m_move = true;
+	}
+	if (m_hit_right == true)
+	{
+		m_move = false;
+	}
 
-	////移動方向
-	//if (m_move == false)
-	//{
-	//	m_vx += m_speed_power;
-	//	m_posture = 1.0f;
-	//	m_ani_time += 1;
-	//}
+	//移動方向
+	if (m_move == false)
+	{
+		m_vx += m_speed_power;
+		m_posture = 1.0f;
+		m_ani_time += 1;
+	}
 
-	//else if (m_move == true)
-	//{
-	//	m_vx -= m_speed_power;
-	//	m_posture = 0.0f;
-	//	m_ani_time += 1;
-	//}
+	else if (m_move == true)
+	{
+		m_vx -= m_speed_power;
+		m_posture = 0.0f;
+		m_ani_time += 1;
+	}
 
 	//Hero.cppから光フラグを取得する
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -99,10 +99,10 @@ void CObjEnemy::Action()
 	}
 
 
-	////摩擦
-	//m_vx += -(m_vx * 0.098);
+	//摩擦
+	m_vx += -(m_vx * 0.098);
 
-	////自由落下運動
+	//自由落下運動
 	//m_vy += 9.8 / (16.0f);
 
 	//ブロックタイプ検知用の変数がないためのダミー
@@ -114,9 +114,9 @@ void CObjEnemy::Action()
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&d1);
 
-	////位置の更新
-	//m_px += m_vx;
-	//m_py += m_vy;
+	//位置の更新
+	/*m_px += m_vx;
+	m_py += m_vy;*/
 
 	//ブロック情報を持ってくる
 	CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
