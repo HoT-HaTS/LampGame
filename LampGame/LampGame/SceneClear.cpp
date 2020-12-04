@@ -33,7 +33,7 @@ void CSceneClear::InitScene()
 	//出力させる文字のグラフィックを作成
 	Font::SetStrTex(L"クリア");
 
-	//Draw::LoadImageW(L"graphic/Stageselect_cursor.png", 1, TEX_SIZE_512);
+	//Draw::LoadImageW(L"graphic/Clear.png", 1, TEX_SIZE_512);
 
 	//音楽データ読み込み用
 	//Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);

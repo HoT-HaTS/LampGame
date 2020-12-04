@@ -56,7 +56,7 @@ struct UserData
 {
 	int mSeveData;	//サンプルセーブデータ
 	int stage_id;
-	bool clear[6];
+	bool clear[7];
 };
 //------------------------------------------------
 
