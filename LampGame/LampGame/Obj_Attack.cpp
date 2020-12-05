@@ -78,6 +78,7 @@ void CObjAttack::Action()
 	else if (m_flag == false)
 	{
 		Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+		this->SetStatus(false);		//スイッチが押されたら消滅
 	}
 
 	//アニメーションの調整
