@@ -86,12 +86,13 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"graphic/Stage_Area1.png", 14, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Stage_Area2.png", 15, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Stage_Area3.png", 16, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Stage_Area4.png", 17, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Stage_Area5.png", 18, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Stage_Area6.png", 19, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area0.png", 14, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area1.png", 15, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area2.png", 16, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area3.png", 17, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area4.png", 18, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area5.png", 19, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area6.png", 20, TEX_SIZE_512);
 
 
 
