@@ -40,9 +40,8 @@ void CObjMain::Action()
 	//ゴールの演出用、主人公の情報取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	g_flag = hero->GetG_Flag();
-	//flagがtrueの時、演出開始
-	/*if (g_flag == true)*/
-	if (Input::GetVKey('K') == true)
+	//flagがtrueの時、演出開始,（今はゴールに触れた瞬間に何回も演出しているので激重になる。）
+	if (g_flag == true)
 	{
 		CObjGoalscene* obj_goalscene = new CObjGoalscene();
 		Objs::InsertObj(obj_goalscene, OBJ_GOALSCENE, 99);
