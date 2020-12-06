@@ -115,43 +115,43 @@ void CObjSelect::Draw()
 	src.m_bottom = src.m_top + 187.0f;
 
 	Font::StrDraw(L"STAGE SELECT", 304, 40, 32, c);
-	Font::StrDraw(L"チュートリアル", 41, 106, 16, c);
-	Font::StrDraw(L"ステージ1", 236, 106, 16, c);
-	Font::StrDraw(L"ステージ2", 431, 106, 16, c);
-	Font::StrDraw(L"ステージ3", 626, 106, 16, c);
-	Font::StrDraw(L"ステージ4", 41, 306, 16, c);
-	Font::StrDraw(L"ステージ5", 236, 306, 16, c);
-	Font::StrDraw(L"ステージ6", 431, 306, 16, c);
+	Font::StrDraw(L"チュートリアル", 57, 106, 16, c);
+	Font::StrDraw(L"ステージ1", 252, 106, 16, c);
+	Font::StrDraw(L"ステージ2", 447, 106, 16, c);
+	Font::StrDraw(L"ステージ3", 642, 106, 16, c);
+	Font::StrDraw(L"ステージ4", 57, 306, 16, c);
+	Font::StrDraw(L"ステージ5", 252, 306, 16, c);
+	Font::StrDraw(L"ステージ6", 447, 306, 16, c);
 	Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c);
 	Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c);
 
 	if (((UserData*)Save::GetData())->clear[0] == true)
 	{
-		Font::StrDraw(L"★", 88, 150, 32, c1);
+		Font::StrDraw(L"★", 41, 106, 16, c1);
 	}
 	if (((UserData*)Save::GetData())->clear[1] == true)
 	{
-		Font::StrDraw(L"★", 88, 200, 32, c1);
+		Font::StrDraw(L"★", 236, 106, 16, c1);
 	}
 	if (((UserData*)Save::GetData())->clear[2] == true)
 	{
-		Font::StrDraw(L"★", 88, 250, 32, c1);
+		Font::StrDraw(L"★",431, 106, 16, c1);
 	}
 	if (((UserData*)Save::GetData())->clear[3] == true)
 	{
-		Font::StrDraw(L"★", 88, 300, 32, c1);
+		Font::StrDraw(L"★", 626, 106, 16, c1);
 	}
 	if (((UserData*)Save::GetData())->clear[4] == true)
 	{
-		Font::StrDraw(L"★", 88, 350, 32, c1);
+		Font::StrDraw(L"★", 41, 306, 16, c1);
 	}
 	if (((UserData*)Save::GetData())->clear[5] == true)
 	{
-		Font::StrDraw(L"★", 418, 150, 32, c1);
+		Font::StrDraw(L"★", 236, 306, 16, c1);
 	}
 	if (((UserData*)Save::GetData())->clear[6] == true)
 	{
-		Font::StrDraw(L"★", 418, 200, 32, c1);
+		Font::StrDraw(L"★", 431, 306, 16, c1);
 	}
 
 	if (((UserData*)Save::GetData())->stage_id == 0)
