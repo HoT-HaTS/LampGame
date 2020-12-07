@@ -242,7 +242,7 @@ void CObjStage1::BlockDraw(float x, float y, RECT_F* dst, float c[], int block_i
 			src.m_right = src.m_left + BLOCK_SIZE;
 			src.m_bottom = src.m_top + BLOCK_SIZE;
 			//•`‰æ
-			Draw::Draw(((UserData*)Save::GetData())->stage_id + 60, &src, dst, c, 0.0f);
+			Draw::Draw(((UserData*)Save::GetData())->stage_id + 40, &src, dst, c, 0.0f);
 		}
 
 		else if (l_f == false)
