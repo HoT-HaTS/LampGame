@@ -40,9 +40,10 @@ void CObjEnemy::Init()
 	m_hit_right = false;
 
 	E_flag = false;
+	d_flag = false;
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE, BLOCK_SIZE-10, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 }
 
 //アクション
@@ -123,56 +124,56 @@ void CObjEnemy::Action()
 
 		//HitBoxの位置の変更
 		CHitBox* hit = Hits::GetHitBox(this);
-		hit->SetPos(m_px + block->GetScroll(), m_py);
-
-
-		//主人公の位置の取得
-		//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		hit->SetPos(m_px + block->GetScroll(), m_py+10);
 
 		//スクロールの値を取得
 		CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-		//主人公と敵のあたり判定チェック
-		//当たっている場合
-		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-		{
-			float hx = hero->GetX();
-			float hy = hero->GetY();
+		d_flag = hero->Get_D_flag();
 
-			//敵の上じゃない条件
-			if (hy + 120 > m_py)
+		if (d_flag == false)
+		{
+			//主人公と敵のあたり判定チェック
+			//当たっている場合
+			if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 			{
-				//敵の左部分に接触
-				if (m_px + scroll->GetScroll() > hx)
+				float hx = hero->GetX();
+				float hy = hero->GetY();
+
+				//敵の上じゃない条件
+				if (hy + 120 > m_py)
 				{
-					hero->SetRight(true);
-					hero->SetX(m_px - 64.5 + scroll->GetScroll());
-					hero->SetVX(-0.8);
+					//敵の左部分に接触
+					if (m_px + scroll->GetScroll() > hx)
+					{
+						hero->SetRight(true);
+						hero->SetX(m_px - 64.5 + scroll->GetScroll());
+						hero->SetVX(-0.8);
+					}
+					//敵の右部分に接触
+					else if (hx > m_px + scroll->GetScroll())
+					{
+						hero->SetLeft(true);
+						hero->SetX(m_px + 63.5 + scroll->GetScroll());
+						hero->SetVX(0.0);
+					}
 				}
-				//敵の右部分に接触
-				else if (hx > m_px + scroll->GetScroll())
+				//敵の上部分に接触
+				if (hy + 125 <= m_py)
 				{
-					hero->SetLeft(true);
-					hero->SetX(m_px + 63.5 + scroll->GetScroll());
-					hero->SetVX(0.0);
+					hero->SetDown(true);
+					hero->SetY(m_py - 128.5);
+					hero->SetVY(0.0);
 				}
-			}
-			//敵の上部分に接触
-			if (hy + 125 <= m_py)
-			{
-				hero->SetDown(true);
-				hero->SetY(m_py - 128.5);
-				hero->SetVY(0.0);
-			}
-			//敵の下部分に接触
-			else if (m_py + 61 <= hy)
-			{
-				hero->SetUp(true);
-				hero->SetY(m_py + 64.5);
-				hero->SetVY(0.0);
+				//敵の下部分に接触
+				else if (m_py + 61 <= hy)
+				{
+					hero->SetUp(true);
+					hero->SetY(m_py + 64.5);
+					hero->SetVY(0.0);
+				}
 			}
 		}
-
 
 		if (L_flag_enemy == true)
 		{
