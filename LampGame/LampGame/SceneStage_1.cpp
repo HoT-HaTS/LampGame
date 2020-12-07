@@ -96,8 +96,13 @@ void CSceneStage_1::InitScene()
 
 
 	//音楽データ読み込み用
-	Audio::LoadAudio(10, L"BGM/main_stage.wav", BACK_MUSIC);
-
+	Audio::LoadAudio(10, L"BGM/Tutorial.wav", BACK_MUSIC);
+	Audio::LoadAudio(11, L"BGM/Stage1.wav", BACK_MUSIC);
+	Audio::LoadAudio(12, L"BGM/Stage2.wav", BACK_MUSIC);
+	Audio::LoadAudio(13, L"BGM/Stage3.wav", BACK_MUSIC);
+	Audio::LoadAudio(14, L"BGM/Stage4.wav", BACK_MUSIC);
+	Audio::LoadAudio(15, L"BGM/Stage5.wav", BACK_MUSIC);
+	Audio::LoadAudio(16, L"BGM/Stage6.wav", BACK_MUSIC);
 
 	//SE読み込み用
 	Audio::LoadAudio(0, L"SE/Shadow_from.wav", EFFECT);
@@ -142,7 +147,7 @@ void CSceneStage_1::InitScene()
 	float v = Audio::VolumeMaster(0);
 	v = Audio::VolumeMaster((0.9 - v));
 
-	Audio::Start(10);
+	Audio::Start(10+ ((UserData*)Save::GetData())->stage_id);
 
 }
 
