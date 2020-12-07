@@ -71,7 +71,6 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/switch.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_attack.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/switch2.png", 12, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/stage_background_beta.png", 20, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/block.png", 21, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Enemy.png", 22, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Board.png", 23, TEX_SIZE_512);
