@@ -442,13 +442,13 @@ void CObjHero::Action()
 		//{
 		//	m_dani_frame += 1;
 		//}
-		if (respawn_time == 18)
+		if (respawn_time == 5)
 		{
 			m_dani_frame++;
 			respawn_time = 0;
 		}
 
-		if (m_dani_frame == 6)
+		if (m_dani_frame == 18)
 		{
 			this->SetStatus(false);
 			Hits::DeleteHitBox(this);
@@ -515,9 +515,9 @@ void CObjHero::Draw()
 	if (dead_flag == true)
 	{
 		//アニメーション番号
-		int AniData[7] =
+		int AniData[16] =
 		{
-			0, 1, 2, 3, 4, 4, 4
+			0, 1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
 		};
 		//切り取り位置の設定
 		src.m_top = 0.0f;
