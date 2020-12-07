@@ -93,7 +93,13 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Stage_Area5.png", 19, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area6.png", 20, TEX_SIZE_512);
 
-
+	Draw::LoadImageW(L"graphic/stage_blockG0.png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG1.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG2.png", 42, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG3.png", 43, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG4.png", 44, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG5.png", 45, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG6.png", 46, TEX_SIZE_512);
 
 	//音楽データ読み込み用
 	Audio::LoadAudio(10, L"BGM/Tutorial.wav", BACK_MUSIC);
@@ -148,7 +154,6 @@ void CSceneStage_1::InitScene()
 	v = Audio::VolumeMaster((0.9 - v));
 
 	Audio::Start(10+ ((UserData*)Save::GetData())->stage_id);
-
 }
 
 //実行中メソッド実行中メソッド
