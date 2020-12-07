@@ -92,6 +92,8 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
 
+	Draw::LoadImageW(L"graphic/BG_Area1.png", 60, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/White.png", 61, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area0.png", 14, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area1.png", 15, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area2.png", 16, TEX_SIZE_512);
@@ -100,7 +102,13 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Stage_Area5.png", 19, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area6.png", 20, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"graphic/Stage_Area0.png", 60, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG0.png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG1.png", 41, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG2.png", 42, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG3.png", 43, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG4.png", 44, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG5.png", 45, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG6.png", 46, TEX_SIZE_512);
 
 	//音楽データ読み込み用
 	Audio::LoadAudio(10, L"BGM/Tutorial.wav", BACK_MUSIC);
