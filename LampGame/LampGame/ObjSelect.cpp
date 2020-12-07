@@ -253,6 +253,6 @@ void CObjSelect::Draw()
 	//	dst.m_bottom = dst.m_top + 150.0f;
 	//}
 	
-	//1番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+	////1番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(1, &src, &dst, c, 0.0f);
 }
