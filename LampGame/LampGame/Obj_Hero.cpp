@@ -388,7 +388,6 @@ void CObjHero::Action()
 			//ステージ終了条件(ゴール到達)
 			if (m_block_type_goal == H_GOAL_BLOCK)
 			{
-				
 				//CObjBlock* g_scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 				//g_scroll->GetScroll();
 				//float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -405,28 +404,29 @@ void CObjHero::Action()
 
 				((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
 
-				for (int i = 1; i <= 5; i++)
+				hg_flag = true;
+			}
+
+			if (a > 200)
+			{
+				for (int i = 1; i <= 6; i++)
 				{
-					if (((UserData*)Save::GetData())->clear[i] == true && hg_flag == false)
+					if (((UserData*)Save::GetData())->clear[i] == true)
 					{
 						count++;
 					}
 				}
-				if (count == 5)
+
+				hg_flag = false;
+				a = 0;
+				if (count == 6)
 				{
 					Scene::SetScene(new CSceneClear());
 				}
 				else
 				{
-					hg_flag = true;
+					Scene::SetScene(new CSceneSelect());
 				}
-
-			}
-			if (a > 200)
-			{
-				hg_flag = false;
-				a = 0;
-				Scene::SetScene(new CSceneSelect());
 			}
 		}
 	}

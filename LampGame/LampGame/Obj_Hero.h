@@ -146,8 +146,6 @@ class CObjHero : public CObj
 
 		int count;			//ステージクリア時の条件
 
-		int count;		//ステージクリア時の条件
-
 		int a ;
 		bool dead_flag;		//死んだか判定するフラグ
 		int respawn_time;	//死亡時から復活するまでの時間
