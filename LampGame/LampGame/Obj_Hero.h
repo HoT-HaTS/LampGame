@@ -80,6 +80,8 @@ class CObjHero : public CObj
 		//コイン関係
 		int GetCoin() { return m_coin_count; }      //コイン枚数確認用
 		void SetCoin(int p) { m_coin_count = p; }
+
+		bool GetG_Flag() { return hg_flag; }
 		
 	private:
 		float m_px;			//位置
@@ -123,6 +125,9 @@ class CObjHero : public CObj
 		//Switch2のフラグ
 		bool s_flag2;
 
+		//ゴールの演出用のフラグ
+		bool hg_flag;
+
 		//踏んでいるblockの種類確認用
 		int m_block_type_under;
 		int m_block_type_goal;
@@ -141,6 +146,9 @@ class CObjHero : public CObj
 
 		int count;			//ステージクリア時の条件
 
+		int count;		//ステージクリア時の条件
+
+		int a ;
 		bool dead_flag;		//死んだか判定するフラグ
 		int respawn_time;	//死亡時から復活するまでの時間
 };

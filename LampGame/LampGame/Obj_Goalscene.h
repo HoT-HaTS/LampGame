@@ -6,21 +6,20 @@
 using namespace GameL;
 
 //オブジェクト：
-class CObjMain : public CObj
+class CObjGoalscene : public CObj
 {
 public:
-	CObjMain() {};
-	~CObjMain() {};
+	CObjGoalscene() {};
+	~CObjGoalscene() {};
 	void Init();		//イニシャライズ
 	void Action();		//アクション
 	void Draw();		//ドロー
-private:
-	bool m_flag;
-	int coin_count;
 
-	//ゴール演出用の変数
+	bool GetS_Flag() { return s_flag; }
+private:
+	float mx;
+	float my;
 	float alpha;
-	bool g_flag;
-	bool ga_flag;
+	bool s_flag;
 };
 

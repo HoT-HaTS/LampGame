@@ -24,6 +24,9 @@ void CObjStage1::Init()
 	g_f2 = false;
 	s1_scroll = INIT_SCROLL;
 	l_f = true;
+
+	alpha = 1.0f;
+	count = 0;
 }
 
 //アクション
@@ -143,6 +146,9 @@ void CObjStage1::Action()
 //ドロー
 void CObjStage1::Draw()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	bool S_flag = hero->GetG_Flag();
+
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	float  c1[4] = { 0.8f, 0.8f, 0.8f, 1.0f };
@@ -174,13 +180,18 @@ void CObjStage1::Draw()
 				}
 				else if (m_map[i][j] == GOAL_BLOCK)
 				{
+					if (S_flag == true)
+						alpha -= 0.01f;
+
+					float gc[4] = { 1.0f,1.0f,1.0f,alpha };
+
 					dst.m_top = i * BLOCK_SIZE - GOAL_T;
 					dst.m_left = j * BLOCK_SIZE + s1_scroll - GOAL_T;
 					dst.m_right = dst.m_left + GOAL_R;
 					dst.m_bottom = dst.m_top + GOAL_B;
 					
 					//ゴールブロック描画
-					BlockDraw(BLOCK_SIZE, 0.0f, &dst, c, GOAL_BLOCK);
+					BlockDraw(BLOCK_SIZE, 0.0f, &dst, gc, GOAL_BLOCK);
 				}
 				else if (m_map[i][j] == G_BLOCK3)
 				{
