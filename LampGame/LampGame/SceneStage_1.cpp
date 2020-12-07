@@ -79,6 +79,13 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Enemy_dead.png", 26, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/tutorial.png", 50, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/block_shadow.png", 51, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG0.png", 60, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG1.png", 61, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG2.png", 62, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG3.png", 63, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG4.png", 64, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG5.png", 65, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/stage_blockG6.png", 66, TEX_SIZE_512);
 
 	Draw::LoadImageW(L"graphic/pausemenu.png", 13, TEX_SIZE_512);
 
@@ -143,11 +150,12 @@ void CSceneStage_1::InitScene()
 		Objs::InsertObj(objt3, OBJ_BOARD, 9);
 	}
 
+
 	//マスターボリュームを1に戻す
 	float v = Audio::VolumeMaster(0);
 	v = Audio::VolumeMaster((0.9 - v));
 
-	Audio::Start(10+ ((UserData*)Save::GetData())->stage_id);
+	Audio::Start(((UserData*)Save::GetData())->stage_id + 10);
 
 }
 
