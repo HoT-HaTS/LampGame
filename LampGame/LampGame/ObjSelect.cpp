@@ -129,29 +129,57 @@ void CObjSelect::Draw()
 	{
 		Font::StrDraw(L"š", 41, 106, 16, c1);
 	}
+	else
+	{
+		Font::StrDraw(L"™", 41, 106, 16, c);
+	}
 	if (((UserData*)Save::GetData())->clear[1] == true)
 	{
 		Font::StrDraw(L"š", 236, 106, 16, c1);
+	}
+	else
+	{
+		Font::StrDraw(L"™", 236, 106, 16, c);
 	}
 	if (((UserData*)Save::GetData())->clear[2] == true)
 	{
 		Font::StrDraw(L"š",431, 106, 16, c1);
 	}
+	else
+	{
+		Font::StrDraw(L"™", 431, 106, 16, c);
+	}
 	if (((UserData*)Save::GetData())->clear[3] == true)
 	{
 		Font::StrDraw(L"š", 626, 106, 16, c1);
+	}
+	else
+	{
+		Font::StrDraw(L"™", 626, 106, 16, c);
 	}
 	if (((UserData*)Save::GetData())->clear[4] == true)
 	{
 		Font::StrDraw(L"š", 41, 306, 16, c1);
 	}
+	else
+	{
+		Font::StrDraw(L"™", 41, 306, 16, c);
+	}
 	if (((UserData*)Save::GetData())->clear[5] == true)
 	{
 		Font::StrDraw(L"š", 236, 306, 16, c1);
 	}
+	else
+	{
+		Font::StrDraw(L"™", 236, 306, 16, c);
+	}
 	if (((UserData*)Save::GetData())->clear[6] == true)
 	{
 		Font::StrDraw(L"š", 431, 306, 16, c1);
+	}
+	else
+	{
+		Font::StrDraw(L"™", 431, 306, 16, c);
 	}
 
 	if (((UserData*)Save::GetData())->stage_id == 0)
