@@ -79,5 +79,7 @@ private:
 
 	//移動の向きの制御用
 	bool m_move;
+
+	bool d_flag;	//主人公死亡判定用フラグ
 };
 
