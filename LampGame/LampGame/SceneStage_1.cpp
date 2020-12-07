@@ -79,6 +79,8 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Enemy_dead.png", 26, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/tutorial.png", 50, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/block_shadow.png", 51, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Switchblock_Mark.png", 52, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Switchblock_Mark_Shadow.png", 53, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/block.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG1.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG2.png", 42, TEX_SIZE_512);
@@ -102,7 +104,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Stage_Area5.png", 19, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area6.png", 20, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"graphic/block.png.png", 40, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/block.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG1.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG2.png", 42, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG3.png", 43, TEX_SIZE_512);

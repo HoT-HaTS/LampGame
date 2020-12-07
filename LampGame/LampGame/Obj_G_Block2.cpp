@@ -79,4 +79,29 @@ void CObj_G_Block2::Draw()
 			Draw::Draw(4, &src, &dst, c, 0.0f);
 		}
 	}
+	else if (switch_flag == false)
+	{
+		if (l_f == true)
+		{
+			//表示位置の設定
+			dst.m_top = 0.0f + m_py;
+			dst.m_left = 0.0f + m_px + scroll->GetScroll();
+			dst.m_right = dst.m_left + BLOCK_SIZE;
+			dst.m_bottom = dst.m_top + BLOCK_SIZE;
+
+			//52番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+			Draw::Draw(52, &src, &dst, c, 0.0f);
+		}
+		else if (l_f == false)
+		{
+			//表示位置の設定
+			dst.m_top = 0.0f + m_py;
+			dst.m_left = 0.0f + m_px + scroll->GetScroll();
+			dst.m_right = dst.m_left + BLOCK_SIZE;
+			dst.m_bottom = dst.m_top + BLOCK_SIZE;
+
+			//53番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+			Draw::Draw(53, &src, &dst, c, 0.0f);
+		}
+	}
 }
