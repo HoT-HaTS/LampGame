@@ -48,77 +48,75 @@ void CObjEnemy::Init()
 //アクション
 void CObjEnemy::Action()
 {
-
-	//通常速度
-	//m_speed_power = 0.3;    //移動速度
-	//m_ani_max_time = 8;		//アニメーション間隔幅
-
-	//Hero.cppから光フラグを取得する
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	bool L_flag_enemy = hero->Get_L_flag();
-
-	if (L_flag_enemy == true)
+	if (pause_flag == false)
 	{
 
-		//ブロック衝突で向き変更
-		if (m_hit_left == true)
-		{
-			m_move = true;
-		}
-		if (m_hit_right == true)
-		{
-			m_move = false;
-		}
-
-		//移動方向
-		if (m_move == false)
-		{
-			m_vx += m_speed_power;
-			m_posture = 1.0f;		//右向き
-		}
-		else if (m_move == true)
-		{
-			m_vx -= m_speed_power;
-			m_posture = 0.0f;		//左向き
-		}
-
+		//Hero.cppから光フラグを取得する
+		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		bool L_flag_enemy = hero->Get_L_flag();
 
 		if (L_flag_enemy == true)
 		{
-			m_ani_time += 1;
+
+			//ブロック衝突で向き変更
+			if (m_hit_left == true)
+			{
+				m_move = true;
+			}
+			if (m_hit_right == true)
+			{
+				m_move = false;
+			}
+
+			//移動方向
+			if (m_move == false)
+			{
+				m_vx += m_speed_power;
+				m_posture = 1.0f;		//右向き
+			}
+			else if (m_move == true)
+			{
+				m_vx -= m_speed_power;
+				m_posture = 0.0f;		//左向き
+			}
+
+
+			if (L_flag_enemy == true)
+			{
+				m_ani_time += 1;
+			}
+
+			if (m_ani_time > m_ani_max_time)
+			{
+				m_ani_frame += 1;
+				m_ani_time = 0;
+			}
+
+			if (m_ani_frame >= 8)
+			{
+				m_ani_frame = 0;
+			}
+
+
+			//摩擦
+			m_vx += -(m_vx * 0.098);
+
+			//自由落下運動
+			m_vy += 9.8 / (16.0f);
+
+			//ブロックタイプ検知用の変数がないためのダミー
+			int d1;
+
+			//ブロックとの当たり判定実行
+			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+			pb->BlockHitEnemy(&m_px, &m_py, false,
+				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+				&d1);
+
+			//位置の更新
+			m_px += m_vx;
+			m_py += m_vy;
 		}
-
-		if (m_ani_time > m_ani_max_time)
-		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
-		}
-
-		if (m_ani_frame >= 8)
-		{
-			m_ani_frame = 0;
-		}
-
-
-		//摩擦
-		m_vx += -(m_vx * 0.098);
-
-		//自由落下運動
-		m_vy += 9.8 / (16.0f);
-
-		//ブロックタイプ検知用の変数がないためのダミー
-		int d1;
-
-		//ブロックとの当たり判定実行
-		CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-		pb->BlockHitEnemy(&m_px, &m_py, false,
-			&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-			&d1);
-
-		//位置の更新
-		m_px += m_vx;
-		m_py += m_vy;
-	}
 
 		//ブロック情報を持ってくる
 		CObjBlock* block = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
@@ -128,73 +126,73 @@ void CObjEnemy::Action()
 		hit->SetPos(m_px + block->GetScroll(), m_py);
 
 
-	//主人公の位置の取得
-	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+		//主人公の位置の取得
+		//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	//スクロールの値を取得
-	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+		//スクロールの値を取得
+		CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-	//主人公と敵のあたり判定チェック
-	//当たっている場合
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		float hx = hero->GetX();
-		float hy = hero->GetY();
-
-		//敵の上じゃない条件
-		if (hy + 120 > m_py)
+		//主人公と敵のあたり判定チェック
+		//当たっている場合
+		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
-			//敵の左部分に接触
-			if (m_px + scroll->GetScroll() > hx)
+			float hx = hero->GetX();
+			float hy = hero->GetY();
+
+			//敵の上じゃない条件
+			if (hy + 120 > m_py)
 			{
-				hero->SetRight(true);
-				hero->SetX(m_px - 64.5 + scroll->GetScroll());
-				hero->SetVX(-0.8);
+				//敵の左部分に接触
+				if (m_px + scroll->GetScroll() > hx)
+				{
+					hero->SetRight(true);
+					hero->SetX(m_px - 64.5 + scroll->GetScroll());
+					hero->SetVX(-0.8);
+				}
+				//敵の右部分に接触
+				else if (hx > m_px + scroll->GetScroll())
+				{
+					hero->SetLeft(true);
+					hero->SetX(m_px + 63.5 + scroll->GetScroll());
+					hero->SetVX(0.0);
+				}
 			}
-			//敵の右部分に接触
-			else if (hx > m_px + scroll->GetScroll())
+			//敵の上部分に接触
+			if (hy + 125 <= m_py)
 			{
-				hero->SetLeft(true);
-				hero->SetX(m_px + 63.5 + scroll->GetScroll());
-				hero->SetVX(0.0);
+				hero->SetDown(true);
+				hero->SetY(m_py - 128.5);
+				hero->SetVY(0.0);
+			}
+			//敵の下部分に接触
+			else if (m_py + 61 <= hy)
+			{
+				hero->SetUp(true);
+				hero->SetY(m_py + 64.5);
+				hero->SetVY(0.0);
 			}
 		}
-		//敵の上部分に接触
-		if (hy + 125 <= m_py)
+
+
+		if (L_flag_enemy == true)
 		{
-			hero->SetDown(true);
-			hero->SetY(m_py - 128.5);
-			hero->SetVY(0.0);
-		}
-		//敵の下部分に接触
-		else if (m_py + 61 <= hy)
-		{
-			hero->SetUp(true);
-			hero->SetY(m_py + 64.5);
-			hero->SetVY(0.0);
+			//光の世界かつ主人公の攻撃がHitBoxに当たるとflagをtrueにする
+			if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
+			{
+				E_flag = true;				//スイッチのフラグをtrueに
+			}
+			//flagがtrueのとき自身を消滅させる
+			if (E_flag == true)
+			{
+				//敵消滅SE
+				Audio::Start(5);
+
+				this->SetStatus(false);		//スイッチが押されたら消滅
+				Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+				return;
+			}
 		}
 	}
-
-
-	if (L_flag_enemy == true)
-	{
-		//光の世界かつ主人公の攻撃がHitBoxに当たるとflagをtrueにする
-		if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
-		{
-			E_flag = true;				//スイッチのフラグをtrueに
-		}
-		//flagがtrueのとき自身を消滅させる
-		if (E_flag == true)
-		{
-			//敵消滅SE
-			Audio::Start(5);
-
-			this->SetStatus(false);		//スイッチが押されたら消滅
-			Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
-			return;
-		}
-	}
-	
 }
 
 //ドロー
