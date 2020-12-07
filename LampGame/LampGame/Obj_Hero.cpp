@@ -419,11 +419,11 @@ void CObjHero::Action()
 				}
 
 			}
-			if (a > 100)
+			if (a > 200)
 			{
 				hg_flag = false;
 				a = 0;
-				//Scene::SetScene(new CSceneSelect());
+				Scene::SetScene(new CSceneSelect());
 			}
 		}
 	}

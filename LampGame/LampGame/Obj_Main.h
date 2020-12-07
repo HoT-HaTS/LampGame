@@ -21,5 +21,6 @@ private:
 	//ƒS[ƒ‹‰‰o—p‚Ì•Ï”
 	float alpha;
 	bool g_flag;
+	bool ga_flag;
 };
 
