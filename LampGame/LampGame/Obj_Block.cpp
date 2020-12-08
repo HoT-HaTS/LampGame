@@ -141,7 +141,8 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			if (m_map[i][j] == 1 || m_map[i][j] == 2 || m_map[i][j] == 4)
+			//床ブロックとゴールブロック、透明ブロック
+			if (m_map[i][j] == 1 || m_map[i][j] == 2|| m_map[i][j] == 4)
 			{
 				//要素番号を座標に変更
 				float bx = j * BLOCK_SIZE;
@@ -177,43 +178,54 @@ void CObjBlock::BlockHit(
 						//角度で上下左右を判定
 						if ((r < 56 && r >= 0) || r > 304)
 						{
-							//右
-							*right = true;								//オブジェクトの左の部分が衝突している
-							*x = bx + (BLOCK_SIZE - 0.5) + (scroll);	//ブロックの位置+オブジェクトの幅
-							*vx = -(*vx) * 0.1f;							//-VX*反発係数
+							if (m_map[i][j] != 2)
+							{
+								//右
+								*right = true;								//オブジェクトの左の部分が衝突している
+								*x = bx + (BLOCK_SIZE - 0.5) + (scroll);	//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;							//-VX*反発係数
+							}
 							*btg = m_map[i][j];
 						}
 						if (r > 56 && r < 124)
 						{
-							//上
-							*down = true;					//オブジェクトの下の部分が衝突している
-							*y = by - (2 * BLOCK_SIZE);		//ブロックの位置+オブジェクトの幅
-							//種類を渡すのスタートとゴールのみ変更する
+							if (m_map[i][j] != 2)
+							{
+								//上
+								*down = true;					//オブジェクトの下の部分が衝突している
+								*y = by - (2 * BLOCK_SIZE);		//ブロックの位置+オブジェクトの幅
+								*vy = 0.0f;
+							}
 							if (m_map[i][j] >= 2)
 							{
 								*btu = m_map[i][j];	//ブロックの要素(type)をオブジェクトに渡す
 								*btg = m_map[i][j];
 							}
-							*vy = 0.0f;
 						}
 						if (r > 124 && r < 236)
 						{
-							//左
-							*left = true;								//オブジェクトの右の部分が衝突している
-							*x = bx - (BLOCK_SIZE + 0.5) + (scroll);	//ブロックの位置+オブジェクトの幅
-							*vx = -(*vx) * 0.1f;							//-VX*反発係数
+							if (m_map[i][j] != 2)
+							{
+								//左
+								*left = true;								//オブジェクトの右の部分が衝突している
+								*x = bx - (BLOCK_SIZE + 0.5) + (scroll);	//ブロックの位置+オブジェクトの幅
+								*vx = -(*vx) * 0.1f;							//-VX*反発係数
+							}
 							*btg = m_map[i][j];
 						}
 						if (236 < r && r < 304)
 						{
-							//下
-							*up = true;						//オブジェクトの上の部分が衝突している
-							*y = by + (BLOCK_SIZE - 0.5);	//ブロックの位置+オブジェクトの幅
-							*btg = m_map[i][j];
-							if (*vy < 0)
+							if (m_map[i][j] != 2)
 							{
-								*vy = 0.0f;
+								//下
+								*up = true;						//オブジェクトの上の部分が衝突している
+								*y = by + (BLOCK_SIZE - 0.5);	//ブロックの位置+オブジェクトの幅
+								if (*vy < 0)
+								{
+									*vy = 0.0f;
+								}
 							}
+							*btg = m_map[i][j];
 						}
 					}
 				}
