@@ -105,11 +105,9 @@ void CObjSelect::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float c1[4] = { 1.0f,1.0f,0.0f,1.0f };
 
-	float s_top[7] = { 105, 105, 105, 105, 305, 305, 305 };
-	float s_left[7] = { 40, 235, 430, 625, 40, 235, 430};
-
-	float c_top[7] = { 41, 236, 431, 626, 41, 236, 431 };
-	float c_left[7] = { 106, 106, 106, 106, 306, 306, 306 };
+	//サムネイル、クリアマーク表示位置
+	float top[7] = { 105, 105, 105, 105, 305, 305, 305 };
+	float left[7] = { 40, 235, 430, 625, 40, 235, 430};
 
 	RECT_F src;		//ステージサムネイル描画元切り取り位置
 	RECT_F dst;		//ステージサムネイル表示位置
@@ -127,8 +125,8 @@ void CObjSelect::Draw()
 	for (int x = 0; x < 7; x++)
 	{
 		//ステージサムネイル表示位置の設定と表示
-		dst.m_top = s_top[x];
-		dst.m_left = s_left[x];
+		dst.m_top = top[x];
+		dst.m_left = left[x];
 		dst.m_right = dst.m_left + 140.0f;
 		dst.m_bottom = dst.m_top + 140.0f;
 		Draw::Draw(x, &src, &dst, c, 0.0f);
@@ -155,8 +153,8 @@ void CObjSelect::Draw()
 		if (((UserData*)Save::GetData())->clear[x] == true)
 		{
 			//ステージサムネイル表示位置の設定と表示
-			dst2.m_top = s_top[x];
-			dst2.m_left = s_left[x];
+			dst2.m_top = top[x];
+			dst2.m_left = left[x];
 			dst2.m_right = dst2.m_left + 32.0f;
 			dst2.m_bottom = dst2.m_top + 32.0f;
 			Draw::Draw(9, &src2, &dst2, c, 0.0f);
