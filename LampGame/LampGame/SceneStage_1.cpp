@@ -123,8 +123,8 @@ void CSceneStage_1::InitScene()
 	Audio::LoadAudio(7, L"SE/Switch.wav", EFFECT);
 	Audio::LoadAudio(8, L"SE/Unlock.wav", EFFECT);
 	Audio::LoadAudio(9, L"SE/fire.wav", EFFECT);
-	Audio::LoadAudio(10, L"SE/P_defeat.wav", EFFECT);
-	Audio::LoadAudio(11, L"SE/Crack_fix.wav", EFFECT);
+	Audio::LoadAudio(20, L"SE/P_defeat.wav", EFFECT);
+	Audio::LoadAudio(21, L"SE/Crack_fix.wav", EFFECT);
 
 	//オブジェクト出現
 	CObjStage1* obj_stage1 = new CObjStage1(map);
