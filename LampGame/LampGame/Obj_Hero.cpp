@@ -28,13 +28,16 @@ void CObjHero::Init()
 	m_posture = INIT_H_POSTURE;	//右向き0.0f 左向き1.0f
 
 	m_ani_time = INIT_ANI_TIME;
+	m_dani_time = INIT_ANI_TIME;
 	m_ani_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
+	m_dani_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
 	m_ani_s_time = INIT_ANI_TIME;
 	m_ani_s_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
 
 
 	m_speed_power = INIT_SPEED_POWER;	//通常速度
 	m_ani_max_time = INIT_H_ANI_MAX_TIME;	//アニメーション間隔幅
+	m_dani_max_time = INIT_H_ANI_MAX_TIME;	//アニメーション間隔幅
 
 	attack_flag = true;	//攻撃制御用フラグ
 
@@ -78,332 +81,362 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
-	if (pause_flag == false)
+	if (dead_flag == false)
 	{
-		//落下によるゲームオーバー
-		if (m_py > STAGE_Y_OUT)
+		if (pause_flag == false)
 		{
-			//ミス時効果音
-			//Audio::Start(6);
-
-			fall_time++;
-
-			if (fall_time > 40)
+			//落下によるゲームオーバー
+			if (m_py > STAGE_Y_OUT)
 			{
-				//場外に出たらリセット
-				Scene::SetScene(new CSceneStage_1());
-				switch_flag = true;
-			}
-		}
+				//ミス時効果音
+				//Audio::Start(6);
 
+				fall_time++;
 
-		if (move_flag == true)
-		{
-			//ブロックとの当たり判定実行
-			CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-			pb->BlockHit(&m_px, &m_py, true,
-				&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-				&m_block_type_under, &m_block_type_goal);
-
-
-			//if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
-			{
-				//主人公の攻撃
-				if (Input::GetVKey('Z') == true)
+				if (fall_time > 40)
 				{
-					if (attack_flag == true)
-					{
-						//攻撃オブジェクトの作成
-						CObjAttack* obj_attack = new CObjAttack(m_px, m_py); //弾丸オブジェクト作成
-						Objs::InsertObj(obj_attack, OBJ_ATTACK, 100);		//作った弾丸オブジェクトをマネージャーに登録
-
-						//攻撃音を鳴らす
-						Audio::Start(9);
-
-						attack_flag = false;
-					}
-				}
-				else
-				{
-					attack_flag = true;
-				}
-			}
-			//移動(光の世界)
-			if (L_flag == true)
-			{
-				//キーの入力方向
-				if (Input::GetVKey(VK_RIGHT) == true)
-				{
-					m_vx +=  m_speed_power;
-					m_posture = 1.0f;
-					m_ani_time += 1.0;
-				}
-				else if (Input::GetVKey(VK_LEFT) == true)
-				{
-					m_vx -=  m_speed_power;
-					m_posture = 0.0f;
-					m_ani_time += 1.0;
-				}
-				else
-				{
-					m_ani_frame = 1;	//キー入力がない場合は静止フレームにする
-					m_ani_time = 0;
-				}
-
-				//Aキー入力でジャンプ
-				if (Input::GetVKey(' ') == true)
-				{
-					if (m_flagj == true)
-					{
-						if (m_hit_down == true || m_hit_down2 == true)
-						{
-							//jump音を鳴らす
-							Audio::Start(2);
-
-							m_vy = -10;
-							m_hit_down = false;
-							m_hit_down2 = false;
-							m_flagj = false;
-						}
-					}
-				}
-				else
-				{
-					m_flagj = true;
-				}
-
-				/*if (m_hit_down == false && m_hit_down2 == false)
-					m_vx += -(m_vx*0.2);*/
-
-				//摩擦
-				m_vx += -(m_vx * INIT_FRICTION);
-
-				//自由落下運動
-				m_vy += 9.8 / (20.0f);
-
-				//位置の更新
-				m_px += m_vx;
-				m_py += m_vy;
-			}
-
-			//移動(影の世界)
-			if (L_flag == false)
-			{
-				//キーの入力方向
-				if (Input::GetVKey(VK_RIGHT) == true)
-				{
-					m_vx += m_speed_power;
-					m_posture = 1.0f;
-					m_ani_time += 1.0;
-				}
-				else if (Input::GetVKey(VK_LEFT) == true)
-				{
-					m_vx -= m_speed_power;
-					m_posture = 0.0f;
-					m_ani_time += 1.0;
-				}
-
-				if (Input::GetVKey(VK_UP) == true)
-				{
-					m_vy -= m_speed_power;
-					m_ani_time += 1.0;
-				}
-				else if (Input::GetVKey(VK_DOWN) == true)
-				{
-					m_vy += m_speed_power;
-					m_ani_time += 1.0;
-				}
-
-				if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
-				{
-					m_ani_frame = 1;	//キー入力がない場合は静止フレームにする
-					m_ani_time = 0;
-				}
-
-				//摩擦
-				m_vx += -(m_vx * INIT_FRICTION);
-				m_vy += -(m_vy * INIT_FRICTION);
-
-				//位置の更新
-				m_px += m_vx;
-				m_py += m_vy;
-
-
-				//右方向
-				if (m_px + BLOCK_SIZE > STAGE_X_OUT)
-				{
-					m_px = STAGE_X_OUT - BLOCK_SIZE; //はみ出ない位置に移動させる。
-				}
-				//左方向
-				if (m_px < 0.0f)
-				{
-					m_px = 0.0f;
-				}
-				//上方向
-				if (m_py < 0.0f)
-				{
-					m_py = 0.0f;
-				}
-				////下方向
-				//if (m_py + 128.0f > 600 )
-				//{
-				//	m_py = 600.0f - 128.0f;
-				//}
-
-				//画面外に行かない処理
-				//CheckWindow(m_px, m_py, -32.0f, -32.0f, 800.0f, 600.0f);
-			}
-			//自身のHitBoxを持ってくる
-			CHitBox* hit = Hits::GetHitBox(this);
-
-			//HitBoxの位置の変更
-			hit->SetPos(m_px, m_py);
-
-			//敵オブジェクトと接触したら主人公削除
-			if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
-			{
-				if (L_flag == true)
-				{
-					this->SetStatus(false);
-					Hits::DeleteHitBox(this);
-
+					//場外に出たらリセット
 					Scene::SetScene(new CSceneStage_1());
 					switch_flag = true;
 				}
 			}
-		}
 
 
-		//アニメーション
-		if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
-		{
-			m_ani_s_time += 1.0;
-		}
-		//アニメーション関連(静止用)
-		if (m_ani_s_time > m_ani_max_time)
-		{
-			m_ani_s_frame += 1;
-			m_ani_s_time = 0;
-		}
-
-		if (m_ani_s_frame == m_ani_max_time)
-		{
-			m_ani_s_frame = 0;
-		}
+			if (move_flag == true)
+			{
+				//ブロックとの当たり判定実行
+				CObjBlock* pb = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+				pb->BlockHit(&m_px, &m_py, true,
+					&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
+					&m_block_type_under, &m_block_type_goal);
 
 
+				//if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
+				{
+					//主人公の攻撃
+					if (Input::GetVKey('Z') == true)
+					{
+						if (attack_flag == true)
+						{
+							//攻撃オブジェクトの作成
+							CObjAttack* obj_attack = new CObjAttack(m_px, m_py); //弾丸オブジェクト作成
+							Objs::InsertObj(obj_attack, OBJ_ATTACK, 100);		//作った弾丸オブジェクトをマネージャーに登録
 
-		//アニメーション関連(移動用)
-		if (m_ani_time > m_ani_max_time)
-		{
-			m_ani_frame += 1;
-			m_ani_time = 0;
-		}
-		if (m_ani_frame == m_ani_max_time)
-		{
-			m_ani_frame = 0;
-		}
+							//攻撃音を鳴らす
+							Audio::Start(9);
+
+							attack_flag = false;
+						}
+					}
+					else
+					{
+						attack_flag = true;
+					}
+				}
+				//移動(光の世界)
+				if (L_flag == true)
+				{
+					//キーの入力方向
+					if (Input::GetVKey(VK_RIGHT) == true)
+					{
+						m_vx += m_speed_power;
+						m_posture = 1.0f;
+						m_ani_time += 1.0;
+					}
+					else if (Input::GetVKey(VK_LEFT) == true)
+					{
+						m_vx -= m_speed_power;
+						m_posture = 0.0f;
+						m_ani_time += 1.0;
+					}
+					else
+					{
+						m_ani_frame = 1;	//キー入力がない場合は静止フレームにする
+						m_ani_time = 0;
+					}
+
+					//Aキー入力でジャンプ
+					if (Input::GetVKey(' ') == true)
+					{
+						if (m_flagj == true)
+						{
+							if (m_hit_down == true || m_hit_down2 == true)
+							{
+								//jump音を鳴らす
+								Audio::Start(2);
+
+								m_vy = -10;
+								m_hit_down = false;
+								m_hit_down2 = false;
+								m_flagj = false;
+							}
+						}
+					}
+					else
+					{
+						m_flagj = true;
+					}
+
+					/*if (m_hit_down == false && m_hit_down2 == false)
+						m_vx += -(m_vx*0.2);*/
+
+						//摩擦
+					m_vx += -(m_vx * INIT_FRICTION);
+
+					//自由落下運動
+					m_vy += 9.8 / (20.0f);
+
+					//位置の更新
+					m_px += m_vx;
+					m_py += m_vy;
+				}
+
+				//移動(影の世界)
+				if (L_flag == false)
+				{
+					//キーの入力方向
+					if (Input::GetVKey(VK_RIGHT) == true)
+					{
+						m_vx += m_speed_power;
+						m_posture = 1.0f;
+						m_ani_time += 1.0;
+					}
+					else if (Input::GetVKey(VK_LEFT) == true)
+					{
+						m_vx -= m_speed_power;
+						m_posture = 0.0f;
+						m_ani_time += 1.0;
+					}
+
+					if (Input::GetVKey(VK_UP) == true)
+					{
+						m_vy -= m_speed_power;
+						m_ani_time += 1.0;
+					}
+					else if (Input::GetVKey(VK_DOWN) == true)
+					{
+						m_vy += m_speed_power;
+						m_ani_time += 1.0;
+					}
+
+					if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
+					{
+						m_ani_frame = 1;	//キー入力がない場合は静止フレームにする
+						m_ani_time = 0;
+					}
+
+					//摩擦
+					m_vx += -(m_vx * INIT_FRICTION);
+					m_vy += -(m_vy * INIT_FRICTION);
+
+					//位置の更新
+					m_px += m_vx;
+					m_py += m_vy;
 
 
-		if (move_flag == true)
-		{
-			//世界切り替え:光→影(X押すと切り替え)
+					//右方向
+					if (m_px + BLOCK_SIZE > STAGE_X_OUT)
+					{
+						m_px = STAGE_X_OUT - BLOCK_SIZE; //はみ出ない位置に移動させる。
+					}
+					//左方向
+					if (m_px < 0.0f)
+					{
+						m_px = 0.0f;
+					}
+					//上方向
+					if (m_py < 0.0f)
+					{
+						m_py = 0.0f;
+					}
+					////下方向
+					//if (m_py + 128.0f > 600 )
+					//{
+					//	m_py = 600.0f - 128.0f;
+					//}
+
+					//画面外に行かない処理
+					//CheckWindow(m_px, m_py, -32.0f, -32.0f, 800.0f, 600.0f);
+				}
+				//自身のHitBoxを持ってくる
+				CHitBox* hit = Hits::GetHitBox(this);
+
+				//HitBoxの位置の変更
+				hit->SetPos(m_px, m_py);
+
+				//敵オブジェクトと接触したらdead_flagをtrueにする
+				if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+				{
+					if (L_flag == true)
+					{
+						dead_flag = true;
+					}
+				}
+			}
+
+
+			//アニメーション
+			if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
+			{
+				m_ani_s_time += 1.0;
+			}
+			//アニメーション関連(静止用)
+			if (m_ani_s_time > m_ani_max_time)
+			{
+				m_ani_s_frame += 1;
+				m_ani_s_time = 0;
+			}
+			if (m_ani_s_frame == m_ani_max_time)
+			{
+				m_ani_s_frame = 0;
+			}
+
+
+
+			//アニメーション関連(移動用)
+			if (m_ani_time > m_ani_max_time)
+			{
+				m_ani_frame += 1;
+				m_ani_time = 0;
+			}
+			if (m_ani_frame == m_ani_max_time)
+			{
+				m_ani_frame = 0;
+			}
+
+
+			if (move_flag == true)
+			{
+				//世界切り替え:光→影(X押すと切り替え)
+				if (L_flag == true)
+				{
+					if (Input::GetVKey('X') == true)
+					{
+						if (m_flag == true)
+						{
+							L_flag = false;
+							m_flag = false;
+							m_vy = 0;
+							m_block_type_goal = 0;
+							m_sx = m_px;
+							m_sy = m_py;
+
+							//移動音を鳴らす(光→影)
+							Audio::Start(1);
+						}
+					}
+					else
+					{
+						m_flag = true;
+					}
+				}
+
+				//世界切り替え:影→光(X押すと切り替え)
+				if (L_flag == false)
+				{
+					if (Input::GetVKey('X') == true)
+					{
+						if (m_flag == true)
+						{
+							m_vx = 0;
+							m_vy = 0;
+							move_flag = false;
+							m_block_type_goal = 0;
+							Hits::DeleteHitBox(this);	//主人公が所有するHitBoxを削除
+
+							//移動音を鳴らす(影→光)
+							Audio::Start(0);
+						}
+					}
+					else
+					{
+						m_flag = true;
+					}
+				}
+			}
+
+			//影→光時に主人公の位置を元に戻す
+			if (move_flag == false)
+			{
+				x = m_sx - m_px;
+				y = m_sy - m_py;
+				ar = GetAtan2Angle(x, -y);
+
+				//移動方向を主人公機の方向にする
+				m_vx = cos(3.14 / 180 * ar);
+				m_vy = -sin(3.14 / 180 * ar);
+				UnitVec(&m_vx, &m_vy);
+
+				m_px += 12 * m_vx;
+				m_py += 12 * m_vy;
+
+				if (m_sx - 10 < m_px && m_px < m_sx + 10 && m_sy - 10 < m_py && m_py < m_sy + 10)
+				{
+					//当たり判定用のHitBoxを作成
+					Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
+					L_flag = true;
+					m_flag = false;
+					move_flag = true;
+				}
+			}
+
+			//ゴール時
 			if (L_flag == true)
 			{
-				if (Input::GetVKey('X') == true)
+				if (hg_flag == true)
+					a += 1;
+				//ステージ終了条件(ゴール到達)
+				if (m_block_type_goal == H_GOAL_BLOCK)
 				{
-					if (m_flag == true)
-					{
-						L_flag = false;
-						m_flag = false;
-						m_vy = 0;
-						m_block_type_goal = 0;
-						m_sx = m_px;
-						m_sy = m_py;
 
-						//移動音を鳴らす(光→影)
-						Audio::Start(1);
-					}
-				}
-				else
-				{
-					m_flag = true;
-				}
-			}
+					//CObjBlock* g_scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
+					//g_scroll->GetScroll();
+					//float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+					//
+					//RECT_F src;	//描画元切り取り位置
+					//RECT_F dst;	//描画先表示位置
+					//dst.m_top = i * BLOCK_SIZE - GOAL_T;
+					//dst.m_left = j * BLOCK_SIZE + s1_scroll - GOAL_T;
+					//dst.m_right = dst.m_left + GOAL_R;
+					//dst.m_bottom = dst.m_top + GOAL_B;
 
-			//世界切り替え:影→光(X押すと切り替え)
-			if (L_flag == false)
-			{
-				if (Input::GetVKey('X') == true)
-				{
-					if (m_flag == true)
+					////ゴールブロック描画
+					//BlockDraw(BLOCK_SIZE, 0.0f, &dst, c, GOAL_BLOCK)
+
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
+
+					for (int i = 1; i <= 5; i++)
 					{
-						m_vx = 0;
-						m_vy = 0;
-						move_flag = false;
-						m_block_type_goal = 0;
-						Hits::DeleteHitBox(this);	//主人公が所有するHitBoxを削除
-					
-						//移動音を鳴らす(影→光)
-						Audio::Start(0);
+						if (((UserData*)Save::GetData())->clear[i] == true && hg_flag == false)
+						{
+							count++;
+						}
 					}
+					if (count == 5)
+					{
+						Scene::SetScene(new CSceneClear());
+					}
+					else
+					{
+						hg_flag = true;
+					}
+
 				}
-				else
+				if (a > 200)
 				{
-					m_flag = true;
+					hg_flag = false;
+					a = 0;
+					Scene::SetScene(new CSceneSelect());
 				}
 			}
 		}
 
-		//影→光時に主人公の位置を元に戻す
-		if (move_flag == false)
-		{
-			x = m_sx - m_px;
-			y = m_sy - m_py;
-			ar = GetAtan2Angle(x, -y);
-
-			//移動方向を主人公機の方向にする
-			m_vx = cos(3.14 / 180 * ar);
-			m_vy = -sin(3.14 / 180 * ar);
-			UnitVec(&m_vx, &m_vy);
-
-			m_px += 12 * m_vx;
-			m_py += 12 * m_vy;
-
-			if (m_sx - 10 < m_px && m_px < m_sx + 10 && m_sy - 10 < m_py && m_py < m_sy + 10)
-			{
-				//当たり判定用のHitBoxを作成
-				Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
-				L_flag = true;
-				m_flag = false;
-				move_flag = true;
-			}
-		}
-
-
-		if (L_flag == true)
-		{
-			if (hg_flag == true)
-				a += 1;
-			//ステージ終了条件(ゴール到達)
-			if (m_block_type_goal == H_GOAL_BLOCK)
-			{
-				//CObjBlock* g_scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-				//g_scroll->GetScroll();
-				//float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-				//
-				//RECT_F src;	//描画元切り取り位置
-				//RECT_F dst;	//描画先表示位置
-				//dst.m_top = i * BLOCK_SIZE - GOAL_T;
-				//dst.m_left = j * BLOCK_SIZE + s1_scroll - GOAL_T;
-				//dst.m_right = dst.m_left + GOAL_R;
-				//dst.m_bottom = dst.m_top + GOAL_B;
-
-				////ゴールブロック描画
-				//BlockDraw(BLOCK_SIZE, 0.0f, &dst, c, GOAL_BLOCK)
-
-				((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
-
+	}
+	//死亡判定後
+	if(dead_flag == true)
+	{
+		//m_dani_time ++;
+		respawn_time++;
 				hg_flag = true;
 			}
 
@@ -431,58 +464,102 @@ void CObjHero::Action()
 		}
 	}
 
+		//if (m_dani_time > m_dani_max_time)
+		//{
+		//	m_dani_frame += 1;
+		//}
+		if (respawn_time == 5)
+		{
+			m_dani_frame++;
+			respawn_time = 0;
+		}
+
+		if (m_dani_frame == 18)
+		{
+			this->SetStatus(false);
+			Hits::DeleteHitBox(this);
+
+			Scene::SetScene(new CSceneStage_1());
+			switch_flag = true;
+		}
+	}
+
+
 }
 
 //ドロー
 void CObjHero::Draw()
 {
-	//アニメーション番号
-	int AniData[5] =
-	{
-		0, 1, 2, 3, 1,
-	};
-
-		//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
-		float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
+	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
 
-	//切り取り位置の設定
-	if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false || pause_flag == true)
+	if (dead_flag == false)
 	{
+		//アニメーション番号
+		int AniData[5] =
+		{
+			0, 1, 2, 3, 1,
+		};
+		//切り取り位置の設定
+		if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false || pause_flag == true)
+		{
+			src.m_top = 0.0f;
+			src.m_left = 0.0f + AniData[m_ani_s_frame] * HBLOCK_INT_X_SIZE;
+			src.m_right = HBLOCK_INT_X_SIZE + AniData[m_ani_s_frame] * HBLOCK_INT_X_SIZE;
+			src.m_bottom = HBLOCK_INT_Y_SIZE;
+		}
+		else if (pause_flag == false)
+		{
+			src.m_top = HBLOCK_INT_Y_SIZE;
+			src.m_left = 0.0f + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
+			src.m_right = HBLOCK_INT_X_SIZE + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
+			src.m_bottom = src.m_top + HBLOCK_INT_Y_SIZE;
+		}
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_py;
+		dst.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE * m_posture) + m_px;
+		dst.m_right = (HBLOCK_INT_X_SIZE * m_posture) + m_px;
+		dst.m_bottom = HBLOCK_INT_Y_SIZE + m_py;
+
+		//光フラグがONなら
+		if (L_flag == true)
+		{
+			//2番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
+			Draw::Draw(2, &src, &dst, c, 0.0f);
+		}
+		//光フラグがOFFなら
+		else
+		{
+			//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
+			Draw::Draw(1, &src, &dst, c, 0.0f);
+		}
+	}
+	if (dead_flag == true)
+	{
+		//アニメーション番号
+		int AniData[16] =
+		{
+			0, 1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+		};
+		//切り取り位置の設定
 		src.m_top = 0.0f;
-		src.m_left = 0.0f + AniData[m_ani_s_frame] * HBLOCK_INT_X_SIZE;
-		src.m_right = HBLOCK_INT_X_SIZE + AniData[m_ani_s_frame] * HBLOCK_INT_X_SIZE;
-		src.m_bottom = HBLOCK_INT_Y_SIZE;
-	}
-	else if (pause_flag == false)
-	{
-		src.m_top = HBLOCK_INT_Y_SIZE;
-		src.m_left = 0.0f + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
-		src.m_right = HBLOCK_INT_X_SIZE + AniData[m_ani_frame] * HBLOCK_INT_X_SIZE;
-		src.m_bottom = src.m_top + HBLOCK_INT_Y_SIZE;
-	}
+		src.m_left = AniData[m_dani_frame] * 2 * BLOCK_SIZE;
+		src.m_right = src.m_left + 2 * BLOCK_SIZE;
+		src.m_bottom = 2 * BLOCK_SIZE;
 
-	//表示位置の設定
-	dst.m_top = 0.0f + m_py;
-	dst.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE * m_posture) + m_px;
-	dst.m_right = (HBLOCK_INT_X_SIZE * m_posture) + m_px;
-	dst.m_bottom = HBLOCK_INT_Y_SIZE + m_py;
+		//表示位置の設定
+		dst.m_top =  m_py;
+		dst.m_left = m_px - 64;
+		dst.m_right = dst.m_left + 2*BLOCK_SIZE;
+		dst.m_bottom = dst.m_top + 2*BLOCK_SIZE;
 
-	//光フラグがONなら
-	if (L_flag == true)
-	{
-		//2番目に登録したグラフィック(主人公・光)をsrc・dst・c の情報をもとに描画
-		Draw::Draw(2, &src, &dst, c, 0.0f);
+		//6番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
+		Draw::Draw(6, &src, &dst, c, 0.0f);
 	}
-	//光フラグがOFFなら
-	else 
-	{
-		//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
-		Draw::Draw(1, &src, &dst, c, 0.0f);
-	}
-
 }
 
 

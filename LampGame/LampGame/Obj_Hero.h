@@ -17,6 +17,7 @@ using namespace GameL;
 
 #define INIT_SPEED_POWER (1.4)	//加算速度
 #define INIT_H_ANI_MAX_TIME (5.0)	
+#define INIT_H_DANI_MAX_TIME (10.0)
 
 #define INIT_FRICTION (0.2)	//摩擦係数
 
@@ -62,6 +63,7 @@ class CObjHero : public CObj
 
 		bool Get_L_flag(){ return L_flag; }
 		bool Get_M_flag() { return move_flag; }
+		bool Get_D_flag() { return dead_flag; }
 
 		void SetX(float x) { m_px = x; }
 		void SetY(float y) { m_py = y; }
@@ -94,12 +96,15 @@ class CObjHero : public CObj
 		float m_posture;	//姿勢
 
 		float m_ani_time;	//アニメーションフレーム動作間隔
+		float m_dani_time;	//dアニメーションフレーム動作間隔
 		float m_ani_s_time;	//ストップアニメーションフレーム動作間隔
 		int m_ani_frame;	//描画フレーム
+		int m_dani_frame;	//描画フレーム
 		int m_ani_s_frame;	//ストップアニメーション描画フレーム
 
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値
+		float m_dani_max_time;	//アニメーション動作間隔最大値
 
 		int time;				//世界切り替え制御用時間
 
@@ -148,5 +153,5 @@ class CObjHero : public CObj
 
 		int a ;
 		bool dead_flag;		//死んだか判定するフラグ
-		int respawn_time;	//死亡時から復活するまでの時間
+		float respawn_time;	//死亡時から復活するまでの時間
 };
