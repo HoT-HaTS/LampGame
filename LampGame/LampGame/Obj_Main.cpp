@@ -20,60 +20,65 @@ void CObjMain::Init()
 	 g_flag = false;
 	 alpha = 0.0f;
 	 ga_flag = false;
+	 d_flag = false;
 }
 
 //アクション
 void CObjMain::Action()
 {
-
-	//Rキー入力でリトライ
-	if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
-	{
-		if (Input::GetVKey('R') == true)
-		{
-			Scene::SetScene(new CSceneStage_1());
-			pause_flag = false;
-			switch_flag = true;
-		}	
-	
-	}
-
 	//ゴールの演出用、主人公の情報取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	g_flag = hero->GetG_Flag();
-	//flagがtrueの時、演出開始,（今はゴールに触れた瞬間に何回も演出しているので激重になる。）
-	if (g_flag == true && ga_flag == false)
-	{
-		CObjGoalscene* obj_goalscene = new CObjGoalscene();
-		Objs::InsertObj(obj_goalscene, OBJ_GOALSCENE, 99);
-		ga_flag = true;
-	}
-	else if (g_flag == false)
-	{
-		ga_flag = false;
-	}
+	d_flag = hero->Get_D_flag();
 
-	//ポーズ用
-	if (Input::GetVKey('P') == true)
+	if (d_flag == false)
 	{
+		//Rキー入力でリトライ
+		if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
+		{
+			if (Input::GetVKey('R') == true)
+			{
+				Scene::SetScene(new CSceneStage_1());
+				pause_flag = false;
+				switch_flag = true;
+			}
 
-		if (m_flag == true && pause_flag == false)
-		{
-			pause_flag = true;
-			m_flag = false;
-			CObjPause* obj_pause = new CObjPause();
-			Objs::InsertObj(obj_pause, OBJ_PAUSE, 99);
 		}
-		else if (m_flag == true && pause_flag == true)
+
+		g_flag = hero->GetG_Flag();
+		//flagがtrueの時、演出開始,（今はゴールに触れた瞬間に何回も演出しているので激重になる。）
+		if (g_flag == true && ga_flag == false)
 		{
-			pause_flag = false;
-			m_flag = false;
+			CObjGoalscene* obj_goalscene = new CObjGoalscene();
+			Objs::InsertObj(obj_goalscene, OBJ_GOALSCENE, 99);
+			ga_flag = true;
+		}
+		else if (g_flag == false)
+		{
+			ga_flag = false;
+		}
+
+		//ポーズ用
+		if (Input::GetVKey('P') == true)
+		{
+
+			if (m_flag == true && pause_flag == false)
+			{
+				pause_flag = true;
+				m_flag = false;
+				CObjPause* obj_pause = new CObjPause();
+				Objs::InsertObj(obj_pause, OBJ_PAUSE, 99);
+			}
+			else if (m_flag == true && pause_flag == true)
+			{
+				pause_flag = false;
+				m_flag = false;
+			}
+		}
+		else
+		{
+			m_flag = true;
 		}
 	}
-	else
-	{
-		m_flag = true;
-	}	
 }
 
 //ドロー

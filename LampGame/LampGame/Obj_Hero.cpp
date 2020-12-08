@@ -308,7 +308,7 @@ void CObjHero::Action()
 			if (move_flag == true)
 			{
 				//世界切り替え:光→影(X押すと切り替え)
-				if (L_flag == true)
+				if (L_flag == true && hg_flag == false)
 				{
 					if (Input::GetVKey('X') == true)
 					{
@@ -388,104 +388,58 @@ void CObjHero::Action()
 				//ステージ終了条件(ゴール到達)
 				if (m_block_type_goal == H_GOAL_BLOCK)
 				{
-
-					//CObjBlock* g_scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
-					//g_scroll->GetScroll();
-					//float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-					//
-					//RECT_F src;	//描画元切り取り位置
-					//RECT_F dst;	//描画先表示位置
-					//dst.m_top = i * BLOCK_SIZE - GOAL_T;
-					//dst.m_left = j * BLOCK_SIZE + s1_scroll - GOAL_T;
-					//dst.m_right = dst.m_left + GOAL_R;
-					//dst.m_bottom = dst.m_top + GOAL_B;
-
-					////ゴールブロック描画
-					//BlockDraw(BLOCK_SIZE, 0.0f, &dst, c, GOAL_BLOCK)
-
+					hg_flag = true;
 					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
-
-					for (int i = 1; i <= 5; i++)
+				}
+				
+				if (a > 200)
+				{
+					for (int i = 1; i <= 6; i++)
 					{
-						if (((UserData*)Save::GetData())->clear[i] == true && hg_flag == false)
+						if (((UserData*)Save::GetData())->clear[i] == true)
 						{
 							count++;
 						}
 					}
-					if (count == 5)
+
+					hg_flag = false;
+					a = 0;
+					if (count == 6)
 					{
 						Scene::SetScene(new CSceneClear());
 					}
 					else
 					{
-						hg_flag = true;
+						Scene::SetScene(new CSceneSelect());
 					}
-
 				}
-				if (a > 200)
-				{
-					hg_flag = false;
-					a = 0;
-					Scene::SetScene(new CSceneSelect());
-				}
+				
 			}
 		}
-
 	}
 	//死亡判定後
-	if(dead_flag == true)
+	if (dead_flag == true)
 	{
 		//m_dani_time ++;
 		respawn_time++;
-				hg_flag = true;
-			}
-
-			if (a > 200)
-			{
-				for (int i = 1; i <= 6; i++)
-				{
-					if (((UserData*)Save::GetData())->clear[i] == true)
-					{
-						count++;
-					}
-				}
-
-				hg_flag = false;
-				a = 0;
-				if (count == 6)
-				{
-					Scene::SetScene(new CSceneClear());
-				}
-				else
-				{
-					Scene::SetScene(new CSceneSelect());
-				}
-			}
-		}
 	}
 
-		//if (m_dani_time > m_dani_max_time)
-		//{
-		//	m_dani_frame += 1;
-		//}
-		if (respawn_time == 5)
-		{
-			m_dani_frame++;
-			respawn_time = 0;
-		}
-
-		if (m_dani_frame == 18)
-		{
-			this->SetStatus(false);
-			Hits::DeleteHitBox(this);
-
-			Scene::SetScene(new CSceneStage_1());
-			switch_flag = true;
-		}
+	if (respawn_time == 5)
+	{
+		m_dani_frame++;
+		respawn_time = 0;
 	}
 
+	if (m_dani_frame == 18)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
 
+		Scene::SetScene(new CSceneStage_1());
+		switch_flag = true;
+	}
 }
+
 
 //ドロー
 void CObjHero::Draw()

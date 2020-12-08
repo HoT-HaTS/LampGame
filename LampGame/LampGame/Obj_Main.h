@@ -22,5 +22,6 @@ private:
 	float alpha;
 	bool g_flag;
 	bool ga_flag;
+	bool d_flag;
 };
 

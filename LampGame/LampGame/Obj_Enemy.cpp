@@ -175,23 +175,20 @@ void CObjEnemy::Action()
 			}
 		}
 
-		if (L_flag_enemy == true)
+		//光の世界かつ主人公の攻撃がHitBoxに当たるとflagをtrueにする
+		if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
 		{
-			//光の世界かつ主人公の攻撃がHitBoxに当たるとflagをtrueにする
-			if (hit->CheckObjNameHit(OBJ_ATTACK) != nullptr)
-			{
-				E_flag = true;				//スイッチのフラグをtrueに
-			}
-			//flagがtrueのとき自身を消滅させる
-			if (E_flag == true)
-			{
-				//敵消滅SE
-				Audio::Start(5);
+			E_flag = true;				//スイッチのフラグをtrueに
+		}
+		//flagがtrueのとき自身を消滅させる
+		if (E_flag == true)
+		{
+			//敵消滅SE
+			Audio::Start(5);
 
-				this->SetStatus(false);		//スイッチが押されたら消滅
-				Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
-				return;
-			}
+			this->SetStatus(false);		//スイッチが押されたら消滅
+			Hits::DeleteHitBox(this);	//スイッチが所有するHitBoxを削除
+			return;
 		}
 	}
 }
