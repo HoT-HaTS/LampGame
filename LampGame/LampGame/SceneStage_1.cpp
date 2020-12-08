@@ -123,8 +123,8 @@ void CSceneStage_1::InitScene()
 	Audio::LoadAudio(16, L"BGM/Stage6.wav", BACK_MUSIC);
 
 	//SE読み込み用
-	Audio::LoadAudio(0, L"SE/Shadow_from.wav", EFFECT);
-	Audio::LoadAudio(1, L"SE/Shadow_to.wav", EFFECT);
+	Audio::LoadAudio(0, L"SE/Shadow_to.wav", EFFECT);
+	Audio::LoadAudio(1, L"SE/Shadow_from.wav", EFFECT);
 	Audio::LoadAudio(2, L"SE/Jump.wav", EFFECT);
 	Audio::LoadAudio(3, L"SE/Flame.wav", EFFECT);
 	Audio::LoadAudio(4, L"SE/Coin.wav", EFFECT);
@@ -133,6 +133,8 @@ void CSceneStage_1::InitScene()
 	Audio::LoadAudio(7, L"SE/Switch.wav", EFFECT);
 	Audio::LoadAudio(8, L"SE/Unlock.wav", EFFECT);
 	Audio::LoadAudio(9, L"SE/fire.wav", EFFECT);
+	Audio::LoadAudio(10, L"SE/P_defeat.wav", EFFECT);
+	Audio::LoadAudio(11, L"SE/Crack_fix.wav", EFFECT);
 
 	//オブジェクト出現
 	CObjStage1* obj_stage1 = new CObjStage1(map);
