@@ -72,31 +72,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/switch.png", 10, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_attack.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/switch2.png", 12, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/block.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Enemy.png", 22, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Board.png", 23, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Shattersub.png", 24, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/G_Block.png", 25, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Enemy_dead.png", 26, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/tutorial.png", 50, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/block_shadow.png", 51, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Switchblock_Mark.png", 52, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Switchblock_Mark_Shadow.png", 53, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/block.png", 40, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/stage_blockG1.png", 41, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/stage_blockG2.png", 42, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/stage_blockG3.png", 43, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/stage_blockG4.png", 44, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/stage_blockG5.png", 45, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/stage_blockG6.png", 46, TEX_SIZE_512);
-
 	Draw::LoadImageW(L"graphic/pausemenu.png", 13, TEX_SIZE_512);
-
-	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
-
-	Draw::LoadImageW(L"graphic/BG_Area1.png", 60, TEX_SIZE_512);
-	Draw::LoadImageW(L"graphic/White.png", 61, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area0.png", 14, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area1.png", 15, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area2.png", 16, TEX_SIZE_512);
@@ -104,7 +80,14 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Stage_Area4.png", 18, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area5.png", 19, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area6.png", 20, TEX_SIZE_512);
-
+	Draw::LoadImageW(L"graphic/block.png", 21, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Enemy.png", 22, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Board.png", 23, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Shattersub.png", 24, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/G_Block.png", 25, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Enemy_dead.png", 26, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/KeyCoin.png", 30, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Keyblock.png", 31, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/block.png", 40, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG1.png", 41, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG2.png", 42, TEX_SIZE_512);
@@ -112,15 +95,22 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/stage_blockG4.png", 44, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG5.png", 45, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG6.png", 46, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/tutorial.png", 50, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/block_shadow.png", 51, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Switchblock_Mark.png", 52, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Switchblock_Mark_Shadow.png", 53, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/BG_Area1.png", 60, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/White.png", 61, TEX_SIZE_512);
+		
 
 	//音楽データ読み込み用
-	Audio::LoadAudio(10, L"BGM/Tutorial.wav", BACK_MUSIC);
-	Audio::LoadAudio(11, L"BGM/Stage1.wav", BACK_MUSIC);
-	Audio::LoadAudio(12, L"BGM/Stage2.wav", BACK_MUSIC);
-	Audio::LoadAudio(13, L"BGM/Stage3.wav", BACK_MUSIC);
-	Audio::LoadAudio(14, L"BGM/Stage4.wav", BACK_MUSIC);
-	Audio::LoadAudio(15, L"BGM/Stage5.wav", BACK_MUSIC);
-	Audio::LoadAudio(16, L"BGM/Stage6.wav", BACK_MUSIC);
+	Audio::LoadAudio(20, L"BGM/Tutorial.wav", BACK_MUSIC);
+	Audio::LoadAudio(21, L"BGM/Stage1.wav", BACK_MUSIC);
+	Audio::LoadAudio(22, L"BGM/Stage2.wav", BACK_MUSIC);
+	Audio::LoadAudio(23, L"BGM/Stage3.wav", BACK_MUSIC);
+	Audio::LoadAudio(24, L"BGM/Stage4.wav", BACK_MUSIC);
+	Audio::LoadAudio(25, L"BGM/Stage5.wav", BACK_MUSIC);
+	Audio::LoadAudio(26, L"BGM/Stage6.wav", BACK_MUSIC);
 
 	//SE読み込み用
 	Audio::LoadAudio(0, L"SE/Shadow_to.wav", EFFECT);
@@ -168,7 +158,7 @@ void CSceneStage_1::InitScene()
 	float v = Audio::VolumeMaster(0);
 	v = Audio::VolumeMaster((0.9 - v));
 
-	Audio::Start(((UserData*)Save::GetData())->stage_id + 10);
+	Audio::Start(((UserData*)Save::GetData())->stage_id + 20);
 
 }
 
