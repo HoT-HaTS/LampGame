@@ -33,7 +33,16 @@ void CSceneSelect::InitScene()
 	//出力させる文字のグラフィックを作成
 	Font::SetStrTex(L"LampGame");
 
-	Draw::LoadImageW(L"graphic/Stageselect_cursor.png", 1, TEX_SIZE_512);
+	//画像データ読み込み
+	Draw::LoadImageW(L"graphic/tumb_0.png", 0, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/tumb_1.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/tumb_2.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/tumb_3.png", 3, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/tumb_4.png", 4, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/tumb_5.png", 5, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/tumb_6.png", 6, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stageselect_cursor.png", 8, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/St_Cleared_mark.png", 9, TEX_SIZE_512);
 
 	//音楽データ読み込み用
 	Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);
