@@ -76,7 +76,7 @@ void CObjHero::Init()
 
 	respawn_time = 0;
 	hg_flag = false;
-	a=0;
+	goal_white = 0;
 }
 
 //アクション
@@ -89,19 +89,8 @@ void CObjHero::Action()
 			//落下によるゲームオーバー
 			if (m_py > STAGE_Y_OUT)
 			{
-				//ミス時効果音
-				//Audio::Start(6);
-
 				dead_flag = true;
-
-				//fall_time++;
-
-				//if (fall_time > 40)
-				//{
-				//	//場外に出たらリセット
-				//	Scene::SetScene(new CSceneStage_1());
-				//	switch_flag = true;
-				//}
+				Audio::Start(12);
 			}
 
 
@@ -179,11 +168,7 @@ void CObjHero::Action()
 					{
 						m_flagj = true;
 					}
-
-					/*if (m_hit_down == false && m_hit_down2 == false)
-						m_vx += -(m_vx*0.2);*/
-
-						//摩擦
+					//摩擦
 					m_vx += -(m_vx * INIT_FRICTION);
 
 					//自由落下運動
@@ -257,9 +242,6 @@ void CObjHero::Action()
 					//{
 					//	m_py = 600.0f - 128.0f;
 					//}
-
-					//画面外に行かない処理
-					//CheckWindow(m_px, m_py, -32.0f, -32.0f, 800.0f, 600.0f);
 				}
 				//自身のHitBoxを持ってくる
 				CHitBox* hit = Hits::GetHitBox(this);
@@ -273,6 +255,11 @@ void CObjHero::Action()
 					if (L_flag == true)
 					{
 						dead_flag = true;
+						if (audio == false)
+						{
+							Audio::Start(10);
+							audio = true;
+						}
 					}
 				}
 			}
@@ -387,7 +374,7 @@ void CObjHero::Action()
 			if (L_flag == true)
 			{
 				if (hg_flag == true)
-					a += 1;
+					goal_white += 1;
 				//ステージ終了条件(ゴール到達)
 				if (m_block_type_goal == H_GOAL_BLOCK)
 				{
@@ -395,7 +382,7 @@ void CObjHero::Action()
 					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
 				}
 				
-				if (a > 200)
+				if (goal_white > 200)
 				{
 					for (int i = 1; i <= 6; i++)
 					{
@@ -406,7 +393,7 @@ void CObjHero::Action()
 					}
 
 					hg_flag = false;
-					a = 0;
+					goal_white = 0;
 					if (count == 6)
 					{
 						Scene::SetScene(new CSceneClear());
@@ -423,12 +410,6 @@ void CObjHero::Action()
 	//死亡判定後
 	if (dead_flag == true)
 	{
-		if (audio == false)
-		{
-			Audio::Start(10);
-			audio = true;
-		}
-
 		//m_dani_time ++;
 		respawn_time++;
 	}

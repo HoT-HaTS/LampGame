@@ -44,8 +44,8 @@ private:
 
 	void BlockDraw(float x, float y, RECT_F* dst, float c[], int block_id);
 
-	int count = 0;
-	float alpha = 1.0f;
+	int count;
+	float alpha;
 
 	enum BLOCKNUM
 	{

@@ -19,7 +19,8 @@ private:
 	int coin_count;
 
 	//ƒS[ƒ‹‰‰o—p‚Ì•Ï”
-	float alpha;
+	float dead_alpha;
+	float in_alpha;
 	float d_time;
 	bool g_flag;
 	bool ga_flag;

@@ -151,7 +151,7 @@ class CObjHero : public CObj
 
 		int count;			//ステージクリア時の条件
 
-		int a ;
+		int goal_white;		//ホワイトアウト時間管理用
 		bool dead_flag;		//死んだか判定するフラグ
 		bool audio;			//死亡時SE用
 		float respawn_time;	//死亡時から復活するまでの時間

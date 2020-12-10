@@ -37,11 +37,9 @@ CSceneStage_1::~CSceneStage_1()
 //初期化メソッド
 void CSceneStage_1::InitScene()
 {
-	
-
 	CObjSelect* stage = (CObjSelect*)Objs::GetObj(OBJ_SELECT);
 
-	//マップデータ完成したら追加
+	//マップデータ関連
 	unique_ptr<wchar_t>p;
 	int size;
 	int map[10][100];
@@ -126,6 +124,7 @@ void CSceneStage_1::InitScene()
 	Audio::LoadAudio(9, L"SE/fire.wav", EFFECT);
 	Audio::LoadAudio(10, L"SE/P_defeat.wav", EFFECT);
 	Audio::LoadAudio(11, L"SE/Crack_fix.wav", EFFECT);
+	Audio::LoadAudio(12, L"SE/fall.wav", EFFECT);
 
 	//オブジェクト出現
 	CObjStage1* obj_stage1 = new CObjStage1(map);
@@ -175,7 +174,6 @@ void CSceneStage_1::InitScene()
 	v = Audio::VolumeMaster((0.9 - v));
 
 	Audio::Start(((UserData*)Save::GetData())->stage_id + 20);
-
 }
 
 //実行中メソッド実行中メソッド
