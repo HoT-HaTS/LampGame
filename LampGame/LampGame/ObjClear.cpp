@@ -15,7 +15,7 @@ using namespace GameL;
 //イニシャライズ
 void CObjClear::Init()
 {
-	scene_num = 6;
+	scene_num = 7;
 	alpha_b = 1.0f;
 	alpha_w = 0.0f;
 	white = false;
@@ -28,7 +28,7 @@ void CObjClear::Action()
 {
 	//しろの時の待機時間を作る
 
-	if (white == false)
+	if (white == false && scene_num >= 2)
 	{
 		alpha_b -= 0.005f;
 		if (alpha_b <= 0.0f)
@@ -36,9 +36,9 @@ void CObjClear::Action()
 			white = true;
 			white_out = true;
 		}
-		if (scene_num < 1)
+		if (scene_num < 2)
 		{
-			Scene::SetScene(new CSceneTitle());
+
 		}
 	}
 
@@ -144,8 +144,29 @@ void CObjClear::Draw()
 			white = false;
 		}
 
-		Draw::Draw(7, &src_w, &dst_w, c_w, 0.0f);
+		Draw::Draw(8, &src_w, &dst_w, c_w, 0.0f);
 	}
 
+	if (scene_num < 2)
+	{
+		//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
+		float  c[4] = { 1.0f, 1.0f, 1.0f, alpha_w };
+
+		RECT_F src;	//描画元切り取り位置
+		RECT_F dst;	//描画先表示位置
+
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 800.0f;
+		src.m_bottom = 600.0f;
+
+		//表示位置の設定
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = dst.m_left + 800.0f;
+		dst.m_bottom = dst.m_top + 600.0f;
+		Draw::Draw(scene_num, &src, &dst, c, 0.0f);
+	}
 
 }
