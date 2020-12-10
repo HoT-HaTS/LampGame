@@ -20,6 +20,7 @@ private:
 
 	//ƒS[ƒ‹‰‰o—p‚Ì•Ï”
 	float alpha;
+	float d_time;
 	bool g_flag;
 	bool ga_flag;
 	bool d_flag;

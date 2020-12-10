@@ -19,6 +19,7 @@ void CObjMain::Init()
 	 coin_count = 0;
 	 g_flag = false;
 	 alpha = 0.0f;
+	 d_time = 0.0f;
 	 ga_flag = false;
 	 d_flag = false;
 }
@@ -79,22 +80,37 @@ void CObjMain::Action()
 			m_flag = true;
 		}
 	}
+	else
+	{
+		d_time++;
+
+		if(d_time >= 60)
+			alpha += 0.02f;
+	}
 }
 
 //ドロー
 void CObjMain::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c1[4] = { 1.0f,1.0f,1.0f,alpha };
 
 	//主人公情報の取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	coin_count = hero->GetCoin();
 
-
+	RECT_F src;		//ブラックアウト描画元切り取り位置
+	RECT_F dst;		//ブラックアウト描画先表示位置
 	RECT_F src2;	//描画元切り取り位置
 	RECT_F dst2;	//描画先表示位置
 	RECT_F dst3;	//描画先表示位置
 	RECT_F dst4;	//描画先表示位置
+
+	//ブラックアウト描画元切り取り位置
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = src.m_left + 8.0f;
+	src.m_bottom = src.m_top + 6.0f;
 
 	//コイン枚数の描画
 	src2.m_top = 0.0f;
@@ -102,28 +118,39 @@ void CObjMain::Draw()
 	src2.m_right = src2.m_left + BLOCK_SIZE;
 	src2.m_bottom = src2.m_top + BLOCK_SIZE;
 
-	if (1 <= coin_count)
+	if (d_flag == false)
 	{
-		dst2.m_top = 0.0f;
-		dst2.m_left = 0.0f;
-		dst2.m_right = dst2.m_left + BLOCK_SIZE;
-		dst2.m_bottom = dst2.m_top + BLOCK_SIZE;
-		Draw::Draw(30, &src2, &dst2, c, 0.0f);
+		if (1 <= coin_count)
+		{
+			dst2.m_top = 0.0f;
+			dst2.m_left = 0.0f;
+			dst2.m_right = dst2.m_left + BLOCK_SIZE;
+			dst2.m_bottom = dst2.m_top + BLOCK_SIZE;
+			Draw::Draw(30, &src2, &dst2, c, 0.0f);
+		}
+		if (2 <= coin_count)
+		{
+			dst3.m_top = 0.0f;
+			dst3.m_left = 0.0f + BLOCK_SIZE;
+			dst3.m_right = dst3.m_left + BLOCK_SIZE;
+			dst3.m_bottom = dst3.m_top + BLOCK_SIZE;
+			Draw::Draw(30, &src2, &dst3, c, 0.0f);
+		}
+		if (3 <= coin_count)
+		{
+			dst4.m_top = 0.0f;
+			dst4.m_left = 0.0f + 2 * BLOCK_SIZE;
+			dst4.m_right = dst4.m_left + BLOCK_SIZE;
+			dst4.m_bottom = dst4.m_top + BLOCK_SIZE;
+			Draw::Draw(30, &src2, &dst4, c, 0.0f);
+		}
 	}
-	if (2 <= coin_count)
+	else
 	{
-		dst3.m_top = 0.0f;
-		dst3.m_left = 0.0f + BLOCK_SIZE;
-		dst3.m_right = dst3.m_left + BLOCK_SIZE;
-		dst3.m_bottom = dst3.m_top + BLOCK_SIZE;
-		Draw::Draw(30, &src2, &dst3, c, 0.0f);
-	}
-	if (3 <= coin_count)
-	{
-		dst4.m_top = 0.0f;
-		dst4.m_left = 0.0f + 2 * BLOCK_SIZE;
-		dst4.m_right = dst4.m_left + BLOCK_SIZE;
-		dst4.m_bottom = dst4.m_top + BLOCK_SIZE;
-		Draw::Draw(30, &src2, &dst4, c, 0.0f);
+		dst.m_top = 0.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = dst.m_left + DRAW_SIZE_R;
+		dst.m_bottom = dst.m_top + DRAW_SIZE_B;
+		Draw::Draw(62, &src, &dst, c1, 0.0f);
 	}
 }
