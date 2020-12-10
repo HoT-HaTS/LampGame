@@ -152,11 +152,11 @@ void CObjSelect::Draw()
 	{
 		if (((UserData*)Save::GetData())->clear[x] == true)
 		{
-			//ステージサムネイル表示位置の設定と表示
+			//クリアマーク表示位置の設定と表示
 			dst2.m_top = top[x];
 			dst2.m_left = left[x];
-			dst2.m_right = dst2.m_left + 32.0f;
-			dst2.m_bottom = dst2.m_top + 32.0f;
+			dst2.m_right = dst2.m_left + 140.0f;
+			dst2.m_bottom = dst2.m_top + 140.0f;
 			Draw::Draw(9, &src2, &dst2, c, 0.0f);
 		}
 	}

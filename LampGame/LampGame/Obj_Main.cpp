@@ -18,7 +18,8 @@ void CObjMain::Init()
 	 m_flag = true;
 	 coin_count = 0;
 	 g_flag = false;
-	 alpha = 0.0f;
+	 dead_alpha = 0.0f;
+	 in_alpha = 1.0;
 	 d_time = 0.0f;
 	 ga_flag = false;
 	 d_flag = false;
@@ -67,7 +68,7 @@ void CObjMain::Action()
 				pause_flag = true;
 				m_flag = false;
 				CObjPause* obj_pause = new CObjPause();
-				Objs::InsertObj(obj_pause, OBJ_PAUSE, 99);
+				Objs::InsertObj(obj_pause, OBJ_PAUSE, 90);
 			}
 			else if (m_flag == true && pause_flag == true)
 			{
@@ -85,15 +86,23 @@ void CObjMain::Action()
 		d_time++;
 
 		if(d_time >= 60)
-			alpha += 0.02f;
+			dead_alpha += 0.02f;
 	}
 }
 
 //ドロー
 void CObjMain::Draw()
 {
+	in_alpha -= 0.02f;
+
+	if (in_alpha <= 0.0f)
+	{
+		in_alpha = 0.0f;
+	}
+
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-	float c1[4] = { 1.0f,1.0f,1.0f,alpha };
+	float c_dead[4] = { 1.0f,1.0f,1.0f,dead_alpha };
+	float c_in[4] = { 1.0f,1.0f,1.0f,in_alpha };
 
 	//主人公情報の取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -112,11 +121,20 @@ void CObjMain::Draw()
 	src.m_right = src.m_left + 8.0f;
 	src.m_bottom = src.m_top + 6.0f;
 
+	//ブラックアウト描画先表示位置
+	dst.m_top = 0.0f;
+	dst.m_left = 0.0f;
+	dst.m_right = dst.m_left + DRAW_SIZE_R;
+	dst.m_bottom = dst.m_top + DRAW_SIZE_B;
+
 	//コイン枚数の描画
 	src2.m_top = 0.0f;
 	src2.m_left = 0.0f;
 	src2.m_right = src2.m_left + BLOCK_SIZE;
 	src2.m_bottom = src2.m_top + BLOCK_SIZE;
+
+	//ブラックイン表示
+	Draw::Draw(62, &src, &dst, c_in, 0.0f);
 
 	if (d_flag == false)
 	{
@@ -147,10 +165,6 @@ void CObjMain::Draw()
 	}
 	else
 	{
-		dst.m_top = 0.0f;
-		dst.m_left = 0.0f;
-		dst.m_right = dst.m_left + DRAW_SIZE_R;
-		dst.m_bottom = dst.m_top + DRAW_SIZE_B;
-		Draw::Draw(62, &src, &dst, c1, 0.0f);
+		Draw::Draw(62, &src, &dst, c_dead, 0.0f);
 	}
 }
