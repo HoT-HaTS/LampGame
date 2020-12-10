@@ -153,5 +153,6 @@ class CObjHero : public CObj
 
 		int a ;
 		bool dead_flag;		//Ž€‚ñ‚¾‚©”»’è‚·‚éƒtƒ‰ƒO
+		bool audio;			//Ž€–SŽžSE—p
 		float respawn_time;	//Ž€–SŽž‚©‚ç•œŠˆ‚·‚é‚Ü‚Å‚ÌŽžŠÔ
 };

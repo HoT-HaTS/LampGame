@@ -101,6 +101,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/Switchblock_Mark_Shadow.png", 53, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/BG_Area1.png", 60, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/White.png", 61, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Black.png", 62, TEX_SIZE_512);
 		
 
 	//音楽データ読み込み用

@@ -72,6 +72,7 @@ void CObjHero::Init()
 	count = 0;
 
 	dead_flag = false;
+	audio = false;
 
 	respawn_time = 0;
 	hg_flag = false;
@@ -91,14 +92,16 @@ void CObjHero::Action()
 				//ミス時効果音
 				//Audio::Start(6);
 
-				fall_time++;
+				dead_flag = true;
 
-				if (fall_time > 40)
-				{
-					//場外に出たらリセット
-					Scene::SetScene(new CSceneStage_1());
-					switch_flag = true;
-				}
+				//fall_time++;
+
+				//if (fall_time > 40)
+				//{
+				//	//場外に出たらリセット
+				//	Scene::SetScene(new CSceneStage_1());
+				//	switch_flag = true;
+				//}
 			}
 
 
@@ -420,17 +423,23 @@ void CObjHero::Action()
 	//死亡判定後
 	if (dead_flag == true)
 	{
+		if (audio == false)
+		{
+			Audio::Start(10);
+			audio = true;
+		}
+
 		//m_dani_time ++;
 		respawn_time++;
 	}
 
-	if (respawn_time == 5)
+	if (respawn_time == 8)
 	{
 		m_dani_frame++;
 		respawn_time = 0;
 	}
 
-	if (m_dani_frame == 18)
+	if (m_dani_frame == 20)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
