@@ -43,7 +43,6 @@ void CObjMain::Action()
 				pause_flag = false;
 				switch_flag = true;
 			}
-
 		}
 
 		g_flag = hero->GetG_Flag();
@@ -63,7 +62,7 @@ void CObjMain::Action()
 		if (Input::GetVKey('P') == true)
 		{
 
-			if (m_flag == true && pause_flag == false)
+			if (m_flag == true && pause_flag == false && g_flag == false)
 			{
 				pause_flag = true;
 				m_flag = false;
