@@ -5,9 +5,13 @@
 //使用するネームスペース
 using namespace GameL;
 
-#define BOARD1_X (640.0)
-#define BOARD2_X (1664.0)
-#define BOARD3_X (3456.0)
+#define BOARD1_X (256.0)
+#define BOARD2_X (2432.0)
+#define BOARD3_X (3712.0)
+#define BOARD4_X (1536.0)
+#define BOARD5_X (640.0)
+#define BOARD6_X (896.0)
+#define BOARD7_X (4736.0)
 #define BOARD_Y (512.0)
 
 //シーン：メイン
