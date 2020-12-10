@@ -99,10 +99,10 @@ void CObjSelect::Action()
 	}
 }
 
-//ドロー（文字）
+//ドロー
 void CObjSelect::Draw()
 {
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//サムネイル、カーソル、クリアマーク用
 	float c1[4] = { 1.0f,1.0f,0.0f,1.0f };
 
 	//サムネイル、クリアマーク表示位置
