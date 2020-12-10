@@ -22,6 +22,9 @@ private:
 	bool white;
 	bool w_end;
 
+	int h_ani_frame;
+	int h_ani_time;
+
 	float alpha_w;
 
 	bool m_key_flag;  //キーフラグ

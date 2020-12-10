@@ -21,13 +21,13 @@ void CObjClear::Init()
 	white = false;
 	w_end = false;
 	white_out = false;
+	h_ani_time = 0;
+	h_ani_frame = 0;
 }
 
 //アクション
 void CObjClear::Action()
 {
-	//しろの時の待機時間を作る
-
 	if (white == false && scene_num >= 2)
 	{
 		alpha_b -= 0.005f;
@@ -36,9 +36,18 @@ void CObjClear::Action()
 			white = true;
 			white_out = true;
 		}
-		if (scene_num < 2)
+	}
+	if (scene_num < 2)
+	{
+		h_ani_time += 1;
+		if (h_ani_time >= 10)
 		{
-
+			h_ani_frame += 1;
+			h_ani_time = 0;
+			if (h_ani_frame >= 4)
+			{
+				h_ani_frame = 0;
+			}
 		}
 	}
 
@@ -150,23 +159,50 @@ void CObjClear::Draw()
 	if (scene_num < 2)
 	{
 		//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
-		float  c[4] = { 1.0f, 1.0f, 1.0f, alpha_w };
-
+		float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
 		RECT_F src;	//描画元切り取り位置
 		RECT_F dst;	//描画先表示位置
 
+		//背景
 		//切り取り位置の設定
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 800.0f;
-		src.m_bottom = 600.0f;
-
+		src.m_top = 200.0f;
+		src.m_left = 150.0f;
+		src.m_right = 600.0f;
+		src.m_bottom = 450.0f;
 		//表示位置の設定
 		dst.m_top = 0.0f;
 		dst.m_left = 0.0f;
 		dst.m_right = dst.m_left + 800.0f;
 		dst.m_bottom = dst.m_top + 600.0f;
-		Draw::Draw(scene_num, &src, &dst, c, 0.0f);
+		Draw::Draw(1, &src, &dst, c, 0.0f);
+
+		
+		//テキスト
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 700.0f;
+		src.m_bottom = 200.0f;
+		//表示位置の設定
+		dst.m_top = 50.0f;
+		dst.m_left = 50.0f;
+		dst.m_right = dst.m_left + 700.0f;
+		dst.m_bottom = dst.m_top + 200.0f;
+		Draw::Draw(9, &src, &dst, c, 0.0f);
+
+
+		//主人公
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f + (h_ani_frame * 64.0f);
+		src.m_right = src.m_left + 64.0f;
+		src.m_bottom = src.m_top + 128.0f;
+		//表示位置の設定
+		dst.m_top = 300.0f;
+		dst.m_left = 336.0f;
+		dst.m_right = dst.m_left + 64.0f;
+		dst.m_bottom = dst.m_top + 128.0f;
+		Draw::Draw(10, &src, &dst, c, 0.0f);
 	}
 
 }

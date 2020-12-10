@@ -88,8 +88,8 @@ void CObjSelect::Action()
 	{
 		if (m_key_flag == true)
 		{
-			/*Scene::SetScene(new CSceneClear());*/
-			Scene::SetScene(new CSceneStage_1());
+			Scene::SetScene(new CSceneClear());
+			//Scene::SetScene(new CSceneStage_1());
 			m_key_flag = false;
 			switch_flag = true;
 		}
