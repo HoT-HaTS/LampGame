@@ -391,6 +391,12 @@ void CObjHero::Action()
 					hg_flag = true;
 					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
 				}
+
+				((UserData*)Save::GetData())->clear[2] = true;
+				((UserData*)Save::GetData())->clear[3] = true;
+				((UserData*)Save::GetData())->clear[4] = true;
+				((UserData*)Save::GetData())->clear[5] = true;
+				((UserData*)Save::GetData())->clear[6] = true;
 				
 				if (a > 200)
 				{

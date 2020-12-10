@@ -33,7 +33,13 @@ void CSceneClear::InitScene()
 	//出力させる文字のグラフィックを作成
 	Font::SetStrTex(L"クリア");
 
-	//Draw::LoadImageW(L"graphic/Clear.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area1.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area2.png", 2, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area3.png", 3, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area4.png", 4, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area5.png", 5, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_Area6.png", 6, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/White.png", 7, TEX_SIZE_512);
 
 	//音楽データ読み込み用
 	//Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);
