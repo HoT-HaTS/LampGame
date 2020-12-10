@@ -108,7 +108,7 @@ void CObjHero::Action()
 					//主人公の攻撃
 					if (Input::GetVKey('Z') == true)
 					{
-						if (attack_flag == true)
+						if (attack_flag == true && hg_flag == false)
 						{
 							//攻撃オブジェクトの作成
 							CObjAttack* obj_attack = new CObjAttack(m_px, m_py); //弾丸オブジェクト作成

@@ -43,6 +43,7 @@ void CSceneSelect::InitScene()
 	Draw::LoadImageW(L"graphic/tumb_6.png", 6, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stageselect_cursor.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/St_Cleared_mark.png", 9, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/BG_sellect.png", 10, TEX_SIZE_512);
 
 	//音楽データ読み込み用
 	Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);

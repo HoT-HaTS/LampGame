@@ -10,10 +10,7 @@
 //一つのシーンで読み込める音楽総数
 #define SCENE_AUDIO_MAX	(32)
 //バックグラウンド色
-#define BACK_COLOR      {0.0f, 0.0f, 0.0f, 1.0f}
+#define BACK_COLOR      {0.9f, 0.9f, 1.0f, 1.0f}
 
 //ウィンドウゲームタイトル名
-#define GAME_NAME L"ライブラリ"
-
-
-
+#define GAME_NAME L"ランプの妖精と影の世界"
