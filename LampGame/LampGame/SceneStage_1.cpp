@@ -149,22 +149,22 @@ void CSceneStage_1::InitScene()
 		CObjBoard* objt2 = new CObjBoard(BOARD2_X, BOARD_Y, 1);
 		Objs::InsertObj(objt2, OBJ_BOARD, 9);
 
-		CObjBoard* objt3 = new CObjBoard(BOARD3_X, BOARD_Y, 3);
+		CObjBoard* objt3 = new CObjBoard(BOARD3_X, BOARD_Y, 2);
 		Objs::InsertObj(objt3, OBJ_BOARD, 9);
 
-		CObjBoard* objt4 = new CObjBoard(BOARD4_X, BOARD_Y, 4);
+		CObjBoard* objt4 = new CObjBoard(BOARD4_X, BOARD_Y, 3);
 		Objs::InsertObj(objt4, OBJ_BOARD, 9);
 
 		//ŠÅ”Â‚ÌØ‚èŽæ‚èˆÊ’u‚ª•Ï@yÀ•W‚ð•Ï‚¦‚é
-		CObjBoard* objt5 = new CObjBoard(BOARD5_X, BOARD_Y, 5);
+		CObjBoard* objt5 = new CObjBoard(BOARD5_X, BOARD_Y, 4);
 		Objs::InsertObj(objt5, OBJ_BOARD, 9);
 
-		CObjBoard* objt7 = new CObjBoard(BOARD7_X, BOARD_Y, 7);
+		CObjBoard* objt7 = new CObjBoard(BOARD7_X, BOARD_Y, 6);
 		Objs::InsertObj(objt7, OBJ_BOARD, 9);
 	}
 	if (((UserData*)Save::GetData())->stage_id == 2)
 	{
-		CObjBoard* objt6 = new CObjBoard(BOARD6_X, BOARD_Y, 6);
+		CObjBoard* objt6 = new CObjBoard(BOARD6_X, BOARD_Y, 5);
 		Objs::InsertObj(objt6, OBJ_BOARD, 9);
 	}
 
