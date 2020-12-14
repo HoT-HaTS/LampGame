@@ -94,6 +94,7 @@ extern bool switch_flag;	//スイッチ用フラグ
 #include "ObjTitle.h"
 #include "ObjClear.h"
 #include "ObjBackGround.h"
+#include "ObjBackGround_Select.h"
 #include "Obj_Goalscene.h"
 //------------------------------------------------
 

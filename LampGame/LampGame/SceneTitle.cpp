@@ -35,6 +35,7 @@ CSceneTitle::~CSceneTitle()
 void CSceneTitle::InitScene()
 {
 	Draw::LoadImageW(L"graphic/Title.png", 14, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Push_desc.png", 15, TEX_SIZE_512);
 
 
 	//音楽データ読み込み用
