@@ -88,8 +88,7 @@ void CObjSelect::Action()
 	{
 		if (m_key_flag == true)
 		{
-			Scene::SetScene(new CSceneClear());
-			//Scene::SetScene(new CSceneStage_1());
+			Scene::SetScene(new CSceneStage_1());
 			m_key_flag = false;
 			switch_flag = true;
 		}
@@ -104,7 +103,7 @@ void CObjSelect::Action()
 void CObjSelect::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//サムネイル、カーソル、クリアマーク用
-	float c1[4] = { 1.0f,0.9f,0.0f,1.0f };
+	float c1[4] = { 1.0f,0.4f,0.0f,1.0f };
 	float c2[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	//サムネイル、クリアマーク表示位置
