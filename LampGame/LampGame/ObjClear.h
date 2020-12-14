@@ -15,5 +15,17 @@ public:
 	void Draw();     //ドロー
 
 private:
+	int scene_num;	//描画用の背景用番号
+	float alpha_b;	//透明度
+
+	bool white_out;
+	bool white;
+	bool w_end;
+
+	int h_ani_frame;
+	int h_ani_time;
+
+	float alpha_w;
+
 	bool m_key_flag;  //キーフラグ
 };

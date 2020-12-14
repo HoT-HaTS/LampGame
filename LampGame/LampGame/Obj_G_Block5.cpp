@@ -34,12 +34,19 @@ void CObj_G_Block5::Action()
 	//主人公の位置の取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	//主人公の衝突確認用のフラグの初期化
-	hero->SetUp(false);
-	hero->SetDown(false);
-	hero->SetLeft(false);
-	hero->SetRight(false);
+	//敵の位置の取得
+	CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 
+	////主人公の衝突確認用のフラグの初期化
+	//hero->SetUp(false);
+	//hero->SetDown(false);
+	//hero->SetLeft(false);
+	//hero->SetRight(false);
+
+	//enemy->SetUp(false);
+	//enemy->SetDown(false);
+	//enemy->SetLeft(false);
+	//enemy->SetRight(false);
 
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
@@ -47,46 +54,87 @@ void CObj_G_Block5::Action()
 
 
 
-	//主人公とG5_BLOCKのあたり判定チェック
-	//当たっている場合
-	if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
-	{
-		float hx = hero->GetX();
-		float hy = hero->GetY();
+	////主人公とG5_BLOCKのあたり判定チェック
+	////当たっている場合
+	//if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
+	//{
+	//	float hx = hero->GetX();
+	//	float hy = hero->GetY();
 
-		//G5_BLOCKの上じゃない条件
-		if (hy + (2 * BLOCK_SIZE - 8) > m_py)
-		{
-			//G5_BLOCKの左部分に接触
-			if (m_px + scroll->GetScroll() > hx)
-			{
-				hero->SetRight(true);
-				hero->SetX(m_px - (BLOCK_SIZE + 0.5) + scroll->GetScroll());
-				hero->SetVX(0.0f);
-			}
-			//G5_BLOCKの右部分に接触
-			else if (hx > m_px + scroll->GetScroll())
-			{
-				hero->SetLeft(true);
-				hero->SetX(m_px + (BLOCK_SIZE - 0.5) + scroll->GetScroll());
-				hero->SetVX(0.0f);
-			}
-		}
-		//G5_BLOCKの上部分に接触
-		if (hy + (2 * BLOCK_SIZE - 1) <= m_py)
-		{
-			hero->SetDown(true);
-			hero->SetY(m_py - (2 * BLOCK_SIZE + 0.5));
-			hero->SetVY(0.0f);
-		}
-		//G5_BLOCKの下部分に接触
-		else if (m_py + (BLOCK_SIZE + 1) <= hy)
-		{
-			hero->SetUp(true);
-			hero->SetY(m_py + (BLOCK_SIZE - 0.5));
-			hero->SetVY(0.0f);
-		}
-	}
+	//	//G5_BLOCKの上じゃない条件
+	//	if (hy + (2 * BLOCK_SIZE - 8) > m_py)
+	//	{
+	//		//G5_BLOCKの左部分に接触
+	//		if (m_px + scroll->GetScroll() > hx)
+	//		{
+	//			hero->SetRight(true);
+	//			hero->SetX(m_px - (BLOCK_SIZE + 0.5) + scroll->GetScroll());
+	//			hero->SetVX(0.0f);
+	//		}
+	//		//G5_BLOCKの右部分に接触
+	//		else if (hx > m_px + scroll->GetScroll())
+	//		{
+	//			hero->SetLeft(true);
+	//			hero->SetX(m_px + (BLOCK_SIZE - 0.5) + scroll->GetScroll());
+	//			hero->SetVX(0.0f);
+	//		}
+	//	}
+	//	//G5_BLOCKの上部分に接触
+	//	if (hy + (2 * BLOCK_SIZE - 1) <= m_py)
+	//	{
+	//		hero->SetDown(true);
+	//		hero->SetY(m_py - (2 * BLOCK_SIZE + 0.5));
+	//		hero->SetVY(0.0f);
+	//	}
+	//	//G5_BLOCKの下部分に接触
+	//	else if (m_py + (BLOCK_SIZE + 1) <= hy)
+	//	{
+	//		hero->SetUp(true);
+	//		hero->SetY(m_py + (BLOCK_SIZE - 0.5));
+	//		hero->SetVY(0.0f);
+	//	}
+	//}
+
+	////敵とG5_BLOCKのあたり判定チェック
+	////当たっている場合
+	//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr)
+	//{
+	//	float hx = enemy->GetX();
+	//	float hy = enemy->GetY();
+
+	//	//G5_BLOCKの上じゃない条件
+	//	if (hy + (2 * BLOCK_SIZE - 8) > m_py)
+	//	{
+	//		//G5_BLOCKの左部分に接触
+	//		if (m_px + scroll->GetScroll() > hx)
+	//		{
+	//			enemy->SetRight(true);
+	//			enemy->SetX(m_px - (BLOCK_SIZE + 0.5) );
+	//			enemy->SetVX(0.0f);
+	//		}
+	//		//G5_BLOCKの右部分に接触
+	//		else if (hx > m_px + scroll->GetScroll())
+	//		{
+	//			enemy->SetLeft(true);
+	//			enemy->SetX(m_px + (BLOCK_SIZE - 0.5));
+	//			enemy->SetVX(0.0f);
+	//		}
+	//	}
+	//	//G5_BLOCKの上部分に接触
+	//	if (hy + (2 * BLOCK_SIZE - 1) <= m_py)
+	//	{
+	//		enemy->SetDown(true);
+	//		enemy->SetY(m_py - (2 * BLOCK_SIZE + 0.5));
+	//		enemy->SetVY(0.0f);
+	//	}
+	//	//G5_BLOCKの下部分に接触
+	//	else if (m_py + (BLOCK_SIZE + 1) <= hy)
+	//	{
+	//		enemy->SetUp(true);
+	//		enemy->SetY(m_py + (BLOCK_SIZE - 0.5));
+	//		enemy->SetVY(0.0f);
+	//	}
+	//}
 
 	coin_count = hero->GetCoin();
 

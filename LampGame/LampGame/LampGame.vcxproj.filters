@@ -114,17 +114,11 @@
     <ClCompile Include="Obj_Pause.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_G_Block1.cpp">
-      <Filter>ソース ファイル\共通\G_Block</Filter>
-    </ClCompile>
     <ClCompile Include="Obj_G_Block3.cpp">
       <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClCompile>
     <ClCompile Include="Obj_G_Block2.cpp">
       <Filter>ソース ファイル\共通\G_Block</Filter>
-    </ClCompile>
-    <ClCompile Include="Obj_Switch.cpp">
-      <Filter>ソース ファイル\共通\Switch</Filter>
     </ClCompile>
     <ClCompile Include="Obj_Switch2.cpp">
       <Filter>ソース ファイル\共通\Switch</Filter>
@@ -146,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="SceneClear.cpp">
       <Filter>ソース ファイル\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="Obj_Goalscene.cpp">
+      <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,17 +224,11 @@
     <ClInclude Include="Obj_Pause.h">
       <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
-    <ClInclude Include="Obj_G_Block1.h">
-      <Filter>ソース ファイル\共通\G_Block</Filter>
-    </ClInclude>
     <ClInclude Include="Obj_G_Block3.h">
       <Filter>ソース ファイル\共通\G_Block</Filter>
     </ClInclude>
     <ClInclude Include="Obj_G_Block2.h">
       <Filter>ソース ファイル\共通\G_Block</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Switch.h">
-      <Filter>ソース ファイル\共通\Switch</Filter>
     </ClInclude>
     <ClInclude Include="Obj_Switch2.h">
       <Filter>ソース ファイル\共通\Switch</Filter>
@@ -259,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="SceneClear.h">
       <Filter>ソース ファイル\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Goalscene.h">
+      <Filter>ソース ファイル\共通</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

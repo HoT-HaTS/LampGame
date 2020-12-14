@@ -15,8 +15,9 @@ using namespace GameL;
 #define INIT_ANI_TIME (0.0)		//アニメーションタイム	
 #define INIT_ANI_FRAME (0.0)	//アニメーションフレーム
 
-#define INIT_SPEED_POWER (1.2)	//加算速度
+#define INIT_SPEED_POWER (1.4)	//加算速度
 #define INIT_H_ANI_MAX_TIME (5.0)	
+#define INIT_H_DANI_MAX_TIME (10.0)
 
 #define INIT_FRICTION (0.2)	//摩擦係数
 
@@ -61,6 +62,8 @@ class CObjHero : public CObj
 		float GetPosture() { return m_posture; }
 
 		bool Get_L_flag(){ return L_flag; }
+		bool Get_M_flag() { return move_flag; }
+		bool Get_D_flag() { return dead_flag; }
 
 		void SetX(float x) { m_px = x; }
 		void SetY(float y) { m_py = y; }
@@ -79,6 +82,8 @@ class CObjHero : public CObj
 		//コイン関係
 		int GetCoin() { return m_coin_count; }      //コイン枚数確認用
 		void SetCoin(int p) { m_coin_count = p; }
+
+		bool GetG_Flag() { return hg_flag; }
 		
 	private:
 		float m_px;			//位置
@@ -91,12 +96,15 @@ class CObjHero : public CObj
 		float m_posture;	//姿勢
 
 		float m_ani_time;	//アニメーションフレーム動作間隔
+		float m_dani_time;	//dアニメーションフレーム動作間隔
 		float m_ani_s_time;	//ストップアニメーションフレーム動作間隔
 		int m_ani_frame;	//描画フレーム
+		int m_dani_frame;	//描画フレーム
 		int m_ani_s_frame;	//ストップアニメーション描画フレーム
 
 		float m_speed_power;	//スピードパワー
 		float m_ani_max_time;	//アニメーション動作間隔最大値
+		float m_dani_max_time;	//アニメーション動作間隔最大値
 
 		int time;				//世界切り替え制御用時間
 
@@ -122,6 +130,9 @@ class CObjHero : public CObj
 		//Switch2のフラグ
 		bool s_flag2;
 
+		//ゴールの演出用のフラグ
+		bool hg_flag;
+
 		//踏んでいるblockの種類確認用
 		int m_block_type_under;
 		int m_block_type_goal;
@@ -136,7 +147,12 @@ class CObjHero : public CObj
 		float y;			//yベクトル
 		float ar;			//移動元と移動先の角度
 
-		int fall_time;	//主人公が落下した時用の時間
+		int fall_time;		//主人公が落下した時用の時間
 
-		int count;		//ステージクリア時の条件
+		int count;			//ステージクリア時の条件
+
+		int goal_white;		//ホワイトアウト時間管理用
+		bool dead_flag;		//死んだか判定するフラグ
+		bool audio;			//死亡時SE用
+		float respawn_time;	//死亡時から復活するまでの時間
 };
