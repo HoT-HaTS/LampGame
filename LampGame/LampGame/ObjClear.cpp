@@ -49,20 +49,21 @@ void CObjClear::Action()
 				h_ani_frame = 0;
 			}
 		}
-	}
 
-	/*if (Input::GetVKey(VK_RETURN) == true)
-	{
-		if (m_key_flag == true)
+		if (Input::GetVKey(VK_RETURN) == true)
 		{
-			Scene::SetScene(new CSceneTitle());
-			m_key_flag = false;
+			if (m_key_flag == true)
+			{
+				Scene::SetScene(new CSceneTitle());
+				m_key_flag = false;
+			}
+		}
+		else
+		{
+			m_key_flag = true;
 		}
 	}
-	else
-	{
-		m_key_flag = true;
-	}*/
+
 }
 
 //ÉhÉçÅ[
