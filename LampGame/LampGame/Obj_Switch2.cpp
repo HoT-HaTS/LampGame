@@ -27,7 +27,7 @@ void CObjSwitch2::Init()
 	//S2_flag = switch_flag;		//スイッチがオフのときはfalse、オンのときはtrue
 	a_flag = false;
 
-	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE, SBLOCK_INT_Y_SIZE, ELEMENT_SWITCH, OBJ_SWITCH, 1);
+	Hits::SetHitBox(this, m_px, m_py, SBLOCK_INT_X_SIZE - 5.0f, SBLOCK_INT_Y_SIZE, ELEMENT_SWITCH, OBJ_SWITCH, 1);
 }
 
 //アクション
@@ -54,7 +54,7 @@ void CObjSwitch2::Action()
 
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + scroll->GetScroll(), m_py);
+	hit->SetPos(m_px + 2.5f + scroll->GetScroll(), m_py);
 
 	//主人公とスイッチのあたり判定チェック
 	//当たっている場合

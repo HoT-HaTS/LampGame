@@ -88,8 +88,8 @@ void CObjSelect::Action()
 	{
 		if (m_key_flag == true)
 		{
-			/*Scene::SetScene(new CSceneClear());*/
-			Scene::SetScene(new CSceneStage_1());
+			Scene::SetScene(new CSceneClear());
+			//Scene::SetScene(new CSceneStage_1());
 			m_key_flag = false;
 			switch_flag = true;
 		}
@@ -104,7 +104,8 @@ void CObjSelect::Action()
 void CObjSelect::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//サムネイル、カーソル、クリアマーク用
-	float c1[4] = { 1.0f,1.0f,0.0f,1.0f };
+	float c1[4] = { 1.0f,0.9f,0.0f,1.0f };
+	float c2[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	//サムネイル、クリアマーク表示位置
 	float top[7] = { 105, 105, 105, 105, 305, 305, 305 };
@@ -116,6 +117,19 @@ void CObjSelect::Draw()
 	RECT_F dst1;	//カーソル描画先表示位置
 	RECT_F src2;	//クリアマーク描画元切り取り位置
 	RECT_F dst2;	//クリアマーク描画先表示位置
+	RECT_F src3;	
+	RECT_F dst3;	
+
+	src3.m_top = 0.0f;
+	src3.m_left = 0.0f;
+	src3.m_right = src3.m_left + 896.0f;
+	src3.m_bottom = src3.m_top + 640.0f;
+
+	dst3.m_top = 0;
+	dst3.m_left = 0;
+	dst3.m_right = dst3.m_left + 800;
+	dst3.m_bottom = dst3.m_top + 600.0f;
+	Draw::Draw(10, &src3, &dst3, c2, 0.0f);
 
 	//ステージサムネイル切り取り位置の設定
 	src.m_top = 0.0f;
@@ -145,9 +159,9 @@ void CObjSelect::Draw()
 	src2.m_right = src2.m_left + 64.0f;
 	src2.m_bottom = src2.m_top + 64.0f;
 
-	Font::StrDraw(L"STAGE SELECT", 304, 40, 32, c);
-	Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c);
-	Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c);
+	Font::StrDraw(L"STAGE SELECT", 304, 40, 32, c1);
+	Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c1);
+	Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c1);
 
 	for (int x = 0; x < 7; x++)
 	{
