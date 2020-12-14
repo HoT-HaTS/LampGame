@@ -41,6 +41,8 @@ void CSceneClear::InitScene()
 	Draw::LoadImageW(L"graphic/Stage_Area5.png", 6, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_Area6.png", 7, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/White.png", 8, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Game_clear_text.png", 9, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/lamp Clear.png", 10, TEX_SIZE_512);
 
 	//音楽データ読み込み用
 	//Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);
