@@ -146,8 +146,11 @@ void CSceneStage_1::InitScene()
 		CObjBoard* objt1 = new CObjBoard(BOARD1_X, BOARD_Y, 0);
 		Objs::InsertObj(objt1, OBJ_BOARD, 9);
 
-		CObjBoard* objt2 = new CObjBoard(BOARD2_X, BOARD_Y, 1);
-		Objs::InsertObj(objt2, OBJ_BOARD, 9);
+		CObjBoard* objt2a = new CObjBoard(BOARD2a_X, BOARD_Y, 1);
+		Objs::InsertObj(objt2a, OBJ_BOARD, 9);
+
+		CObjBoard* objt2b = new CObjBoard(BOARD2b_X, BOARD_Yb, 1);
+		Objs::InsertObj(objt2b, OBJ_BOARD, 9);
 
 		CObjBoard* objt3 = new CObjBoard(BOARD3_X, BOARD_Y, 2);
 		Objs::InsertObj(objt3, OBJ_BOARD, 9);

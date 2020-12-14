@@ -165,9 +165,6 @@
     <ClCompile Include="Obj_Block.cpp" />
     <ClCompile Include="Obj_Board.cpp" />
     <ClCompile Include="Obj_Enemy.cpp" />
-    <ClCompile Include="Obj_G_Block1.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Obj_G_Block4.cpp" />
     <ClCompile Include="Obj_G_Block5.cpp" />
     <ClCompile Include="Obj_Hero.cpp" />
@@ -175,9 +172,6 @@
     <ClCompile Include="Obj_Main.cpp" />
     <ClCompile Include="Obj_Pause.cpp" />
     <ClCompile Include="Obj_Stage1.cpp" />
-    <ClCompile Include="Obj_Switch.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Obj_Switch2.cpp" />
     <ClCompile Include="SceneClear.cpp" />
     <ClCompile Include="SceneSelect.cpp" />
@@ -216,14 +210,8 @@
     <ClInclude Include="Obj_Attack.h" />
     <ClInclude Include="Obj_Block.h" />
     <ClInclude Include="Obj_Enemy.h" />
-    <ClInclude Include="Obj_G_Block1.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Obj_Hero.h" />
     <ClInclude Include="Obj_Main.h" />
-    <ClInclude Include="Obj_Switch.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Obj_Switch2.h" />
     <ClInclude Include="SceneClear.h" />
     <ClInclude Include="SceneSelect.h" />
