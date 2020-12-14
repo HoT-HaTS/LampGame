@@ -441,7 +441,7 @@ void CObjHero::Draw()
 
 	//影の位置のやつテスト用
 	RECT_F src1;	//描画元切り取り位置
-	RECT_F dst2;	//描画先表示位置
+	RECT_F dst1;	//描画先表示位置
 
 	if (dead_flag == false)
 	{
@@ -466,6 +466,7 @@ void CObjHero::Draw()
 			src.m_bottom = src.m_top + HBLOCK_INT_Y_SIZE;
 		}
 
+		//影時の主人公の元の位置を表示する画像
 		src1.m_top = 0.0f;
 		src1.m_left = HBLOCK_INT_X_SIZE;
 		src1.m_right = HBLOCK_INT_X_SIZE + HBLOCK_INT_X_SIZE;
@@ -477,10 +478,11 @@ void CObjHero::Draw()
 		dst.m_right = (HBLOCK_INT_X_SIZE * m_posture) + m_px;
 		dst.m_bottom = HBLOCK_INT_Y_SIZE + m_py;
 
-		dst2.m_top = 0.0f + m_sy;
-		dst2.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE ) + m_sx;
-		dst2.m_right = (HBLOCK_INT_X_SIZE ) + m_sx;
-		dst2.m_bottom = HBLOCK_INT_Y_SIZE + m_sy;
+		//影時の主人公の元の位置を表示する位置
+		dst1.m_top = 0.0f + m_sy;
+		dst1.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE ) + m_sx;
+		dst1.m_right = (HBLOCK_INT_X_SIZE ) + m_sx;
+		dst1.m_bottom = HBLOCK_INT_Y_SIZE + m_sy;
 
 		//光フラグがONなら
 		if (L_flag == true)
@@ -493,7 +495,8 @@ void CObjHero::Draw()
 		{
 			//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
 			Draw::Draw(1, &src, &dst, c, 0.0f);
-			Draw::Draw(1, &src1, &dst2, c1, 0.0f);
+			////影時の主人公の元の位置を表示する
+			Draw::Draw(1, &src1, &dst1, c1, 0.0f);
 		}
 	}
 	if (dead_flag == true)
