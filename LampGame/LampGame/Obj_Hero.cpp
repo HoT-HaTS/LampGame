@@ -382,7 +382,7 @@ void CObjHero::Action()
 					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
 				}
 				
-				if (goal_white > 200)
+				if (goal_white > 300)
 				{
 					for (int i = 1; i <= 6; i++)
 					{

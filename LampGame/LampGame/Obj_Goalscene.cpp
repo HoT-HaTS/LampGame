@@ -3,6 +3,7 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/SceneObjManager.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "Obj_Goalscene.h"
@@ -63,6 +64,30 @@ void CObjGoalscene::Draw()
 		alpha -= 0.01f;
 		//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 		Draw::Draw(61, &src, &dst, c, 0.0f);
+
+		//ステージクリアテロップ表示
+		if (alpha <= 0.0f)
+		{
+			//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
+			float  c_sc[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+			RECT_F src_sc;	//描画元切り取り位置
+			RECT_F dst_sc;	//描画先表示位置
+
+			//切り取り位置の設定
+			src_sc.m_top = 0.0f;
+			src_sc.m_left = 0.0f;
+			src_sc.m_right = 700.0f;
+			src_sc.m_bottom = 200.0f;
+
+			//表示位置の設定
+			dst_sc.m_top = 100.0f;
+			dst_sc.m_left = 50.0f;
+			dst_sc.m_right = dst_sc.m_left + 700.0f;
+			dst_sc.m_bottom = dst_sc.m_top + 200.0f;
+			Draw::Draw(63, &src_sc, &dst_sc, c_sc, 0.0f);
+			Audio::Start(13);
+		}
 			
 	}
 	
