@@ -104,31 +104,70 @@ void CObjSelect::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//サムネイル、カーソル、クリアマーク用
 	float c1[4] = { 1.0f,0.4f,0.0f,1.0f };
-	float c2[4] = { 1.0f,1.0f,1.0f,0.5f };
 
 	//サムネイル、クリアマーク表示位置
 	float top[7] = { 105, 105, 105, 105, 305, 305, 305 };
 	float left[7] = { 40, 235, 430, 625, 40, 235, 430};
 
-	RECT_F src;		//ステージサムネイル描画元切り取り位置
-	RECT_F dst;		//ステージサムネイル表示位置
-	RECT_F src1;	//カーソル描画元切り取り位置
-	RECT_F dst1;	//カーソル描画先表示位置
-	RECT_F src2;	//クリアマーク描画元切り取り位置
-	RECT_F dst2;	//クリアマーク描画先表示位置
-	RECT_F src3;	
-	RECT_F dst3;	
+	RECT_F src;			//ステージサムネイル描画元切り取り位置
+	RECT_F dst;			//ステージサムネイル表示位置
+	RECT_F src1;		//カーソル描画元切り取り位置
+	RECT_F dst1;		//カーソル描画先表示位置
+	RECT_F src2;		//クリアマーク描画元切り取り位置
+	RECT_F dst2;		//クリアマーク描画先表示位置
+	RECT_F src3;		//ステージセレクト背景描画元切り取り位置
+	RECT_F dst3;		//ステージセレクト背景描画先表示位置
+	RECT_F src_select;	//文字画像描画元切り取り位置
+	RECT_F dst_select;	//文字表示位置
+	RECT_F src_start;	//文字画像描画元切り取り位置
+	RECT_F dst_start;	//文字表示位置
+	RECT_F src_exit;	//文字画像描画元切り取り位置
+	RECT_F dst_exit;	//文字表示位置
 
-	src3.m_top = 0.0f;
-	src3.m_left = 0.0f;
-	src3.m_right = src3.m_left + 896.0f;
-	src3.m_bottom = src3.m_top + 640.0f;
+	//STAGE SELECT の文字
+	{
+		src_select.m_top = 0.0f;
+		src_select.m_left = 0.0f;
+		src_select.m_right = src_select.m_left + 401.0f;
+		src_select.m_bottom = src_select.m_top + 91.0f;
 
-	dst3.m_top = 0;
-	dst3.m_left = 0;
-	dst3.m_right = dst3.m_left + 800;
-	dst3.m_bottom = dst3.m_top + 600.0f;
-	Draw::Draw(10, &src3, &dst3, c2, 0.0f);
+		dst_select.m_top = 10.0f;
+		dst_select.m_left = 199.5f;
+		dst_select.m_right = dst_select.m_left + 401.0f;
+		dst_select.m_bottom = dst_select.m_top + 91.0f;
+
+		Draw::Draw(11, &src_select, &dst_select, c, 0.0f);
+	}
+
+	//ENTER を押してスタート の文字
+	{
+		src_start.m_top = 0.0f;
+		src_start.m_left = 0.0f;
+		src_start.m_right = src_start.m_left + 372.0f;
+		src_start.m_bottom = src_start.m_top + 71.0f;
+
+		dst_start.m_top = 490.0f;
+		dst_start.m_left = 214.0f;
+		dst_start.m_right = dst_start.m_left + 372.0f;
+		dst_start.m_bottom = dst_start.m_top + 71.0f;
+
+		Draw::Draw(12, &src_start, &dst_start, c, 0.0f);
+	}
+
+	//EXIT の文字
+	{
+		src_exit.m_top = 0.0f;
+		src_exit.m_left = 0.0f;
+		src_exit.m_right = src_exit.m_left + 163.0f;
+		src_exit.m_bottom = src_exit.m_top + 31.0f;
+
+		dst_exit.m_top = 569.0f;
+		dst_exit.m_left = 681.5f;
+		dst_exit.m_right = dst_exit.m_left + 163.0f;
+		dst_exit.m_bottom = dst_exit.m_top + 31.0f;
+
+		Draw::Draw(13, &src_exit, &dst_exit, c, 0.0f);
+	}
 
 	//ステージサムネイル切り取り位置の設定
 	src.m_top = 0.0f;
@@ -158,9 +197,9 @@ void CObjSelect::Draw()
 	src2.m_right = src2.m_left + 64.0f;
 	src2.m_bottom = src2.m_top + 64.0f;
 
-	Font::StrDraw(L"STAGE SELECT", 304, 40, 32, c1);
-	Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c1);
-	Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c1);
+	//Font::StrDraw(L"STAGE SELECT", 304, 40, 32, c1);
+	//Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c1);
+	//Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c1);
 
 	for (int x = 0; x < 7; x++)
 	{

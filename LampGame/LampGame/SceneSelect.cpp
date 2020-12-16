@@ -31,7 +31,7 @@ CSceneSelect::~CSceneSelect()
 void CSceneSelect::InitScene()
 {
 	//出力させる文字のグラフィックを作成
-	Font::SetStrTex(L"LampGame");
+	//Font::SetStrTex(L"LampGame");
 
 	//画像データ読み込み
 	Draw::LoadImageW(L"graphic/tumb_0.png", 0, TEX_SIZE_512);
@@ -44,6 +44,9 @@ void CSceneSelect::InitScene()
 	Draw::LoadImageW(L"graphic/Stageselect_cursor.png", 8, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/St_Cleared_mark.png", 9, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/BG_sellect.png", 10, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_desc.png", 11, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_desc2.png", 12, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Stage_desc3.png", 13, TEX_SIZE_512);
 
 	//音楽データ読み込み用
 	Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);
@@ -53,8 +56,13 @@ void CSceneSelect::InitScene()
 
 	//ステージセレクトオブジェクト作成
 	CObjSelect* obj = new CObjSelect();   //ステージセレクトオブジェクト作成
-	Objs::InsertObj(obj, OBJ_SELECT, 10); 
+	Objs::InsertObj(obj, OBJ_SELECT, 10);
 
+	//ステージセレクトオブジェクト作成
+	CObjBackGround_Select* objs_bg = new CObjBackGround_Select();   //ステージセレクトオブジェクト作成
+	Objs::InsertObj(objs_bg, OBJ_SELECT, 10);
+
+	//オーディオスタート
 	Audio::Start(11);
 }
 

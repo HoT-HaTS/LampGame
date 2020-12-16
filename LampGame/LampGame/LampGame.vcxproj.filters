@@ -144,6 +144,9 @@
     <ClCompile Include="Obj_Goalscene.cpp">
       <Filter>ソース ファイル\共通</Filter>
     </ClCompile>
+    <ClCompile Include="ObjBackGround_Select.cpp">
+      <Filter>ソース ファイル\Select</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -253,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="Obj_Goalscene.h">
       <Filter>ソース ファイル\共通</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjBackGround_Select.h">
+      <Filter>ソース ファイル\Select</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

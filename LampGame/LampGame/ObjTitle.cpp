@@ -41,9 +41,20 @@ void CObjTitle::Action()
 //ドロー
 void CObjTitle::Draw()
 {
-	float c[4] = { 0.0f,0.0f,0.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
-	//Font::StrDraw(L"ランプの妖精と影の世界", TITLE1_X, TITLE1_Y, TITLE_SIZE, c);
+	RECT_F src;	//描画元切り取り位置
+	RECT_F dst;	//描画先表示位置
 
-	Font::StrDraw(L"GameStart : Push_EnterKey", TITLE2_X, TITLE2_Y, TITLE_SIZE, c);
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = src.m_left + 422.0f;
+	src.m_bottom = src.m_top + 62.0f;
+
+	dst.m_top = 460.0f;
+	dst.m_left = 189.0f;
+	dst.m_right = dst.m_left + 422.0f;
+	dst.m_bottom = dst.m_top + 62.0;
+
+	Draw::Draw(15, &src, &dst, c, 0.0f);
 }
