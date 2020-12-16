@@ -26,6 +26,7 @@ void CObjHero::Init()
 	m_sy = INIT_H_PY;
 
 	m_posture = INIT_H_POSTURE;	//右向き0.0f 左向き1.0f
+	m_sposture = INIT_H_POSTURE;//右向き0.0f 左向き1.0f
 
 	m_ani_time = INIT_ANI_TIME;
 	m_dani_time = INIT_ANI_TIME;
@@ -308,6 +309,7 @@ void CObjHero::Action()
 							m_block_type_goal = 0;
 							m_sx = m_px;
 							m_sy = m_py;
+							m_sposture = m_posture;
 
 							//移動音を鳴らす(光→影)
 							Audio::Start(1);
@@ -365,6 +367,7 @@ void CObjHero::Action()
 					L_flag = true;
 					m_flag = false;
 					move_flag = true;
+					m_posture = m_sposture;
 				}
 			}
 
@@ -480,8 +483,8 @@ void CObjHero::Draw()
 
 		//影時の主人公の元の位置を表示する位置
 		dst1.m_top = 0.0f + m_sy;
-		dst1.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE ) + m_sx;
-		dst1.m_right = (HBLOCK_INT_X_SIZE ) + m_sx;
+		dst1.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE*m_sposture ) + m_sx;
+		dst1.m_right = (HBLOCK_INT_X_SIZE*m_sposture ) + m_sx;
 		dst1.m_bottom = HBLOCK_INT_Y_SIZE + m_sy;
 
 		//光フラグがONなら
