@@ -56,7 +56,17 @@ private:
 
 	int coin_count;
 
-	//float m_px; //使われていないのでコメントアウト
-	//float m_py;
+	enum BLOCKNUM
+	{
+		NO_BLOCK,
+		STAGE_BLOCK,
+		GOAL_BLOCK,
+		ENEMY_BLOCK,
+		G_BLOCK3,
+		G_BLOCK2,
+		G_SWITCH2,
+		G_BLOCK5,
+		G_SWITCH5,
+	};
 
 };

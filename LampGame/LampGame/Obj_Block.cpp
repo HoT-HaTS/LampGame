@@ -141,8 +141,17 @@ void CObjBlock::BlockHit(
 	{
 		for (int j = 0; j < 100; j++)
 		{
-			//床ブロックとゴールブロック、透明ブロック
-			if (m_map[i][j] == 1 || m_map[i][j] == 2|| m_map[i][j] == 4)
+			switch (m_map[i][j])
+			{
+				//床ブロックとゴールブロック、透明ブロック
+			case G_BLOCK2:
+				if(switch_flag==true)
+
+			case G_BLOCK5:
+				if (coin_count < 3)
+			case STAGE_BLOCK:
+			case GOAL_BLOCK:
+			case G_BLOCK3:
 			{
 				//要素番号を座標に変更
 				float bx = j * BLOCK_SIZE;
@@ -184,7 +193,7 @@ void CObjBlock::BlockHit(
 					if (len < hit_length)
 					{
 						//角度で上下左右を判定
-						if ((r < t && r >= 0) || r > 360-t)
+						if ((r < t && r >= 0) || r > 360 - t)
 						{
 							if (m_map[i][j] != 2)
 							{
@@ -195,7 +204,7 @@ void CObjBlock::BlockHit(
 							}
 							*btg = m_map[i][j];
 						}
-						if (r > t && r < 180-t)
+						if (r > t && r < 180 - t)
 						{
 							if (m_map[i][j] != 2)
 							{
@@ -210,7 +219,7 @@ void CObjBlock::BlockHit(
 								*btg = m_map[i][j];
 							}
 						}
-						if (r > 180-t && r < 180+t)
+						if (r > 180 - t && r < 180 + t)
 						{
 							if (m_map[i][j] != 2)
 							{
@@ -221,7 +230,7 @@ void CObjBlock::BlockHit(
 							}
 							*btg = m_map[i][j];
 						}
-						if (180+t < r && r < 360-t)
+						if (180 + t < r && r < 360 - t)
 						{
 							if (m_map[i][j] != 2)
 							{
@@ -238,7 +247,11 @@ void CObjBlock::BlockHit(
 					}
 				}
 			}
-			else if (m_map[i][j] == 5)
+			}
+		}
+	}
+}
+			/*else if (m_map[i][j] == 5)
 			{
 				if (switch_flag == true)
 				{
@@ -400,7 +413,7 @@ void CObjBlock::BlockHit(
 			}
 		}
 	}
-}
+}*/
 
 
 //BlockHitEnemy関数(敵用の当たり判定)

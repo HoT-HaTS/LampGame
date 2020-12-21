@@ -58,8 +58,5 @@ private:
 		G_SWITCH2,
 		G_BLOCK5,
 		G_SWITCH5,
-
-		//Œã‚ÉíœH
-		G_BLOCK,
 	};
 };
