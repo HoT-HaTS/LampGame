@@ -26,6 +26,7 @@ void CObjHero::Init()
 	m_sy = INIT_H_PY;
 
 	m_posture = INIT_H_POSTURE;	//右向き0.0f 左向き1.0f
+	m_sposture = INIT_H_POSTURE;//右向き0.0f 左向き1.0f
 
 	m_ani_time = INIT_ANI_TIME;
 	m_dani_time = INIT_ANI_TIME;
@@ -199,12 +200,10 @@ void CObjHero::Action()
 					if (Input::GetVKey(VK_UP) == true)
 					{
 						m_vy -= m_speed_power;
-						m_ani_time += 1.0;
 					}
 					else if (Input::GetVKey(VK_DOWN) == true)
 					{
 						m_vy += m_speed_power;
-						m_ani_time += 1.0;
 					}
 
 					if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
@@ -310,6 +309,7 @@ void CObjHero::Action()
 							m_block_type_goal = 0;
 							m_sx = m_px;
 							m_sy = m_py;
+							m_sposture = m_posture;
 
 							//移動音を鳴らす(光→影)
 							Audio::Start(1);
@@ -367,6 +367,7 @@ void CObjHero::Action()
 					L_flag = true;
 					m_flag = false;
 					move_flag = true;
+					m_posture = m_sposture;
 				}
 			}
 
@@ -382,7 +383,7 @@ void CObjHero::Action()
 					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
 				}
 				
-				if (goal_white > 200)
+				if (goal_white > 300)
 				{
 					for (int i = 1; i <= 6; i++)
 					{
@@ -436,9 +437,14 @@ void CObjHero::Draw()
 {
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	float  c1[4] = { 0, 0, 0, 1.0 };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
+
+	//影の位置のやつテスト用
+	RECT_F src1;	//描画元切り取り位置
+	RECT_F dst1;	//描画先表示位置
 
 	if (dead_flag == false)
 	{
@@ -463,11 +469,23 @@ void CObjHero::Draw()
 			src.m_bottom = src.m_top + HBLOCK_INT_Y_SIZE;
 		}
 
+		//影時の主人公の元の位置を表示する画像
+		src1.m_top = 0.0f;
+		src1.m_left = HBLOCK_INT_X_SIZE;
+		src1.m_right = HBLOCK_INT_X_SIZE + HBLOCK_INT_X_SIZE;
+		src1.m_bottom = HBLOCK_INT_Y_SIZE;
+
 		//表示位置の設定
 		dst.m_top = 0.0f + m_py;
 		dst.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE * m_posture) + m_px;
 		dst.m_right = (HBLOCK_INT_X_SIZE * m_posture) + m_px;
 		dst.m_bottom = HBLOCK_INT_Y_SIZE + m_py;
+
+		//影時の主人公の元の位置を表示する位置
+		dst1.m_top = 0.0f + m_sy;
+		dst1.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE*m_sposture ) + m_sx;
+		dst1.m_right = (HBLOCK_INT_X_SIZE*m_sposture ) + m_sx;
+		dst1.m_bottom = HBLOCK_INT_Y_SIZE + m_sy;
 
 		//光フラグがONなら
 		if (L_flag == true)
@@ -480,6 +498,8 @@ void CObjHero::Draw()
 		{
 			//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
 			Draw::Draw(1, &src, &dst, c, 0.0f);
+			////影時の主人公の元の位置を表示する
+			Draw::Draw(1, &src1, &dst1, c1, 0.0f);
 		}
 	}
 	if (dead_flag == true)

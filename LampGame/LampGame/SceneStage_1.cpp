@@ -100,6 +100,7 @@ void CSceneStage_1::InitScene()
 	Draw::LoadImageW(L"graphic/BG_Area1.png", 60, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/White.png", 61, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Black.png", 62, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/St_Clear_Text.png", 63, TEX_SIZE_512);
 		
 
 	//音楽データ読み込み用
@@ -125,6 +126,7 @@ void CSceneStage_1::InitScene()
 	Audio::LoadAudio(10, L"SE/P_defeat.wav", EFFECT);
 	Audio::LoadAudio(11, L"SE/Crack_fix.wav", EFFECT);
 	Audio::LoadAudio(12, L"SE/fall.wav", EFFECT);
+	Audio::LoadAudio(13, L"SE/stage_clear.wav", EFFECT);
 
 	//オブジェクト出現
 	CObjStage1* obj_stage1 = new CObjStage1(map);

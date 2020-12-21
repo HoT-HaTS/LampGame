@@ -90,10 +90,11 @@ class CObjHero : public CObj
 		float m_py;
 		float m_vx;			//移動ベクトル
 		float m_vy;
-		float m_sx;			//世界切り替え時の位置
+		float m_sx;			//主人公の位置保存用
 		float m_sy;
 
-		float m_posture;	//姿勢
+		float m_posture;	//主人公の向き
+		float m_sposture;	//主人公の向き保存用
 
 		float m_ani_time;	//アニメーションフレーム動作間隔
 		float m_dani_time;	//dアニメーションフレーム動作間隔
