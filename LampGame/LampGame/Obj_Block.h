@@ -6,7 +6,7 @@
 using namespace GameL;
 
 #define ASCROLL_LINE (300)
-#define BSCROLL_LINE (200)
+#define BSCROLL_LINE (280)
 
 #define BLOCKCUT_SIZE_T (600.0f)
 #define BLOCKCUT_SIZE_R (800.0f)
@@ -16,7 +16,7 @@ using namespace GameL;
 #define DRAW_SIZE_B (600.0f)
 
 #define BLOCK_SIZE (64.0f)
-#define HIT_LENGTH (111.0f)
+#define HIT_LENGTH (112.0f)
 
 
 //オブジェクト：
