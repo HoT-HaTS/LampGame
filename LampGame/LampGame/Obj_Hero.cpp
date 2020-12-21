@@ -26,6 +26,7 @@ void CObjHero::Init()
 	m_sy = INIT_H_PY;
 
 	m_posture = INIT_H_POSTURE;	//右向き0.0f 左向き1.0f
+	m_sposture = INIT_H_POSTURE;//右向き0.0f 左向き1.0f
 
 	m_ani_time = INIT_ANI_TIME;
 	m_dani_time = INIT_ANI_TIME;
@@ -57,7 +58,7 @@ void CObjHero::Init()
 	m_block_type_goal = BLOCK_TYPE_G;	//blockの種類確認用(右)
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE-10, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 	//光→影移動用変数
 	move_flag = true;
@@ -199,12 +200,14 @@ void CObjHero::Action()
 					if (Input::GetVKey(VK_UP) == true)
 					{
 						m_vy -= m_speed_power;
-						m_ani_time += 1.0;
+						if(Input::GetVKey(VK_LEFT) != true && Input::GetVKey(VK_RIGHT) != true)
+							m_ani_time += 1.0;
 					}
 					else if (Input::GetVKey(VK_DOWN) == true)
 					{
 						m_vy += m_speed_power;
-						m_ani_time += 1.0;
+						if (Input::GetVKey(VK_LEFT) != true && Input::GetVKey(VK_RIGHT) != true)
+							m_ani_time += 1.0;
 					}
 
 					if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
@@ -247,7 +250,7 @@ void CObjHero::Action()
 				CHitBox* hit = Hits::GetHitBox(this);
 
 				//HitBoxの位置の変更
-				hit->SetPos(m_px, m_py);
+				hit->SetPos(m_px+5, m_py);
 
 				//敵オブジェクトと接触したらdead_flagをtrueにする
 				if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
@@ -310,6 +313,7 @@ void CObjHero::Action()
 							m_block_type_goal = 0;
 							m_sx = m_px;
 							m_sy = m_py;
+							m_sposture = m_posture;
 
 							//移動音を鳴らす(光→影)
 							Audio::Start(1);
@@ -363,10 +367,11 @@ void CObjHero::Action()
 				if (m_sx - 10 < m_px && m_px < m_sx + 10 && m_sy - 10 < m_py && m_py < m_sy + 10)
 				{
 					//当たり判定用のHitBoxを作成
-					Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
+					Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE-10, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
 					L_flag = true;
 					m_flag = false;
 					move_flag = true;
+					m_posture = m_sposture;
 				}
 			}
 
@@ -436,9 +441,14 @@ void CObjHero::Draw()
 {
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
 	float  c[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	float  c1[4] = { 0, 0, 0, 1.0 };
 
 	RECT_F src;	//描画元切り取り位置
 	RECT_F dst;	//描画先表示位置
+
+	//影の位置のやつテスト用
+	RECT_F src1;	//描画元切り取り位置
+	RECT_F dst1;	//描画先表示位置
 
 	if (dead_flag == false)
 	{
@@ -463,11 +473,23 @@ void CObjHero::Draw()
 			src.m_bottom = src.m_top + HBLOCK_INT_Y_SIZE;
 		}
 
+		//影時の主人公の元の位置を表示する画像
+		src1.m_top = 0.0f;
+		src1.m_left = HBLOCK_INT_X_SIZE;
+		src1.m_right = HBLOCK_INT_X_SIZE + HBLOCK_INT_X_SIZE;
+		src1.m_bottom = HBLOCK_INT_Y_SIZE;
+
 		//表示位置の設定
 		dst.m_top = 0.0f + m_py;
 		dst.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE * m_posture) + m_px;
 		dst.m_right = (HBLOCK_INT_X_SIZE * m_posture) + m_px;
 		dst.m_bottom = HBLOCK_INT_Y_SIZE + m_py;
+
+		//影時の主人公の元の位置を表示する位置
+		dst1.m_top = 0.0f + m_sy;
+		dst1.m_left = (HBLOCK_INT_X_SIZE - HBLOCK_INT_X_SIZE*m_sposture ) + m_sx;
+		dst1.m_right = (HBLOCK_INT_X_SIZE*m_sposture ) + m_sx;
+		dst1.m_bottom = HBLOCK_INT_Y_SIZE + m_sy;
 
 		//光フラグがONなら
 		if (L_flag == true)
@@ -480,6 +502,8 @@ void CObjHero::Draw()
 		{
 			//1番目に登録したグラフィック(主人公・影)をsrc・dst・c の情報をもとに描画
 			Draw::Draw(1, &src, &dst, c, 0.0f);
+			////影時の主人公の元の位置を表示する
+			Draw::Draw(1, &src1, &dst1, c1, 0.0f);
 		}
 	}
 	if (dead_flag == true)

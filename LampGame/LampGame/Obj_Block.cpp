@@ -172,11 +172,19 @@ void CObjBlock::BlockHit(
 					else
 						r = 360.0f - abs(r);
 
+					//当たり判定用:主人公とブロックの角度(の端)を求める
+					float a1 = (HBLOCK_INT_Y_SIZE / 2 - 5) + BLOCK_SIZE / 2;	//底辺	:主人公縦+ブロック縦長さ(半分)
+					float b1 = (HBLOCK_INT_X_SIZE / 2 - 5) + BLOCK_SIZE / 2;  //高さ	:主人公横+ブロック横長さ(半分)
+					float t1 = 90.0 - (atan2(b1, a1) * 180 / 3.14); //主人公の中心とブロックの中心の角度(単位:度)
+					int t = (int)t1;
+
+					float hit_length = sqrt(a1 * a1 + b1 * b1) - 1;
+
 					//lenがある一定の長さより短い場合に判定に入る。
-					if (len < HIT_LENGTH)
+					if (len < hit_length)
 					{
 						//角度で上下左右を判定
-						if ((r < 56 && r >= 0) || r > 304)
+						if ((r < t && r >= 0) || r > 360-t)
 						{
 							if (m_map[i][j] != 2)
 							{
@@ -187,7 +195,7 @@ void CObjBlock::BlockHit(
 							}
 							*btg = m_map[i][j];
 						}
-						if (r > 56 && r < 124)
+						if (r > t && r < 180-t)
 						{
 							if (m_map[i][j] != 2)
 							{
@@ -202,7 +210,7 @@ void CObjBlock::BlockHit(
 								*btg = m_map[i][j];
 							}
 						}
-						if (r > 124 && r < 236)
+						if (r > 180-t && r < 180+t)
 						{
 							if (m_map[i][j] != 2)
 							{
@@ -213,7 +221,7 @@ void CObjBlock::BlockHit(
 							}
 							*btg = m_map[i][j];
 						}
-						if (236 < r && r < 304)
+						if (180+t < r && r < 360-t)
 						{
 							if (m_map[i][j] != 2)
 							{
@@ -266,7 +274,7 @@ void CObjBlock::BlockHit(
 						if (len < HIT_LENGTH)
 						{
 							//角度で上下左右を判定
-							if ((r < 56 && r >= 0) || r > 304)
+							if ((r < 58.5 && r >= 0) || r > 301.5)
 							{
 								//右
 								*right = true;								//オブジェクトの左の部分が衝突している
@@ -274,7 +282,7 @@ void CObjBlock::BlockHit(
 								*vx = -(*vx) * 0.1f;							//-VX*反発係数
 								*btg = m_map[i][j];
 							}
-							if (r > 56 && r < 124)
+							if (r > 58.5 && r < 121.5)
 							{
 								//上
 								*down = true;					//オブジェクトの下の部分が衝突している
@@ -287,7 +295,7 @@ void CObjBlock::BlockHit(
 								}
 								*vy = 0.0f;
 							}
-							if (r > 124 && r < 236)
+							if (r > 121.5 && r < 238.5)
 							{
 								//左
 								*left = true;								//オブジェクトの右の部分が衝突している
@@ -295,7 +303,7 @@ void CObjBlock::BlockHit(
 								*vx = -(*vx) * 0.1f;							//-VX*反発係数
 								*btg = m_map[i][j];
 							}
-							if (236 < r && r < 304)
+							if (238.5 < r && r < 301.5)
 							{
 								//下
 								*up = true;						//オブジェクトの上の部分が衝突している
@@ -346,15 +354,15 @@ void CObjBlock::BlockHit(
 						if (len < HIT_LENGTH)
 						{
 							//角度で上下左右を判定
-							if ((r < 56 && r >= 0) || r > 304)
+							if ((r < 58.5 && r >= 0) || r > 301.5)
 							{
 								//右
 								*right = true;								//オブジェクトの左の部分が衝突している
-								*x = bx + (BLOCK_SIZE - 0.5) + (scroll);	//ブロックの位置+オブジェクトの幅
+								*x = bx + (BLOCK_SIZE - 0.2) + (scroll);	//ブロックの位置+オブジェクトの幅
 								*vx = -(*vx) * 0.1f;							//-VX*反発係数
 								*btg = m_map[i][j];
 							}
-							if (r > 56 && r < 124)
+							if (r > 58.5 && r < 121.5)
 							{
 								//上
 								*down = true;					//オブジェクトの下の部分が衝突している
@@ -367,19 +375,19 @@ void CObjBlock::BlockHit(
 								}
 								*vy = 0.0f;
 							}
-							if (r > 124 && r < 236)
+							if (r > 121.5 && r < 238.5)
 							{
 								//左
 								*left = true;								//オブジェクトの右の部分が衝突している
-								*x = bx - (BLOCK_SIZE + 0.5) + (scroll);	//ブロックの位置+オブジェクトの幅
+								*x = bx - (BLOCK_SIZE + 0.2) + (scroll);	//ブロックの位置+オブジェクトの幅
 								*vx = -(*vx) * 0.1f;							//-VX*反発係数
 								*btg = m_map[i][j];
 							}
-							if (236 < r && r < 304)
+							if (238.5 < r && r < 301.5)
 							{
 								//下
 								*up = true;						//オブジェクトの上の部分が衝突している
-								*y = by + (BLOCK_SIZE - 0.5);	//ブロックの位置+オブジェクトの幅
+								*y = by + (BLOCK_SIZE - 0.2);	//ブロックの位置+オブジェクトの幅
 								*btg = m_map[i][j];
 								if (*vy < 0)
 								{
