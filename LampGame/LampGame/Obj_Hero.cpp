@@ -58,7 +58,7 @@ void CObjHero::Init()
 	m_block_type_goal = BLOCK_TYPE_G;	//blockの種類確認用(右)
 
 	//当たり判定用のHitBoxを作成
-	Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
+	Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE-10, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
 
 	//光→影移動用変数
 	move_flag = true;
@@ -200,10 +200,14 @@ void CObjHero::Action()
 					if (Input::GetVKey(VK_UP) == true)
 					{
 						m_vy -= m_speed_power;
+						if(Input::GetVKey(VK_LEFT) != true && Input::GetVKey(VK_RIGHT) != true)
+							m_ani_time += 1.0;
 					}
 					else if (Input::GetVKey(VK_DOWN) == true)
 					{
 						m_vy += m_speed_power;
+						if (Input::GetVKey(VK_LEFT) != true && Input::GetVKey(VK_RIGHT) != true)
+							m_ani_time += 1.0;
 					}
 
 					if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
@@ -246,7 +250,7 @@ void CObjHero::Action()
 				CHitBox* hit = Hits::GetHitBox(this);
 
 				//HitBoxの位置の変更
-				hit->SetPos(m_px, m_py);
+				hit->SetPos(m_px+5, m_py);
 
 				//敵オブジェクトと接触したらdead_flagをtrueにする
 				if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
@@ -363,7 +367,7 @@ void CObjHero::Action()
 				if (m_sx - 10 < m_px && m_px < m_sx + 10 && m_sy - 10 < m_py && m_py < m_sy + 10)
 				{
 					//当たり判定用のHitBoxを作成
-					Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
+					Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE-10, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
 					L_flag = true;
 					m_flag = false;
 					move_flag = true;
