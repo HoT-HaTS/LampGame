@@ -27,6 +27,7 @@ void CObjStage1::Init()
 
 	alpha = 1.0f;
 	count = 0;
+	t = 0;
 }
 
 //アクション
@@ -44,24 +45,26 @@ void CObjStage1::Action()
 	CObj_G_Block2* gflag2 = (CObj_G_Block2*)Objs::GetObj(OBJ_BLOCK);
 	g_f2 = gflag2->Get_G2_flag();
 
-	//object出現ライン
-	//主人公の位置+500をobject出現ラインにする
-	float line = hx + (-s1_scroll) + OBJECT_LINE;
+
+	//主人公の位置+300をobject出現ライン(初期値)にし、+500をobjectの出現ラインにする。
+	float line = hx + (-s1_scroll) + OBJECT_LINE  + t;
+	if (t < 200)
+	{
+		t += 64;
+	}
 
 	//object出現ラインを要素番号化
 	int ex = ((int)line) / BLOCK_SIZE;
 
-	/*object出現ラインの列を検索
-	0:なにもなし
-	1:ステージブロック
-	2:ゴールブロック
-	3:敵出現用ブロック
-	4:影の世界でしか見えないブロック(G3)
-	5:スイッチを押すと出現、消滅するブロック(G2)
-	6:5用のスイッチ
-	7:鍵と連動するブロック(G5)
-	8:7用の鍵
-	9:予備*/
+	ScrollLine(ex);
+
+}
+
+//ScrollLine関数
+//要素番号をもとにブロック等を出現させる
+//引数1	int ex マップのx座標(要素番号)
+void CObjStage1::ScrollLine(int ex)
+{
 
 	for (int i = 0; i < INIT_MAP_X; i++)
 	{
@@ -96,7 +99,7 @@ void CObjStage1::Action()
 			//G3ブロック出現
 			CObj_G_Block3* objg3 = new CObj_G_Block3(ex * BLOCK_SIZE, i * BLOCK_SIZE);
 			Objs::InsertObj(objg3, G_BLOCK3, 7);
-			
+
 			//出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;
 		}
@@ -126,7 +129,7 @@ void CObjStage1::Action()
 			//G5ブロック出現
 			CObj_G_Block5* objg5 = new CObj_G_Block5(ex * BLOCK_SIZE, i * BLOCK_SIZE);
 			Objs::InsertObj(objg5, OBJ_BLOCK, 8);
-			
+
 			//出現場所の値を0にする
 			m_map[i][ex] = NO_BLOCK;
 		}

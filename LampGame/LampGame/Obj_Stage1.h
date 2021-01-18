@@ -16,7 +16,7 @@ using namespace GameL;
 
 #define BLOCK_SIZE (64.0f)
 
-#define OBJECT_LINE (500.0)
+#define OBJECT_LINE (300.0)
 
 #define GOAL_T (128.0)
 #define GOAL_L (128.0)
@@ -43,9 +43,11 @@ private:
 	bool l_f;
 
 	void BlockDraw(float x, float y, RECT_F* dst, float c[], int block_id);
+	void ScrollLine(int ex);
 
 	int count;
 	float alpha;
+	int t;
 
 	enum BLOCKNUM
 	{

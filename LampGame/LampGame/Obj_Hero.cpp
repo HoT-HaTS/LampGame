@@ -13,13 +13,12 @@
 //使用するネームスペース
 using namespace GameL;
 
-
-
 //イニシャライズ
 void CObjHero::Init()
 {
 	m_px = INIT_H_PX;		//位置
 	m_py = INIT_H_PY;
+
 	m_vx = INIT_H_VX;		//移動ベクトル
 	m_vy = INIT_H_VY;
 	m_sx = INIT_H_PX;		//世界切り替え時の位置
