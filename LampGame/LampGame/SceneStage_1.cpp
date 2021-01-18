@@ -42,20 +42,20 @@ void CSceneStage_1::InitScene()
 	//マップデータ関連
 	unique_ptr<wchar_t>p;
 	int size;
-	int map[10][100];
-	wchar_t str[128];
+	int map[MAP_Y][MAP_X];
+	wchar_t str[MAX_STR];
 
 	swprintf_s(str, L"stagedata/Stage%d.csv", ((UserData*)Save::GetData())->stage_id);
 	p = Save::ExternalDataOpen(str, &size);
-	int count = 1;
-	for (int i = 0; i < 10; i++)
+	int count = INIT_COUNT;
+	for (int i = 0; i < MAP_Y; i++)
 	{
-		for (int j = 0; j < 100; j++)
+		for (int j = 0; j < MAP_X; j++)
 		{
 			int w = 0;
 			swscanf_s(&p.get()[count], L"%d", &w);
 			map[i][j] = w;
-			count += 2;
+			count += PLUS_COUNT;
 		}
 	}
 
@@ -145,31 +145,31 @@ void CSceneStage_1::InitScene()
 	//看板出現用
 	if (((UserData*)Save::GetData())->stage_id == 0)
 	{
-		CObjBoard* objt1 = new CObjBoard(BOARD1_X, BOARD_Y, 0);
+		CObjBoard* objt1 = new CObjBoard(BOARD1_X, BOARD_Y, BOARD_MOVE);
 		Objs::InsertObj(objt1, OBJ_BOARD, 9);
 
-		CObjBoard* objt2a = new CObjBoard(BOARD2a_X, BOARD_Y, 1);
+		CObjBoard* objt2a = new CObjBoard(BOARD2a_X, BOARD_Y, BOARD_Z_KEY);
 		Objs::InsertObj(objt2a, OBJ_BOARD, 9);
 
-		CObjBoard* objt2b = new CObjBoard(BOARD2b_X, BOARD_Yb, 1);
+		CObjBoard* objt2b = new CObjBoard(BOARD2b_X, BOARD_Yb, BOARD_Z_KEY);
 		Objs::InsertObj(objt2b, OBJ_BOARD, 9);
 
-		CObjBoard* objt3 = new CObjBoard(BOARD3_X, BOARD_Y, 2);
+		CObjBoard* objt3 = new CObjBoard(BOARD3_X, BOARD_Y, BOARD_X_KEY);
 		Objs::InsertObj(objt3, OBJ_BOARD, 9);
 
-		CObjBoard* objt4 = new CObjBoard(BOARD4_X, BOARD_Y, 3);
+		CObjBoard* objt4 = new CObjBoard(BOARD4_X, BOARD_Y, BOARD_SPACE_KEY);
 		Objs::InsertObj(objt4, OBJ_BOARD, 9);
 
 		//看板の切り取り位置が変　y座標を変える
-		CObjBoard* objt5 = new CObjBoard(BOARD5_X, BOARD_Y, 4);
+		CObjBoard* objt5 = new CObjBoard(BOARD5_X, BOARD_Y, BOARD_P_KEY);
 		Objs::InsertObj(objt5, OBJ_BOARD, 9);
 
-		CObjBoard* objt7 = new CObjBoard(BOARD7_X, BOARD_Y, 6);
+		CObjBoard* objt7 = new CObjBoard(BOARD7_X, BOARD_Y, BOARD_KEY_BLOAK);
 		Objs::InsertObj(objt7, OBJ_BOARD, 9);
 	}
 	if (((UserData*)Save::GetData())->stage_id == 2)
 	{
-		CObjBoard* objt6 = new CObjBoard(BOARD6_X, BOARD_Y, 5);
+		CObjBoard* objt6 = new CObjBoard(BOARD6_X, BOARD_Y, BOARD_GLASS_BLOCK);
 		Objs::InsertObj(objt6, OBJ_BOARD, 9);
 	}
 
