@@ -8,7 +8,7 @@ using namespace GameL;
 #define INIT_H_VX (0.0f)		//主人公速度
 #define INIT_H_VY (0.0f)
 #define INIT_H_PX (64.0f)		//主人公位置
-#define INIT_H_PY (350.0f)
+#define INIT_H_PY (360.0f)
 
 #define INIT_H_POSTURE (1.0)	//主人公向き
 
