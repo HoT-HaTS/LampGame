@@ -11,8 +11,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-
-
 //イニシャライズ
 void CObjPause::Init()
 {
@@ -40,7 +38,6 @@ void CObjPause::Action()
 			pause_flag = false;
 			switch_flag = true;
 		}
-
 	}
 }
 

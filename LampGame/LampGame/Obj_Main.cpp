@@ -10,8 +10,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-
-
 //イニシャライズ
 void CObjMain::Init()
 {
@@ -107,12 +105,14 @@ void CObjMain::Draw()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	coin_count = hero->GetCoin();
 
-	RECT_F src;		//ブラックアウト描画元切り取り位置
-	RECT_F dst;		//ブラックアウト描画先表示位置
-	RECT_F src2;	//描画元切り取り位置
-	RECT_F dst2;	//描画先表示位置
-	RECT_F dst3;	//描画先表示位置
-	RECT_F dst4;	//描画先表示位置
+	RECT_F src;			//ブラックアウト描画元切り取り位置
+	RECT_F dst;			//ブラックアウト描画先表示位置
+	RECT_F src2;		//コイン描画元切り取り位置
+	RECT_F dst2;		//コイン描画先表示位置
+	RECT_F dst3;		//コイン描画先表示位置
+	RECT_F dst4;		//コイン描画先表示位置
+	RECT_F src_guide;	//ガイド描画元切り取り位置
+	RECT_F dst_guide;	//ガイド描画先表示位置
 
 	//ブラックアウト描画元切り取り位置
 	src.m_top = 0.0f;
@@ -131,6 +131,21 @@ void CObjMain::Draw()
 	src2.m_left = 0.0f;
 	src2.m_right = src2.m_left + BLOCK_SIZE;
 	src2.m_bottom = src2.m_top + BLOCK_SIZE;
+
+	//ガイド描画元切り取り位置
+	src_guide.m_top = 0.0f;
+	src_guide.m_left = 0.0f;
+	src_guide.m_right = src_guide.m_left + 600.0f;
+	src_guide.m_bottom = src_guide.m_top + 32.0f;
+
+	//ガイド描画先表示位置
+	dst_guide.m_top = 0.0f;
+	dst_guide.m_left = 200.0f;
+	dst_guide.m_right = dst_guide.m_left + 600.0f;
+	dst_guide.m_bottom = dst_guide.m_top + 32.0f;
+
+	//ガイド表示
+	Draw::Draw(0, &src_guide, &dst_guide, c, 0.0f);
 
 	//ブラックイン表示
 	Draw::Draw(62, &src, &dst, c_in, 0.0f);
