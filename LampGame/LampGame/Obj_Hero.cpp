@@ -87,7 +87,7 @@ void CObjHero::Action()
 		if (pause_flag == false)
 		{
 			//落下によるゲームオーバー
-			if (m_py > STAGE_Y_OUT && hg_flag == false && hg_flag == false)
+			if (m_py > STAGE_Y_OUT && hg_flag == false )
 			{
 				dead_flag = true;
 				Audio::Start(12);
