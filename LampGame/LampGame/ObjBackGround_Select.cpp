@@ -33,12 +33,12 @@ void CObjBackGround_Select::Draw()
 
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = src.m_left + 896.0f;
-	src.m_bottom = src.m_top + 640.0f;
+	src.m_right = src.m_left + CUTOUT_X;
+	src.m_bottom = src.m_top + CUTOUT_Y;
 
 	dst.m_top = 0;
 	dst.m_left = 0;
-	dst.m_right = dst.m_left + 800;
-	dst.m_bottom = dst.m_top + 600.0f;
+	dst.m_right = dst.m_left + DRAW_X;
+	dst.m_bottom = dst.m_top + DRAW_Y;
 	Draw::Draw(10, &src, &dst, c, 0.0f);
 }
