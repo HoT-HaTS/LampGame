@@ -87,12 +87,11 @@ void CObjHero::Action()
 		if (pause_flag == false)
 		{
 			//落下によるゲームオーバー
-			if (m_py > STAGE_Y_OUT)
+			if (m_py > STAGE_Y_OUT && hg_flag == false)
 			{
 				dead_flag = true;
 				Audio::Start(12);
 			}
-
 
 			if (move_flag == true)
 			{
@@ -266,7 +265,6 @@ void CObjHero::Action()
 				}
 			}
 
-
 			//アニメーション
 			if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
 			{
@@ -283,8 +281,6 @@ void CObjHero::Action()
 				m_ani_s_frame = 0;
 			}
 
-
-
 			//アニメーション関連(移動用)
 			if (m_ani_time > m_ani_max_time)
 			{
@@ -295,7 +291,6 @@ void CObjHero::Action()
 			{
 				m_ani_frame = 0;
 			}
-
 
 			if (move_flag == true)
 			{
@@ -407,7 +402,6 @@ void CObjHero::Action()
 						Scene::SetScene(new CSceneSelect());
 					}
 				}
-				
 			}
 		}
 	}
@@ -529,7 +523,6 @@ void CObjHero::Draw()
 	}
 }
 
-
 //---GetAtan2Angle関数
 //引数1		float w		:幅
 //引数2		float h		:高さ
@@ -583,15 +576,15 @@ bool CObjHero:: UnitVec(float* vx, float* vy)
 //HeroMove関数:Xボタンを押した瞬間の光と影の位置から角度を求めて一定速度で元の位置に戻る
 void CObjHero::HeroMove(float mx,float my, float sx, float sy, float vx, float vy)
 {
-		float x = sx - mx;
-		float y = sy - my;
-		float ar = GetAtan2Angle(x, -y);
+	float x = sx - mx;
+	float y = sy - my;
+	float ar = GetAtan2Angle(x, -y);
 
-		//移動方向を主人公機の方向にする
-		vx = cos(3.14 / 180 * ar);
-		vy = -sin(3.14 / 180 * ar);
-		UnitVec(&vx, &vy);
+	//移動方向を主人公機の方向にする
+	vx = cos(3.14 / 180 * ar);
+	vy = -sin(3.14 / 180 * ar);
+	UnitVec(&vx, &vy);
 
-		sx += 20 * vx;
-		sy += 20 * vy;
+	sx += 20 * vx;
+	sy += 20 * vy;
 }
