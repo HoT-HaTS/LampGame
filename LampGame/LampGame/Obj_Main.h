@@ -5,6 +5,16 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define DEAD_TIME (60)
+#define ADD_ALPHA (0.02f)
+#define SRC_BLACK_R (8.0f)
+#define SRC_BLACK_B (6.0f)
+#define SRC_GUIDE_R (600.0f)
+#define SRC_GUIDE_B (32.0f)
+#define DST_GUIDE_L (200.0f)
+#define DST_GUIDE_R (600.0f)
+#define DST_GUIDE_B (32.0f)
+
 //オブジェクト：
 class CObjMain : public CObj
 {
@@ -26,4 +36,3 @@ private:
 	bool ga_flag;
 	bool d_flag;
 };
-

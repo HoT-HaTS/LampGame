@@ -83,15 +83,15 @@ void CObjMain::Action()
 	{
 		d_time++;
 
-		if(d_time >= 60)
-			dead_alpha += 0.02f;
+		if(d_time >= DEAD_TIME)
+			dead_alpha += ADD_ALPHA;
 	}
 }
 
 //ドロー
 void CObjMain::Draw()
 {
-	in_alpha -= 0.02f;
+	in_alpha -= ADD_ALPHA;
 
 	if (in_alpha <= 0.0f)
 	{
@@ -118,8 +118,8 @@ void CObjMain::Draw()
 	//ブラックアウト描画元切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = src.m_left + 8.0f;
-	src.m_bottom = src.m_top + 6.0f;
+	src.m_right = src.m_left + SRC_BLACK_R;
+	src.m_bottom = src.m_top + SRC_BLACK_B;
 
 	//ブラックアウト描画先表示位置
 	dst.m_top = 0.0f;
@@ -136,14 +136,14 @@ void CObjMain::Draw()
 	//ガイド描画元切り取り位置
 	src_guide.m_top = 0.0f;
 	src_guide.m_left = 0.0f;
-	src_guide.m_right = src_guide.m_left + 600.0f;
-	src_guide.m_bottom = src_guide.m_top + 32.0f;
+	src_guide.m_right = src_guide.m_left + SRC_GUIDE_R;
+	src_guide.m_bottom = src_guide.m_top + SRC_GUIDE_B;
 
 	//ガイド描画先表示位置
 	dst_guide.m_top = 0.0f;
-	dst_guide.m_left = 200.0f;
-	dst_guide.m_right = dst_guide.m_left + 600.0f;
-	dst_guide.m_bottom = dst_guide.m_top + 32.0f;
+	dst_guide.m_left = DST_GUIDE_L;
+	dst_guide.m_right = dst_guide.m_left + DST_GUIDE_R;
+	dst_guide.m_bottom = dst_guide.m_top + DST_GUIDE_B;
 
 	//ガイド表示
 	Draw::Draw(0, &src_guide, &dst_guide, c, 0.0f);
