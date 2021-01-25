@@ -165,17 +165,17 @@ void CObjBlock::BlockHit(
 
 					//角度rを求める
 					float r = atan2(rvy, rvx);	//(ラジアン)
-					r = r * 180.0f / 3.14f;		//度
+					r = r * 180 / PI;		//度
 
 					if (r <= 0.0f)
 						r = abs(r);
 					else
-						r = 360.0f - abs(r);
+						r = 360 - abs(r);
 
 					//当たり判定用:主人公とブロックの角度(の端)を求める
 					float a1 = (HBLOCK_INT_Y_SIZE / 2 - 5) + BLOCK_SIZE / 2;	//底辺	:主人公縦+ブロック縦長さ(半分)
 					float b1 = (HBLOCK_INT_X_SIZE / 2 - 5) + BLOCK_SIZE / 2;  //高さ	:主人公横+ブロック横長さ(半分)
-					float t1 = 90.0 - (atan2(b1, a1) * 180 / 3.14); //主人公の中心とブロックの中心の角度(単位:度)
+					float t1 = 90.0 - (atan2(b1, a1) * 180 / PI); //主人公の中心とブロックの中心の角度(単位:度)
 					int t = (int)t1;
 
 					float hit_length = sqrt(a1 * a1 + b1 * b1) - 1;

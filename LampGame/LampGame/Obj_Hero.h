@@ -9,6 +9,7 @@ using namespace GameL;
 #define INIT_H_VY (0.0f)
 #define INIT_H_PX (64.0f)		//主人公位置
 #define INIT_H_PY (360.0f)
+#define HERO_POSI (10)			//主人公の位置調整用
 
 #define INIT_H_POSTURE (1.0)	//主人公向き
 
@@ -18,6 +19,9 @@ using namespace GameL;
 #define INIT_SPEED_POWER (1.4)	//加算速度
 #define INIT_H_ANI_MAX_TIME (5.0)	
 #define INIT_H_DANI_MAX_TIME (10.0)
+#define JUMP_SPEED (10)			//ジャンプ時速度
+#define FALL_SPEED (0.5)		//落下速度
+#define SHADOW_SPEED (12)		//影→光の移動速度
 
 #define INIT_FRICTION (0.2)	//摩擦係数
 
@@ -30,6 +34,14 @@ using namespace GameL;
 #define STAGE_Y_OUT (800.0f)	//下方向ステージ外判定
 
 #define H_GOAL_BLOCK (2)
+
+#define RESPAWN_TIME (8)		//リスポーンタイム
+
+#define GOAL_WHITE_COUNT (300)
+#define GOAL_COUNT (6)			//ゴールカウント
+
+#define PI (3.14)				//円周率
+#define STRAIGHT_ANGLE (180)	//180°
 
 //ベクトルの正規化を行う関数
 bool UnitVec(float* vx, float* vy);
