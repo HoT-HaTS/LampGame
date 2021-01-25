@@ -119,7 +119,7 @@ void CObjAttack::Draw()
 		src.m_top = x;
 		src.m_left = 0.0f + AniData[m_ani_frame] * ABLOCK_INT_X_SIZE;
 		src.m_right = src.m_left + ABLOCK_INT_X_SIZE;
-		src.m_bottom = src.m_top + ABLOCK_INT_X_SIZE - (x);
+		src.m_bottom = src.m_top + ABLOCK_INT_X_SIZE;
 	}
 
 	//表示位置の設定　向きで表示位置を変える
