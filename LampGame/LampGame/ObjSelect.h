@@ -34,13 +34,20 @@ using namespace GameL;
 #define STAGE_THUMB_SIZE_X (140.0f)
 #define STAGE_THUMB_SIZE_Y (140.0f)
 
-//カーソル切り取りサイズ
-#define CURSOR_SIZE_X (250.0f)
-#define CURSOR_SIZE_Y (187.0f)
+//ステージ選択カーソル 切り取りサイズ
+#define CURSOR_CUTOUT_SIZE_X (250.0f)
+#define CURSOR_CUTOUT_SIZE_Y (187.0f)
+//ステージ選択カーソル　位置
+#define CURSOR_X1 (35.0f)
+#define CURSOR_X2 (230.0f)
+#define CURSOR_X3 (425.0f)
+#define CURSOR_X4 (620.0f)
+#define CURSOR_Y1 (100.0f)
+#define CURSOR_Y2 (300.0f)
+//ステージ選択カーソル 表示サイズ
+#define CURSOR_DRAW_SIZE_X (150.0f)
+#define CURSOR_DRAW_SIZE_Y (150.0f)
 
-//カーソル位置
-#define CURSOR_X1 (250.0f)
-#define CURSOR_SIZE_Y (187.0f)
 
 //クリアマークサイズ
 #define CLAER_MARK_SIZE_X (64.0f)
