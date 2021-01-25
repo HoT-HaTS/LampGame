@@ -47,6 +47,7 @@ void CObjMain::Action()
 		//flagがtrueの時、演出開始,（今はゴールに触れた瞬間に何回も演出しているので激重になる。）
 		if (g_flag == true && ga_flag == false)
 		{
+
 			CObjGoalscene* obj_goalscene = new CObjGoalscene();
 			Objs::InsertObj(obj_goalscene, OBJ_GOALSCENE, 99);
 			ga_flag = true;
