@@ -5,6 +5,11 @@
 //使用するネームスペース
 using namespace GameL;
 
+#define KEYCOIN_SIZE (59.0f)
+#define ADD_SIZE (5.0f)
+#define KEYCOIN_FLAME (10)
+#define KEYCOIN_MAX_TIME (40)
+
 //オブジェクト：
 class CObjKeyCoin : public CObj
 {

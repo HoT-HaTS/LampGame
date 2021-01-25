@@ -106,8 +106,10 @@ void CObjSelect::Draw()
 	float c1[4] = { 1.0f,0.4f,0.0f,1.0f };
 
 	//サムネイル、クリアマーク表示位置
-	float top[7] = { 105, 105, 105, 105, 305, 305, 305 };
-	float left[7] = { 40, 235, 430, 625, 40, 235, 430};
+	float top[7] = { CLEAR_MARK_Y1, CLEAR_MARK_Y1, CLEAR_MARK_Y1, CLEAR_MARK_Y1,
+					 CLEAR_MARK_Y2, CLEAR_MARK_Y2, CLEAR_MARK_Y2 };
+	float left[7] = { CLEAR_MARK_X1, CLEAR_MARK_X2, CLEAR_MARK_X3, CLEAR_MARK_X4,
+					  CLEAR_MARK_X1, CLEAR_MARK_X2, CLEAR_MARK_X3 };
 
 	RECT_F src;			//ステージサムネイル描画元切り取り位置
 	RECT_F dst;			//ステージサムネイル表示位置
@@ -128,13 +130,13 @@ void CObjSelect::Draw()
 	{
 		src_select.m_top = 0.0f;
 		src_select.m_left = 0.0f;
-		src_select.m_right = src_select.m_left + 401.0f;
-		src_select.m_bottom = src_select.m_top + 91.0f;
+		src_select.m_right = src_select.m_left + SELECT_SIZE_X;
+		src_select.m_bottom = src_select.m_top + SELECT_SIZE_Y;
 
-		dst_select.m_top = 10.0f;
-		dst_select.m_left = 199.5f;
-		dst_select.m_right = dst_select.m_left + 401.0f;
-		dst_select.m_bottom = dst_select.m_top + 91.0f;
+		dst_select.m_top = SELECT_DRAW_X;
+		dst_select.m_left = SELECT_DRAW_Y;
+		dst_select.m_right = dst_select.m_left + SELECT_SIZE_X;
+		dst_select.m_bottom = dst_select.m_top + SELECT_SIZE_Y;
 
 		Draw::Draw(11, &src_select, &dst_select, c, 0.0f);
 	}
@@ -143,13 +145,13 @@ void CObjSelect::Draw()
 	{
 		src_start.m_top = 0.0f;
 		src_start.m_left = 0.0f;
-		src_start.m_right = src_start.m_left + 372.0f;
-		src_start.m_bottom = src_start.m_top + 71.0f;
+		src_start.m_right = src_start.m_left + ENTER_SIZE_X;
+		src_start.m_bottom = src_start.m_top + ENTER_SIZE_Y;
 
-		dst_start.m_top = 490.0f;
-		dst_start.m_left = 214.0f;
-		dst_start.m_right = dst_start.m_left + 372.0f;
-		dst_start.m_bottom = dst_start.m_top + 71.0f;
+		dst_start.m_top = ENTER_DRAW_Y;
+		dst_start.m_left = ENTER_DRAW_X;
+		dst_start.m_right = dst_start.m_left + ENTER_SIZE_X;
+		dst_start.m_bottom = dst_start.m_top + ENTER_SIZE_Y;
 
 		Draw::Draw(12, &src_start, &dst_start, c, 0.0f);
 	}
@@ -158,13 +160,13 @@ void CObjSelect::Draw()
 	{
 		src_exit.m_top = 0.0f;
 		src_exit.m_left = 0.0f;
-		src_exit.m_right = src_exit.m_left + 163.0f;
-		src_exit.m_bottom = src_exit.m_top + 31.0f;
+		src_exit.m_right = src_exit.m_left + EXIT_SIZE_X;
+		src_exit.m_bottom = src_exit.m_top + EXIT_SIZE_Y;
 
-		dst_exit.m_top = 569.0f;
-		dst_exit.m_left = 681.5f;
-		dst_exit.m_right = dst_exit.m_left + 163.0f;
-		dst_exit.m_bottom = dst_exit.m_top + 31.0f;
+		dst_exit.m_top = EXIT_DRAW_Y;
+		dst_exit.m_left = EXIT_DRAW_X;
+		dst_exit.m_right = dst_exit.m_left + EXIT_SIZE_X;
+		dst_exit.m_bottom = dst_exit.m_top + EXIT_SIZE_Y;
 
 		Draw::Draw(13, &src_exit, &dst_exit, c, 0.0f);
 	}
