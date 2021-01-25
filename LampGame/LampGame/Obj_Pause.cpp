@@ -53,14 +53,14 @@ void CObjPause::Draw()
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 800.0f;
-	src.m_bottom = 600.0f;
+	src.m_right = BG_X_SIZE;
+	src.m_bottom = BG_Y_SIZE;
 
 	//表示位置の設定
-	dst.m_top = 10.0f;
-	dst.m_left = 15.0f;
-	dst.m_right = dst.m_left + 775.0f;
-	dst.m_bottom = dst.m_top + 580.0f;
+	dst.m_top = PAUSE_DRAW_SIZE_T;
+	dst.m_left = PAUSE_DRAW_SIZE_L;
+	dst.m_right = dst.m_left + PAUSE_DRAW_SIZE_R;
+	dst.m_bottom = dst.m_top + PAUSE_DRAW_SIZE_B;
 
 	//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(13, &src, &dst, c, 0.0f);
