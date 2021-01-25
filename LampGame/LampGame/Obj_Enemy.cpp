@@ -23,7 +23,6 @@ void CObjEnemy::Init()
 
 	m_vx = INIT_E_VX;		//移動ベクトル
 	m_vy = INIT_E_VY;
-	//m_posture = INIT_E_POSTURE;	//右向き0.0f 左向き1.0f
 
 	m_ani_time = INIT_ANI_TIME;
 	m_ani_frame = INIT_ANI_FRAME;	//静止フレームを初期にする
@@ -93,17 +92,17 @@ void CObjEnemy::Action()
 				m_ani_time = 0;
 			}
 
-			if (m_ani_frame >= 8)
+			if (m_ani_frame >= m_ani_max_time-1)
 			{
 				m_ani_frame = 0;
 			}
 
 
 			//摩擦
-			m_vx += -(m_vx * 0.098);
+			m_vx += -(m_vx * INIT_FRICTION);
 
 			//自由落下運動
-			m_vy += 9.8 / (16.0f);
+			m_vy += FALL_SPEED;
 
 			//ブロックタイプ検知用の変数がないためのダミー
 			int d1;
@@ -141,35 +140,35 @@ void CObjEnemy::Action()
 				float hy = hero->GetY();
 
 				//敵の上じゃない条件
-				if (hy + 120 > m_py)
+				if (hy + 2* BLOCK_SIZE-8 > m_py)
 				{
 					//敵の左部分に接触
 					if (m_px + scroll->GetScroll() > hx)
 					{
 						hero->SetRight(true);
-						hero->SetX(m_px - 64.5 + scroll->GetScroll());
+						hero->SetX(m_px - BLOCK_SIZE-0.5 + scroll->GetScroll());
 						hero->SetVX(-0.8);
 					}
 					//敵の右部分に接触
 					else if (hx > m_px + scroll->GetScroll())
 					{
 						hero->SetLeft(true);
-						hero->SetX(m_px + 63.5 + scroll->GetScroll());
+						hero->SetX(m_px + BLOCK_SIZE+0.5 + scroll->GetScroll());
 						hero->SetVX(0.0);
 					}
 				}
 				//敵の上部分に接触
-				if (hy + 125 <= m_py)
+				if (hy + 2* BLOCK_SIZE-3 <= m_py)
 				{
 					hero->SetDown(true);
-					hero->SetY(m_py - 128.5);
+					hero->SetY(m_py - 2* BLOCK_SIZE+0.5);
 					hero->SetVY(0.0);
 				}
 				//敵の下部分に接触
-				else if (m_py + 61 <= hy)
+				else if (m_py + BLOCK_SIZE-3 <= hy)
 				{
 					hero->SetUp(true);
-					hero->SetY(m_py + 64.5);
+					hero->SetY(m_py + BLOCK_SIZE+0.5);
 					hero->SetVY(0.0);
 				}
 			}
