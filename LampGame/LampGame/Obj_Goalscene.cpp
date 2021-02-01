@@ -53,7 +53,7 @@ void CObjGoalscene::Draw()
 	//flagがtrueの時、演出開始
 	if (s_flag==true)
 	{
-		alpha += 0.01f;
+		alpha += ALPHA_CHANGE;
 		//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 		Draw::Draw(61, &src, &dst, c, 0.0f);
 		if (alpha >= 1.0f)
@@ -61,7 +61,7 @@ void CObjGoalscene::Draw()
 	}
 	else
 	{
-		alpha += ALPHA_MINUS;
+		alpha -= ALPHA_CHANGE;
 		//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 		Draw::Draw(61, &src, &dst, c, 0.0f);
 
