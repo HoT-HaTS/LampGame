@@ -41,14 +41,14 @@ void CObjGoalscene::Draw()
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 800.0f;
-	src.m_bottom = 600.0f;
+	src.m_right = WINDOW_SIZE_X;
+	src.m_bottom = WINDOW_SIZE_Y;
 
 	//表示位置の設定
 	dst.m_top = 0.0f;
 	dst.m_left = 0.0f;
-	dst.m_right = dst.m_left + 800.0f;
-	dst.m_bottom = dst.m_top + 600.0f;
+	dst.m_right = dst.m_left + WINDOW_SIZE_X;
+	dst.m_bottom = dst.m_top + WINDOW_SIZE_Y;
 
 	//flagがtrueの時、演出開始
 	if (s_flag==true)
@@ -61,7 +61,7 @@ void CObjGoalscene::Draw()
 	}
 	else
 	{
-		alpha -= 0.01f;
+		alpha += ALPHA_MINUS;
 		//10番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 		Draw::Draw(61, &src, &dst, c, 0.0f);
 
@@ -77,14 +77,14 @@ void CObjGoalscene::Draw()
 			//切り取り位置の設定
 			src_sc.m_top = 0.0f;
 			src_sc.m_left = 0.0f;
-			src_sc.m_right = 700.0f;
-			src_sc.m_bottom = 200.0f;
+			src_sc.m_right = CLEARTELOP_SIZE_X;
+			src_sc.m_bottom = CLEARTELOP_SIZE_Y;
 
 			//表示位置の設定
-			dst_sc.m_top = 100.0f;
-			dst_sc.m_left = 50.0f;
-			dst_sc.m_right = dst_sc.m_left + 700.0f;
-			dst_sc.m_bottom = dst_sc.m_top + 200.0f;
+			dst_sc.m_top = CLEARTELOP_POS_Y;
+			dst_sc.m_left = CLEARTELOP_POS_X;
+			dst_sc.m_right = dst_sc.m_left + CLEARTELOP_SIZE_X;
+			dst_sc.m_bottom = dst_sc.m_top + CLEARTELOP_SIZE_Y;
 			Draw::Draw(63, &src_sc, &dst_sc, c_sc, 0.0f);
 			Audio::Start(13);
 		}
