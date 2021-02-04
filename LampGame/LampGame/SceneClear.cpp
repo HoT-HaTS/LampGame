@@ -45,7 +45,7 @@ void CSceneClear::InitScene()
 	Draw::LoadImageW(L"graphic/lamp Clear.png", 10, TEX_SIZE_512);
 
 	//音楽データ読み込み用
-	//Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);
+	Audio::LoadAudio(0, L"BGM/Beta_Clear.wav", BACK_MUSIC);
 
 	//SE読み込み用
 	//Audio::LoadAudio(0, L"SE/Cursor.wav", EFFECT);
@@ -55,10 +55,10 @@ void CSceneClear::InitScene()
 	Objs::InsertObj(objc, OBJ_CLEAR, 10);
 
 	//マスターボリュームを1に戻す
-	//float v = Audio::VolumeMaster(0);
-	//v = Audio::VolumeMaster((0.4 - v));
+	float v = Audio::VolumeMaster(0);
+	v = Audio::VolumeMaster((0.4 - v));
 
-	//Audio::Start(11);
+	Audio::Start(11);
 }
 
 //ゲームメイン実行中メソッド

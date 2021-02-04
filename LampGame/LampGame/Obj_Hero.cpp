@@ -374,6 +374,11 @@ void CObjHero::Action()
 				{
 					hg_flag = true;
 					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+1] = true;
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+2] = true;
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+3] = true;
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+4] = true;
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+5] = true;
 				}
 				
 				if (goal_white > GOAL_WHITE_COUNT)
