@@ -58,7 +58,7 @@ void CSceneClear::InitScene()
 	float v = Audio::VolumeMaster(0);
 	v = Audio::VolumeMaster((0.4 - v));
 
-	Audio::Start(11);
+	Audio::Start(0);
 }
 
 //ゲームメイン実行中メソッド
