@@ -22,7 +22,7 @@ CObjKeyCoin::CObjKeyCoin(float x, float y)
 //イニシャライズ
 void CObjKeyCoin::Init()
 {
-	Hits::SetHitBox(this, m_px, m_py, BLOCK_SIZE - 5.0f, BLOCK_SIZE - 5.0f, ELEMENT_COIN, OBJ_KEYCOIN, 1);
+	Hits::SetHitBox(this, m_px, m_py, KEYCOIN_SIZE, KEYCOIN_SIZE, ELEMENT_COIN, OBJ_KEYCOIN, 1);
 	m_ani_time = 0;
 	m_ani_frame = 0;
 
@@ -34,14 +34,13 @@ void CObjKeyCoin::Action()
 {
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
-
 	m_ani_time++;
 
-	if (m_ani_time % 10 == 0)
+	if (m_ani_time % KEYCOIN_FLAME == 0)
 	{
 		m_ani_frame++;
 	}
-	if (m_ani_time == 40)
+	if (m_ani_time == KEYCOIN_MAX_TIME)
 	{
 		m_ani_time, m_ani_frame = 0;
 	}
@@ -49,7 +48,7 @@ void CObjKeyCoin::Action()
 
 	//HitBoxの内容を更新
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(m_px + 5.0f + scroll->GetScroll(), m_py + 5.0f);
+	hit->SetPos(m_px + ADD_SIZE + scroll->GetScroll(), m_py + ADD_SIZE);
 
 	//主人公情報の取得
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);

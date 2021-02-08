@@ -10,8 +10,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-
-
 //イニシャライズ
 void CObjMain::Init()
 {
@@ -49,6 +47,7 @@ void CObjMain::Action()
 		//flagがtrueの時、演出開始,（今はゴールに触れた瞬間に何回も演出しているので激重になる。）
 		if (g_flag == true && ga_flag == false)
 		{
+
 			CObjGoalscene* obj_goalscene = new CObjGoalscene();
 			Objs::InsertObj(obj_goalscene, OBJ_GOALSCENE, 99);
 			ga_flag = true;
@@ -84,15 +83,15 @@ void CObjMain::Action()
 	{
 		d_time++;
 
-		if(d_time >= 60)
-			dead_alpha += 0.02f;
+		if(d_time >= DEAD_TIME)
+			dead_alpha += ADD_ALPHA;
 	}
 }
 
 //ドロー
 void CObjMain::Draw()
 {
-	in_alpha -= 0.02f;
+	in_alpha -= ADD_ALPHA;
 
 	if (in_alpha <= 0.0f)
 	{
@@ -107,18 +106,20 @@ void CObjMain::Draw()
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	coin_count = hero->GetCoin();
 
-	RECT_F src;		//ブラックアウト描画元切り取り位置
-	RECT_F dst;		//ブラックアウト描画先表示位置
-	RECT_F src2;	//描画元切り取り位置
-	RECT_F dst2;	//描画先表示位置
-	RECT_F dst3;	//描画先表示位置
-	RECT_F dst4;	//描画先表示位置
+	RECT_F src;			//ブラックアウト描画元切り取り位置
+	RECT_F dst;			//ブラックアウト描画先表示位置
+	RECT_F src2;		//コイン描画元切り取り位置
+	RECT_F dst2;		//コイン描画先表示位置
+	RECT_F dst3;		//コイン描画先表示位置
+	RECT_F dst4;		//コイン描画先表示位置
+	RECT_F src_guide;	//ガイド描画元切り取り位置
+	RECT_F dst_guide;	//ガイド描画先表示位置
 
 	//ブラックアウト描画元切り取り位置
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = src.m_left + 8.0f;
-	src.m_bottom = src.m_top + 6.0f;
+	src.m_right = src.m_left + SRC_BLACK_R;
+	src.m_bottom = src.m_top + SRC_BLACK_B;
 
 	//ブラックアウト描画先表示位置
 	dst.m_top = 0.0f;
@@ -131,6 +132,21 @@ void CObjMain::Draw()
 	src2.m_left = 0.0f;
 	src2.m_right = src2.m_left + BLOCK_SIZE;
 	src2.m_bottom = src2.m_top + BLOCK_SIZE;
+
+	//ガイド描画元切り取り位置
+	src_guide.m_top = 0.0f;
+	src_guide.m_left = 0.0f;
+	src_guide.m_right = src_guide.m_left + SRC_GUIDE_R;
+	src_guide.m_bottom = src_guide.m_top + SRC_GUIDE_B;
+
+	//ガイド描画先表示位置
+	dst_guide.m_top = 0.0f;
+	dst_guide.m_left = DST_GUIDE_L;
+	dst_guide.m_right = dst_guide.m_left + DST_GUIDE_R;
+	dst_guide.m_bottom = dst_guide.m_top + DST_GUIDE_B;
+
+	//ガイド表示
+	Draw::Draw(0, &src_guide, &dst_guide, c, 0.0f);
 
 	//ブラックイン表示
 	Draw::Draw(62, &src, &dst, c_in, 0.0f);

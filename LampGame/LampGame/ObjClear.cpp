@@ -5,6 +5,7 @@
 #include "GameL/SceneManager.h"
 #include "GameL/SceneObjManager.h"
 #include "GameL/UserData.h"
+#include "GameL/Audio.h"
 
 #include "GameHead.h"
 #include "ObjClear.h"
@@ -63,14 +64,11 @@ void CObjClear::Action()
 			m_key_flag = true;
 		}
 	}
-
 }
 
 //ドロー
 void CObjClear::Draw()
 {
-	
-
 	RECT_F src1;	//描画元切り取り位置
 	RECT_F src2;
 
@@ -176,7 +174,6 @@ void CObjClear::Draw()
 		dst_clear.m_right = dst_clear.m_left + BG_X_SIZE;
 		dst_clear.m_bottom = dst_clear.m_top + BG_Y_SIZE;
 		Draw::Draw(scene_num, &src_clear, &dst_clear, c, 0.0f);
-
 		
 		//テキスト-------------------
 		//切り取り位置の設定
@@ -205,5 +202,4 @@ void CObjClear::Draw()
 		dst_clear.m_bottom = dst_clear.m_top + CLEAR_HERO_Y_SIZE;
 		Draw::Draw(10, &src_clear, &dst_clear, c, 0.0f);
 	}
-
 }

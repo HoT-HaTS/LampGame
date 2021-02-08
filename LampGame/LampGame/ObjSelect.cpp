@@ -106,8 +106,10 @@ void CObjSelect::Draw()
 	float c1[4] = { 1.0f,0.4f,0.0f,1.0f };
 
 	//サムネイル、クリアマーク表示位置
-	float top[7] = { 105, 105, 105, 105, 305, 305, 305 };
-	float left[7] = { 40, 235, 430, 625, 40, 235, 430};
+	float top[7] = { CLEAR_MARK_Y1, CLEAR_MARK_Y1, CLEAR_MARK_Y1, CLEAR_MARK_Y1,
+					 CLEAR_MARK_Y2, CLEAR_MARK_Y2, CLEAR_MARK_Y2 };
+	float left[7] = { CLEAR_MARK_X1, CLEAR_MARK_X2, CLEAR_MARK_X3, CLEAR_MARK_X4,
+					  CLEAR_MARK_X1, CLEAR_MARK_X2, CLEAR_MARK_X3 };
 
 	RECT_F src;			//ステージサムネイル描画元切り取り位置
 	RECT_F dst;			//ステージサムネイル表示位置
@@ -128,13 +130,13 @@ void CObjSelect::Draw()
 	{
 		src_select.m_top = 0.0f;
 		src_select.m_left = 0.0f;
-		src_select.m_right = src_select.m_left + 401.0f;
-		src_select.m_bottom = src_select.m_top + 91.0f;
+		src_select.m_right = src_select.m_left + SELECT_SIZE_X;
+		src_select.m_bottom = src_select.m_top + SELECT_SIZE_Y;
 
-		dst_select.m_top = 10.0f;
-		dst_select.m_left = 199.5f;
-		dst_select.m_right = dst_select.m_left + 401.0f;
-		dst_select.m_bottom = dst_select.m_top + 91.0f;
+		dst_select.m_top = SELECT_DRAW_X;
+		dst_select.m_left = SELECT_DRAW_Y;
+		dst_select.m_right = dst_select.m_left + SELECT_SIZE_X;
+		dst_select.m_bottom = dst_select.m_top + SELECT_SIZE_Y;
 
 		Draw::Draw(11, &src_select, &dst_select, c, 0.0f);
 	}
@@ -143,13 +145,13 @@ void CObjSelect::Draw()
 	{
 		src_start.m_top = 0.0f;
 		src_start.m_left = 0.0f;
-		src_start.m_right = src_start.m_left + 372.0f;
-		src_start.m_bottom = src_start.m_top + 71.0f;
+		src_start.m_right = src_start.m_left + ENTER_SIZE_X;
+		src_start.m_bottom = src_start.m_top + ENTER_SIZE_Y;
 
-		dst_start.m_top = 490.0f;
-		dst_start.m_left = 214.0f;
-		dst_start.m_right = dst_start.m_left + 372.0f;
-		dst_start.m_bottom = dst_start.m_top + 71.0f;
+		dst_start.m_top = ENTER_DRAW_Y;
+		dst_start.m_left = ENTER_DRAW_X;
+		dst_start.m_right = dst_start.m_left + ENTER_SIZE_X;
+		dst_start.m_bottom = dst_start.m_top + ENTER_SIZE_Y;
 
 		Draw::Draw(12, &src_start, &dst_start, c, 0.0f);
 	}
@@ -158,13 +160,13 @@ void CObjSelect::Draw()
 	{
 		src_exit.m_top = 0.0f;
 		src_exit.m_left = 0.0f;
-		src_exit.m_right = src_exit.m_left + 163.0f;
-		src_exit.m_bottom = src_exit.m_top + 31.0f;
+		src_exit.m_right = src_exit.m_left + EXIT_SIZE_X;
+		src_exit.m_bottom = src_exit.m_top + EXIT_SIZE_Y;
 
-		dst_exit.m_top = 569.0f;
-		dst_exit.m_left = 681.5f;
-		dst_exit.m_right = dst_exit.m_left + 163.0f;
-		dst_exit.m_bottom = dst_exit.m_top + 31.0f;
+		dst_exit.m_top = EXIT_DRAW_Y;
+		dst_exit.m_left = EXIT_DRAW_X;
+		dst_exit.m_right = dst_exit.m_left + EXIT_SIZE_X;
+		dst_exit.m_bottom = dst_exit.m_top + EXIT_SIZE_Y;
 
 		Draw::Draw(13, &src_exit, &dst_exit, c, 0.0f);
 	}
@@ -172,30 +174,30 @@ void CObjSelect::Draw()
 	//ステージサムネイル切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = src.m_left + 140.0f;
-	src.m_bottom = src.m_top + 140.0f;
+	src.m_right = src.m_left + STAGE_THUMB_SIZE_X;
+	src.m_bottom = src.m_top + STAGE_THUMB_SIZE_Y;
 
 	for (int x = 0; x < 7; x++)
 	{
 		//ステージサムネイル表示位置の設定と表示
 		dst.m_top = top[x];
 		dst.m_left = left[x];
-		dst.m_right = dst.m_left + 140.0f;
-		dst.m_bottom = dst.m_top + 140.0f;
+		dst.m_right = dst.m_left + STAGE_THUMB_SIZE_X;
+		dst.m_bottom = dst.m_top + STAGE_THUMB_SIZE_Y;
 		Draw::Draw(x, &src, &dst, c, 0.0f);
 	}
 
 	//カーソル切り取り位置の設定
 	src1.m_top = 0.0f;
 	src1.m_left = 0.0f;
-	src1.m_right = src1.m_left + 250.0f;
-	src1.m_bottom = src1.m_top + 187.0f;
+	src1.m_right = src1.m_left + CURSOR_CUTOUT_SIZE_X;
+	src1.m_bottom = src1.m_top + CURSOR_CUTOUT_SIZE_Y;
 
 	//クリアマーク切り取り位置の設定
 	src2.m_top = 0.0f;
 	src2.m_left = 0.0f;
-	src2.m_right = src2.m_left + 64.0f;
-	src2.m_bottom = src2.m_top + 64.0f;
+	src2.m_right = src2.m_left + CLAER_MARK_SIZE_X;
+	src2.m_bottom = src2.m_top + CLAER_MARK_SIZE_Y;
 
 	//Font::StrDraw(L"STAGE SELECT", 304, 40, 32, c1);
 	//Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c1);
@@ -205,11 +207,11 @@ void CObjSelect::Draw()
 	{
 		if (((UserData*)Save::GetData())->clear[x] == true)
 		{
-			//クリアマーク表示位置の設定と表示
+			//クリアマーク表示位置の設定と表示(ステージサムネに合わせる)
 			dst2.m_top = top[x];
 			dst2.m_left = left[x];
-			dst2.m_right = dst2.m_left + 140.0f;
-			dst2.m_bottom = dst2.m_top + 140.0f;
+			dst2.m_right = dst2.m_left + STAGE_THUMB_SIZE_X;
+			dst2.m_bottom = dst2.m_top + STAGE_THUMB_SIZE_Y;
 			Draw::Draw(9, &src2, &dst2, c, 0.0f);
 		}
 	}
@@ -217,44 +219,44 @@ void CObjSelect::Draw()
 	if (((UserData*)Save::GetData())->stage_id == 0)
 	{
 		//表示位置の設定
-		dst1.m_top = 100.0f;
-		dst1.m_left = 35.0f;
+		dst1.m_top = CURSOR_Y1;
+		dst1.m_left = CURSOR_X1;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 1)
 	{
 		//表示位置の設定
-		dst1.m_top = 100.0f;
-		dst1.m_left = 230.0f;
+		dst1.m_top = CURSOR_Y1;
+		dst1.m_left = CURSOR_X2;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 2)
 	{
 		//表示位置の設定
-		dst1.m_top = 100.0f;
-		dst1.m_left = 425.0f;
+		dst1.m_top = CURSOR_Y1;
+		dst1.m_left = CURSOR_X3;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 3)
 	{
 		//表示位置の設定
-		dst1.m_top = 100.0f;
-		dst1.m_left = 620.0f;
+		dst1.m_top = CURSOR_Y1;
+		dst1.m_left = CURSOR_X4;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 4)
 	{
 		//表示位置の設定
-		dst1.m_top = 300.0f;
-		dst1.m_left = 35.0f;
+		dst1.m_top = CURSOR_Y2;
+		dst1.m_left = CURSOR_X1;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 5)
 	{
 		//表示位置の設定
-		dst1.m_top = 300.0f;
-		dst1.m_left = 230.0f;
+		dst1.m_top = CURSOR_Y2;
+		dst1.m_left = CURSOR_X2;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 6)
 	{
 		//表示位置の設定
-		dst1.m_top = 300.0f;
-		dst1.m_left = 425.0f;
+		dst1.m_top = CURSOR_Y2;
+		dst1.m_left = CURSOR_X3;
 	}
 	//else if (((UserData*)Save::GetData())->stage_id == 7)
 	//{
@@ -268,8 +270,8 @@ void CObjSelect::Draw()
 		dst1.m_left = 0.0f;
 	}
 
-	dst1.m_right = dst1.m_left + 150.0f;
-	dst1.m_bottom = dst1.m_top + 150.0f;
+	dst1.m_right = dst1.m_left + CURSOR_DRAW_SIZE_X;
+	dst1.m_bottom = dst1.m_top + CURSOR_DRAW_SIZE_Y;
 	
 	//8番目に登録したグラフィックをsrc・dst・c の情報をもとに描画
 	Draw::Draw(8, &src1, &dst1, c, 0.0f);

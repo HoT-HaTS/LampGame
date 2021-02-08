@@ -87,12 +87,11 @@ void CObjHero::Action()
 		if (pause_flag == false)
 		{
 			//落下によるゲームオーバー
-			if (m_py > STAGE_Y_OUT)
+			if (m_py > STAGE_Y_OUT && hg_flag == false )
 			{
 				dead_flag = true;
 				Audio::Start(12);
 			}
-
 
 			if (move_flag == true)
 			{
@@ -157,7 +156,7 @@ void CObjHero::Action()
 								//jump音を鳴らす
 								Audio::Start(2);
 
-								m_vy = -10;
+								m_vy = -JUMP_SPEED;
 								m_hit_down = false;
 								m_hit_down2 = false;
 								m_flagj = false;
@@ -172,7 +171,7 @@ void CObjHero::Action()
 					m_vx += -(m_vx * INIT_FRICTION);
 
 					//自由落下運動
-					m_vy += 9.8 / (20.0f);
+					m_vy += FALL_SPEED;
 
 					//位置の更新
 					m_px += m_vx;
@@ -239,20 +238,15 @@ void CObjHero::Action()
 					{
 						m_py = 0.0f;
 					}
-					////下方向
-					//if (m_py + 128.0f > 600 )
-					//{
-					//	m_py = 600.0f - 128.0f;
-					//}
 				}
 				//自身のHitBoxを持ってくる
 				CHitBox* hit = Hits::GetHitBox(this);
 
 				//HitBoxの位置の変更
-				hit->SetPos(m_px+5, m_py);
+				hit->SetPos(m_px + HERO_POSI / 2, m_py);
 
 				//敵オブジェクトと接触したらdead_flagをtrueにする
-				if (hit->CheckElementHit(ELEMENT_ENEMY) == true)
+				if (hit->CheckElementHit(ELEMENT_ENEMY) == true && hg_flag == false)
 				{
 					if (L_flag == true)
 					{
@@ -265,7 +259,6 @@ void CObjHero::Action()
 					}
 				}
 			}
-
 
 			//アニメーション
 			if (Input::GetVKey(VK_RIGHT) == false && Input::GetVKey(VK_LEFT) == false && Input::GetVKey(VK_UP) == false && Input::GetVKey(VK_DOWN) == false)
@@ -283,8 +276,6 @@ void CObjHero::Action()
 				m_ani_s_frame = 0;
 			}
 
-
-
 			//アニメーション関連(移動用)
 			if (m_ani_time > m_ani_max_time)
 			{
@@ -295,7 +286,6 @@ void CObjHero::Action()
 			{
 				m_ani_frame = 0;
 			}
-
 
 			if (move_flag == true)
 			{
@@ -356,14 +346,14 @@ void CObjHero::Action()
 				ar = GetAtan2Angle(x, -y);
 
 				//移動方向を主人公機の方向にする
-				m_vx = cos(3.14 / 180 * ar);
-				m_vy = -sin(3.14 / 180 * ar);
+				m_vx = cos(PI / STRAIGHT_ANGLE * ar);
+				m_vy = -sin(PI / STRAIGHT_ANGLE * ar);
 				UnitVec(&m_vx, &m_vy);
 
-				m_px += 12 * m_vx;
-				m_py += 12 * m_vy;
+				m_px += SHADOW_SPEED * m_vx;
+				m_py += SHADOW_SPEED * m_vy;
 
-				if (m_sx - 10 < m_px && m_px < m_sx + 10 && m_sy - 10 < m_py && m_py < m_sy + 10)
+				if (m_sx - HERO_POSI < m_px && m_px < m_sx + HERO_POSI && m_sy - HERO_POSI < m_py && m_py < m_sy + HERO_POSI)
 				{
 					//当たり判定用のHitBoxを作成
 					Hits::SetHitBox(this, m_px, m_py, HBLOCK_INT_X_SIZE-10, HBLOCK_INT_Y_SIZE, ELEMENT_PLAYER, OBJ_HERO, 1);
@@ -384,11 +374,17 @@ void CObjHero::Action()
 				{
 					hg_flag = true;
 					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id] = true;
+					//デバッグ用
+					/*((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+1] = true;
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+2] = true;
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+3] = true;
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+4] = true;
+					((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id+5] = true;*/
 				}
 				
-				if (goal_white > 300)
+				if (goal_white > GOAL_WHITE_COUNT)
 				{
-					for (int i = 1; i <= 6; i++)
+					for (int i = 1; i <= GOAL_COUNT; i++)
 					{
 						if (((UserData*)Save::GetData())->clear[i] == true)
 						{
@@ -398,7 +394,7 @@ void CObjHero::Action()
 
 					hg_flag = false;
 					goal_white = 0;
-					if (count == 6)
+					if (count == GOAL_COUNT)
 					{
 						Scene::SetScene(new CSceneClear());
 					}
@@ -407,7 +403,6 @@ void CObjHero::Action()
 						Scene::SetScene(new CSceneSelect());
 					}
 				}
-				
 			}
 		}
 	}
@@ -418,13 +413,13 @@ void CObjHero::Action()
 		respawn_time++;
 	}
 
-	if (respawn_time == 8)
+	if (respawn_time == RESPAWN_TIME)
 	{
 		m_dani_frame++;
 		respawn_time = 0;
 	}
 
-	if (m_dani_frame == 20)
+	if (m_dani_frame == 2* INIT_H_DANI_MAX_TIME)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
@@ -520,7 +515,7 @@ void CObjHero::Draw()
 
 		//表示位置の設定
 		dst.m_top =  m_py;
-		dst.m_left = m_px - 64;
+		dst.m_left = m_px - BLOCK_SIZE;
 		dst.m_right = dst.m_left + 2*BLOCK_SIZE;
 		dst.m_bottom = dst.m_top + 2*BLOCK_SIZE;
 
@@ -528,7 +523,6 @@ void CObjHero::Draw()
 		Draw::Draw(6, &src, &dst, c, 0.0f);
 	}
 }
-
 
 //---GetAtan2Angle関数
 //引数1		float w		:幅
@@ -539,12 +533,12 @@ void CObjHero::Draw()
 float CObjHero:: GetAtan2Angle(float w, float h)
 {
 	//atan2で角度を求める
-	float r = atan2(h, w) * 180.0f / 3.14f;
+	float r = atan2(h, w) * STRAIGHT_ANGLE / PI;
 
 	//-180.0°～0°を180°～360°に変換
 	if (r < 0)
 	{
-		r = 360 - fabs(r);
+		r = 2* STRAIGHT_ANGLE - fabs(r);
 	}
 
 	return r;
@@ -583,15 +577,12 @@ bool CObjHero:: UnitVec(float* vx, float* vy)
 //HeroMove関数:Xボタンを押した瞬間の光と影の位置から角度を求めて一定速度で元の位置に戻る
 void CObjHero::HeroMove(float mx,float my, float sx, float sy, float vx, float vy)
 {
-		float x = sx - mx;
-		float y = sy - my;
-		float ar = GetAtan2Angle(x, -y);
+	float x = sx - mx;
+	float y = sy - my;
+	float ar = GetAtan2Angle(x, -y);
 
-		//移動方向を主人公機の方向にする
-		vx = cos(3.14 / 180 * ar);
-		vy = -sin(3.14 / 180 * ar);
-		UnitVec(&vx, &vy);
-
-		sx += 20 * vx;
-		sy += 20 * vy;
+	//移動方向を主人公機の方向にする
+	vx = cos(PI / STRAIGHT_ANGLE * ar);
+	vy = -sin(PI / STRAIGHT_ANGLE * ar);
+	UnitVec(&vx, &vy);
 }
