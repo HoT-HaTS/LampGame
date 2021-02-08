@@ -45,34 +45,6 @@ void CObjSelect::Action()
 			Audio::Start(0);
 		}
 	}
-	else if (Input::GetVKey(VK_DOWN) == true)
-	{
-		if (select_flag == true)
-		{
-			if (((UserData*)Save::GetData())->stage_id <= 2)
-			{
-				((UserData*)Save::GetData())->stage_id += 4;
-				select_flag = false;
-
-				//カーソル音を鳴らす
-				Audio::Start(0);
-			}
-		}
-	}
-	else if (Input::GetVKey(VK_UP) == true)
-	{
-		if (select_flag == true)
-		{
-			if (((UserData*)Save::GetData())->stage_id >= 4)
-			{
-				((UserData*)Save::GetData())->stage_id -= 4;
-				select_flag = false;
-
-				//カーソル音を鳴らす
-				Audio::Start(0);
-			}
-		}
-	}
 	else
 	{
 		select_flag = true;
