@@ -61,6 +61,7 @@ void CSceneStage_1::InitScene()
 
 
 	//グラフィック読み込み
+	Draw::LoadImageW(L"guide.png", 0, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_shadow_walk.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/lamp_v2.png", 2, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/stage_blockG.png", 3, TEX_SIZE_512);
@@ -141,7 +142,6 @@ void CSceneStage_1::InitScene()
 	CObjBlock* objb = new CObjBlock(map);
 	Objs::InsertObj(objb, OBJ_BLOCK, 6);
 
-
 	//看板出現用
 	if (((UserData*)Save::GetData())->stage_id == 0)
 	{
@@ -173,6 +173,8 @@ void CSceneStage_1::InitScene()
 		Objs::InsertObj(objt6, OBJ_BOARD, 9);
 	}
 
+	/*CObjBoard* obj_guide = new CObjBoard(200.0f,0.0f,0.0f);
+	Objs::InsertObj(obj_guide, OBJ_BOARD, 9);*/
 
 	//マスターボリュームを1に戻す
 	float v = Audio::VolumeMaster(0);

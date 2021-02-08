@@ -69,7 +69,6 @@ void CObjBoard::Action()
 //ドロー
 void CObjBoard::Draw()
 {
-	
 	CObjBlock* scroll = (CObjBlock*)Objs::GetObj(OBJ_BLOCK);
 
 	//描画カラー情報 R=RED　G=Green　B=Blue　A=alpha(透過情報)
@@ -110,7 +109,21 @@ void CObjBoard::Draw()
 			Draw::Draw(50, &src2, &dst2, c, 0.0f);
 		}
 
+		//ガイドの表示（別のソースコードで作る）
+		//RECT_F src_guide;	//描画元切り取り位置
+		//RECT_F dst_guide;	//描画先表示位置
 
+		//src_guide.m_top = 0.0f;
+		//src_guide.m_left = 0.0f;
+		//src_guide.m_right = src_guide.m_left + 600.0f;
+		//src_guide.m_bottom = src_guide.m_top + 32.0f;
+
+		//dst_guide.m_top = 0.0f;
+		//dst_guide.m_left = 200.0f;
+		//dst_guide.m_right = dst_guide.m_left + 600.0f;
+		//dst_guide.m_bottom = dst_guide.m_top + 32.0f;
+
+		//Draw::Draw(0, &src_guide, &dst_guide, c, 0.0f);
 }
 
 
