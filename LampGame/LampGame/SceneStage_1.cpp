@@ -144,7 +144,10 @@ void CSceneStage_1::InitScene()
 	//ŠÅ”ÂoŒ»—p
 	if (((UserData*)Save::GetData())->stage_id == 0)
 	{
-		CObjBoard* objt1 = new CObjBoard(BOARD1_X, BOARD_Y, BOARD_MOVE);
+		CObjBoard* objt1a = new CObjBoard(BOARD1_X, BOARD_Y, BOARD_MOVE1);
+		Objs::InsertObj(objt1, OBJ_BOARD, 9);
+
+		CObjBoard* objt1b = new CObjBoard(BOARD1_X, BOARD_Y, BOARD_MOVE2);
 		Objs::InsertObj(objt1, OBJ_BOARD, 9);
 
 		CObjBoard* objt2a = new CObjBoard(BOARD2a_X, BOARD_Y, BOARD_Z_KEY);
@@ -152,6 +155,9 @@ void CSceneStage_1::InitScene()
 
 		CObjBoard* objt2b = new CObjBoard(BOARD2b_X, BOARD_Yb, BOARD_Z_KEY);
 		Objs::InsertObj(objt2b, OBJ_BOARD, 9);
+
+		CObjBoard* objt3 = new CObjBoard(BOARD3_X, BOARD_Y, BOARD_X_KEY);
+		Objs::InsertObj(objt3, OBJ_BOARD, 9);
 
 		CObjBoard* objt3 = new CObjBoard(BOARD3_X, BOARD_Y, BOARD_X_KEY);
 		Objs::InsertObj(objt3, OBJ_BOARD, 9);

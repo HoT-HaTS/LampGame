@@ -13,7 +13,8 @@ using namespace GameL;
 #define INIT_COUNT (1)
 #define PLUS_COUNT (2)
 
-#define BOARD1_X (256.0)
+#define BOARD1a_X (256.0)
+#define BOARD1b_X (3830.0)
 #define BOARD2a_X (2432.0)
 #define BOARD2b_X (3776.0)
 #define BOARD3_X (3712.0)
@@ -24,13 +25,14 @@ using namespace GameL;
 #define BOARD_Y (512.0)
 #define BOARD_Yb (128.0)
 
-#define BOARD_MOVE (0)
+#define BOARD_MOVE1 (0)
+#define BOARD_MOVE2 (6)
 #define BOARD_Z_KEY (1)
-#define BOARD_X_KEY (2)
+#define BOARD_X_KEY1 (2)
+#define BOARD_X_KEY2 (7)
 #define BOARD_SPACE_KEY (3)
-#define BOARD_P_KEY (4)
-#define BOARD_GLASS_BLOCK (5)
-#define BOARD_KEY_BLOAK (6)
+#define BOARD_GLASS_BLOCK (4)
+#define BOARD_KEY_BLOAK (5)
 
 //シーン：メイン
 class CSceneStage_1 :public CScene
