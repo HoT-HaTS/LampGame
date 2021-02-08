@@ -43,14 +43,9 @@ using namespace GameL;
 #define CURSOR_DRAW_SIZE_X (150.0f)
 #define CURSOR_DRAW_SIZE_Y (150.0f)
 
-
 //クリアマークサイズ
 #define CLAER_MARK_SIZE_X (64.0f)
 #define CLAER_MARK_SIZE_Y (64.0f)
-
-
-
-
 
 //オブジェクト：タイトル
 class CObjSelect : public CObj

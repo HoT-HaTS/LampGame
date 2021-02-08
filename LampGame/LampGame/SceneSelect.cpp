@@ -47,6 +47,7 @@ void CSceneSelect::InitScene()
 	Draw::LoadImageW(L"graphic/Stage_desc.png", 11, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_desc2.png", 12, TEX_SIZE_512);
 	Draw::LoadImageW(L"graphic/Stage_desc3.png", 13, TEX_SIZE_512);
+	Draw::LoadImageW(L"graphic/Locked.png", 14, TEX_SIZE_512);
 
 	//音楽データ読み込み用
 	Audio::LoadAudio(11, L"BGM/Sunrise_Title.wav", BACK_MUSIC);

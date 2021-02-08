@@ -18,6 +18,7 @@ void CObjSelect::Init()
 	select_flag = true;
 
 	((UserData*)Save::GetData())->stage_id = 0;
+	((UserData*)Save::GetData())->clear[0] = true;
 }
 
 //アクション
@@ -58,11 +59,14 @@ void CObjSelect::Action()
 	//エンターキーを押してシーン：ゲームメインに移行する
 	if (Input::GetVKey(VK_RETURN) == true)
 	{
-		if (m_key_flag == true)
+		if (((UserData*)Save::GetData())->clear[((UserData*)Save::GetData())->stage_id - 1] == true || ((UserData*)Save::GetData())->stage_id == 0)
 		{
-			Scene::SetScene(new CSceneStage_1());
-			m_key_flag = false;
-			switch_flag = true;
+			if (m_key_flag == true)
+			{
+				Scene::SetScene(new CSceneStage_1());
+				m_key_flag = false;
+				switch_flag = true;
+			}
 		}
 	}
 	else
@@ -81,8 +85,8 @@ void CObjSelect::Draw()
 	//サムネイル、クリアマーク表示位置
 	float top[7] = { CLEAR_MARK_Y1, CLEAR_MARK_Y2, CLEAR_MARK_Y1, CLEAR_MARK_Y2,
 					 CLEAR_MARK_Y1, CLEAR_MARK_Y2, CLEAR_MARK_Y1 };
-	float left[7] = { CLEAR_MARK_X1, (CLEAR_MARK_X2+ CLEAR_MARK_X1)/2, CLEAR_MARK_X2, (CLEAR_MARK_X3+ CLEAR_MARK_X2)/2,
-					  CLEAR_MARK_X3, (CLEAR_MARK_X4+ CLEAR_MARK_X3)/2, CLEAR_MARK_X4 };
+	float left[7] = { CLEAR_MARK_X1, (CLEAR_MARK_X2 + CLEAR_MARK_X1) / 2, CLEAR_MARK_X2, (CLEAR_MARK_X3 + CLEAR_MARK_X2) / 2,
+					  CLEAR_MARK_X3, (CLEAR_MARK_X4 + CLEAR_MARK_X3) / 2, CLEAR_MARK_X4 };
 
 	RECT_F src;			//ステージサムネイル描画元切り取り位置
 	RECT_F dst;			//ステージサムネイル表示位置
@@ -90,8 +94,6 @@ void CObjSelect::Draw()
 	RECT_F dst1;		//カーソル描画先表示位置
 	RECT_F src2;		//クリアマーク描画元切り取り位置
 	RECT_F dst2;		//クリアマーク描画先表示位置
-	RECT_F src3;		//ステージセレクト背景描画元切り取り位置
-	RECT_F dst3;		//ステージセレクト背景描画先表示位置
 	RECT_F src_select;	//文字画像描画元切り取り位置
 	RECT_F dst_select;	//文字表示位置
 	RECT_F src_start;	//文字画像描画元切り取り位置
@@ -176,7 +178,7 @@ void CObjSelect::Draw()
 	//Font::StrDraw(L"START : Push_EnterKey", 240, 500, 32, c1);
 	//Font::StrDraw(L"Exit : Push_Esc", 640, 574, 20, c1);
 
-	for (int x = 0; x < 7; x++)
+	for (int x = 1; x < 7; x++)
 	{
 		if (((UserData*)Save::GetData())->clear[x] == true)
 		{
@@ -231,12 +233,6 @@ void CObjSelect::Draw()
 		dst1.m_top = top[6] - CURSOR_ADJ;
 		dst1.m_left = left[6] - CURSOR_ADJ;
 	}
-	//else if (((UserData*)Save::GetData())->stage_id == 7)
-	//{
-	//	//表示位置の設定
-	//	dst.m_top = 300.0f;
-	//	dst.m_left = 620.0f;
-	//}
 	else
 	{
 		dst1.m_top = 0.0f;
