@@ -3,6 +3,7 @@
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
 #include "GameL/HitBoxManager.h"
+#include "GameL/UserData.h"
 
 #include "GameHead.h"
 #include "Obj_Main.h"
@@ -145,8 +146,9 @@ void CObjMain::Draw()
 	dst_guide.m_right = dst_guide.m_left + DST_GUIDE_R;
 	dst_guide.m_bottom = dst_guide.m_top + DST_GUIDE_B;
 
-	//ガイド表示
-	Draw::Draw(0, &src_guide, &dst_guide, c, 0.0f);
+	//チュートリアル以外でガイド表示
+	if(((UserData*)Save::GetData())->stage_id != 0)
+		Draw::Draw(0, &src_guide, &dst_guide, c, 0.0f);
 
 	//ブラックイン表示
 	Draw::Draw(62, &src, &dst, c_in, 0.0f);
