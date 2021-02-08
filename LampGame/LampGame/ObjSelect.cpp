@@ -105,11 +105,12 @@ void CObjSelect::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };	//サムネイル、カーソル、クリアマーク用
 	float c1[4] = { 1.0f,0.4f,0.0f,1.0f };
 
+
 	//サムネイル、クリアマーク表示位置
-	float top[7] = { CLEAR_MARK_Y1, CLEAR_MARK_Y1, CLEAR_MARK_Y1, CLEAR_MARK_Y1,
-					 CLEAR_MARK_Y2, CLEAR_MARK_Y2, CLEAR_MARK_Y2 };
-	float left[7] = { CLEAR_MARK_X1, CLEAR_MARK_X2, CLEAR_MARK_X3, CLEAR_MARK_X4,
-					  CLEAR_MARK_X1, CLEAR_MARK_X2, CLEAR_MARK_X3 };
+	float top[7] = { CLEAR_MARK_Y1, CLEAR_MARK_Y2, CLEAR_MARK_Y1, CLEAR_MARK_Y2,
+					 CLEAR_MARK_Y1, CLEAR_MARK_Y2, CLEAR_MARK_Y1 };
+	float left[7] = { CLEAR_MARK_X1, (CLEAR_MARK_X2+ CLEAR_MARK_X1)/2, CLEAR_MARK_X2, (CLEAR_MARK_X3+ CLEAR_MARK_X2)/2,
+					  CLEAR_MARK_X3, (CLEAR_MARK_X4+ CLEAR_MARK_X3)/2, CLEAR_MARK_X4 };
 
 	RECT_F src;			//ステージサムネイル描画元切り取り位置
 	RECT_F dst;			//ステージサムネイル表示位置
@@ -219,44 +220,44 @@ void CObjSelect::Draw()
 	if (((UserData*)Save::GetData())->stage_id == 0)
 	{
 		//表示位置の設定
-		dst1.m_top = CURSOR_Y1;
-		dst1.m_left = CURSOR_X1;
+		dst1.m_top = top[0] - CURSOR_ADJ;
+		dst1.m_left = left[0] - CURSOR_ADJ;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 1)
 	{
 		//表示位置の設定
-		dst1.m_top = CURSOR_Y1;
-		dst1.m_left = CURSOR_X2;
+		dst1.m_top = top[1] - CURSOR_ADJ;
+		dst1.m_left = left[1] - CURSOR_ADJ;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 2)
 	{
 		//表示位置の設定
-		dst1.m_top = CURSOR_Y1;
-		dst1.m_left = CURSOR_X3;
+		dst1.m_top = top[2] - CURSOR_ADJ;
+		dst1.m_left = left[2] - CURSOR_ADJ;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 3)
 	{
 		//表示位置の設定
-		dst1.m_top = CURSOR_Y1;
-		dst1.m_left = CURSOR_X4;
+		dst1.m_top = top[3] - CURSOR_ADJ;
+		dst1.m_left = left[3] - CURSOR_ADJ;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 4)
 	{
 		//表示位置の設定
-		dst1.m_top = CURSOR_Y2;
-		dst1.m_left = CURSOR_X1;
+		dst1.m_top = top[4] - CURSOR_ADJ;
+		dst1.m_left = left[4] - CURSOR_ADJ;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 5)
 	{
 		//表示位置の設定
-		dst1.m_top = CURSOR_Y2;
-		dst1.m_left = CURSOR_X2;
+		dst1.m_top = top[5] - CURSOR_ADJ;
+		dst1.m_left = left[5] - CURSOR_ADJ;
 	}
 	else if (((UserData*)Save::GetData())->stage_id == 6)
 	{
 		//表示位置の設定
-		dst1.m_top = CURSOR_Y2;
-		dst1.m_left = CURSOR_X3;
+		dst1.m_top = top[6] - CURSOR_ADJ;
+		dst1.m_left = left[6] - CURSOR_ADJ;
 	}
 	//else if (((UserData*)Save::GetData())->stage_id == 7)
 	//{
