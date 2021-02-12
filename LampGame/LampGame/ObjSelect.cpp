@@ -68,6 +68,15 @@ void CObjSelect::Action()
 				switch_flag = true;
 			}
 		}
+		else
+		{
+			if (m_key_flag == true)
+			{
+				Audio::Start(1);
+				m_key_flag = false;
+				switch_flag = true;
+			}
+		}
 	}
 	else
 	{
@@ -160,6 +169,11 @@ void CObjSelect::Draw()
 		dst.m_right = dst.m_left + STAGE_THUMB_SIZE_X;
 		dst.m_bottom = dst.m_top + STAGE_THUMB_SIZE_Y;
 		Draw::Draw(x, &src, &dst, c, 0.0f);
+
+		if (((UserData*)Save::GetData())->clear[x] != true && ((UserData*)Save::GetData())->clear[x - 1] != true)
+		{
+			Draw::Draw(14, &src, &dst, c, 0.0f);
+		}
 	}
 
 	//カーソル切り取り位置の設定

@@ -54,6 +54,7 @@ void CSceneSelect::InitScene()
 
 	//SE読み込み用
 	Audio::LoadAudio(0, L"SE/Cursor.wav", EFFECT);
+	Audio::LoadAudio(1, L"SE/Switch.wav", EFFECT);
 
 	//ステージセレクトオブジェクト作成
 	CObjSelect* obj = new CObjSelect();   //ステージセレクトオブジェクト作成
